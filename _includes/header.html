@@ -1,0 +1,13 @@
+<header class="hero d-flex align-items-center justify-content-center text-white text-center" 
+        style="background-image: url('{{ page.hero_image | default: '/assets/img/hero-bg.jpg' }}'); 
+               height: 100vh; 
+               background-size: cover; 
+               background-position: center; 
+               position: relative;">
+    <div id="particles-js"></div>
+    <div class="container px-4 px-lg-5 text-center">
+        <div class="text-box"> <!-- Contenedor para resaltar el texto -->
+            <h1 class="display-3 fw-bold">{{ page.title | default: '¡Bienvenido a Chispi Page!' }}</h1>
+            <p class="lead mt-3">{{ page.subtitle | default: 'Tu rincón especial en Internet' }}</p>
+    </div>
+</header>

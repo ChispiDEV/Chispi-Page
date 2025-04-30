@@ -1,0 +1,21 @@
+title: "Dashboard Personal"
+description: "Portfolio, Devlogs, Proyectos y Recursos"
+baseurl: ""
+url: "https://ChispiDEV.github.io"
+markdown: kramdown
+plugins:
+  - jekyll-feed
+collections:
+  projects:
+    output: true
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: devlog
+  - scope:
+      path: "projects"
+      type: "projects"
+    values:
+      layout: project
