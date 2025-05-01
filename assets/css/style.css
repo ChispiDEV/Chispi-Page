@@ -1,0 +1,210 @@
+.hero {
+    position: relative;
+    height: 100vh;
+    color: black;
+    overflow: hidden;
+  }
+  
+  #particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* semitransparente */
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .hero-content {
+    z-index: 3;
+  }
+  
+  .btn {
+    margin: 0 10px;
+  }
+
+
+  /* Verde esmeralda profundo */
+.btn-outline-verde-1 {
+    border: 2px solid #007f5f;
+    color: #007f5f;
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+.btn-outline-verde-1:hover {
+    background-color: #007f5f;
+    color: #fff;
+}
+
+/* Verde selva */
+.btn-outline-verde-2 {
+    border: 2px solid #00a86b;
+    color: #00a86b;
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+.btn-outline-verde-2:hover {
+    background-color: #00a86b;
+    color: #fff;
+}
+
+/* Verde hoja */
+.btn-outline-verde-3 {
+    border: 2px solid #28b463;
+    color: #28b463;
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+.btn-outline-verde-3:hover {
+    background-color: #28b463;
+    color: #fff;
+}
+
+/* Verde primavera */
+.btn-outline-verde-4 {
+    border: 2px solid #2ecc71;
+    color: #2ecc71;
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+.btn-outline-verde-4:hover {
+    background-color: #2ecc71;
+    color: #fff;
+}
+
+/* Verde limón intenso */
+.btn-outline-verde-5 {
+    border: 2px solid #3dff70;
+    color: #3dff70;
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+.btn-outline-verde-5:hover {
+    background-color: #3dff70;
+    color: #000; /* fondo muy claro → texto oscuro para mejor contraste */
+}
+
+/* Recuadro semitransparente  */
+.text-box {
+    background: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente */
+    color: black; /* Texto en negro */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 10px; /* Bordes redondeados */
+    display: inline-block; /* Para ajustar al contenido */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); /* Sombra suave para destacar */
+  }
+  
+/* Navbar */
+#navbar {
+    height: 60px;
+    z-index: 1000;
+}
+
+/* Sidebar */
+#sidebar-wrapper {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    transition: right 0.3s ease;
+    z-index: 1050;
+    padding-top: 70px; /* deja espacio para la navbar */
+}
+
+#sidebar-wrapper.active {
+    right: 0; /* Muestra el menú cuando tiene la clase 'active' */
+}
+
+/* Estilos para el menú */
+.sidebar-nav {
+    list-style: none;
+    padding: 0;
+    margin-top: 0px; /* Espacio para botón de cierre */
+}
+
+.sidebar-nav li {
+    text-align: center;
+  }
+
+.sidebar-nav li a {
+    display: block;
+    padding: 15px;
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+}
+
+.sidebar-nav li a:hover {
+    background-color: #444;
+}
+
+/* Botón de menú */
+.menu-toggle {
+    font-size: 24px;
+    border: none;
+    background: #28a745;
+    color: white;
+}
+
+/* Botón de cerrar dentro del menú */
+.close-menu-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #28a745; /* Verde bonito */
+    border: none;
+    padding: 8px 10px;
+    border-radius: 50%; /* Redondo */
+    font-size: 22px;
+    color: white;
+    cursor: pointer;
+    z-index: 1060;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.close-menu-toggle:hover {
+    background-color: #218838; /* Verde más oscuro al pasar mouse */
+}
+
+/* Botón scroll to top */
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none; /* Inicialmente oculto, aparecerá cuando el usuario haga scroll */
+    background-color: #28a745; /* Verde, puedes cambiarlo si lo prefieres */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%; /* Para que sea circular */
+    font-size: 24px; /* Ajusta el tamaño del ícono */
+    text-align: center; /* Centra el ícono */
+    cursor: pointer;
+    z-index: 1050; /* Asegúrate de que esté por encima de otros elementos */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Agrega una sombra sutil */
+}
+
+/* Cuando el usuario hace focus en el botón */
+.scroll-to-top:focus {
+    outline: none;
+}
+
+/* Efecto hover para cambiar el color del fondo cuando el usuario pasa el mouse sobre el botón */
+.scroll-to-top:hover {
+    background-color: #218838;
+}

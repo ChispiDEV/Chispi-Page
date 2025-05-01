@@ -1,0 +1,43 @@
+.hero {
+    position: relative;
+    background-blend-mode: darken;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 1;
+  }
+  
+  .hero .overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+  }
+  
+  .hero-content {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    z-index: 1;
+  }
+  
+
+/* Efecto hover en el botón */
+.hover-effect {
+    transition: all 0.3s ease;
+  }
+  
+  .hover-effect:hover {
+    transform: scale(1.1);
+    background-color: #0d6efd;
+    color: #fff;
+    box-shadow: 0 0 15px #0d6efd;
+  }
+
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    top: 0;
+    left: 0;
+}
+  
