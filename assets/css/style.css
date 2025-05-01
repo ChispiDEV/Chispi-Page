@@ -208,3 +208,52 @@
 .scroll-to-top:hover {
     background-color: #218838;
 }
+
+/* Altura total para html y body */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Distribución en columnas para todo el layout */
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* El main crece según el contenido */
+  main {
+    flex: 1 0 auto;
+  }
+  
+  /* El footer no se encoge */
+  footer {
+    flex-shrink: 0;
+  }
+  
+/* Modo oscuro por defecto */
+[data-theme="dark"] body {
+    background-color: #121212;
+    color: #f1f1f1;
+  }
+  
+  [data-theme="light"] body {
+    background-color: #f8f9fa;
+    color: #212529;
+  }
+  
+  /* Cambiar navbar y footer según el tema */
+  [data-theme="dark"] .navbar,
+  [data-theme="dark"] footer {
+    background-color: #212529;
+  }
+  
+  [data-theme="light"] .navbar,
+  [data-theme="light"] footer {
+    background-color: #ffffff;
+    color: #212529;
+  }
+  
+  /* O cambia texto con clases como .text-white/.text-dark según el tema si lo prefieres */
+  
