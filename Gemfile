@@ -1,7 +1,5 @@
-# frozen_string_literal: true
-
+# Gemfile
 source "https://rubygems.org"
 
-# gem "rails"
-gem "jekyll"
-gem "jekyll-feed"
+gem "jekyll", "~> 4.3.2"
+gem "jekyll-feed", "~> 0.17"
