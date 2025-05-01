@@ -5,49 +5,37 @@ hero_image: "/assets/img/contacto-bg.jpg"
 ---
 
 <section id="contacto" class="py-5 bg-light">
-    <div class="container">
-      <p class="lead text-center mt-3">¿Quieres ponerte en contacto conmigo? Rellena el formulario de abajo.</p>
-      
-      <form name="sentMessage" id="contactForm" novalidate>
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <div class="form-group">
-              <label>Nombre</label>
-              <input type="text" class="form-control" placeholder="Tu nombre" id="name" required data-validation-required-message="Por favor, indica tu nombre.">
-              <p class="help-block text-danger"></p>
-            </div>
-          </div>
-          <div class="col-md-6 mb-3">
-            <div class="form-group">
-              <label>Correo electrónico</label>
-              <input type="email" class="form-control" placeholder="Tu correo electrónico" id="email" required data-validation-required-message="Por favor, indica tu correo electrónico.">
-              <p class="help-block text-danger"></p>
-            </div>
-          </div>
+  <div class="container">
+    <h2 class="text-center mb-4">Contacto</h2>
+    <p class="lead text-center">¿Quieres ponerte en contacto conmigo? Rellena el formulario de abajo.</p>
+
+    <form action="https://formspree.io/f/mrbqbklp" method="POST" class="mt-4">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="name">Nombre</label>
+          <input type="text" name="name" id="name" class="form-control" placeholder="Tu nombre" required>
         </div>
-  
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <div class="form-group">
-              <label>Número de teléfono</label>
-              <input type="tel" class="form-control" placeholder="Tu número de teléfono (opcional)" id="phone">
-              <p class="help-block text-danger"></p>
-            </div>
-          </div>
-          <div class="col-md-6 mb-3">
-            <div class="form-group">
-              <label>Mensaje</label>
-              <textarea rows="5" class="form-control" placeholder="Mensaje" id="message" required data-validation-required-message="Por favor, escribe tu mensaje."></textarea>
-              <p class="help-block text-danger"></p>
-            </div>
-          </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="email">Correo electrónico</label>
+          <input type="email" name="email" id="email" class="form-control" placeholder="Tu correo electrónico" required>
         </div>
-  
-        <div class="text-center">
-          <button type="submit" class="btn btn-primary btn-lg" id="sendMessageButton">Enviar</button>
-        </div>
-      </form>
-  
-    </div>
-  </section>
-  
+      </div>
+
+      <div class="mb-3">
+        <label for="message">Mensaje</label>
+        <textarea name="message" id="message" rows="5" class="form-control" placeholder="Escribe tu mensaje aquí" required></textarea>
+      </div>
+
+      <!-- Campo anti-spam -->
+      <input type="text" name="_gotcha" style="display:none">
+
+      <!-- Redirección opcional -->
+      <input type="hidden" name="_redirect" value="{{ '/gracias.html' | relative_url }}">
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-outline-verde-1 btn-lg">Enviar mensaje</button>
+      </div>
+    </form>
+  </div>
+</section>
