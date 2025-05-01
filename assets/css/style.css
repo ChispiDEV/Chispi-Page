@@ -170,7 +170,7 @@
     text-decoration: none;
     display: inline-block;
   }
-  
+
   .btn-outline-verde-1 {
     border-color: var(--btn-verde-1);
     color: var(--btn-verde-1);
@@ -209,5 +209,15 @@
   .btn-outline-verde-4:hover {
     background-color: var(--btn-verde-4);
     color: var(--btn-text-hover-light);
+  }
+
+  #particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-size: cover;
+    background-position: center;
+    color: var(--text-color);
   }
   
