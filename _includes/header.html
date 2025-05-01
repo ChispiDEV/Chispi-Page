@@ -1,5 +1,5 @@
 <header class="hero d-flex align-items-center justify-content-center text-white text-center"
-        style="background-image: url('{{ page.hero_image | default: '/assets/img/hero-bg.jpg' }}');
+        style="background-image: url('{{ page.hero_image | default: '/assets/img/hero-bg.jpg' | relative_url }}');
                height: 100vh;
                background-size: cover;
                background-position: center;
@@ -17,3 +17,4 @@
         </div>
     </div>
 </header>
+

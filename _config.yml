@@ -1,6 +1,6 @@
 title: "Dashboard Personal"
 description: "Portfolio, Devlogs, Proyectos y Recursos"
-baseurl: ""
+baseurl: "/Chispi-Page"
 url: "https://ChispiDEV.github.io"
 markdown: kramdown
 plugins:
