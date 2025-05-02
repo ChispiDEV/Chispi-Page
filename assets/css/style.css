@@ -30,6 +30,8 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   transition: background-color 0.3s, color 0.3s;
+  margin: 0;
+  font-family: sans-serif;
 }
 
 /* === HERO === */
@@ -84,11 +86,67 @@ footer {
   color: var(--btn-verde-1);
 }
 
+/* === Botones circulares: menú, cerrar, scroll-to-top === */
+.menu-toggle,
+.close-menu-toggle,
+.scroll-to-top {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--btn-verde-1);
+  color: white;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.menu-toggle:hover,
+.close-menu-toggle:hover,
+.scroll-to-top:hover {
+  background-color: var(--btn-verde-2);
+}
+
+/* === Íconos del botón de menú === */
+.menu-toggle::before {
+  content: "\f0c9"; /* ícono de hamburguesa */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  transition: content 0.3s ease;
+}
+
+.close-menu-toggle::before {
+  content: "\f00d"; /* ícono de X */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  transition: content 0.3s ease;
+}
+
+/* === Botón scroll to top === */
+.scroll-to-top::before {
+  content: "\f106";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  display: inline-block;
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
 /* === Botón cambio de tema === */
 .theme-toggle {
   position: fixed;
   top: 20px;
-  right: 20px;
+  right: 75px;
   width: 45px;
   height: 45px;
   border: none;
@@ -112,60 +170,6 @@ footer {
 
 [data-theme="dark"] .theme-toggle::before {
   content: "\f185"; /* sol */
-}
-
-/* === Scroll to top === */
-.scroll-to-top::before {
-  content: "\f106";
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
-  display: inline-block;
-}
-.scroll-to-top {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background-color: var(--btn-verde-1);
-  border: none;
-  border-radius: 50%;
-  width: 45px;
-  height: 45px;
-  color: white;
-  font-size: 20px;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  z-index: 9999;
-}
-
-/* === Botón menú hamburguesa y cierre === */
-.menu-toggle::before {
-  content: "\f0c9";
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
-}
-
-.close-menu-toggle::before {
-  content: "\f00d";
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
-}
-
-.menu-toggle,
-.close-menu-toggle,
-.scroll-to-top {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 24px;
-}
-
-/* Hover */
-.menu-toggle:hover,
-.close-menu-toggle:hover,
-.scroll-to-top:hover {
-  background-color: var(--btn-verde-2);
 }
 
 /* === Menú lateral === */

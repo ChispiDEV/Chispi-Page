@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Mi portfolio personal con proyectos, contacto y más.">
-    <title>Sobre mí | Dashboard Personal</title>
+    <title data-i18n="title">Sobre mí | Dashboard Personal</title>
 
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/98ca02228e.js" crossorigin="anonymous"></script>
@@ -30,16 +30,21 @@
     <!-- Navbar -->
     <nav id="navbar" class="navbar navbar-dark bg-dark fixed-top" style="z-index: 9999;">
   <div class="container-fluid d-flex justify-content-between align-items-center">
+    <!-- Branding -->
     <a class="navbar-brand" href="/Chispi-Page/">Chispi Page</a>
-    <button class="menu-toggle"
-      id="menu-toggle" aria-label="Abrir menú">
-    </button>
-    <button class="theme-toggle"
-      aria-label="Cambiar tema" id="theme-toggle">
-    </button>   
+
+    <!-- Botones: Idioma, Tema, Menú -->
+    <div class="d-flex align-items-center gap-2">
+      <button class="btn btn-sm btn-outline-light" id="language-toggle" aria-label="Cambiar idioma" title="Cambiar idioma">
+        🌐
+      </button>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema"></button>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú"></button>
+    </div>
   </div>
 </nav>
 
+<!-- Menú lateral -->
 <div id="sidebar-wrapper">
   <ul class="sidebar-nav">
     <li><a href="/Chispi-Page/">Inicio</a></li>
@@ -49,10 +54,14 @@
     <li><a href="/Chispi-Page/recursos.html">Recursos</a></li>
     <li><a href="/Chispi-Page/contacto.html">Contacto</a></li>
   </ul>
-  <button class="close-menu-toggle"
-    aria-label="Cerrar menú">
-  </button>
+
+  <!-- Botón para cerrar menú -->
+  <button class="close-menu-toggle" id="close-menu-toggle" aria-label="Cerrar menú"></button>
 </div>
+
+<!-- Botón Scroll to Top -->
+<button class="scroll-to-top" aria-label="Volver arriba"></button>
+
 
 
     <!-- Cabecera de cada página -->
