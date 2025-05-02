@@ -4,23 +4,23 @@
   --text-color: #212529;
   --overlay-bg: rgba(255, 255, 255, 0.8);
   --footer-bg: #ffffff;
-  --navbar-bg: #ffffff;
-  --footer-border: #e0e0e0;
+  --navbar-bg: #ffffff; /* fondo claro por defecto */
+  --footer-border: #e0e0e0; /* borde suave claro */
   --navbar-border: #e0e0e0;
-  --muted-text: #6c757d;
+  --muted-text: #6c757d; /* gris oscuro claro */
   --icon-color: #212529;
   --btn-verde-1: #28a745;
   --btn-verde-2: #218838;
   --btn-verde-3: #1e7e34;
   --btn-verde-4: #155724;
-  --btn-text-color: #f8f9fa;
+  --btn-text-color: #f8f9fa; /* blanco cálido para modo claro */
   --btn-text-hover-light: white;
-  --post-title-color: #1e7e34;
-  --tag-bg-default: #e6f4ea;
+  --post-title-color: #1e7e34; /* verde oscuro bonito para modo claro */
+  --tag-bg-default: #e6f4ea;   /* verde muy suave */
   --tag-text-default: #1e7e34;
   --meta-text-color: #6c757d;
-  --summary-bg: #f0fdf4;
-  --summary-text: #1e4620;
+  --summary-bg: #f0fdf4;       /* verde pálido */
+  --summary-text: #1e4620;     /* verde oscuro legible */
 }
 
 [data-theme="dark"] {
@@ -28,25 +28,26 @@
   --text-color: #f1f1f1;
   --overlay-bg: rgba(0, 0, 0, 0.7);
   --footer-bg: #212529;
-  --navbar-bg: #212529;
-  --footer-border: #333333;
+  --navbar-bg: #212529; /* fondo oscuro */
+  --footer-border: #333333; /* borde oscuro tenue */
   --navbar-border: #333333;
-  --muted-text: #bbbbbb;
+  --muted-text: #bbbbbb; /* gris claro para fondo oscuro */
   --icon-color: #f1f1f1;
   --btn-verde-1: #90ee90;
   --btn-verde-2: #7edc7e;
   --btn-verde-3: #6ecf6e;
   --btn-verde-4: #5eb25e;
-  --btn-text-color: #121212;
+  --btn-text-color: #121212; /* negro suave para modo oscuro */
   --btn-text-hover-light: #121212;
-  --post-title-color: #90ee90;
-  --tag-bg-default: #214d30;
+  --post-title-color: #90ee90; /* verde claro para modo oscuro */
+  --tag-bg-default: #214d30;   /* fondo verdoso oscuro */
   --tag-text-default: #bfffc0;
   --meta-text-color: #bbbbbb;
-  --summary-bg: #1d2b1f;
-  --summary-text: #cce8cc;
+  --summary-bg: #1d2b1f;       /* verde oscuro suave */
+  --summary-text: #cce8cc;     /* verde claro legible */
 }
 
+/* === General === */
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
@@ -55,42 +56,47 @@ body {
   font-family: sans-serif;
 }
 
-/* HERO & Overlay */
-.hero, .overlay, .text-box {
-  color: var(--text-color);
-}
+/* === HERO === */
 .hero {
   position: relative;
   height: 100vh;
   overflow: hidden;
   background-size: cover;
   background-position: center;
+  color: var(--text-color);
 }
-.overlay, .text-box {
+
+.overlay {
   background: var(--overlay-bg);
 }
+
+/* === TEXT BOX === */
 .text-box {
+  background: var(--overlay-bg);
+  color: var(--text-color);
   padding: 2rem;
   border-radius: 1rem;
 }
 
-/* NAVBAR */
+/* === NAVBAR === */
 #navbar {
   background-color: var(--navbar-bg);
   color: var(--text-color);
   transition: background-color 0.3s ease, border-bottom 0.3s ease;
   border-bottom: 1px solid var(--navbar-border);
 }
+
 .navbar-brand {
   color: var(--text-color);
   transition: color 0.3s ease;
   text-decoration: none;
 }
+
 .navbar-brand:hover {
   color: var(--btn-verde-1);
 }
 
-/* FOOTER */
+/* === FOOTER === */
 footer {
   background-color: var(--footer-bg);
   color: var(--text-color);
@@ -99,21 +105,26 @@ footer {
   border-top: 1px solid var(--footer-border);
   transition: background-color 0.3s ease, border-top 0.3s ease;
 }
-footer small, .text-subtitle, .post-meta {
+
+footer small {
   color: var(--muted-text);
-  transition: color 0.3s;
+  transition: color 0.3s ease;
 }
+
 footer a {
   margin: 0 0.5rem;
   transition: opacity 0.2s ease, color 0.3s ease;
 }
+
 footer a:hover,
 footer a:focus {
-  opacity: 0.8;
+  opacity: 0.8; /* efecto sutil además del color */
 }
 
-/* ICONS */
-[class^="icon-"]::before {
+/* === Iconos personalizados === */
+.icon-github::before,
+.icon-linkedin::before,
+.icon-email::before {
   font-family: "Font Awesome 6 Brands", "Font Awesome 6 Free";
   font-weight: 900;
   font-size: 1.5rem;
@@ -121,17 +132,19 @@ footer a:focus {
   color: var(--icon-color);
   transition: color 0.3s;
 }
+
 .icon-github::before { content: "\f09b"; }
 .icon-linkedin::before { content: "\f08c"; }
 .icon-email::before { content: "\f0e0"; }
+
 .icon-github:hover::before,
 .icon-linkedin:hover::before,
 .icon-email:hover::before {
   color: var(--btn-verde-1);
 }
 
-/* BOTONES REDONDOS */
-.icon-button, .scroll-to-top {
+/* === Botones redondos estilo uniforme === */
+.icon-button {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -143,30 +156,65 @@ footer a:focus {
   color: var(--btn-text-color);
   cursor: pointer;
   font-size: 20px;
-  z-index: 1100;
   position: relative;
+  z-index: 1100;
 }
-.icon-button:hover,
-.scroll-to-top:hover {
+
+.icon-button:hover {
   background-color: var(--btn-verde-2);
 }
+
+/* === Íconos con Font Awesome === */
+#menu-toggle::before {
+  content: "\f0c9"; /* ícono hamburguesa */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+}
+
+#close-menu-toggle::before {
+  content: "\f00d"; /* ícono cerrar */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+}
+
 .scroll-to-top {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  display: none;
+  display: none; /* Oculto por defecto */
   opacity: 0;
   transition: opacity 0.3s ease;
+  z-index: 1100;
 }
 
-/* TOGGLES */
-#menu-toggle::before { content: "\f0c9"; }
-#close-menu-toggle::before { content: "\f00d"; }
-#theme-toggle::before { content: "\f186"; }
-[data-theme="dark"] #theme-toggle::before { content: "\f185"; }
-#language-toggle::before { content: "\f57d"; }
+.scroll-to-top::before {
+  content: "\f106"; /* flecha arriba */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+}
 
-/* SIDEBAR */
+.scroll-to-top:hover {
+  background-color: var(--btn-verde-2);
+}
+
+#theme-toggle::before {
+  content: "\f186"; /* luna por defecto */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+}
+
+[data-theme="dark"] #theme-toggle::before {
+  content: "\f185"; /* sol en modo oscuro */
+}
+
+/* === Botón idioma === */
+#language-toggle::before {
+  content: "\f57d"; /* ícono globo idioma */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+}
+
+/* === Menú lateral === */
 #sidebar-wrapper {
   position: fixed;
   top: 0;
@@ -179,28 +227,33 @@ footer a:focus {
   z-index: 9998;
   padding: 1rem;
 }
+
 #sidebar-wrapper.active {
   right: 0;
 }
+
 .sidebar-nav {
   list-style: none;
   padding: 0;
   margin-top: 3rem;
 }
+
 .sidebar-nav li {
   margin: 1rem 0;
 }
+
 .sidebar-nav a {
   color: var(--text-color);
   text-decoration: none;
   font-weight: bold;
   transition: color 0.2s;
 }
+
 .sidebar-nav a:hover {
   color: var(--btn-verde-1);
 }
 
-/* BOTONES OUTLINE */
+/* === Botones personalizados === */
 [class^="btn-outline-verde-"] {
   border: 2px solid;
   background-color: transparent;
@@ -211,19 +264,44 @@ footer a:focus {
   text-decoration: none;
   display: inline-block;
 }
-.btn-outline-verde-1 { border-color: var(--btn-verde-1); color: var(--btn-verde-1); }
-.btn-outline-verde-2 { border-color: var(--btn-verde-2); color: var(--btn-verde-2); }
-.btn-outline-verde-3 { border-color: var(--btn-verde-3); color: var(--btn-verde-3); }
-.btn-outline-verde-4 { border-color: var(--btn-verde-4); color: var(--btn-verde-4); }
-.btn-outline-verde-1:hover,
-.btn-outline-verde-2:hover,
-.btn-outline-verde-3:hover,
-.btn-outline-verde-4:hover {
-  background-color: currentColor;
+
+.btn-outline-verde-1 {
+  border-color: var(--btn-verde-1);
+  color: var(--btn-verde-1);
+}
+.btn-outline-verde-1:hover {
+  background-color: var(--btn-verde-1);
   color: var(--btn-text-hover-light);
 }
 
-/* PARTICULAS */
+.btn-outline-verde-2 {
+  border-color: var(--btn-verde-2);
+  color: var(--btn-verde-2);
+}
+.btn-outline-verde-2:hover {
+  background-color: var(--btn-verde-2);
+  color: var(--btn-text-hover-light);
+}
+
+.btn-outline-verde-3 {
+  border-color: var(--btn-verde-3);
+  color: var(--btn-verde-3);
+}
+.btn-outline-verde-3:hover {
+  background-color: var(--btn-verde-3);
+  color: var(--btn-text-hover-light);
+}
+
+.btn-outline-verde-4 {
+  border-color: var(--btn-verde-4);
+  color: var(--btn-verde-4);
+}
+.btn-outline-verde-4:hover {
+  background-color: var(--btn-verde-4);
+  color: var(--btn-text-hover-light);
+}
+
+/* === Partículas === */
 #particles-js {
   position: absolute;
   width: 100%;
@@ -233,31 +311,20 @@ footer a:focus {
   background-position: center;
 }
 
-/* POSTS */
+/* === TÍTULOS DE POSTS === */
+.post-meta {
+  color: var(--meta-text-color);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s;
+}
+
 .post-title {
   color: var(--post-title-color);
   transition: color 0.3s;
 }
-.post-meta {
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
-}
-.post-summary {
-  background-color: var(--summary-bg);
-  color: var(--summary-text);
-  border-left: 4px solid var(--btn-verde-2);
-  padding: 0.75rem 1rem;
-  margin: 1rem 0;
-  border-radius: 0.5rem;
-  font-style: italic;
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-}
-.text-title {
-  color: var(--btn-verde-2);
-  transition: color 0.3s;
-}
 
-/* TAGS */
+/* === TAGS === */
 .tag {
   display: inline-block;
   padding: 0.25rem 0.5rem;
@@ -270,13 +337,14 @@ footer a:focus {
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* TAG COLORS */
-.tag-color-0 { background-color: #e6f4ea; color: #1e7e34; }
-.tag-color-1 { background-color: #eaf4ff; color: #1a73e8; }
-.tag-color-2 { background-color: #fff4e6; color: #e67e22; }
-.tag-color-3 { background-color: #fce8e6; color: #d93025; }
-.tag-color-4 { background-color: #f3e5f5; color: #6a1b9a; }
-.tag-color-5 { background-color: #f1f8e9; color: #558b2f; }
+/* === COLORES DE TAGS DIFERENTES === */
+.tag-color-0 { background-color: #e6f4ea; color: #1e7e34; } /* verde claro */
+.tag-color-1 { background-color: #eaf4ff; color: #1a73e8; } /* azul claro */
+.tag-color-2 { background-color: #fff4e6; color: #e67e22; } /* naranja claro */
+.tag-color-3 { background-color: #fce8e6; color: #d93025; } /* rojo claro */
+.tag-color-4 { background-color: #f3e5f5; color: #6a1b9a; } /* púrpura claro */
+.tag-color-5 { background-color: #f1f8e9; color: #558b2f; } /* verde oliva */
+
 [data-theme="dark"] .tag-color-0 { background-color: #214d30; color: #bfffc0; }
 [data-theme="dark"] .tag-color-1 { background-color: #1e3a5f; color: #a0cfff; }
 [data-theme="dark"] .tag-color-2 { background-color: #5c3d1b; color: #ffddaa; }
@@ -284,10 +352,38 @@ footer a:focus {
 [data-theme="dark"] .tag-color-4 { background-color: #3a2a4d; color: #e1c4ff; }
 [data-theme="dark"] .tag-color-5 { background-color: #2e4220; color: #d7f3c1; }
 
-/* TAG BADGES */
+.post-summary {
+  background-color: var(--summary-bg);
+  color: var(--summary-text);
+  border-left: 4px solid var(--btn-verde-2);
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  font-style: italic;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+/* === Estilos personalizados para página de post === */
+.text-title {
+  color: var(--btn-verde-2);
+  transition: color 0.3s;
+}
+
+.text-subtitle {
+  color: var(--muted-text);
+  transition: color 0.3s;
+}
+
+.post-meta {
+  color: var(--muted-text);
+  transition: color 0.3s;
+}
+
+/* Etiquetas con color automático */
 .tag-badge {
   display: inline-block;
   padding: 0.3em 0.6em;
+  font-size: 0.85em;
   font-weight: 600;
   border-radius: 0.5em;
   background-color: hsl(calc(var(--tag-hue, 180) + var(--tag-index, 0) * 37), 65%, 75%);
@@ -296,12 +392,7 @@ footer a:focus {
   transition: background-color 0.3s, color 0.3s;
 }
 
-.tag-badge .tag-count {
-  font-size: 0.85em;
-  opacity: 0.8;
-  margin-left: 0.3em;
-}
-
+/* Dark mode adjustments for tag */
 [data-theme="dark"] .tag-badge {
   background-color: hsl(calc(var(--tag-hue, 180) + var(--tag-index, 0) * 37), 65%, 30%);
   color: #f0f0f0;
