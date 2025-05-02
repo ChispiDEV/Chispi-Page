@@ -79,70 +79,78 @@
 
     <!-- Contenido dinámico -->
     <main class="container mt-5 pt-5">
-      <article class="post container py-5">
+      <article class="post container-fluid px-0">
 
-  <!-- Título y subtítulo -->
-  <header class="mb-4">
-    <h1 class="display-3 fw-bold text-title">Iniciando el DevBlog - Semana 1</h1>
-    
-      <p class="h4 text-subtitle">Primera semana del DevBlog.
+  
+    <div class="post-hero-image w-100 mb-5 position-relative d-flex align-items-center justify-content-center"
+         style="background-image: url('/Chispi-Page/%7B%7B%20site.baseurl%20%7D%7D/assets/img/posts/post-01.jpg');
+                background-size: cover;
+                background-position: center;
+                height: 300px;">
+      <div class="text-center text-white bg-dark bg-opacity-50 p-4 rounded">
+        <h1 class="display-3 fw-bold text-title">Iniciando el DevBlog - Semana 1</h1>
+        
+          <p class="h4 text-subtitle">Primera semana del DevBlog.
  Conecto Notion con mi blog y exporto mis posts automáticamente usando Python.</p>
-    
-  </header>
+        
+      </div>
+    </div>
+  
 
-  <!-- Información del post -->
-  <section class="mb-4">
-    <ul class="list-unstyled post-meta small">
-      <li>
-        Publicado por 
-        
+  <div class="container py-5">
+    <!-- Información del post -->
+    <section class="mb-4">
+      <ul class="list-unstyled post-meta small">
+        <li>
+          Publicado por 
           
-        
-        el 24 de April, 2025 · 
-        <span class="reading-time" title="Estimated read time">
+            
+          
+          el 24 de April, 2025 · 
+          <span class="reading-time" title="Estimated read time">
   
    1 min  read </span>
 
-      </li>
-
-      
-        <li>
-          <strong>Estado de ánimo:</strong>
-          
-            <span class="tag-badge" style="--tag-hue: 30; --tag-index: 0;">Motivada</span>
-          
         </li>
-      
 
-      
-        <li>
-          <strong>Proyectos:</strong>
-          
-            <span class="tag-badge" style="--tag-hue: 270; --tag-index: 0;">Chispi-DevLog</span>
-          
-        </li>
-      
+        
+          <li>
+            <strong>Estado de ánimo:</strong>
+            
+              <span class="tag-badge" style="--tag-hue: 30; --tag-index: 0;">Motivada</span>
+            
+          </li>
+        
 
-      
+        
+          <li>
+            <strong>Proyectos:</strong>
+            
+              <span class="tag-badge" style="--tag-hue: 270; --tag-index: 0;">Chispi-DevLog</span>
+            
+          </li>
+        
 
-      
-        <li>
-          <strong>Etiquetas:</strong>
-          
-            <a href="/Chispi-Page/tags/GitHub"
-               class="tag-badge"
-               style="--tag-hue: 180; --tag-index: 0;">
-              GitHub
-            </a>
-          
-        </li>
-      
-    </ul>
-  </section>
+        
 
-  <!-- Contenido principal -->
-  <section class="post-content">
-    <div class="post-content">
+        
+          <li>
+            <strong>Etiquetas:</strong>
+            
+              <a href="/Chispi-Page/tags/GitHub"
+                class="tag-badge"
+                style="--tag-hue: 180; --tag-index: 0;">
+                GitHub
+              </a>
+            
+          </li>
+        
+      </ul>
+    </section>
+
+    <!-- Contenido principal -->
+    <section class="post-content">
+      <div class="post-content">
   <p>Buenos días!</p>
 <p>Soy Cristina Fuentes, analista de datos y bióloga. He creado este Blog para poder tener un seguimiento de mis avances en programación y análisis de datos 😉 </p>
 <p>En esta primera entrada voy a recoger los avances realizados en el desarrollo de los scripts necesarios para generar las entradas del blog en Notion y que se actualicen en GitHub. </p>
@@ -155,22 +163,25 @@
 <p>Un amable saludo y nos vemos en la próxima entrada. </p>
 <p>Cristina</p>
 </div>
-  </section>
+    </section>
 
-  <!-- Navegación entre posts -->
-  <nav class="post-navigation d-flex justify-content-between mt-5 pt-4 border-top">
-    
-      <span></span>
-    
+    <!-- Navegación entre posts -->
+    <nav class="post-navigation d-flex justify-content-between mt-5 pt-4 border-top">
 
-    
-      <a href="/Chispi-Page/2025/04/25/chispinotiondev02.html"
-         class="btn btn-outline-primary"
-         aria-label="Siguiente post: Primer viernes - Semana 1">
-        Primer viernes - Semana 1 &rarr;
-      </a>
-    
-  </nav>
+      
+        <span></span>
+      
+
+      
+        <a href="/Chispi-Page/2025/04/25/chispinotiondev02.html"
+          class="btn-outline-verde-3 d-flex align-items-center gap-2 text-end"
+          aria-label="Siguiente post: Primer viernes - Semana 1">
+          Primer viernes - Semana 1 &rarr;
+        </a>
+      
+
+    </nav>
+  </div>
 </article>
 
     </main>
