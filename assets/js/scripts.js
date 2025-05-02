@@ -1,25 +1,38 @@
 window.addEventListener('DOMContentLoaded', () => {
+  const html = document.documentElement;
   const menuToggle = document.getElementById('menu-toggle');
+  const closeMenuToggle = document.getElementById('close-menu-toggle');
   const sidebarWrapper = document.getElementById('sidebar-wrapper');
   const scrollToTop = document.querySelector('.scroll-to-top');
   const themeToggle = document.getElementById('theme-toggle');
-  const html = document.documentElement;
+  const languageToggle = document.getElementById('language-toggle');
   let scrollToTopVisible = false;
 
   // === MENÚ LATERAL ===
-  if (menuToggle && sidebarWrapper) {
+  if (menuToggle && closeMenuToggle && sidebarWrapper) {
     menuToggle.addEventListener('click', () => {
-      sidebarWrapper.classList.toggle('active');
+      sidebarWrapper.classList.add('active');
+      menuToggle.style.display = 'none';
+      closeMenuToggle.style.display = 'flex';
     });
 
-    document.querySelectorAll('#sidebar-wrapper a').forEach(link => {
+    closeMenuToggle.addEventListener('click', () => {
+      sidebarWrapper.classList.remove('active');
+      closeMenuToggle.style.display = 'none';
+      menuToggle.style.display = 'flex';
+    });
+
+    // Cierra menú al hacer clic en un enlace
+    sidebarWrapper.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         sidebarWrapper.classList.remove('active');
+        closeMenuToggle.style.display = 'none';
+        menuToggle.style.display = 'flex';
       });
     });
   }
 
-  // === BOTÓN SCROLL TO TOP ===
+  // === SCROLL TO TOP ===
   if (scrollToTop) {
     window.addEventListener('scroll', () => {
       const shouldShow = window.scrollY > 100;
@@ -66,12 +79,21 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // === CONFIGURACIÓN INICIAL ===
+  // === CAMBIO DE IDIOMA ===
+  if (languageToggle) {
+    languageToggle.addEventListener('click', () => {
+      const currentLang = html.getAttribute('lang') || 'es';
+      const newLang = currentLang === 'es' ? 'en' : 'es';
+      html.setAttribute('lang', newLang);
+      window.location.href = `/${newLang}/`;
+    });
+  }
+
+  // === INICIALIZACIÓN ===
   const initialTheme = html.getAttribute('data-theme') || 'dark';
   html.setAttribute('data-theme', initialTheme);
   updateImagesForTheme(initialTheme);
 
-  // === ACTUALIZACIÓN DE IMÁGENES SEGÚN EL TEMA ===
   function updateImagesForTheme(theme) {
     const hero = document.querySelector('header.hero');
     if (hero && hero.dataset.imgDark && hero.dataset.imgLight) {
