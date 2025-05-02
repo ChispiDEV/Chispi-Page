@@ -11,7 +11,8 @@ resources:  []
 projects: ["Chispi-DevLog"]
 publish: true
 status: "Publicado"
-background: "{{ site.baseurl }}/assets/img/posts/post-01.jpg"  # Aquí agregamos el campo de fondo
+hero_image_dark: "{{ site.baseurl }}/assets/img/posts/post-01.jpg"  # Aquí agregamos el campo de fondo
+hero_image_light: "{{ site.baseurl }}/assets/img/posts/post-01.jpg"  # Aquí agregamos el campo de fondo
 ---
 
 Buenos días!
