@@ -31,7 +31,9 @@
     {% include navbar.html %}
 
     <!-- Cabecera de cada página -->
-    {% include header.html %}
+    {% unless page.hide_header %}
+      {% include header.html %}
+    {% endunless %}
 
     <!-- Contenido dinámico -->
     <main class="container mt-5 pt-5">
