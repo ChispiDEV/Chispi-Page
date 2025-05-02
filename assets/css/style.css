@@ -397,3 +397,21 @@ footer a:focus {
   background-color: hsl(calc(var(--tag-hue, 180) + var(--tag-index, 0) * 37), 65%, 30%);
   color: #f0f0f0;
 }
+
+/* === Miniaturas de posts === */
+.post-thumbnail {
+  min-width: 120px;
+  flex-shrink: 0;
+}
+
+.post-thumbnail img {
+  width: 120px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.post-thumbnail img:hover {
+  transform: scale(1.03);
+}
