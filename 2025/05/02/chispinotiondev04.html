@@ -81,16 +81,23 @@
       <article class="post container-fluid px-0">
 
   
-    <div class="post-hero-image w-100 mb-5 position-relative d-flex align-items-center justify-content-center"
+    <div class="post-hero-image w-100 mb-5 position-relative overflow-hidden"
          style="background-image: url('/Chispi-Page/assets/img/posts/Ciencia_educacin_y_tecnologa_conectadas.png');
                 background-size: cover;
                 background-position: center;
                 height: 300px;">
-      <div class="text-center text-white bg-dark bg-opacity-50 p-4 rounded">
-        <h1 class="display-3 fw-bold text-title">Avances en la página - Semana 2</h1>
-        
-          <p class="h4 text-subtitle">Creando una página con partículas, temas e idiomas</p>
-        
+
+      <!-- Partículas -->
+      <div id="particles-js" class="position-absolute top-0 start-0 w-100 h-100"></div>
+
+      <!-- Contenido centrado -->
+      <div class="position-relative z-1 d-flex align-items-center justify-content-center h-100">
+        <div class="text-center text-white bg-dark bg-opacity-50 p-4 rounded">
+          <h1 class="display-3 fw-bold text-title">Avances en la página - Semana 2</h1>
+          
+            <p class="h4 text-subtitle">Creando una página con partículas, temas e idiomas</p>
+          
+        </div>
       </div>
     </div>
   
@@ -136,26 +143,26 @@
             <strong>Etiquetas:</strong>
             
               <a href="/Chispi-Page/tags/GitHub"
-                 class="tag-badge"
-                 style="--tag-hue: 180; --tag-index: 0;">
+                class="tag-badge"
+                style="--tag-hue: 180; --tag-index: 0;">
                 GitHub
               </a>
             
               <a href="/Chispi-Page/tags/APIs"
-                 class="tag-badge"
-                 style="--tag-hue: 180; --tag-index: 1;">
+                class="tag-badge"
+                style="--tag-hue: 180; --tag-index: 1;">
                 APIs
               </a>
             
               <a href="/Chispi-Page/tags/SQL"
-                 class="tag-badge"
-                 style="--tag-hue: 180; --tag-index: 2;">
+                class="tag-badge"
+                style="--tag-hue: 180; --tag-index: 2;">
                 SQL
               </a>
             
               <a href="/Chispi-Page/tags/JavaScript"
-                 class="tag-badge"
-                 style="--tag-hue: 180; --tag-index: 3;">
+                class="tag-badge"
+                style="--tag-hue: 180; --tag-index: 3;">
                 JavaScript
               </a>
             
@@ -178,18 +185,40 @@
 
     <!-- Navegación entre posts -->
     <nav class="post-navigation d-flex justify-content-between mt-5 pt-4 border-top">
+
       
         <a href="/Chispi-Page/2025/04/26/chispinotiondev03.html"
-           class="btn-outline-verde-1 d-flex align-items-center gap-2"
-           aria-label="Post anterior: Blog bonito - Semana 1">
+          class="btn-outline-verde-1 d-flex align-items-center gap-2"
+          aria-label="Post anterior: Blog bonito - Semana 1">
           &larr; Blog bonito - Semana 1
         </a>
       
 
       
+
     </nav>
   </div>
 </article>
+
+<!-- Partículas -->
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+<script>
+  tsParticles.load("particles-js", {
+    fullScreen: false,
+    background: { color: "transparent" },
+    particles: {
+      number: { value: 40 },
+      size: { value: 3 },
+      move: { enable: true, speed: 1 },
+      line_linked: { enable: true, opacity: 0.3 },
+    },
+    interactivity: {
+      events: {
+        onhover: { enable: true, mode: "repulse" }
+      }
+    }
+  });
+</script>
 
     </main>
 

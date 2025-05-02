@@ -82,17 +82,24 @@
       <article class="post container-fluid px-0">
 
   
-    <div class="post-hero-image w-100 mb-5 position-relative d-flex align-items-center justify-content-center"
+    <div class="post-hero-image w-100 mb-5 position-relative overflow-hidden"
          style="background-image: url('/Chispi-Page/assets/img/posts/post-03.jpg');
                 background-size: cover;
                 background-position: center;
                 height: 300px;">
-      <div class="text-center text-white bg-dark bg-opacity-50 p-4 rounded">
-        <h1 class="display-3 fw-bold text-title">Blog bonito - Semana 1</h1>
-        
-          <p class="h4 text-subtitle">Avances en la página del blog. 
+
+      <!-- Partículas -->
+      <div id="particles-js" class="position-absolute top-0 start-0 w-100 h-100"></div>
+
+      <!-- Contenido centrado -->
+      <div class="position-relative z-1 d-flex align-items-center justify-content-center h-100">
+        <div class="text-center text-white bg-dark bg-opacity-50 p-4 rounded">
+          <h1 class="display-3 fw-bold text-title">Blog bonito - Semana 1</h1>
+          
+            <p class="h4 text-subtitle">Avances en la página del blog. 
  Utilizar una plantilla de Bootstrap para que el blog quede más estético.</p>
-        
+          
+        </div>
       </div>
     </div>
   
@@ -140,8 +147,8 @@
             <strong>Etiquetas:</strong>
             
               <a href="/Chispi-Page/tags/GitHub"
-                 class="tag-badge"
-                 style="--tag-hue: 180; --tag-index: 0;">
+                class="tag-badge"
+                style="--tag-hue: 180; --tag-index: 0;">
                 GitHub
               </a>
             
@@ -163,24 +170,46 @@
 
     <!-- Navegación entre posts -->
     <nav class="post-navigation d-flex justify-content-between mt-5 pt-4 border-top">
+
       
         <a href="/Chispi-Page/2025/04/25/chispinotiondev02.html"
-           class="btn-outline-verde-1 d-flex align-items-center gap-2"
-           aria-label="Post anterior: Primer viernes - Semana 1">
+          class="btn-outline-verde-1 d-flex align-items-center gap-2"
+          aria-label="Post anterior: Primer viernes - Semana 1">
           &larr; Primer viernes - Semana 1
         </a>
       
 
       
         <a href="/Chispi-Page/2025/05/02/chispinotiondev04.html"
-           class="btn-outline-verde-3 d-flex align-items-center gap-2 text-end"
-           aria-label="Siguiente post: Avances en la página - Semana 2">
+          class="btn-outline-verde-3 d-flex align-items-center gap-2 text-end"
+          aria-label="Siguiente post: Avances en la página - Semana 2">
           Avances en la página - Semana 2 &rarr;
         </a>
       
+
     </nav>
   </div>
 </article>
+
+<!-- Partículas -->
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+<script>
+  tsParticles.load("particles-js", {
+    fullScreen: false,
+    background: { color: "transparent" },
+    particles: {
+      number: { value: 40 },
+      size: { value: 3 },
+      move: { enable: true, speed: 1 },
+      line_linked: { enable: true, opacity: 0.3 },
+    },
+    interactivity: {
+      events: {
+        onhover: { enable: true, mode: "repulse" }
+      }
+    }
+  });
+</script>
 
     </main>
 
