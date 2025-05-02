@@ -11,7 +11,7 @@ resources:  []
 projects: ["Chispi-DevLog"]
 publish: true
 status: "Publicado"
-background: "/assets/img/posts/Ciencia_educacin_y_tecnologa_conectadas.png"  # Aquí agregamos el campo de fondo
+background: "{{ site.baseurl }}/assets/img/posts/Ciencia_educacin_y_tecnologa_conectadas.png"  # Aquí agregamos el campo de fondo
 ---
 
 Buenas tardes!!
