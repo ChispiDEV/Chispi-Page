@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://chispidev.github.io/Chispi-Page/feed.xml" rel="self" type="application/atom+xml" /><link href="https://chispidev.github.io/Chispi-Page/" rel="alternate" type="text/html" /><updated>2025-05-02T17:16:17+00:00</updated><id>https://chispidev.github.io/Chispi-Page/feed.xml</id><title type="html">Dashboard Personal</title><subtitle>Portfolio, Devlogs, Proyectos y Recursos</subtitle><entry><title type="html">Chispinotiondev04</title><link href="https://chispidev.github.io/Chispi-Page/2025/05/02/chispinotiondev04.html" rel="alternate" type="text/html" title="Chispinotiondev04" /><published>2025-05-02T00:00:00+00:00</published><updated>2025-05-02T00:00:00+00:00</updated><id>https://chispidev.github.io/Chispi-Page/2025/05/02/chispinotiondev04</id><content type="html" xml:base="https://chispidev.github.io/Chispi-Page/2025/05/02/chispinotiondev04.html"><![CDATA[---
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://chispidev.github.io/Chispi-Page/feed.xml" rel="self" type="application/atom+xml" /><link href="https://chispidev.github.io/Chispi-Page/" rel="alternate" type="text/html" /><updated>2025-05-02T17:23:07+00:00</updated><id>https://chispidev.github.io/Chispi-Page/feed.xml</id><title type="html">Dashboard Personal</title><subtitle>Portfolio, Devlogs, Proyectos y Recursos</subtitle><entry><title type="html">Chispinotiondev04</title><link href="https://chispidev.github.io/Chispi-Page/2025/05/02/chispinotiondev04.html" rel="alternate" type="text/html" title="Chispinotiondev04" /><published>2025-05-02T00:00:00+00:00</published><updated>2025-05-02T00:00:00+00:00</updated><id>https://chispidev.github.io/Chispi-Page/2025/05/02/chispinotiondev04</id><content type="html" xml:base="https://chispidev.github.io/Chispi-Page/2025/05/02/chispinotiondev04.html"><![CDATA[---
 layout: post
 title: "Avances en la página - Semana 2"
 subtitle: "Creando una página con partículas, temas e idiomas"
@@ -6,8 +6,6 @@ date: 2025-05-02
 tags: ["GitHub", "APIs", "SQL", "JavaScript"]
 slug: "chispinotiondev04"
 mood: ["Orgullosa"]
-issues: ""
-resources: []
 projects: ["Chispi-DevLog"]
 publish: true
 status: "Publicado"
@@ -24,7 +22,7 @@ hero_image_light: "/Chispi-Page/assets/img/posts/Ciencia_educacin_y_tecnologa_co
 <p>Espero que nos volvamos a ver pronto!!</p>
 <p>Un amable saludo.</p>
 <p>Cristina Fuentes</p>
-</div>]]></content><author><name></name></author><summary type="html"><![CDATA[--- layout: post title: "Avances en la página - Semana 2" subtitle: "Creando una página con partículas, temas e idiomas" date: 2025-05-02 tags: ["GitHub", "APIs", "SQL", "JavaScript"] slug: "chispinotiondev04" mood: ["Orgullosa"] issues: "" resources: [] projects: ["Chispi-DevLog"] publish: true status: "Publicado" hero_image_dark: "/Chispi-Page/assets/img/posts/Ciencia_educacin_y_tecnologa_conectadas.png" hero_image_light: "/Chispi-Page/assets/img/posts/Ciencia_educacin_y_tecnologa_conectadas.png" ---]]></summary></entry><entry><title type="html">Chispinotiondev03</title><link href="https://chispidev.github.io/Chispi-Page/2025/04/26/chispinotiondev03.html" rel="alternate" type="text/html" title="Chispinotiondev03" /><published>2025-04-26T00:00:00+00:00</published><updated>2025-04-26T00:00:00+00:00</updated><id>https://chispidev.github.io/Chispi-Page/2025/04/26/chispinotiondev03</id><content type="html" xml:base="https://chispidev.github.io/Chispi-Page/2025/04/26/chispinotiondev03.html"><![CDATA[---
+</div>]]></content><author><name></name></author><summary type="html"><![CDATA[--- layout: post title: "Avances en la página - Semana 2" subtitle: "Creando una página con partículas, temas e idiomas" date: 2025-05-02 tags: ["GitHub", "APIs", "SQL", "JavaScript"] slug: "chispinotiondev04" mood: ["Orgullosa"] projects: ["Chispi-DevLog"] publish: true status: "Publicado" hero_image_dark: "/Chispi-Page/assets/img/posts/Ciencia_educacin_y_tecnologa_conectadas.png" hero_image_light: "/Chispi-Page/assets/img/posts/Ciencia_educacin_y_tecnologa_conectadas.png" ---]]></summary></entry><entry><title type="html">Chispinotiondev03</title><link href="https://chispidev.github.io/Chispi-Page/2025/04/26/chispinotiondev03.html" rel="alternate" type="text/html" title="Chispinotiondev03" /><published>2025-04-26T00:00:00+00:00</published><updated>2025-04-26T00:00:00+00:00</updated><id>https://chispidev.github.io/Chispi-Page/2025/04/26/chispinotiondev03</id><content type="html" xml:base="https://chispidev.github.io/Chispi-Page/2025/04/26/chispinotiondev03.html"><![CDATA[---
 layout: post
 title: "Blog bonito - Semana 1"
 subtitle: "Avances en la página del blog. \n Utilizar una plantilla de Bootstrap para que el blog quede más estético."
@@ -32,8 +30,6 @@ date: 2025-04-26
 tags: ["GitHub"]
 slug: "chispinotiondev03"
 mood: ["Orgullosa", "Motivada"]
-issues: ""
-resources: []
 projects: ["Chispi-DevLog"]
 publish: true
 status: "Publicado"
@@ -49,7 +45,7 @@ hero_image_light: "/Chispi-Page/assets/img/posts/post-03.jpg"
 <p>Espero que disfrutéis de lo que queda de semana y nos vemos en el próximo post.</p>
 <p>Un amable saludo.</p>
 <p>Cristina</p>
-</div>]]></content><author><name></name></author><summary type="html"><![CDATA[--- layout: post title: "Blog bonito - Semana 1" subtitle: "Avances en la página del blog. \n Utilizar una plantilla de Bootstrap para que el blog quede más estético." date: 2025-04-26 tags: ["GitHub"] slug: "chispinotiondev03" mood: ["Orgullosa", "Motivada"] issues: "" resources: [] projects: ["Chispi-DevLog"] publish: true status: "Publicado" hero_image_dark: "/Chispi-Page/assets/img/posts/post-03.jpg" hero_image_light: "/Chispi-Page/assets/img/posts/post-03.jpg" ---]]></summary></entry><entry><title type="html">Chispinotiondev02</title><link href="https://chispidev.github.io/Chispi-Page/2025/04/25/chispinotiondev02.html" rel="alternate" type="text/html" title="Chispinotiondev02" /><published>2025-04-25T00:00:00+00:00</published><updated>2025-04-25T00:00:00+00:00</updated><id>https://chispidev.github.io/Chispi-Page/2025/04/25/chispinotiondev02</id><content type="html" xml:base="https://chispidev.github.io/Chispi-Page/2025/04/25/chispinotiondev02.html"><![CDATA[---
+</div>]]></content><author><name></name></author><summary type="html"><![CDATA[--- layout: post title: "Blog bonito - Semana 1" subtitle: "Avances en la página del blog. \n Utilizar una plantilla de Bootstrap para que el blog quede más estético." date: 2025-04-26 tags: ["GitHub"] slug: "chispinotiondev03" mood: ["Orgullosa", "Motivada"] projects: ["Chispi-DevLog"] publish: true status: "Publicado" hero_image_dark: "/Chispi-Page/assets/img/posts/post-03.jpg" hero_image_light: "/Chispi-Page/assets/img/posts/post-03.jpg" ---]]></summary></entry><entry><title type="html">Chispinotiondev02</title><link href="https://chispidev.github.io/Chispi-Page/2025/04/25/chispinotiondev02.html" rel="alternate" type="text/html" title="Chispinotiondev02" /><published>2025-04-25T00:00:00+00:00</published><updated>2025-04-25T00:00:00+00:00</updated><id>https://chispidev.github.io/Chispi-Page/2025/04/25/chispinotiondev02</id><content type="html" xml:base="https://chispidev.github.io/Chispi-Page/2025/04/25/chispinotiondev02.html"><![CDATA[---
 layout: post
 title: "Primer viernes - Semana 1"
 subtitle: "Trabajando con el Blog. \n Cambiando el aspecto de la página"
@@ -57,8 +53,6 @@ date: 2025-04-25
 tags: ["GitHub"]
 slug: "chispinotiondev02"
 mood: ["Bloqueada"]
-issues: ""
-resources: []
 projects: ["Chispi-DevLog"]
 publish: true
 status: "Publicado"
@@ -72,7 +66,7 @@ hero_image_light: "/Chispi-Page/assets/img/posts/post-02.jpg"
 <p>Parece que el formato “minima” es el único con el que consigo que se despliegue la página, pero seguiré intentándolo.</p>
 <p>Espero que tengáis un gran fin de semana.</p>
 <p>Cristina</p>
-</div>]]></content><author><name></name></author><summary type="html"><![CDATA[--- layout: post title: "Primer viernes - Semana 1" subtitle: "Trabajando con el Blog. \n Cambiando el aspecto de la página" date: 2025-04-25 tags: ["GitHub"] slug: "chispinotiondev02" mood: ["Bloqueada"] issues: "" resources: [] projects: ["Chispi-DevLog"] publish: true status: "Publicado" hero_image_dark: "/Chispi-Page/assets/img/posts/post-02.jpg" hero_image_light: "/Chispi-Page/assets/img/posts/post-02.jpg" ---]]></summary></entry><entry><title type="html">Chispinotiondev01</title><link href="https://chispidev.github.io/Chispi-Page/2025/04/24/chispinotiondev01.html" rel="alternate" type="text/html" title="Chispinotiondev01" /><published>2025-04-24T00:00:00+00:00</published><updated>2025-04-24T00:00:00+00:00</updated><id>https://chispidev.github.io/Chispi-Page/2025/04/24/chispinotiondev01</id><content type="html" xml:base="https://chispidev.github.io/Chispi-Page/2025/04/24/chispinotiondev01.html"><![CDATA[---
+</div>]]></content><author><name></name></author><summary type="html"><![CDATA[--- layout: post title: "Primer viernes - Semana 1" subtitle: "Trabajando con el Blog. \n Cambiando el aspecto de la página" date: 2025-04-25 tags: ["GitHub"] slug: "chispinotiondev02" mood: ["Bloqueada"] projects: ["Chispi-DevLog"] publish: true status: "Publicado" hero_image_dark: "/Chispi-Page/assets/img/posts/post-02.jpg" hero_image_light: "/Chispi-Page/assets/img/posts/post-02.jpg" ---]]></summary></entry><entry><title type="html">Chispinotiondev01</title><link href="https://chispidev.github.io/Chispi-Page/2025/04/24/chispinotiondev01.html" rel="alternate" type="text/html" title="Chispinotiondev01" /><published>2025-04-24T00:00:00+00:00</published><updated>2025-04-24T00:00:00+00:00</updated><id>https://chispidev.github.io/Chispi-Page/2025/04/24/chispinotiondev01</id><content type="html" xml:base="https://chispidev.github.io/Chispi-Page/2025/04/24/chispinotiondev01.html"><![CDATA[---
 layout: post
 title: "Iniciando el DevBlog - Semana 1"
 subtitle: "Primera semana del DevBlog.\n Conecto Notion con mi blog y exporto mis posts automáticamente usando Python."
@@ -80,8 +74,6 @@ date: 2025-04-24
 tags: ["GitHub"]
 slug: "chispinotiondev01"
 mood: ["Motivada"]
-issues: ""
-resources: []
 projects: ["Chispi-DevLog"]
 publish: true
 status: "Publicado"
@@ -101,4 +93,4 @@ hero_image_light: "/Chispi-Page/assets/img/posts/post-01.jpg"
 <p>Y de momento esto es todo por hoy. </p>
 <p>Un amable saludo y nos vemos en la próxima entrada. </p>
 <p>Cristina</p>
-</div>]]></content><author><name></name></author><summary type="html"><![CDATA[--- layout: post title: "Iniciando el DevBlog - Semana 1" subtitle: "Primera semana del DevBlog.\n Conecto Notion con mi blog y exporto mis posts automáticamente usando Python." date: 2025-04-24 tags: ["GitHub"] slug: "chispinotiondev01" mood: ["Motivada"] issues: "" resources: [] projects: ["Chispi-DevLog"] publish: true status: "Publicado" hero_image_dark: "/Chispi-Page/assets/img/posts/post-01.jpg" hero_image_light: "/Chispi-Page/assets/img/posts/post-01.jpg" ---]]></summary></entry></feed>
+</div>]]></content><author><name></name></author><summary type="html"><![CDATA[--- layout: post title: "Iniciando el DevBlog - Semana 1" subtitle: "Primera semana del DevBlog.\n Conecto Notion con mi blog y exporto mis posts automáticamente usando Python." date: 2025-04-24 tags: ["GitHub"] slug: "chispinotiondev01" mood: ["Motivada"] projects: ["Chispi-DevLog"] publish: true status: "Publicado" hero_image_dark: "/Chispi-Page/assets/img/posts/post-01.jpg" hero_image_light: "/Chispi-Page/assets/img/posts/post-01.jpg" ---]]></summary></entry></feed>
