@@ -29,10 +29,10 @@ pagination:
     <section class="col-md-9">
       {% for post in paginator.posts %}
         <article class="mb-5 pb-3 border-bottom d-flex flex-column flex-md-row gap-4">
-          {% if post.hero_image or post.hero_image_dark %}
+          {% if post.hero_image %}
             <div class="post-thumbnail d-none d-md-block flex-shrink-0" style="max-width: 180px;">
               <img 
-                src="{{ post.hero_image | default: post.hero_image_dark | relative_url }}" 
+                src="{{ post.hero_image | relative_url }}" 
                 alt="Miniatura de {{ post.title }}"
                 class="img-fluid rounded shadow-sm"
               >

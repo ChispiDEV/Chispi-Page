@@ -2,90 +2,101 @@
 layout: default
 ---
 
-<article class="post container py-5">
+<article class="post container-fluid px-0">
 
-  <!-- Título y subtítulo -->
-  <header class="mb-4">
-    <h1 class="display-3 fw-bold text-title">{{ page.title }}</h1>
-    {% if page.subtitle %}
-      <p class="h4 text-subtitle">{{ page.subtitle }}</p>
-    {% endif %}
-  </header>
-
-  <!-- Información del post -->
-  <section class="mb-4">
-    <ul class="list-unstyled post-meta small">
-      <li>
-        Publicado por 
-        {% if page.author %}
-          {{ page.author }}
-        {% else %}
-          {{ site.author }}
+  {% if page.hero_image %}
+    <div class="post-hero-image w-100 mb-5 position-relative d-flex align-items-center justify-content-center"
+         style="background-image: url('{{ page.hero_image | relative_url }}');
+                background-size: cover;
+                background-position: center;
+                height: 300px;">
+      <div class="text-center text-white bg-dark bg-opacity-50 p-4 rounded">
+        <h1 class="display-3 fw-bold text-title">{{ page.title }}</h1>
+        {% if page.subtitle %}
+          <p class="h4 text-subtitle">{{ page.subtitle }}</p>
         {% endif %}
-        el {{ page.date | date: '%d de %B, %Y' }} · 
-        {% include read_time.html content=content %}
-      </li>
+      </div>
+    </div>
+  {% endif %}
 
-      {% if page.mood %}
+  <div class="container py-5">
+    <!-- Información del post -->
+    <section class="mb-4">
+      <ul class="list-unstyled post-meta small">
         <li>
-          <strong>Estado de ánimo:</strong>
-          {% for mood_item in page.mood %}
-            <span class="tag-badge" style="--tag-hue: 30; --tag-index: {{ forloop.index0 }};">{{ mood_item }}</span>
-          {% endfor %}
+          Publicado por 
+          {% if page.author %}
+            {{ page.author }}
+          {% else %}
+            {{ site.author }}
+          {% endif %}
+          el {{ page.date | date: '%d de %B, %Y' }} · 
+          {% include read_time.html content=content %}
         </li>
+
+        {% if page.mood %}
+          <li>
+            <strong>Estado de ánimo:</strong>
+            {% for mood_item in page.mood %}
+              <span class="tag-badge" style="--tag-hue: 30; --tag-index: {{ forloop.index0 }};">{{ mood_item }}</span>
+            {% endfor %}
+          </li>
+        {% endif %}
+
+        {% if page.projects %}
+          <li>
+            <strong>Proyectos:</strong>
+            {% for project in page.projects %}
+              <span class="tag-badge" style="--tag-hue: 270; --tag-index: {{ forloop.index0 }};">{{ project }}</span>
+            {% endfor %}
+          </li>
+        {% endif %}
+
+        {% if page.summary %}
+          <li class="post-summary"><strong>📝 Resumen:</strong> {{ page.summary }}</li>
+        {% endif %}
+
+        {% if page.tags %}
+          <li>
+            <strong>Etiquetas:</strong>
+            {% for tag in page.tags %}
+              <a href="{{ '/tags/' | append: tag | relative_url }}"
+                class="tag-badge"
+                style="--tag-hue: 180; --tag-index: {{ forloop.index0 }};">
+                {{ tag }}
+              </a>
+            {% endfor %}
+          </li>
+        {% endif %}
+      </ul>
+    </section>
+
+    <!-- Contenido principal -->
+    <section class="post-content">
+      {{ content }}
+    </section>
+
+    <!-- Navegación entre posts -->
+    <nav class="post-navigation d-flex justify-content-between mt-5 pt-4 border-top">
+
+      {% if page.previous %}
+        <a href="{{ page.previous.url | relative_url }}"
+          class="btn-outline-verde-1 d-flex align-items-center gap-2"
+          aria-label="Post anterior: {{ page.previous.title }}">
+          &larr; {{ page.previous.title }}
+        </a>
+      {% else %}
+        <span></span>
       {% endif %}
 
-      {% if page.projects %}
-        <li>
-          <strong>Proyectos:</strong>
-          {% for project in page.projects %}
-            <span class="tag-badge" style="--tag-hue: 270; --tag-index: {{ forloop.index0 }};">{{ project }}</span>
-          {% endfor %}
-        </li>
+      {% if page.next %}
+        <a href="{{ page.next.url | relative_url }}"
+          class="btn-outline-verde-3 d-flex align-items-center gap-2 text-end"
+          aria-label="Siguiente post: {{ page.next.title }}">
+          {{ page.next.title }} &rarr;
+        </a>
       {% endif %}
 
-      {% if page.summary %}
-        <li class="post-summary"><strong>📝 Resumen:</strong> {{ page.summary }}</li>
-      {% endif %}
-
-      {% if page.tags %}
-        <li>
-          <strong>Etiquetas:</strong>
-          {% for tag in page.tags %}
-            <a href="{{ '/tags/' | append: tag | relative_url }}"
-               class="tag-badge"
-               style="--tag-hue: 180; --tag-index: {{ forloop.index0 }};">
-              {{ tag }}
-            </a>
-          {% endfor %}
-        </li>
-      {% endif %}
-    </ul>
-  </section>
-
-  <!-- Contenido principal -->
-  <section class="post-content">
-    {{ content }}
-  </section>
-
-  <!-- Navegación entre posts -->
-  <nav class="post-navigation d-flex justify-content-between mt-5 pt-4 border-top">
-    {% if page.previous %}
-      <a href="{{ page.previous.url | relative_url }}"
-         class="btn btn-outline-primary"
-         aria-label="Post anterior: {{ page.previous.title }}">
-        &larr; {{ page.previous.title }}
-      </a>
-    {% else %}
-      <span></span>
-    {% endif %}
-
-    {% if page.next %}
-      <a href="{{ page.next.url | relative_url }}"
-         class="btn btn-outline-primary"
-         aria-label="Siguiente post: {{ page.next.title }}">
-        {{ page.next.title }} &rarr;
-      </a>
-    {% endif %}
-  </nav>
+    </nav>
+  </div>
 </article>
