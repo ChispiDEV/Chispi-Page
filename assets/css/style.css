@@ -4,6 +4,10 @@
   --text-color: #212529;
   --overlay-bg: rgba(255, 255, 255, 0.8);
   --footer-bg: #ffffff;
+  --navbar-bg: #ffffff; /* fondo claro por defecto */
+  --footer-border: #e0e0e0; /* borde suave claro */
+  --navbar-border: #e0e0e0;
+  --muted-text: #6c757d; /* gris oscuro claro */
   --icon-color: #212529;
   --btn-verde-1: #28a745;
   --btn-verde-2: #218838;
@@ -18,6 +22,10 @@
   --text-color: #f1f1f1;
   --overlay-bg: rgba(0, 0, 0, 0.7);
   --footer-bg: #212529;
+  --navbar-bg: #212529; /* fondo oscuro */
+  --footer-border: #333333; /* borde oscuro tenue */
+  --navbar-border: #333333;
+  --muted-text: #bbbbbb; /* gris claro para fondo oscuro */
   --icon-color: #f1f1f1;
   --btn-verde-1: #90ee90;
   --btn-verde-2: #7edc7e;
@@ -58,12 +66,47 @@ body {
   border-radius: 1rem;
 }
 
+/* === NAVBAR === */
+#navbar {
+  background-color: var(--navbar-bg);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, border-bottom 0.3s ease;
+  border-bottom: 1px solid var(--navbar-border);
+}
+
+.navbar-brand {
+  color: var(--text-color);
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+.navbar-brand:hover {
+  color: var(--btn-verde-1);
+}
+
 /* === FOOTER === */
 footer {
   background-color: var(--footer-bg);
   color: var(--text-color);
   text-align: center;
   padding: 20px 0;
+  border-top: 1px solid var(--footer-border);
+  transition: background-color 0.3s ease, border-top 0.3s ease;
+}
+
+footer small {
+  color: var(--muted-text);
+  transition: color 0.3s ease;
+}
+
+footer a {
+  margin: 0 0.5rem;
+  transition: opacity 0.2s ease, color 0.3s ease;
+}
+
+footer a:hover,
+footer a:focus {
+  opacity: 0.8; /* efecto sutil además del color */
 }
 
 /* === Iconos personalizados === */
