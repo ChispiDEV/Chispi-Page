@@ -6,9 +6,9 @@ layout: default
 
   <!-- Título y subtítulo -->
   <header class="mb-4">
-    <h1 class="display-5 fw-bold text-title">{{ page.title }}</h1>
+    <h1 class="display-3 fw-bold text-title">{{ page.title }}</h1>
     {% if page.subtitle %}
-      <p class="lead text-subtitle">{{ page.subtitle }}</p>
+      <p class="h4 text-subtitle">{{ page.subtitle }}</p>
     {% endif %}
   </header>
 
@@ -27,7 +27,21 @@ layout: default
       </li>
 
       {% if page.mood %}
-        <li><strong>Estado de ánimo:</strong> {{ page.mood }}</li>
+        <li>
+          <strong>Estado de ánimo:</strong>
+          {% for mood_item in page.mood %}
+            <span class="tag-badge" style="--tag-hue: 30; --tag-index: {{ forloop.index0 }};">{{ mood_item }}</span>
+          {% endfor %}
+        </li>
+      {% endif %}
+
+      {% if page.projects %}
+        <li>
+          <strong>Proyectos:</strong>
+          {% for project in page.projects %}
+            <span class="tag-badge" style="--tag-hue: 270; --tag-index: {{ forloop.index0 }};">{{ project }}</span>
+          {% endfor %}
+        </li>
       {% endif %}
 
       {% if page.summary %}
@@ -40,7 +54,7 @@ layout: default
           {% for tag in page.tags %}
             <a href="{{ '/tags/' | append: tag | relative_url }}"
                class="tag-badge"
-               style="--tag-index: {{ forloop.index0 }};">
+               style="--tag-hue: 180; --tag-index: {{ forloop.index0 }};">
               {{ tag }}
             </a>
           {% endfor %}
