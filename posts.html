@@ -15,9 +15,9 @@ pagination:
         {% assign tags_list = site.tags | sort %}
         {% for tag in tags_list %}
           <li>
-            <a href="{{ '/tags/' | append: tag[0] | relative_url }}" class="badge bg-secondary text-decoration-none mb-1 d-inline-block">
-              {{ tag[0] }} <span class="badge bg-light text-dark">{{ tag[1].size }}</span>
-            </a>
+            <a href="{{ '/tags/' | append: tag[0] | relative_url }}" class="tag-badge" style="--tag-index: {{ forloop.index0 }};">
+                {{ tag[0] }} <span class="tag-count">({{ tag[1].size }})</span>
+              </a>
           </li>
         {% endfor %}
       </ul>
@@ -28,7 +28,7 @@ pagination:
       {% for post in paginator.posts %}
         <article class="mb-5 pb-3 border-bottom">
           <a href="{{ post.url | relative_url }}" class="text-decoration-none">
-            <h2 class="h4 text-primary">{{ post.title }}</h2>
+            <h2 class="post-title">{{ post.title }}</h2>
 
             {% if post.subtitle %}
               <h3 class="h6 text-muted">{{ post.subtitle }}</h3>
@@ -42,19 +42,23 @@ pagination:
           {% endif %}
 
           {% if post.summary %}
-            <p class="mb-1"><strong>Resumen:</strong> {{ post.summary }}</p>
+          <div class="post-summary"><strong>Resumen:</strong> {{ post.summary }}</div>
           {% endif %}
 
           {% if post.tags %}
             <p class="mb-1">
               <strong>Etiquetas:</strong>
               {% for tag in post.tags %}
-                <a href="{{ '/tags/' | append: tag | relative_url }}" class="badge bg-info text-dark me-1">{{ tag }}</a>
+                <a href="{{ '/tags/' | append: tag | relative_url }}" 
+                    class="tag-badge"
+                    style="--tag-index: {{ forloop.index0 }};">
+                  {{ tag }}
+                </a>
               {% endfor %}
             </p>
           {% endif %}
 
-          <p class="text-muted small">
+          <p class="post-meta">
             Publicado por
             {% if post.author %}
               {{ post.author }}

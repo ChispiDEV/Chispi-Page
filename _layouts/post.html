@@ -6,38 +6,47 @@ layout: default
 
   <!-- Título y subtítulo -->
   <header class="mb-4">
-    <h1 class="display-5 fw-bold">{{ page.title }}</h1>
-
+    <h1 class="display-5 fw-bold text-title">{{ page.title }}</h1>
     {% if page.subtitle %}
-      <p class="lead text-muted">{{ page.subtitle }}</p>
+      <p class="lead text-subtitle">{{ page.subtitle }}</p>
     {% endif %}
   </header>
 
   <!-- Información del post -->
-  <section class="mb-4 text-muted small">
-    <p>
-      Publicado por 
-      {% if page.author %}
-        {{ page.author }}
-      {% else %}
-        {{ site.author }}
+  <section class="mb-4">
+    <ul class="list-unstyled post-meta small">
+      <li>
+        Publicado por 
+        {% if page.author %}
+          {{ page.author }}
+        {% else %}
+          {{ site.author }}
+        {% endif %}
+        el {{ page.date | date: '%d de %B, %Y' }} · 
+        {% include read_time.html content=content %}
+      </li>
+
+      {% if page.mood %}
+        <li><strong>Estado de ánimo:</strong> {{ page.mood }}</li>
       {% endif %}
-      el {{ page.date | date: '%d de %B, %Y' }} · 
-      {% include read_time.html content=content %}
-    </p>
 
-    {% if page.mood %}
-      <p><strong>Estado de ánimo:</strong> {{ page.mood }}</p>
-    {% endif %}
+      {% if page.summary %}
+        <li class="post-summary"><strong>📝 Resumen:</strong> {{ page.summary }}</li>
+      {% endif %}
 
-    {% if page.tags %}
-      <p>
-        <strong>Etiquetas:</strong>
-        {% for tag in page.tags %}
-          <a href="{{ '/tags/' | append: tag | relative_url }}" class="badge bg-secondary text-light me-1">{{ tag }}</a>
-        {% endfor %}
-      </p>
-    {% endif %}
+      {% if page.tags %}
+        <li>
+          <strong>Etiquetas:</strong>
+          {% for tag in page.tags %}
+            <a href="{{ '/tags/' | append: tag | relative_url }}"
+               class="tag-badge"
+               style="--tag-index: {{ forloop.index0 }};">
+              {{ tag }}
+            </a>
+          {% endfor %}
+        </li>
+      {% endif %}
+    </ul>
   </section>
 
   <!-- Contenido principal -->
@@ -48,13 +57,21 @@ layout: default
   <!-- Navegación entre posts -->
   <nav class="post-navigation d-flex justify-content-between mt-5 pt-4 border-top">
     {% if page.previous %}
-      <a href="{{ page.previous.url | relative_url }}" class="btn btn-outline-primary">&larr; {{ page.previous.title }}</a>
+      <a href="{{ page.previous.url | relative_url }}"
+         class="btn btn-outline-primary"
+         aria-label="Post anterior: {{ page.previous.title }}">
+        &larr; {{ page.previous.title }}
+      </a>
     {% else %}
       <span></span>
     {% endif %}
 
     {% if page.next %}
-      <a href="{{ page.next.url | relative_url }}" class="btn btn-outline-primary">{{ page.next.title }} &rarr;</a>
+      <a href="{{ page.next.url | relative_url }}"
+         class="btn btn-outline-primary"
+         aria-label="Siguiente post: {{ page.next.title }}">
+        {{ page.next.title }} &rarr;
+      </a>
     {% endif %}
   </nav>
 </article>
