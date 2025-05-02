@@ -86,14 +86,11 @@ footer {
   color: var(--btn-verde-1);
 }
 
-/* === Botones circulares: menú, cerrar, scroll-to-top === */
-.menu-toggle,
-.close-menu-toggle,
-.scroll-to-top {
+/* === Botones redondos estilo uniforme === */
+.icon-button {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
   width: 45px;
   height: 45px;
   border: none;
@@ -101,75 +98,49 @@ footer {
   background-color: var(--btn-verde-1);
   color: white;
   cursor: pointer;
+  font-size: 20px;
+  position: relative;
   z-index: 1100;
 }
 
-.menu-toggle:hover,
-.close-menu-toggle:hover,
-.scroll-to-top:hover {
+.icon-button:hover {
   background-color: var(--btn-verde-2);
 }
 
-/* === Íconos del botón de menú === */
-.menu-toggle::before {
-  content: "\f0c9"; /* ícono de hamburguesa */
+/* === Íconos con Font Awesome === */
+#menu-toggle::before {
+  content: "\f0c9"; /* ícono hamburguesa */
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
-  transition: content 0.3s ease;
 }
 
-.close-menu-toggle::before {
-  content: "\f00d"; /* ícono de X */
+#close-menu-toggle::before {
+  content: "\f00d"; /* ícono cerrar */
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
-  transition: content 0.3s ease;
 }
 
-/* === Botón scroll to top === */
 .scroll-to-top::before {
-  content: "\f106";
+  content: "\f106"; /* flecha arriba */
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
-  display: inline-block;
 }
 
-.scroll-to-top {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  display: none;
-  justify-content: center;
-  align-items: center;
-}
-
-/* === Botón cambio de tema === */
-.theme-toggle {
-  position: fixed;
-  top: 20px;
-  right: 75px;
-  width: 45px;
-  height: 45px;
-  border: none;
-  border-radius: 50%;
-  background-color: var(--btn-verde-1);
-  color: white;
-  cursor: pointer;
-  z-index: 1100;
-  font-size: 20px;
-}
-
-.theme-toggle::before {
+#theme-toggle::before {
+  content: "\f186"; /* luna por defecto */
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
-  display: inline-block;
-  line-height: 45px;
-  text-align: center;
-  width: 100%;
-  content: "\f186"; /* luna */
 }
 
-[data-theme="dark"] .theme-toggle::before {
-  content: "\f185"; /* sol */
+[data-theme="dark"] #theme-toggle::before {
+  content: "\f185"; /* sol en modo oscuro */
+}
+
+/* === Botón idioma === */
+#language-toggle::before {
+  content: "\f57d"; /* ícono globo idioma */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
 }
 
 /* === Menú lateral === */

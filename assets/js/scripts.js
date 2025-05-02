@@ -8,6 +8,10 @@ window.addEventListener('DOMContentLoaded', () => {
   const languageToggle = document.getElementById('language-toggle');
   let scrollToTopVisible = false;
 
+  // === BASE URL ===
+  const BASE_URL = '/Chispi-Page'; // Cambiar esto si se mueve la carpeta
+
+
   // === MENÚ LATERAL ===
   if (menuToggle && closeMenuToggle && sidebarWrapper) {
     menuToggle.addEventListener('click', () => {
@@ -78,16 +82,21 @@ window.addEventListener('DOMContentLoaded', () => {
       updateImagesForTheme(newTheme);
     });
   }
+ // === CAMBIO DE IDIOMA ===
+ if (languageToggle) {
+  languageToggle.addEventListener('click', () => {
+    const currentLang = html.getAttribute('lang') || 'es';
+    const newLang = currentLang === 'es' ? 'en' : 'es';
 
-  // === CAMBIO DE IDIOMA ===
-  if (languageToggle) {
-    languageToggle.addEventListener('click', () => {
-      const currentLang = html.getAttribute('lang') || 'es';
-      const newLang = currentLang === 'es' ? 'en' : 'es';
-      html.setAttribute('lang', newLang);
-      window.location.href = `/${newLang}/`;
-    });
-  }
+    const path = window.location.pathname.replace(BASE_URL, '');
+    const newPath = path.startsWith('/en/')
+      ? path.replace('/en/', '/')
+      : `/en${path}`;
+
+    html.setAttribute('lang', newLang);
+    window.location.href = `${window.location.origin}${BASE_URL}${newPath}`;
+  });
+}
 
   // === INICIALIZACIÓN ===
   const initialTheme = html.getAttribute('data-theme') || 'dark';
