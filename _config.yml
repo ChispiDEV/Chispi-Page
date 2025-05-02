@@ -2,12 +2,41 @@ title: "Dashboard Personal"
 description: "Portfolio, Devlogs, Proyectos y Recursos"
 baseurl: "/Chispi-Page"
 url: "https://ChispiDEV.github.io"
+
 markdown: kramdown
+
+# Plugins necesarios
 plugins:
   - jekyll-feed
+  - jekyll-paginate-v2
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-archives
+
+# Para que Jekyll busque plugins en _plugins/
+plugins_dir: _plugins
+
+# Paginación general para index/posts.html
+pagination:
+  enabled: true
+  per_page: 5
+  permalink: /page/:num/
+  title: ":title - Página :num"
+
+# Paginación automática por etiqueta (tags)
+pagination_tag:
+  enabled: true
+  per_page: 5
+  title: "Etiqueta: :tag - Página :num"
+  permalink: /tags/:tag/page/:num/
+  layout: tag
+
+# Colecciones personalizadas
 collections:
   projects:
     output: true
+
+# Layout por defecto para posts y proyectos
 defaults:
   - scope:
       path: ""
@@ -19,3 +48,4 @@ defaults:
       type: "projects"
     values:
       layout: project
+

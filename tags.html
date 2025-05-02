@@ -1,0 +1,22 @@
+---
+layout: page
+title: Todas las etiquetas
+permalink: /tags/
+---
+
+<section class="container py-5">
+  <h1 class="mb-4">Explorar por etiquetas</h1>
+
+  <div class="row">
+    {% assign tags_sorted = site.tags | sort %}
+    {% for tag in tags_sorted %}
+      {% assign tag_name = tag[0] %}
+      {% assign tag_posts = tag[1] %}
+      <div class="col-md-4 mb-3">
+        <a href="{{ '/tags/' | append: tag_name | append: '/page/1/' | relative_url }}" class="d-block border rounded p-3 text-decoration-none h-100">
+          <strong>{{ tag_name }}</strong> <span class="badge bg-primary">{{ tag_posts | size }}</span>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</section>

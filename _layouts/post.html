@@ -1,0 +1,60 @@
+---
+layout: default
+---
+
+<article class="post container py-5">
+
+  <!-- Título y subtítulo -->
+  <header class="mb-4">
+    <h1 class="display-5 fw-bold">{{ page.title }}</h1>
+
+    {% if page.subtitle %}
+      <p class="lead text-muted">{{ page.subtitle }}</p>
+    {% endif %}
+  </header>
+
+  <!-- Información del post -->
+  <section class="mb-4 text-muted small">
+    <p>
+      Publicado por 
+      {% if page.author %}
+        {{ page.author }}
+      {% else %}
+        {{ site.author }}
+      {% endif %}
+      el {{ page.date | date: '%d de %B, %Y' }} · 
+      {% include read_time.html content=content %}
+    </p>
+
+    {% if page.mood %}
+      <p><strong>Estado de ánimo:</strong> {{ page.mood }}</p>
+    {% endif %}
+
+    {% if page.tags %}
+      <p>
+        <strong>Etiquetas:</strong>
+        {% for tag in page.tags %}
+          <a href="{{ '/tags/' | append: tag | relative_url }}" class="badge bg-secondary text-light me-1">{{ tag }}</a>
+        {% endfor %}
+      </p>
+    {% endif %}
+  </section>
+
+  <!-- Contenido principal -->
+  <section class="post-content">
+    {{ content }}
+  </section>
+
+  <!-- Navegación entre posts -->
+  <nav class="post-navigation d-flex justify-content-between mt-5 pt-4 border-top">
+    {% if page.previous %}
+      <a href="{{ page.previous.url | relative_url }}" class="btn btn-outline-primary">&larr; {{ page.previous.title }}</a>
+    {% else %}
+      <span></span>
+    {% endif %}
+
+    {% if page.next %}
+      <a href="{{ page.next.url | relative_url }}" class="btn btn-outline-primary">{{ page.next.title }} &rarr;</a>
+    {% endif %}
+  </nav>
+</article>
