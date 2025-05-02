@@ -9,6 +9,7 @@
   --btn-verde-2: #218838;
   --btn-verde-3: #1e7e34;
   --btn-verde-4: #155724;
+  --btn-text-color: #f8f9fa; /* blanco cálido para modo claro */
   --btn-text-hover-light: white;
 }
 
@@ -22,6 +23,7 @@
   --btn-verde-2: #7edc7e;
   --btn-verde-3: #6ecf6e;
   --btn-verde-4: #5eb25e;
+  --btn-text-color: #121212; /* negro suave para modo oscuro */
   --btn-text-hover-light: #121212;
 }
 
@@ -96,7 +98,7 @@ footer {
   border: none;
   border-radius: 50%;
   background-color: var(--btn-verde-1);
-  color: white;
+  color: var(--btn-text-color);
   cursor: pointer;
   font-size: 20px;
   position: relative;
