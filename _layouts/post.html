@@ -5,25 +5,25 @@ layout: default
 <article class="post container-fluid px-0">
 
   {% if page.hero_image %}
-    <div class="post-hero-image w-100 mb-5 position-relative d-flex align-items-center justify-content-center"
+    <div class="post-hero-image w-100 mb-5 position-relative overflow-hidden"
          style="background-image: url('{{ page.hero_image | relative_url }}');
                 background-size: cover;
                 background-position: center;
                 height: 300px;">
-      <div class="text-center text-white bg-dark bg-opacity-50 p-4 rounded">
-        <h1 class="display-3 fw-bold text-title">{{ page.title }}</h1>
-        {% if page.subtitle %}
-          <p class="h4 text-subtitle">{{ page.subtitle }}</p>
-        {% endif %}
+
+      <!-- Partículas -->
+      <div id="particles-js" class="position-absolute top-0 start-0 w-100 h-100"></div>
+
+      <!-- Contenido centrado -->
+      <div class="position-relative z-1 d-flex align-items-center justify-content-center h-100">
+        <div class="text-center text-white bg-dark bg-opacity-50 p-4 rounded">
+          <h1 class="display-3 fw-bold text-title">{{ page.title }}</h1>
+          {% if page.subtitle %}
+            <p class="h4 text-subtitle">{{ page.subtitle }}</p>
+          {% endif %}
+        </div>
       </div>
     </div>
-  {% else %}
-    <header class="container py-4 text-center">
-      <h1 class="display-3 fw-bold text-title">{{ page.title }}</h1>
-      {% if page.subtitle %}
-        <p class="h4 text-subtitle">{{ page.subtitle }}</p>
-      {% endif %}
-    </header>
   {% endif %}
 
   <div class="container py-5">
@@ -68,8 +68,8 @@ layout: default
             <strong>Etiquetas:</strong>
             {% for tag in page.tags %}
               <a href="{{ '/tags/' | append: tag | relative_url }}"
-                 class="tag-badge"
-                 style="--tag-hue: 180; --tag-index: {{ forloop.index0 }};">
+                class="tag-badge"
+                style="--tag-hue: 180; --tag-index: {{ forloop.index0 }};">
                 {{ tag }}
               </a>
             {% endfor %}
@@ -85,10 +85,11 @@ layout: default
 
     <!-- Navegación entre posts -->
     <nav class="post-navigation d-flex justify-content-between mt-5 pt-4 border-top">
+
       {% if page.previous %}
         <a href="{{ page.previous.url | relative_url }}"
-           class="btn-outline-verde-1 d-flex align-items-center gap-2"
-           aria-label="Post anterior: {{ page.previous.title }}">
+          class="btn-outline-verde-1 d-flex align-items-center gap-2"
+          aria-label="Post anterior: {{ page.previous.title }}">
           &larr; {{ page.previous.title }}
         </a>
       {% else %}
@@ -97,11 +98,32 @@ layout: default
 
       {% if page.next %}
         <a href="{{ page.next.url | relative_url }}"
-           class="btn-outline-verde-3 d-flex align-items-center gap-2 text-end"
-           aria-label="Siguiente post: {{ page.next.title }}">
+          class="btn-outline-verde-3 d-flex align-items-center gap-2 text-end"
+          aria-label="Siguiente post: {{ page.next.title }}">
           {{ page.next.title }} &rarr;
         </a>
       {% endif %}
+
     </nav>
   </div>
 </article>
+
+<!-- Partículas -->
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+<script>
+  tsParticles.load("particles-js", {
+    fullScreen: false,
+    background: { color: "transparent" },
+    particles: {
+      number: { value: 40 },
+      size: { value: 3 },
+      move: { enable: true, speed: 1 },
+      line_linked: { enable: true, opacity: 0.3 },
+    },
+    interactivity: {
+      events: {
+        onhover: { enable: true, mode: "repulse" }
+      }
+    }
+  });
+</script>

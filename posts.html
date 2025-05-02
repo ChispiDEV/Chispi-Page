@@ -51,7 +51,12 @@ pagination:
             </a>
         
             {% if post.mood %}
-              <p class="mb-1"><strong>Estado de ánimo:</strong> {{ post.mood }}</p>
+              <div>
+                <strong>Estado de ánimo:</strong>
+                {% for mood_item in post.mood %}
+                  <span class="tag-badge" style="--tag-hue: 30; --tag-index: {{ forloop.index0 }};">{{ mood_item }}</span>
+                {% endfor %}
+              </div>
             {% endif %}
         
             {% if post.summary %}
