@@ -138,6 +138,10 @@ footer {
   font-weight: 900;
 }
 
+.scroll-to-top:hover {
+  background-color: var(--btn-verde-2);
+}
+
 #theme-toggle::before {
   content: "\f186"; /* luna por defecto */
   font-family: "Font Awesome 6 Free";
