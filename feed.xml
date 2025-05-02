@@ -1,55 +1,135 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://chispidev.github.io/Chispi-Page/feed.xml" rel="self" type="application/atom+xml" /><link href="https://chispidev.github.io/Chispi-Page/" rel="alternate" type="text/html" /><updated>2025-05-02T16:40:11+00:00</updated><id>https://chispidev.github.io/Chispi-Page/feed.xml</id><title type="html">Dashboard Personal</title><subtitle>Portfolio, Devlogs, Proyectos y Recursos</subtitle><entry><title type="html">Avances en la página - Semana 2</title><link href="https://chispidev.github.io/Chispi-Page/2025/05/02/chispinotiondev04.html" rel="alternate" type="text/html" title="Avances en la página - Semana 2" /><published>2025-05-02T00:00:00+00:00</published><updated>2025-05-02T00:00:00+00:00</updated><id>https://chispidev.github.io/Chispi-Page/2025/05/02/chispinotiondev04</id><content type="html" xml:base="https://chispidev.github.io/Chispi-Page/2025/05/02/chispinotiondev04.html"><![CDATA[<p>Buenas tardes!!</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://chispidev.github.io/Chispi-Page/feed.xml" rel="self" type="application/atom+xml" /><link href="https://chispidev.github.io/Chispi-Page/" rel="alternate" type="text/html" /><updated>2025-05-02T16:55:31+00:00</updated><id>https://chispidev.github.io/Chispi-Page/feed.xml</id><title type="html">Dashboard Personal</title><subtitle>Portfolio, Devlogs, Proyectos y Recursos</subtitle><entry><title type="html">Avances en la página - Semana 2</title><link href="https://chispidev.github.io/Chispi-Page/2025/05/02/chispinotiondev04.html" rel="alternate" type="text/html" title="Avances en la página - Semana 2" /><published>2025-05-02T00:00:00+00:00</published><updated>2025-05-02T00:00:00+00:00</updated><id>https://chispidev.github.io/Chispi-Page/2025/05/02/chispinotiondev04</id><content type="html" xml:base="https://chispidev.github.io/Chispi-Page/2025/05/02/chispinotiondev04.html"><![CDATA[<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Avances en la página - Semana 2</title>
+</head>
+<body>
+  <article>
+    <h1>Avances en la página - Semana 2</h1>
+    <h2>Creando una página con partículas, temas e idiomas</h2>
+    <p><strong>Fecha:</strong> 2025-05-02</p>
+    <p><strong>Estado de ánimo:</strong> Orgullosa</p>
+    <p><strong>Estado:</strong> Publicado</p>
+    <p><strong>Errores:</strong><br></p>
+    <p><strong>Recursos:</strong><br></p>
+    <p><strong>Proyectos:</strong> Chispi-DevLog</p>
+    <hr>
+    <div>Buenas tardes!!
 
-<p>Espero que hayáis tenido una gran semana a pesar del apagón en España, después de todo, esta semana ha sido extra-corta.</p>
+Espero que hayáis tenido una gran semana a pesar del apagón en España, después de todo, esta semana ha sido extra-corta.
 
-<p>Este puente he estado trabajando con la página web que va a contener los blogs, proyectos y demás, buscando que tenga una apariencia amigable y sea funcional.</p>
+Este puente he estado trabajando con la página web que va a contener los blogs, proyectos y demás, buscando que tenga una apariencia amigable y sea funcional.
 
-<p>Inicialmente tuve unos cuantos problemas generando la página al intentar poner el modo claro/oscuro y los iconos. Acabé solucionando los problemas con los iconos introduciéndolos en el estilo de CSS, permitiéndome así generar los botones de forma que sigan el mismo patrón definido en la clase.</p>
+Inicialmente tuve unos cuantos problemas generando la página al intentar poner el modo claro/oscuro y los iconos. Acabé solucionando los problemas con los iconos introduciéndolos en el estilo de CSS, permitiéndome así generar los botones de forma que sigan el mismo patrón definido en la clase.
 
-<p>Estoy muy orgullosa del resultado, y pronto colgaré una guía de lo que he hecho como proyecto para la página.</p>
+Estoy muy orgullosa del resultado, y pronto colgaré una guía de lo que he hecho como proyecto para la página.
 
-<p>Espero que nos volvamos a ver pronto!!</p>
+Espero que nos volvamos a ver pronto!!
 
-<p>Un amable saludo.</p>
+Un amable saludo.
 
-<p>Cristina Fuentes</p>]]></content><author><name></name></author><category term="GitHub" /><category term="APIs" /><category term="SQL" /><category term="JavaScript" /><summary type="html"><![CDATA[Buenas tardes!!]]></summary></entry><entry><title type="html">Blog bonito - Semana 1</title><link href="https://chispidev.github.io/Chispi-Page/2025/04/26/chispinotiondev03.html" rel="alternate" type="text/html" title="Blog bonito - Semana 1" /><published>2025-04-26T00:00:00+00:00</published><updated>2025-04-26T00:00:00+00:00</updated><id>https://chispidev.github.io/Chispi-Page/2025/04/26/chispinotiondev03</id><content type="html" xml:base="https://chispidev.github.io/Chispi-Page/2025/04/26/chispinotiondev03.html"><![CDATA[<p>Feliz sábado!!</p>
+Cristina Fuentes</div>
+  </article>
+</body>
+</html>]]></content><author><name></name></author><category term="GitHub" /><category term="APIs" /><category term="SQL" /><category term="JavaScript" /><summary type="html"><![CDATA[Avances en la página - Semana 2 Avances en la página - Semana 2 Creando una página con partículas, temas e idiomas Fecha: 2025-05-02 Estado de ánimo: Orgullosa Estado: Publicado Errores: Recursos: Proyectos: Chispi-DevLog Buenas tardes!!]]></summary></entry><entry><title type="html">Blog bonito - Semana 1</title><link href="https://chispidev.github.io/Chispi-Page/2025/04/26/chispinotiondev03.html" rel="alternate" type="text/html" title="Blog bonito - Semana 1" /><published>2025-04-26T00:00:00+00:00</published><updated>2025-04-26T00:00:00+00:00</updated><id>https://chispidev.github.io/Chispi-Page/2025/04/26/chispinotiondev03</id><content type="html" xml:base="https://chispidev.github.io/Chispi-Page/2025/04/26/chispinotiondev03.html"><![CDATA[<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Blog bonito - Semana 1</title>
+</head>
+<body>
+  <article>
+    <h1>Blog bonito - Semana 1</h1>
+    <h2>Avances en la página del blog. \n Utilizar una plantilla de Bootstrap para que el blog quede más estético.</h2>
+    <p><strong>Fecha:</strong> 2025-04-26</p>
+    <p><strong>Estado de ánimo:</strong> Orgullosa, Motivada</p>
+    <p><strong>Estado:</strong> Publicado</p>
+    <p><strong>Errores:</strong><br></p>
+    <p><strong>Recursos:</strong><br>https://github.com/startbootstrap/startbootstrap-clean-blog-jekyll</p>
+    <p><strong>Proyectos:</strong> Chispi-DevLog</p>
+    <hr>
+    <div>Feliz sábado!!
 
-<p>Hoy no iba a trabajar en proyectos porque es fin de semana, pero al final me pudieron las ganas de lograr avances en el aspecto del blog y acabé poniéndome en marcha.</p>
+Hoy no iba a trabajar en proyectos porque es fin de semana, pero al final me pudieron las ganas de lograr avances en el aspecto del blog y acabé poniéndome en marcha.
 
-<p>Tras una discusión fuerte con los scripts he conseguido aplicar el tema “Clean Blog Jekyll”, aunque para ello tuve que eliminar el repositorio anterior y volver a hacerlo todo desde cero.</p>
+Tras una discusión fuerte con los scripts he conseguido aplicar el tema “Clean Blog Jekyll”, aunque para ello tuve que eliminar el repositorio anterior y volver a hacerlo todo desde cero.
 
-<p>Finalmente, utilizando el modelo de la propia página de GitHub del proyecto y personalizándolo he logrado tener un Blog cuyo aspecto me gusta bastante. Ahora se puede pedir contacto a través de un formulario, se ven los diferentes apartados y los post se actualizan automáticamente con el script de Python. Me siento bastante orgullosa de estos avances ^^</p>
+Finalmente, utilizando el modelo de la propia página de GitHub del proyecto y personalizándolo he logrado tener un Blog cuyo aspecto me gusta bastante. Ahora se puede pedir contacto a través de un formulario, se ven los diferentes apartados y los post se actualizan automáticamente con el script de Python. Me siento bastante orgullosa de estos avances ^^
 
-<p>Espero que disfrutéis de lo que queda de semana y nos vemos en el próximo post.</p>
+Espero que disfrutéis de lo que queda de semana y nos vemos en el próximo post.
 
-<p>Un amable saludo.</p>
+Un amable saludo.
 
-<p>Cristina</p>]]></content><author><name></name></author><category term="GitHub" /><summary type="html"><![CDATA[Feliz sábado!!]]></summary></entry><entry><title type="html">Primer viernes - Semana 1</title><link href="https://chispidev.github.io/Chispi-Page/2025/04/25/chispinotiondev02.html" rel="alternate" type="text/html" title="Primer viernes - Semana 1" /><published>2025-04-25T00:00:00+00:00</published><updated>2025-04-25T00:00:00+00:00</updated><id>https://chispidev.github.io/Chispi-Page/2025/04/25/chispinotiondev02</id><content type="html" xml:base="https://chispidev.github.io/Chispi-Page/2025/04/25/chispinotiondev02.html"><![CDATA[<p>Buenos días el último día de la semana!</p>
+Cristina</div>
+  </article>
+</body>
+</html>]]></content><author><name></name></author><category term="GitHub" /><summary type="html"><![CDATA[Blog bonito - Semana 1 Blog bonito - Semana 1 Avances en la página del blog. \n Utilizar una plantilla de Bootstrap para que el blog quede más estético. Fecha: 2025-04-26 Estado de ánimo: Orgullosa, Motivada Estado: Publicado Errores: Recursos:https://github.com/startbootstrap/startbootstrap-clean-blog-jekyll Proyectos: Chispi-DevLog Feliz sábado!!]]></summary></entry><entry><title type="html">Primer viernes - Semana 1</title><link href="https://chispidev.github.io/Chispi-Page/2025/04/25/chispinotiondev02.html" rel="alternate" type="text/html" title="Primer viernes - Semana 1" /><published>2025-04-25T00:00:00+00:00</published><updated>2025-04-25T00:00:00+00:00</updated><id>https://chispidev.github.io/Chispi-Page/2025/04/25/chispinotiondev02</id><content type="html" xml:base="https://chispidev.github.io/Chispi-Page/2025/04/25/chispinotiondev02.html"><![CDATA[<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Primer viernes - Semana 1</title>
+</head>
+<body>
+  <article>
+    <h1>Primer viernes - Semana 1</h1>
+    <h2>Trabajando con el Blog. \n Cambiando el aspecto de la página</h2>
+    <p><strong>Fecha:</strong> 2025-04-25</p>
+    <p><strong>Estado de ánimo:</strong> Bloqueada</p>
+    <p><strong>Estado:</strong> Publicado</p>
+    <p><strong>Errores:</strong><br>1. Página deja de cargar. \n 2. No se muestran los cambios de la apariencia</p>
+    <p><strong>Recursos:</strong><br></p>
+    <p><strong>Proyectos:</strong> Chispi-DevLog</p>
+    <hr>
+    <div>Buenos días el último día de la semana!
 
-<p>Hoy ha sido un día bastante poco productivo, ya que he intentado cambiar el aspecto del blog a un formato más visual y no ha habido forma.</p>
+Hoy ha sido un día bastante poco productivo, ya que he intentado cambiar el aspecto del blog a un formato más visual y no ha habido forma.
 
-<p>Parece que el formato “minima” es el único con el que consigo que se despliegue la página, pero seguiré intentándolo.</p>
+Parece que el formato “minima” es el único con el que consigo que se despliegue la página, pero seguiré intentándolo.
 
-<p>Espero que tengáis un gran fin de semana.</p>
+Espero que tengáis un gran fin de semana.
 
-<p>Cristina</p>]]></content><author><name></name></author><category term="GitHub" /><summary type="html"><![CDATA[Buenos días el último día de la semana!]]></summary></entry><entry><title type="html">Iniciando el DevBlog - Semana 1</title><link href="https://chispidev.github.io/Chispi-Page/2025/04/24/chispinotiondev01.html" rel="alternate" type="text/html" title="Iniciando el DevBlog - Semana 1" /><published>2025-04-24T00:00:00+00:00</published><updated>2025-04-24T00:00:00+00:00</updated><id>https://chispidev.github.io/Chispi-Page/2025/04/24/chispinotiondev01</id><content type="html" xml:base="https://chispidev.github.io/Chispi-Page/2025/04/24/chispinotiondev01.html"><![CDATA[<p>Buenos días!</p>
+Cristina</div>
+  </article>
+</body>
+</html>]]></content><author><name></name></author><category term="GitHub" /><summary type="html"><![CDATA[Primer viernes - Semana 1 Primer viernes - Semana 1 Trabajando con el Blog. \n Cambiando el aspecto de la página Fecha: 2025-04-25 Estado de ánimo: Bloqueada Estado: Publicado Errores:1. Página deja de cargar. \n 2. No se muestran los cambios de la apariencia Recursos: Proyectos: Chispi-DevLog Buenos días el último día de la semana!]]></summary></entry><entry><title type="html">Iniciando el DevBlog - Semana 1</title><link href="https://chispidev.github.io/Chispi-Page/2025/04/24/chispinotiondev01.html" rel="alternate" type="text/html" title="Iniciando el DevBlog - Semana 1" /><published>2025-04-24T00:00:00+00:00</published><updated>2025-04-24T00:00:00+00:00</updated><id>https://chispidev.github.io/Chispi-Page/2025/04/24/chispinotiondev01</id><content type="html" xml:base="https://chispidev.github.io/Chispi-Page/2025/04/24/chispinotiondev01.html"><![CDATA[<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Iniciando el DevBlog - Semana 1</title>
+</head>
+<body>
+  <article>
+    <h1>Iniciando el DevBlog - Semana 1</h1>
+    <h2>Primera semana del DevBlog.\n Conecto Notion con mi blog y exporto mis posts automáticamente usando Python.</h2>
+    <p><strong>Fecha:</strong> 2025-04-24</p>
+    <p><strong>Estado de ánimo:</strong> Motivada</p>
+    <p><strong>Estado:</strong> Publicado</p>
+    <p><strong>Errores:</strong><br>1. Error en el tipo de propiedad de la sección “Estado” → Cambiar en el script la propiedad buscada \n 2. El contenido no se escribía en el archivo .md → Modificar script para que lea el texto del apartado, comentar la sección del script en el que se genera el contenido de forma dinámica \n</p>
+    <p><strong>Recursos:</strong><br></p>
+    <p><strong>Proyectos:</strong> Chispi-DevLog</p>
+    <hr>
+    <div>Buenos días!
 
-<p>Soy Cristina Fuentes, analista de datos y bióloga. He creado este Blog para poder tener un seguimiento de mis avances en programación y análisis de datos 😉</p>
+Soy Cristina Fuentes, analista de datos y bióloga. He creado este Blog para poder tener un seguimiento de mis avances en programación y análisis de datos 😉 
 
-<p>En esta primera entrada voy a recoger los avances realizados en el desarrollo de los scripts necesarios para generar las entradas del blog en Notion y que se actualicen en GitHub.</p>
+En esta primera entrada voy a recoger los avances realizados en el desarrollo de los scripts necesarios para generar las entradas del blog en Notion y que se actualicen en GitHub. 
 
-<p>Por un lado, he generado en Notion una base de datos en la que se almacena la información de los proyectos (la podéis ver aquí), ordenando la información y creando las categorías necesarias para poder incorporarlas al script principal.</p>
+Por un lado, he generado en Notion una base de datos en la que se almacena la información de los proyectos (la podéis ver aquí), ordenando la información y creando las categorías necesarias para poder incorporarlas al script principal. 
 
-<p>Posteriormente generé el script de Python (del que hay una copia para usar de plantilla en la sección de recursos) que transforma la información de la base de datos en un archivo .md que se utilizará en los posts.</p>
+Posteriormente generé el script de Python (del que hay una copia para usar de plantilla en la sección de recursos) que transforma la información de la base de datos en un archivo .md que se utilizará en los posts. 
 
-<p>A continuación creé un repositorio público con GitHub Pages integrado para que hubiera un lugar donde publicar las entradas.</p>
+A continuación creé un repositorio público con GitHub Pages integrado para que hubiera un lugar donde publicar las entradas. 
 
-<p>Para poner bonita la página, utilicé Jeckyll que también tiene integración con GitHub.</p>
+Para poner bonita la página, utilicé Jeckyll que también tiene integración con GitHub. 
 
-<p>Por último modifiqué el script que generaba los archivos .md para que también agregara una copia a la carpeta de _posts del repositorio, permitiendo que las entradas se actualicen de forma automática.</p>
+Por último modifiqué el script que generaba los archivos .md para que también agregara una copia a la carpeta de _posts del repositorio, permitiendo que las entradas se actualicen de forma automática. 
 
-<p>Y de momento esto es todo por hoy.</p>
+Y de momento esto es todo por hoy. 
 
-<p>Un amable saludo y nos vemos en la próxima entrada.</p>
+Un amable saludo y nos vemos en la próxima entrada. 
 
-<p>Cristina</p>]]></content><author><name></name></author><category term="GitHub" /><summary type="html"><![CDATA[Buenos días!]]></summary></entry></feed>
+Cristina</div>
+  </article>
+</body>
+</html>]]></content><author><name></name></author><category term="GitHub" /><summary type="html"><![CDATA[Iniciando el DevBlog - Semana 1 Iniciando el DevBlog - Semana 1 Primera semana del DevBlog.\n Conecto Notion con mi blog y exporto mis posts automáticamente usando Python. Fecha: 2025-04-24 Estado de ánimo: Motivada Estado: Publicado Errores:1. Error en el tipo de propiedad de la sección “Estado” → Cambiar en el script la propiedad buscada \n 2. El contenido no se escribía en el archivo .md → Modificar script para que lea el texto del apartado, comentar la sección del script en el que se genera el contenido de forma dinámica \n Recursos: Proyectos: Chispi-DevLog Buenos días!]]></summary></entry></feed>
