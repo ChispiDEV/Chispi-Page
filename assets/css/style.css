@@ -1,223 +1,266 @@
 /* === Variables de color === */
 :root {
-    --bg-color: #ffffff;
-    --text-color: #212529;
-    --overlay-bg: rgba(255, 255, 255, 0.8);
-    --footer-bg: #ffffff;
-    --icon-color: #212529;
-    --btn-verde-1: #28a745;
-    --btn-verde-2: #218838;
-    --btn-verde-3: #1e7e34;
-    --btn-verde-4: #155724;
-  
-    --btn-text-hover-light: white;
-  }
-  
-  [data-theme="dark"] {
-    --bg-color: #121212;
-    --text-color: #f1f1f1;
-    --overlay-bg: rgba(0, 0, 0, 0.7);
-    --footer-bg: #212529;
-    --icon-color: #f1f1f1;
-    --btn-verde-1: #90ee90;
-    --btn-verde-2: #7edc7e;
-    --btn-verde-3: #6ecf6e;
-    --btn-verde-4: #5eb25e;
-  
-    --btn-text-hover-light: #121212;
-  }
-  
-  body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: background-color 0.3s, color 0.3s;
-  }
-  
-  /* === HERO === */
-  .hero {
-    position: relative;
-    height: 100vh;
-    overflow: hidden;
-    background-size: cover;
-    background-position: center;
-    color: var(--text-color);
-  }
-  
-  .overlay {
-    background: var(--overlay-bg);
-  }
-  
-  /* === TEXT BOX (ajustado para modo claro/oscuro) === */
-  .text-box {
-    background: var(--overlay-bg);
-    color: var(--text-color);
-  }
-  
-  /* === FOOTER === */
-  footer {
-    background-color: var(--footer-bg);
-    color: var(--text-color);
-    text-align: center;
-    padding: 20px 0;
-  }
-  
-  /* === Iconos personalizados con CSS === */
-  .icon-github::before,
-  .icon-linkedin::before,
-  .icon-email::before {
-    font-family: "Font Awesome 6 Brands", "Font Awesome 6 Free";
-    font-weight: 900;
-    font-size: 1.5rem;
-    margin: 0 10px;
-    color: var(--icon-color);
-    transition: color 0.3s;
-  }
-  
-  .icon-github::before {
-    content: "\f09b"; /* GitHub */
-  }
-  
-  .icon-linkedin::before {
-    content: "\f08c"; /* LinkedIn */
-  }
-  
-  .icon-email::before {
-    content: "\f0e0"; /* Envelope */
-  }
-  
-  .icon-github:hover::before,
-  .icon-linkedin:hover::before,
-  .icon-email:hover::before {
-    color: #28a745;
-  }
-  
-  /* === Botón cambio de tema === */
-  .theme-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 45px;
-    height: 45px;
-    border: none;
-    border-radius: 50%;
-    background-color: #28a745;
-    color: white;
-    cursor: pointer;
-    z-index: 1100;
-    font-size: 20px;
-  }
-  
-  .theme-toggle::before {
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    display: inline-block;
-    line-height: 45px;
-    text-align: center;
-    width: 100%;
-    content: "\f186"; /* Luna: indica modo claro activo */
-  }
-  
-  [data-theme="dark"] .theme-toggle::before {
-    content: "\f185"; /* Sol: indica modo oscuro activo */
-  }
+  --bg-color: #ffffff;
+  --text-color: #212529;
+  --overlay-bg: rgba(255, 255, 255, 0.8);
+  --footer-bg: #ffffff;
+  --icon-color: #212529;
+  --btn-verde-1: #28a745;
+  --btn-verde-2: #218838;
+  --btn-verde-3: #1e7e34;
+  --btn-verde-4: #155724;
+  --btn-text-hover-light: white;
+}
 
-/* Scroll to top */
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #f1f1f1;
+  --overlay-bg: rgba(0, 0, 0, 0.7);
+  --footer-bg: #212529;
+  --icon-color: #f1f1f1;
+  --btn-verde-1: #90ee90;
+  --btn-verde-2: #7edc7e;
+  --btn-verde-3: #6ecf6e;
+  --btn-verde-4: #5eb25e;
+  --btn-text-hover-light: #121212;
+}
+
+/* === General === */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* === HERO === */
+.hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  color: var(--text-color);
+}
+
+.overlay {
+  background: var(--overlay-bg);
+}
+
+/* === TEXT BOX === */
+.text-box {
+  background: var(--overlay-bg);
+  color: var(--text-color);
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+/* === FOOTER === */
+footer {
+  background-color: var(--footer-bg);
+  color: var(--text-color);
+  text-align: center;
+  padding: 20px 0;
+}
+
+/* === Iconos personalizados === */
+.icon-github::before,
+.icon-linkedin::before,
+.icon-email::before {
+  font-family: "Font Awesome 6 Brands", "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 1.5rem;
+  margin: 0 10px;
+  color: var(--icon-color);
+  transition: color 0.3s;
+}
+
+.icon-github::before { content: "\f09b"; }
+.icon-linkedin::before { content: "\f08c"; }
+.icon-email::before { content: "\f0e0"; }
+
+.icon-github:hover::before,
+.icon-linkedin:hover::before,
+.icon-email:hover::before {
+  color: var(--btn-verde-1);
+}
+
+/* === Botón cambio de tema === */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--btn-verde-1);
+  color: white;
+  cursor: pointer;
+  z-index: 1100;
+  font-size: 20px;
+}
+
+.theme-toggle::before {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  display: inline-block;
+  line-height: 45px;
+  text-align: center;
+  width: 100%;
+  content: "\f186"; /* luna */
+}
+
+[data-theme="dark"] .theme-toggle::before {
+  content: "\f185"; /* sol */
+}
+
+/* === Scroll to top === */
 .scroll-to-top::before {
-    content: "\f106"; /* flecha hacia arriba */
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    display: inline-block;
-  }
-  
-  /* Botón menú hamburguesa (ícono) */
-  .menu-toggle::before {
-    content: "\f0c9"; /* bars */
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-  }
-  
-  /* Botón cerrar menú lateral */
-  .close-menu-toggle::before {
-    content: "\f00d"; /* times/x */
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-  }
-  
-  /* Asegurar tamaño y estilo general */
-  .menu-toggle,
-  .close-menu-toggle,
-  .scroll-to-top {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-  }
-  
-  /* Hover opcional */
-  .menu-toggle:hover,
-  .close-menu-toggle:hover,
-  .scroll-to-top:hover {
-    background-color: #218838;
-  }
-    
-  [class^="btn-outline-verde-"] {
-    border: 2px solid;
-    background-color: transparent;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-  }
+  content: "\f106";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  display: inline-block;
+}
+.scroll-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: var(--btn-verde-1);
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  color: white;
+  font-size: 20px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 9999;
+}
 
-  .btn-outline-verde-1 {
-    border-color: var(--btn-verde-1);
-    color: var(--btn-verde-1);
-  }
-  
-  .btn-outline-verde-1:hover {
-    background-color: var(--btn-verde-1);
-    color: var(--btn-text-hover-light);
-  }
-  
-  .btn-outline-verde-2 {
-    border-color: var(--btn-verde-2);
-    color: var(--btn-verde-2);
-  }
-  
-  .btn-outline-verde-2:hover {
-    background-color: var(--btn-verde-2);
-    color: var(--btn-text-hover-light);
-  }
-  
-  .btn-outline-verde-3 {
-    border-color: var(--btn-verde-3);
-    color: var(--btn-verde-3);
-  }
-  
-  .btn-outline-verde-3:hover {
-    background-color: var(--btn-verde-3);
-    color: var(--btn-text-hover-light);
-  }
-  
-  .btn-outline-verde-4 {
-    border-color: var(--btn-verde-4);
-    color: var(--btn-verde-4);
-  }
-  
-  .btn-outline-verde-4:hover {
-    background-color: var(--btn-verde-4);
-    color: var(--btn-text-hover-light);
-  }
+/* === Botón menú hamburguesa y cierre === */
+.menu-toggle::before {
+  content: "\f0c9";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+}
 
-  #particles-js {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    background-size: cover;
-    background-position: center;
-    color: var(--text-color);
-  }
-  
+.close-menu-toggle::before {
+  content: "\f00d";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+}
+
+.menu-toggle,
+.close-menu-toggle,
+.scroll-to-top {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
+
+/* Hover */
+.menu-toggle:hover,
+.close-menu-toggle:hover,
+.scroll-to-top:hover {
+  background-color: var(--btn-verde-2);
+}
+
+/* === Menú lateral === */
+#sidebar-wrapper {
+  position: fixed;
+  top: 0;
+  right: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: var(--footer-bg);
+  color: var(--text-color);
+  transition: right 0.3s ease;
+  z-index: 9998;
+  padding: 1rem;
+}
+
+#sidebar-wrapper.active {
+  right: 0;
+}
+
+.sidebar-nav {
+  list-style: none;
+  padding: 0;
+  margin-top: 3rem;
+}
+
+.sidebar-nav li {
+  margin: 1rem 0;
+}
+
+.sidebar-nav a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+.sidebar-nav a:hover {
+  color: var(--btn-verde-1);
+}
+
+/* === Botones personalizados === */
+[class^="btn-outline-verde-"] {
+  border: 2px solid;
+  background-color: transparent;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-outline-verde-1 {
+  border-color: var(--btn-verde-1);
+  color: var(--btn-verde-1);
+}
+.btn-outline-verde-1:hover {
+  background-color: var(--btn-verde-1);
+  color: var(--btn-text-hover-light);
+}
+
+.btn-outline-verde-2 {
+  border-color: var(--btn-verde-2);
+  color: var(--btn-verde-2);
+}
+.btn-outline-verde-2:hover {
+  background-color: var(--btn-verde-2);
+  color: var(--btn-text-hover-light);
+}
+
+.btn-outline-verde-3 {
+  border-color: var(--btn-verde-3);
+  color: var(--btn-verde-3);
+}
+.btn-outline-verde-3:hover {
+  background-color: var(--btn-verde-3);
+  color: var(--btn-text-hover-light);
+}
+
+.btn-outline-verde-4 {
+  border-color: var(--btn-verde-4);
+  color: var(--btn-verde-4);
+}
+.btn-outline-verde-4:hover {
+  background-color: var(--btn-verde-4);
+  color: var(--btn-text-hover-light);
+}
+
+/* === Partículas === */
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+}

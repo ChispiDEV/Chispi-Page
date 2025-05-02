@@ -6,7 +6,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const html = document.documentElement;
   let scrollToTopVisible = false;
 
-  // Menú lateral
+  // === MENÚ LATERAL ===
   if (menuToggle && sidebarWrapper) {
     menuToggle.addEventListener('click', () => {
       sidebarWrapper.classList.toggle('active');
@@ -19,19 +19,13 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Scroll to top
+  // === BOTÓN SCROLL TO TOP ===
   if (scrollToTop) {
-    document.addEventListener('scroll', () => {
-      if (window.scrollY > 100) {
-        if (!scrollToTopVisible) {
-          fadeIn(scrollToTop);
-          scrollToTopVisible = true;
-        }
-      } else {
-        if (scrollToTopVisible) {
-          fadeOut(scrollToTop);
-          scrollToTopVisible = false;
-        }
+    window.addEventListener('scroll', () => {
+      const shouldShow = window.scrollY > 100;
+      if (shouldShow !== scrollToTopVisible) {
+        scrollToTopVisible = shouldShow;
+        shouldShow ? fadeIn(scrollToTop) : fadeOut(scrollToTop);
       }
     });
 
@@ -41,8 +35,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   function fadeIn(element) {
-    if (!element) return;
-    element.style.display = 'block';
+    element.style.display = 'flex';
     element.style.opacity = 0;
     (function fade() {
       let val = parseFloat(element.style.opacity);
@@ -54,7 +47,6 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   function fadeOut(element) {
-    if (!element) return;
     (function fade() {
       if ((element.style.opacity -= 0.1) < 0) {
         element.style.display = 'none';
@@ -64,19 +56,22 @@ window.addEventListener('DOMContentLoaded', () => {
     })();
   }
 
-  // Cambia entre temas claro/oscuro
-  themeToggle?.addEventListener('click', () => {
-    const currentTheme = html.getAttribute('data-theme') || 'dark';
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    html.setAttribute('data-theme', newTheme);
-    updateImagesForTheme(newTheme);
-  });
+  // === CAMBIO DE TEMA CLARO/OSCURO ===
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = html.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      updateImagesForTheme(newTheme);
+    });
+  }
 
-  // Establece modo oscuro por defecto
-  html.setAttribute('data-theme', 'dark');
-  updateImagesForTheme('dark');
+  // === CONFIGURACIÓN INICIAL ===
+  const initialTheme = html.getAttribute('data-theme') || 'dark';
+  html.setAttribute('data-theme', initialTheme);
+  updateImagesForTheme(initialTheme);
 
-  // Cambia las imágenes con atributos data-img-dark y data-img-light
+  // === ACTUALIZACIÓN DE IMÁGENES SEGÚN EL TEMA ===
   function updateImagesForTheme(theme) {
     const hero = document.querySelector('header.hero');
     if (hero && hero.dataset.imgDark && hero.dataset.imgLight) {
