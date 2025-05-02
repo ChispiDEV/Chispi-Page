@@ -32,13 +32,8 @@ hide_header: true
     <section class="mb-4">
       <ul class="list-unstyled post-meta small">
         <li>
-          Publicado por 
-          {% if page.author %}
-            {{ page.author }}
-          {% else %}
-            {{ site.author }}
-          {% endif %}
-          el {{ page.date | date: '%d de %B, %Y' }} · 
+          Publicado el 
+          {{ page.date | date: '%d de %B, %Y' }} · 
           {% include read_time.html content=content %}
         </li>
 
