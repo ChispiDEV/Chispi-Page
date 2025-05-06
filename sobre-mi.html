@@ -6,63 +6,80 @@ hero_image_light: "/assets/img/sobre-mi-bg-light.jpg"
 subtitle: "Desarrolladora | Diseñadora | Creadora de contenido"
 ---
 
-<section id="sobre-mi" class="py-5">
-  <div class="container max-w-4xl mx-auto px-4">
-    <div class="flex flex-col md:flex-row items-center gap-6">
-      <img src="{{ '/assets/img/foto-perfil.jpg' | relative_url }}" 
-          alt="Foto de Cristina"
-          class="w-40 h-40 object-cover rounded-full shadow-lg border-4 border-verde-1 hover:scale-105 transition-transform duration-300">
-      <div>
-        <h2 class="text-3xl font-bold mb-4 mt-6">🧑‍💻 Sobre mí</h2>
-        <p class="text-left">👋 Soy Cristina (mis compañeros suelen llamarme Chispi). ¡Bienvenidos a mi Página!</p>
-      </div>
+<section id="sobre-mi" class="py-12">
+  <div class="container max-w-3xl mx-auto px-4">
+
+    <!-- Imagen centrada -->
+    <div class="flex flex-col items-center text-center mb-10">
+      <img src="{{ '/assets/img/foto-perfil.jpg' | relative_url }}"
+           alt="Foto de Cristina"
+           class="w-32 h-32 object-cover rounded-full border-4 border-green-500 shadow-lg mb-4">
+      <h2 class="text-3xl font-bold mb-2">🧑‍💻 Sobre mí</h2>
+      <p class="text-base max-w-xl">👋 Soy Cristina (mis compañeros suelen llamarme Chispi). ¡Bienvenidos a mi Página!</p>
     </div>
 
-    <div class="mt-6 text-left space-y-4">
-      <p>👩‍🔬 <strong>Bióloga y exprofesora</strong> orientada al <strong>análisis de datos</strong>. Me especializo en:</p>
-      <ul class="list-disc list-inside">
-        <li>📊 <strong>Python, Pandas, SQL</strong></li>
-        <li>📄 <strong>LaTeX, Pandoc</strong></li>
-        <li>📈 <strong>Matplotlib, Seaborn, Power BI</strong></li>
-      </ul>
+    <!-- Contenido en bloques con buen espaciado -->
+    <div class="space-y-10 text-left">
 
-      <p>🍀 Graduada del bootcamp de <strong>IMMUNE Institute</strong>:</p>
-      <ul class="list-disc list-inside">
-        <li>Machine Learning</li>
-        <li>Visualización de Datos</li>
-        <li>Análisis Avanzado</li>
-      </ul>
+      <div>
+        <p>👩‍🔬 <strong>Bióloga y exprofesora</strong> orientada al <strong>análisis de datos</strong>. Me especializo en:</p>
+        <ul class="list-disc list-inside mt-2">
+          <li>📊 <strong>Python, Pandas, SQL</strong></li>
+          <li>📄 <strong>LaTeX, Pandoc</strong></li>
+          <li>📈 <strong>Matplotlib, Seaborn, Power BI</strong></li>
+        </ul>
+      </div>
+
+      <div>
+        <p>🍀 Graduada del bootcamp de <strong>IMMUNE Institute</strong>:</p>
+        <ul class="list-disc list-inside mt-2">
+          <li>Machine Learning</li>
+          <li>Visualización de Datos</li>
+          <li>Análisis Avanzado</li>
+        </ul>
+      </div>
 
       <p>👀 Mi formación en <strong>bioquímica y educación</strong> me permite aportar una mirada única.</p>
 
-      <h3 class="text-xl font-semibold mt-10 mb-3">🔧 Habilidades</h3>
-      <div class="flex flex-wrap gap-2">
-        <img src="https://img.shields.io/badge/-Python-blue" alt="Python">
-        <img src="https://img.shields.io/badge/-SQL-orange" alt="SQL">
-        <img src="https://img.shields.io/badge/-HTML-pink" alt="HTML">
-        <img src="https://img.shields.io/badge/-CSS-green" alt="CSS">
-        <img src="https://img.shields.io/badge/-R-red" alt="R">
+      <div>
+        <h3 class="text-xl font-semibold mb-3">🔧 Habilidades</h3>
+        <div class="flex flex-wrap gap-3">
+          <img src="https://img.shields.io/badge/-Python-blue" alt="Python">
+          <img src="https://img.shields.io/badge/-SQL-orange" alt="SQL">
+          <img src="https://img.shields.io/badge/-HTML-pink" alt="HTML">
+          <img src="https://img.shields.io/badge/-CSS-green" alt="CSS">
+          <img src="https://img.shields.io/badge/-R-red" alt="R">
+        </div>
       </div>
 
-      <h3 class="text-xl font-semibold mt-10 mb-3">🖥️ Tecnologías Principales</h3>
-      <img src="https://img.shields.io/badge/-Python-3776AB?logo=python&logoColor=white" alt="Python">
-      <img src="https://img.shields.io/badge/-LaTeX-008080?logo=latex&logoColor=white" alt="LaTeX">
+      <div>
+        <h3 class="text-xl font-semibold mb-3">🖥️ Tecnologías Principales</h3>
+        <div class="flex flex-wrap gap-3">
+          <img src="https://img.shields.io/badge/-Python-3776AB?logo=python&logoColor=white" alt="Python">
+          <img src="https://img.shields.io/badge/-LaTeX-008080?logo=latex&logoColor=white" alt="LaTeX">
+        </div>
+      </div>
 
-      <h3 class="text-xl font-semibold mt-10 mb-3">🔥 ¿Qué estoy haciendo ahora?</h3>
-      <ul class="list-disc list-inside">
-        <li>💻 Modelado de datos y dashboards interactivos.</li>
-        <li>📖 NetworkX para análisis de redes sociales.</li>
-        <li>🤝 Abierta a colaboraciones.</li>
-      </ul>
+      <div>
+        <h3 class="text-xl font-semibold mb-3">🔥 ¿Qué estoy haciendo ahora?</h3>
+        <ul class="list-disc list-inside mt-2">
+          <li>💻 Modelado de datos y dashboards interactivos.</li>
+          <li>📖 NetworkX para análisis de redes sociales.</li>
+          <li>🤝 Abierta a colaboraciones.</li>
+        </ul>
+      </div>
 
-      <h3 class="text-xl font-semibold mt-10 mb-3">🎉 Curiosidades Sobre Mí</h3>
-      <ul class="list-disc list-inside">
-        <li>🎮 500+ horas en Stardew Valley</li>
-        <li>✈️ Soporte en Riot Games</li>
-        <li>🐶 Mis perras: <strong>Riven</strong> y <strong>Haru</strong></li>
-        <li>🎨 Diseñadora de uñas y tejedora</li>
-        <li>🌍 Aprendiendo japonés para visitar <strong>Kumamoto</strong></li>
-      </ul>
+      <div>
+        <h3 class="text-xl font-semibold mb-3">🎉 Curiosidades Sobre Mí</h3>
+        <ul class="list-disc list-inside mt-2">
+          <li>🎮 500+ horas en Stardew Valley</li>
+          <li>✈️ Soporte en Riot Games</li>
+          <li>🐶 Mis perras: <strong>Riven</strong> y <strong>Haru</strong></li>
+          <li>🎨 Diseñadora de uñas y tejedora</li>
+          <li>🌍 Aprendiendo japonés para visitar <strong>Kumamoto</strong></li>
+        </ul>
+      </div>
+
     </div>
   </div>
 </section>
