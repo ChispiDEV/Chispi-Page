@@ -48,4 +48,9 @@ defaults:
       type: "projects"
     values:
       layout: project
-
+  # Habilita salida de las páginas generadas por plugins
+  - scope:
+      path: ""
+      type: "tags"
+    values:
+      layout: tag

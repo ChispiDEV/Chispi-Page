@@ -13,7 +13,8 @@ permalink: /tags/
       {% assign tag_name = tag[0] %}
       {% assign tag_posts = tag[1] %}
       <div class="col-md-4 mb-3">
-        <a href="{{ '/tags/' | append: tag_name | append: '/page/1/' | relative_url }}" class="d-block border rounded p-3 text-decoration-none h-100">
+        <a href="{{ '/tags/' | append: tag_name | append: '/' | relative_url }}" 
+            class="d-block border rounded p-3 text-decoration-none h-100">
           <strong>{{ tag_name }}</strong> <span class="badge bg-primary">{{ tag_posts | size }}</span>
         </a>
       </div>

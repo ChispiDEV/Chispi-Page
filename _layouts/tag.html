@@ -4,9 +4,10 @@ title: Etiqueta
 ---
 
 <section class="post-list container py-5">
-  <h1 class="mb-4">Entradas etiquetadas con: <span class="text-primary">{{ paginator.tag }}</span></h1>
+  <h1 class="mb-4">Entradas etiquetadas con: <span class="text-primary">{{ page.tag }}</span></h1>
 
-  {% for post in paginator.posts %}
+  {% assign tag_posts = site.tags[page.tag] %}
+  {% for post in tag_posts %}
     <article class="mb-5 pb-3 border-bottom">
       <a href="{{ post.url | relative_url }}" class="text-decoration-none">
         <h2 class="h4 text-primary">{{ post.title }}</h2>
@@ -39,19 +40,5 @@ title: Etiqueta
       </p>
     </article>
   {% endfor %}
-
-  <!-- Paginación -->
-  {% if paginator.total_pages > 1 %}
-    <nav class="d-flex justify-content-between mt-4">
-      {% if paginator.previous_page_path %}
-        <a class="btn btn-outline-primary" href="{{ paginator.previous_page_path | relative_url }}">&larr; Más recientes</a>
-      {% else %}
-        <span></span>
-      {% endif %}
-
-      {% if paginator.next_page_path %}
-        <a class="btn btn-outline-primary" href="{{ paginator.next_page_path | relative_url }}">Más antiguos &rarr;</a>
-      {% endif %}
-    </nav>
-  {% endif %}
 </section>
+
