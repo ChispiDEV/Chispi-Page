@@ -19,6 +19,7 @@
   --btn-verde-3: #1e7e34;
   --btn-verde-4: #155724;
   --btn-text-color: #f8f9fa; /* blanco cálido para modo claro */
+  --btn-background-color: rgba(255, 255, 255, 0.2);
   --btn-text-hover-light: white;
   --post-title-color: #1e7e34; /* verde oscuro bonito para modo claro */
   --tag-bg-default: #e6f4ea;   /* verde muy suave */
@@ -48,6 +49,7 @@
   --btn-verde-3: #6ecf6e;
   --btn-verde-4: #5eb25e;
   --btn-text-color: #121212; /* negro suave para modo oscuro */
+  --btn-background-color: rgba(0, 0, 0, 0.2);
   --btn-text-hover-light: #121212;
   --post-title-color: #90ee90; /* verde claro para modo oscuro */
   --tag-bg-default: #214d30;   /* fondo verdoso oscuro */
@@ -73,6 +75,8 @@ body {
   overflow: hidden;
   background-size: cover;
   background-position: center;
+  background-color: transparent !important;
+  box-shadow: none !important;
   color: var(--text-color);
 }
 
@@ -293,6 +297,9 @@ footer a:focus {
   transition: all 0.3s ease;
   text-decoration: none;
   display: inline-block;
+  background-color: var(--btn-background-color); /* Fondo semitransparente */
+  backdrop-filter: blur(2px);          /* Suaviza el fondo detrás (opcional) */
+
 }
 
 .btn-outline-verde-1 {
