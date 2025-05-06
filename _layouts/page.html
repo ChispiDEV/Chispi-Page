@@ -1,45 +1,45 @@
 <!DOCTYPE html>
 <html lang="es" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{ page.description | default: 'Página de contenido de ' | append: site.title }}">
-    <title data-i18n="title">{{ page.title }} | {{ site.title }}</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ page.description | default: 'Página de ' | append: site.title }}">
+  <title data-i18n="title">{{ page.title }} | {{ site.title }}</title>
 
-    <!-- FontAwesome -->
-    <script src="https://kit.fontawesome.com/98ca02228e.js" crossorigin="anonymous"></script>
+  <!-- FontAwesome -->
+  <script src="https://kit.fontawesome.com/98ca02228e.js" crossorigin="anonymous"></script>
 
-    <!-- Favicon -->
-    <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
 
-    <!-- CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <!-- Estilos -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
 
 <body>
-    <!-- Navbar -->
-    {% include navbar.html %}
+  <!-- Navbar -->
+  {% include navbar.html %}
 
-    <!-- Cabecera de la página, si aplica -->
-    {% unless page.hide_header %}
-      {% include header.html %}
-    {% endunless %}
+  <!-- Header -->
+  {% unless page.hide_header %}
+    {% include header.html %}
+  {% endunless %}
 
-    <!-- Contenido principal -->
-    <main class="container py-5">
-        {{ content }}
-    </main>
+  <!-- Contenido -->
+  <main class="container mt-5 pt-5">
+    {{ content }}
+  </main>
 
-    <!-- Footer -->
-    {% include footer.html %}
+  <!-- Footer -->
+  {% include footer.html %}
 
-    <!-- Scroll to top -->
-    <button class="scroll-to-top icon-button" aria-label="Volver arriba"></button>
+  <!-- Botón Scroll to top -->
+  <button class="scroll-to-top icon-button" aria-label="Volver arriba"></button>
 
-    <!-- JS -->
-    <script src="{{ '/assets/js/scripts.js' | relative_url }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <!-- Scripts -->
+  <script src="{{ '/assets/js/scripts.js' | relative_url }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 </body>
 </html>
