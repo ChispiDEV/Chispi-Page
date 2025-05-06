@@ -5,19 +5,30 @@ hero_image_dark: "/assets/img/index-bg-dark.jpg"
 hero_image_light: "/assets/img/index-bg-light.jpg"
 ---
 
-<!-- Sección de presentación rápida -->
-<section class="py-5 text-center">
-  <div class="container">
-    <h2 class="fw-bold mb-4">¿Qué es Chispi Page?</h2>
-    <p class="lead mb-4">
-      Es un espacio personal para compartir mis ideas, proyectos, devlogs, arte y más. ¡Un rincón creativo donde todo tiene lugar!
-    </p>
+<section class="hero-section py-5">
+  <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-4">
     
-    <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
-      <a href="{{ '/sobre-mi.html' | relative_url }}" class="btn btn-outline-verde-1 btn-lg">Conóceme más</a>
-      <a href="{{ '/contacto.html' | relative_url }}" class="btn btn-outline-verde-2 btn-lg">Contacto</a>
-      <a href="{{ '/posts.html' | relative_url }}" class="btn btn-outline-verde-3 btn-lg">Lee mis blogs</a>
-      <a href="{{ '/proyectos.html' | relative_url }}" class="btn btn-outline-verde-4 btn-lg">Ojea mis proyectos</a>
+    <!-- Texto principal -->
+    <div class="text-md-start text-center flex-grow-1">
+      <h1 class="fw-bold display-4 mb-3">¡Hola! Soy <span class="text-verde-1">Chispi</span></h1>
+      <p class="text-muted fst-italic">Desarrolladora | Analista de Datos | Creadora de contenido</p>
+      <p class="lead mb-4">
+        Bienvenida a <strong>Chispi Page</strong>: un rincón creativo donde comparto mis ideas, proyectos, devlogs, arte y más.
+      </p>
+
+      <div class="d-flex flex-wrap gap-3 justify-content-md-start justify-content-center">
+        <a href="{{ '/sobre-mi.html' | relative_url }}" class="btn btn-outline-verde-1 btn-lg">Conóceme más</a>
+        <a href="{{ '/proyectos.html' | relative_url }}" class="btn btn-outline-verde-4 btn-lg">Ojea mis proyectos</a>
+        <a href="{{ '/posts.html' | relative_url }}" class="btn btn-outline-verde-3 btn-lg">Lee mis blogs</a>
+        <a href="{{ '/contacto.html' | relative_url }}" class="btn btn-outline-verde-2 btn-lg">Contacto</a>
+      </div>
     </div>
+
+    <!-- Imagen o avatar -->
+    <div class="hero-image text-center">
+      <img src="/assets/img/perfil-Chispi.png" alt="Avatar de Chispi" class="img-fluid rounded-circle shadow-lg" style="max-width: 200px;">
+    </div>
+
   </div>
 </section>
+

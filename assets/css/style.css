@@ -8,7 +8,12 @@
   --footer-border: #e0e0e0; /* borde suave claro */
   --navbar-border: #e0e0e0;
   --muted-text: #6c757d; /* gris oscuro claro */
+  --accent-text: #3cc88f;
   --icon-color: #212529;
+  --verde-1: #3cc88f;
+  --verde-2: #28a97b;
+  --verde-3: #2b7a6a;
+  --verde-4: #1f564b;
   --btn-verde-1: #28a745;
   --btn-verde-2: #218838;
   --btn-verde-3: #1e7e34;
@@ -32,7 +37,12 @@
   --footer-border: #333333; /* borde oscuro tenue */
   --navbar-border: #333333;
   --muted-text: #bbbbbb; /* gris claro para fondo oscuro */
+  --accent-text: #57e6b6;
   --icon-color: #f1f1f1;
+  --verde-1: #57e6b6;
+  --verde-2: #3cc88f;
+  --verde-3: #2ea97b;
+  --verde-4: #1a5544;
   --btn-verde-1: #90ee90;
   --btn-verde-2: #7edc7e;
   --btn-verde-3: #6ecf6e;
@@ -68,6 +78,26 @@ body {
 
 .overlay {
   background: var(--overlay-bg);
+}
+
+.hero-section {
+  background: linear-gradient(
+    to bottom right,
+    var(--bg-color),
+    var(--verde-1)
+  );
+  border-radius: 1rem;
+  padding: 2rem;
+  color: var(--text-color);
+  transition: background-color 0.3s ease;
+}
+
+.hero-section .btn {
+  min-width: 160px;
+}
+
+.text-verde-1 {
+  color: var(--btn-verde-1);
 }
 
 /* === TEXT BOX === */
