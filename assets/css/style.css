@@ -105,6 +105,19 @@ body {
   color: var(--btn-verde-1);
 }
 
+.hero-box {
+  background-color: rgba(255, 255, 255, 0.75);
+  color: #000;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Para tema claro */
+body.theme-dark .hero-box {
+  background-color: rgba(0, 0, 0, 0.6); /* fondo oscuro por defecto */
+  color: white;
+}
+
+
 /* === TEXT BOX === */
 .text-box {
   background: var(--overlay-bg);
