@@ -9,7 +9,7 @@ layout: default
       style="background-image: url('{{ page.hero_image | relative_url }}');
             background-size: cover;
             background-position: center;
-            min-height: 60vh;">
+            min-height: 100vh;">
 
       <!-- Partículas -->
       <div id="particles-js"
@@ -17,8 +17,8 @@ layout: default
         style="z-index: 0;"></div>
 
       <!-- Contenido centrado -->
-      <div class="position-relative z-1 d-flex align-items-center justify-content-center h-100">
-        <div class="text-center text-white bg-dark bg-opacity-50 p-4 rounded">
+      <div class="container px-4 px-lg-5 text-center" style="position: relative; z-index: 2;">
+        <div class="text-center bg-opacity-50 p-4 rounded">
           <h1 class="display-3 fw-bold text-verde-1">{{ page.title }}</h1>
           {% if page.subtitle %}
             <p class="lead mb-4">{{ page.subtitle }}</p>
