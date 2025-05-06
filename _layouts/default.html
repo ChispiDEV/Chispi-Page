@@ -36,9 +36,13 @@
     {% endunless %}
 
     <!-- Contenido dinámico -->
-    <main class="container mt-5 pt-5">
+    {% if page.hide_header %}
       {{ content }}
-    </main>
+    {% else %}
+      <main class="container mt-5 pt-5">
+        {{ content }}
+      </main>
+    {% endif %}
 
     <!-- Footer -->
     {% include footer.html %}

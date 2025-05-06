@@ -11,25 +11,24 @@ hide_header: true
   data-img-light="{{ page.hero_image_light | default: '/assets/img/hero-bg-light.jpg' | relative_url }}">
   
   <div id="particles-js" 
-       style="position: absolute; width: 100%; height: 100%; z-index: 0;"></div>
+    class="position-absolute top-0 start-0 w-100 h-100; width: 100%; height: 100%; z-index: 0;"></div>
 
-  <div class="container px-4 px-lg-5 text-center" style="position: relative; z-index: 2;">
-    <div class="text-box">
-      <img src="{{ '/assets/img/perfil-Chispi.jpg' | relative_url }}" alt="Avatar de Chispi"
-         class="rounded-circle shadow-lg border border-4 border-verde-1 mb-3"
-         style="width: 150px; height: 150px; object-fit: cover;">
-      <h1 class="display-3 fw-bold">¡Hola! Soy <span class="text-verde-1">Chispi</span></h1>
-      <p class="lead fst-italic">Desarrolladora | Analista de Datos | Creadora de contenido</p>
-      <p class="lead mb-4">
-        Bienvenida a <strong>Chispi Page</strong>: un rincón creativo donde comparto mis ideas, proyectos, devlogs, arte y más.
-      </p>
-    
+  <!-- Contenido centrado -->
+  <div class="position-relative z-1 d-flex align-items-center justify-content-center h-100">
+    <img src="{{ '/assets/img/perfil-Chispi.jpg' | relative_url }}" alt="Avatar de Chispi"
+        class="rounded-circle shadow-lg border border-4 border-verde-1 mb-3"
+        style="width: 150px; height: 150px; object-fit: cover;">
+    <h1 class="display-3 fw-bold">¡Hola! Soy <span class="text-verde-1">Chispi</span></h1>
+    <p class="lead fst-italic">Desarrolladora | Analista de Datos | Creadora de contenido</p>
+    <p class="lead mb-4">
+      Bienvenida a <strong>Chispi Page</strong>: un rincón creativo donde comparto mis ideas, proyectos, devlogs, arte y más.
+    </p>
+  
     <div class="d-flex flex-wrap gap-3 justify-content-center">
       <a href="{{ '/sobre-mi.html' | relative_url }}" class="btn btn-outline-verde-1 btn-lg">Conóceme más</a>
       <a href="{{ '/proyectos.html' | relative_url }}" class="btn btn-outline-verde-4 btn-lg">Ojea mis proyectos</a>
       <a href="{{ '/posts.html' | relative_url }}" class="btn btn-outline-verde-3 btn-lg">Lee mis blogs</a>
       <a href="{{ '/contacto.html' | relative_url }}" class="btn btn-outline-verde-2 btn-lg">Contacto</a>
-    </div>
 
     </div>
   </div>
