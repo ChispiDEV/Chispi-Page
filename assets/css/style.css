@@ -71,13 +71,14 @@ body {
 /* === HERO === */
 .hero {
   position: relative;
-  height: 100vh;
   overflow: hidden;
   background-size: cover;
   background-position: center;
   background-color: transparent !important;
   box-shadow: none !important;
   color: var(--text-color);
+  background-repeat: no-repeat;
+  min-height: 100vh;
 }
 
 .overlay {
