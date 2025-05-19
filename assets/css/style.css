@@ -267,13 +267,13 @@ footer a:focus {
 #sidebar-wrapper {
   position: fixed;
   top: 0;
-  right: -250px;
-  width: 250px;
+  right: -280px;
+  width: 280px;
   height: 100%;
   background-color: var(--footer-bg);
   color: var(--text-color);
   transition: right 0.3s ease;
-  z-index: 9999;
+  z-index: 10000;
   padding: 1rem;
 }
 
@@ -307,7 +307,7 @@ footer a:focus {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: transparent;
+  background: none;
   border: none;
   font-size: 2rem;
   cursor: pointer;
@@ -498,6 +498,7 @@ footer a:focus {
   height: 150px;
   object-fit: cover;
   border-radius: 50%;
+  border: 3px solid var(--btn-verde-2);
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
