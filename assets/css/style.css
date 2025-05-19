@@ -211,6 +211,7 @@ footer a:focus {
   font-size: 20px;
   position: relative;
   z-index: 1100;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .icon-button:hover {
@@ -308,26 +309,16 @@ footer a:focus {
 
 /* === Botón de cerrar menú lateral con tema adaptativo === */
 #close-menu-toggle {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 45px;
-  height: 45px;
-  border: none;
-  border-radius: 50%;
   background-color: var(--btn-rojo-1);
   color: var(--btn-text-color);
-  cursor: pointer;
-  font-size: 20px;
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: none;
-  z-index: 10000;
+  z-index: 11000;
 }
 
 #close-menu-toggle:hover {
-  color: var(--btn-rojo-2);
+  background-color: var(--btn-rojo-2);
 }
 
 /* === Botones personalizados === */
