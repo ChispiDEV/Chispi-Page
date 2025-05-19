@@ -18,6 +18,8 @@
   --btn-verde-2: #218838;
   --btn-verde-3: #1e7e34;
   --btn-verde-4: #155724;
+  --btn-rojo-1: #dc3545;
+  --btn-rojo-2: #c82333;
   --btn-text-color: #f8f9fa; /* blanco cálido para modo claro */
   --btn-background-color: rgba(255, 255, 255, 0.2);
   --btn-text-hover-light: white;
@@ -48,6 +50,8 @@
   --btn-verde-2: #7edc7e;
   --btn-verde-3: #6ecf6e;
   --btn-verde-4: #5eb25e;
+  --btn-rojo-1: #ff6b6b;
+  --btn-rojo-2: #ff4c4c;
   --btn-text-color: #121212; /* negro suave para modo oscuro */
   --btn-background-color: rgba(0, 0, 0, 0.2);
   --btn-text-hover-light: #121212;
@@ -267,8 +271,8 @@ footer a:focus {
 #sidebar-wrapper {
   position: fixed;
   top: 0;
-  right: -280px;
-  width: 280px;
+  right: -250px;
+  width: 250px;
   height: 100%;
   background-color: var(--footer-bg);
   color: var(--text-color);
@@ -304,28 +308,26 @@ footer a:focus {
 
 /* === Botón de cerrar menú lateral con tema adaptativo === */
 #close-menu-toggle {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--btn-rojo-1);
+  color: var(--btn-text-color);
+  cursor: pointer;
+  font-size: 20px;
   position: absolute;
   top: 1rem;
   right: 1rem;
   background: none;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
   z-index: 10000;
-  color: #dc3545; /* Modo claro por defecto (rojo Bootstrap) */
 }
 
 #close-menu-toggle:hover {
-  color: #ff6b6b; /* Modo claro: rojo más claro al pasar el cursor */
-}
-
-/* === En modo oscuro: colores adaptados === */
-[data-theme="dark"] #close-menu-toggle {
-  color: #ff6b6b; /* Modo oscuro: rosa claro */
-}
-
-[data-theme="dark"] #close-menu-toggle:hover {
-  color: #ffa8a8; /* Modo oscuro: más claro al pasar cursor */
+  color: var(--btn-rojo-2);
 }
 
 /* === Botones personalizados === */
