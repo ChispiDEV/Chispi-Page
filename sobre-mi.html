@@ -6,14 +6,14 @@ hero_image_light: "/assets/img/sobre-mi-bg-light.jpg"
 subtitle: "Desarrolladora | Diseñadora | Creadora de contenido"
 ---
 
-<section id="sobre-mi" class="py-12">
+<section id="sobre-mi" class="py-12" xmlns="http://www.w3.org/1999/html">
   <div class="container max-w-3xl mx-auto px-4">
 
     <!-- Imagen centrada -->
     <div class="flex flex-col items-center text-center mb-10">
-      <img src="{{ '/assets/img/foto-perfil.jpg' | relative_url }}"
-           alt="Foto de Cristina"
-           class="w-32 h-32 object-cover rounded-full border-4 border-green-500 shadow-lg mb-4">
+      <img src="{{ '/assets/img/foto-perfil.jpg.jpg' | relative_url }}" alt="Foto de Cristina"
+           class="rounded-circle shadow-lg border border-4 border-verde-1 mb-3 mx-auto d-block"
+           style="width: 120px; height: 120px; object-fit: cover;">
       <h2 class="text-3xl font-bold mb-2">🧑‍💻 Sobre mí</h2>
       <p class="text-base max-w-xl">👋 Soy Cristina (mis compañeros suelen llamarme Chispi). ¡Bienvenidos a mi Página!</p>
     </div>
@@ -43,13 +43,20 @@ subtitle: "Desarrolladora | Diseñadora | Creadora de contenido"
 
       <div>
         <h3 class="text-xl font-semibold mb-3">🔧 Habilidades</h3>
-        <div class="flex flex-wrap gap-3">
-          <img src="https://img.shields.io/badge/-Python-blue" alt="Python">
-          <img src="https://img.shields.io/badge/-SQL-orange" alt="SQL">
-          <img src="https://img.shields.io/badge/-HTML-pink" alt="HTML">
-          <img src="https://img.shields.io/badge/-CSS-green" alt="CSS">
-          <img src="https://img.shields.io/badge/-R-red" alt="R">
-        </div>
+        <p><strong>Lenguajes de Programación:</strong>
+         <div class="flex flex-wrap gap-3">
+           <img src="https://img.shields.io/badge/-Python-blue" alt="Python">
+           <img src="https://img.shields.io/badge/-SQL-orange" alt="SQL">
+           <img src="https://img.shields.io/badge/-HTML-pink" alt="HTML">
+           <img src="https://img.shields.io/badge/-CSS-green" alt="CSS">
+           <img src="https://img.shields.io/badge/-R-red" alt="R">
+         </div>
+        </p>
+
+        <p><strong>Frameworks:</strong> Pandas, NumPy, SciPy, Matplotlib, Pytest, scikit-learn, Seaborn</p>
+        <p><strong>Herramientas de Visualización:</strong> Power BI, Tableau</p>
+        <p><strong>Herramientas de Desarrollo:</strong> LaTeX, Pandoc, Jupyter Notebook, Google Colab, Git, Anaconda</p>
+        <p><strong>Bases de Datos:</strong> MySQL, OracleSQL</p>
       </div>
 
       <div>
