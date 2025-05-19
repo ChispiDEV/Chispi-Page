@@ -79,6 +79,7 @@ body {
   color: var(--text-color);
   background-repeat: no-repeat;
   min-height: 100vh;
+  padding-top: 4rem; /* Deja espacio para los botones del header si hay */
 }
 
 .overlay {
@@ -272,7 +273,7 @@ footer a:focus {
   background-color: var(--footer-bg);
   color: var(--text-color);
   transition: right 0.3s ease;
-  z-index: 9998;
+  z-index: 9999;
   padding: 1rem;
 }
 
@@ -305,7 +306,7 @@ footer a:focus {
 #close-menu-toggle {
   position: absolute;
   top: 1rem;
-  left: 1rem;
+  right: 1rem;
   background: transparent;
   border: none;
   font-size: 2rem;
