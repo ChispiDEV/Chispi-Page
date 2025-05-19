@@ -18,6 +18,7 @@ yarn.lock
 
 # Archivos personales o sensibles
 .env
+*.local
 *.key
 *.pem
 

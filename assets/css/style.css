@@ -252,7 +252,7 @@ footer a:focus {
 }
 
 [data-theme="dark"] #theme-toggle::before {
-  content: "\f185"; /* sol en modo oscuro */
+  content: "\f0eb"; /* bombilla en modo oscuro */
 }
 
 /* === Botón idioma === */
@@ -299,6 +299,32 @@ footer a:focus {
 
 .sidebar-nav a:hover {
   color: var(--btn-verde-1);
+}
+
+/* === Botón de cerrar menú lateral con tema adaptativo === */
+#close-menu-toggle {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 10000;
+  color: #dc3545; /* Modo claro por defecto (rojo Bootstrap) */
+}
+
+#close-menu-toggle:hover {
+  color: #ff6b6b; /* Modo claro: rojo más claro al pasar el cursor */
+}
+
+/* === En modo oscuro: colores adaptados === */
+[data-theme="dark"] #close-menu-toggle {
+  color: #ff6b6b; /* Modo oscuro: rosa claro */
+}
+
+[data-theme="dark"] #close-menu-toggle:hover {
+  color: #ffa8a8; /* Modo oscuro: más claro al pasar cursor */
 }
 
 /* === Botones personalizados === */
