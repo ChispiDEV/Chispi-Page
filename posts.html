@@ -77,13 +77,8 @@ pagination:
             {% endif %}
         
             <p class="post-meta">
-              Publicado por
-              {% if post.author %}
-                {{ post.author }}
-              {% else %}
-                {{ site.author }}
-              {% endif %}
-              el {{ post.date | date: '%d de %B, %Y' }} · {% include read_time.html content=post.content %}
+              Publicado el 
+              {{ post.date | date: '%d de %B, %Y' }} · {% include read_time.html content=post.content %}
             </p>
           </div>
         </article>      
