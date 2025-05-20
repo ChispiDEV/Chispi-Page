@@ -29,17 +29,22 @@
   --meta-text-color: #6c757d;
   --summary-bg: #f0fdf4;       /* verde pálido */
   --summary-text: #1e4620;     /* verde oscuro legible */
-  --marino-1: rgba(0, 128, 145, 0.25);
-  --marino-2: rgba(3, 197, 186, 0.25);
-  --marino-border: rgba(0, 255, 255, 0.35);
-
-  --floral-1: rgba(255, 182, 193, 0.2);
-  --floral-2: rgba(221, 160, 221, 0.25);
-  --floral-border: rgba(255, 105, 180, 0.3);
-
-  --primavera-1: rgba(144, 238, 144, 0.2);
-  --primavera-2: rgba(255, 255, 150, 0.2);
-  --primavera-border: rgba(173, 255, 168, 0.35);
+  --box-sol-bg: #ffe066;       /* amarillo suave */
+  --box-sol-text: #5a4500;
+  --box-mar-bg: #74c0fc;       /* azul claro */
+  --box-mar-text: #002b47;
+  --box-flor-bg: #f783ac;      /* rosa chicle */
+  --box-flor-text: #4a002a;
+  --box-hoja-bg: #8ce99a;      /* verde menta */
+  --box-hoja-text: #003921;
+  --box-fuego-bg: #ffa94d;
+  --box-fuego-text: #5b3200;
+  --box-cielo-bg: #e3fafc;
+  --box-cielo-text: #084c61;
+  --box-uva-bg: #d0bfff;
+  --box-uva-text: #3a0ca3;
+  --box-coral-bg: #ffc9c9;
+  --box-coral-text: #7f1d1d;
 }
 
 [data-theme="dark"] {
@@ -72,17 +77,22 @@
   --meta-text-color: #bbbbbb;
   --summary-bg: #1d2b1f;       /* verde oscuro suave */
   --summary-text: #cce8cc;     /* verde claro legible */
-  --marino-1: rgba(0, 128, 145, 0.12);
-  --marino-2: rgba(3, 197, 186, 0.12);
-  --marino-border: rgba(0, 128, 145, 0.2);
-
-  --floral-1: rgba(255, 192, 203, 0.15);
-  --floral-2: rgba(186, 85, 211, 0.15);
-  --floral-border: rgba(255, 105, 180, 0.25);
-
-  --primavera-1: rgba(173, 255, 168, 0.15);
-  --primavera-2: rgba(255, 251, 150, 0.15);
-  --primavera-border: rgba(144, 238, 144, 0.2);
+  --box-sol-bg: #bfa500;       /* dorado profundo */
+  --box-sol-text: #fffde7;
+  --box-mar-bg: #1864ab;       /* azul oscuro */
+  --box-mar-text: #e3f2fd;
+  --box-flor-bg: #9c0e4e;      /* rosa oscuro */
+  --box-flor-text: #ffeef5;
+  --box-hoja-bg: #2b8a3e;      /* verde selva */
+  --box-hoja-text: #e6fff0;
+  --box-fuego-bg: #cc6e00;
+  --box-fuego-text: #fff3e6;
+  --box-cielo-bg: #0b7285;
+  --box-cielo-text: #e0f7fa;
+  --box-uva-bg: #5f3dc4;
+  --box-uva-text: #edeaff;
+  --box-coral-bg: #962626;
+  --box-coral-text: #ffe5e5;
 }
 
 /* === General === */
@@ -524,27 +534,64 @@ footer a:focus {
 .box {
   padding: 1.5rem;
   border-radius: 1rem;
-  border: 1px solid transparent;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  transition: background 0.4s ease, border 0.4s ease;
-  backdrop-filter: blur(4px);
-  background-size: cover;
-  background-blend-mode: overlay;
-}
-/* 🌊 Marino */
-.box-marino {
-  background: linear-gradient(135deg, var(--marino-1), var(--marino-2));
-  border-color: var(--marino-border);
+  font-weight: bold;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: background 0.4s ease, border 0.4s ease, box-shadow 0.4s ease;
 }
 
-/* 🌺 Floral */
-.box-floral {
-  background: linear-gradient(135deg, var(--floral-1), var(--floral-2));
-  border-color: var(--floral-border);
+.box-sol {
+  background-color: var(--box-sol-bg);
+  color: var(--box-sol-text);
+  border-color: #ffd43b;
+  box-shadow: 0 4px 12px rgba(255, 208, 0, 0.3);
 }
 
-/* 🌿 Primavera */
-.box-primavera {
-  background: linear-gradient(135deg, var(--primavera-1), var(--primavera-2));
-  border-color: var(--primavera-border);
+.box-mar {
+  background-color: var(--box-mar-bg);
+  color: var(--box-mar-text);
+  border-color: #339af0;
+  box-shadow: 0 4px 12px rgba(51, 154, 240, 0.3);
+}
+
+.box-flor {
+  background-color: var(--box-flor-bg);
+  color: var(--box-flor-text);
+  border-color: #f06595;
+  box-shadow: 0 4px 12px rgba(240, 101, 149, 0.3);
+}
+
+.box-hoja {
+  background-color: var(--box-hoja-bg);
+  color: var(--box-hoja-text);
+  border-color: #69db7c;
+  box-shadow: 0 4px 12px rgba(105, 219, 124, 0.3);
+}
+
+.box-fuego {
+  background-color: var(--box-fuego-bg);
+  color: var(--box-fuego-text);
+  border-color: #ff922b;
+  box-shadow: 0 4px 12px rgba(255, 146, 43, 0.3);
+}
+
+.box-cielo {
+  background-color: var(--box-cielo-bg);
+  color: var(--box-cielo-text);
+  border-color: #22b8cf;
+  box-shadow: 0 4px 12px rgba(34, 184, 207, 0.3);
+}
+
+.box-uva {
+  background-color: var(--box-uva-bg);
+  color: var(--box-uva-text);
+  border-color: #845ef7;
+  box-shadow: 0 4px 12px rgba(132, 94, 247, 0.3);
+}
+
+.box-coral {
+  background-color: var(--box-coral-bg);
+  color: var(--box-coral-text);
+  border-color: #ff6b6b;
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
 }
