@@ -29,22 +29,30 @@
   --meta-text-color: #6c757d;
   --summary-bg: #f0fdf4;       /* verde pálido */
   --summary-text: #1e4620;     /* verde oscuro legible */
-  --box-sol-bg: #ffe066;       /* amarillo suave */
-  --box-sol-text: #5a4500;
-  --box-mar-bg: #74c0fc;       /* azul claro */
-  --box-mar-text: #002b47;
-  --box-flor-bg: #f783ac;      /* rosa chicle */
-  --box-flor-text: #4a002a;
-  --box-hoja-bg: #8ce99a;      /* verde menta */
-  --box-hoja-text: #003921;
-  --box-fuego-bg: #ffa94d;
-  --box-fuego-text: #5b3200;
-  --box-cielo-bg: #e3fafc;
-  --box-cielo-text: #084c61;
-  --box-uva-bg: #d0bfff;
-  --box-uva-text: #3a0ca3;
-  --box-coral-bg: #ffc9c9;
-  --box-coral-text: #7f1d1d;
+  --box-sol-bg: #fff9c4;      /* amarillo pastel */
+  --box-sol-text: #665c00;
+  --box-sol-border: #f4e19c;
+  --box-mar-bg: #cce5ff;      /* azul pastel */
+  --box-mar-text: #204060;
+  --box-mar-border: #a3d0f7;
+  --box-flor-bg: #fddde6;     /* rosa pastel */
+  --box-flor-text: #75213d;
+  --box-flor-border: #f6b5c8;
+  --box-hoja-bg: #d4f8d4;     /* verde pastel */
+  --box-hoja-text: #275f3b;
+  --box-hoja-border: #b2e7b2;
+  --box-cielo-bg: #d8f3dc;    /* menta pastel */
+  --box-cielo-text: #285943;
+  --box-cielo-border: #b6e2cc;
+  --box-uva-bg: #e6ccff;      /* lila pastel */
+  --box-uva-text: #4e2a84;
+  --box-uva-border: #d1b3ff;
+  --box-coral-bg: #ffe0e0;    /* coral pastel */
+  --box-coral-text: #7b2c2c;
+  --box-coral-border: #f7b3b3;
+  --box-fuego-bg: #ffe9cc;    /* naranja pastel */
+  --box-fuego-text: #6b3e00;
+  --box-fuego-border: #fcd2a8;
 }
 
 [data-theme="dark"] {
@@ -77,22 +85,30 @@
   --meta-text-color: #bbbbbb;
   --summary-bg: #1d2b1f;       /* verde oscuro suave */
   --summary-text: #cce8cc;     /* verde claro legible */
-  --box-sol-bg: #bfa500;       /* dorado profundo */
-  --box-sol-text: #fffde7;
-  --box-mar-bg: #1864ab;       /* azul oscuro */
-  --box-mar-text: #e3f2fd;
-  --box-flor-bg: #9c0e4e;      /* rosa oscuro */
-  --box-flor-text: #ffeef5;
-  --box-hoja-bg: #2b8a3e;      /* verde selva */
-  --box-hoja-text: #e6fff0;
-  --box-fuego-bg: #cc6e00;
-  --box-fuego-text: #fff3e6;
-  --box-cielo-bg: #0b7285;
-  --box-cielo-text: #e0f7fa;
-  --box-uva-bg: #5f3dc4;
-  --box-uva-text: #edeaff;
-  --box-coral-bg: #962626;
-  --box-coral-text: #ffe5e5;
+  --box-sol-bg: #5f5e2e;
+  --box-sol-text: #fffdd7;
+  --box-sol-border: #888755;
+  --box-mar-bg: #2d3a4d;
+  --box-mar-text: #ddefff;
+  --box-mar-border: #455a75;
+  --box-flor-bg: #442833;
+  --box-flor-text: #ffd7e6;
+  --box-flor-border: #a65376;
+  --box-hoja-bg: #2f4430;
+  --box-hoja-text: #dcffe0;
+  --box-hoja-border: #4c7a4f;
+  --box-cielo-bg: #2b3f38;
+  --box-cielo-text: #d8f3dc;
+  --box-cielo-border: #4f7664;
+  --box-uva-bg: #3b2f47;
+  --box-uva-text: #f1e7ff;
+  --box-uva-border: #6a4e7b;
+  --box-coral-bg: #4a2d2d;
+  --box-coral-text: #ffe0e0;
+  --box-coral-border: #a06666;
+  --box-fuego-bg: #503922;
+  --box-fuego-text: #ffeeda;
+  --box-fuego-border: #8c6a45;
 }
 
 /* === General === */
@@ -536,62 +552,61 @@ footer a:focus {
   border-radius: 1rem;
   font-weight: bold;
   border: 2px solid transparent;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-  transition: background 0.4s ease, border 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: background 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.box-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem; /* separa horizontal y vertical */
 }
 
 .box-sol {
   background-color: var(--box-sol-bg);
   color: var(--box-sol-text);
-  border-color: #ffd43b;
-  box-shadow: 0 4px 12px rgba(255, 208, 0, 0.3);
+  border-color: var(--box-sol-border);
 }
 
 .box-mar {
   background-color: var(--box-mar-bg);
   color: var(--box-mar-text);
-  border-color: #339af0;
-  box-shadow: 0 4px 12px rgba(51, 154, 240, 0.3);
+  border-color: var(--box-mar-border);
 }
 
 .box-flor {
   background-color: var(--box-flor-bg);
   color: var(--box-flor-text);
-  border-color: #f06595;
-  box-shadow: 0 4px 12px rgba(240, 101, 149, 0.3);
+  border-color: var(--box-flor-border);
 }
 
 .box-hoja {
   background-color: var(--box-hoja-bg);
   color: var(--box-hoja-text);
-  border-color: #69db7c;
-  box-shadow: 0 4px 12px rgba(105, 219, 124, 0.3);
-}
-
-.box-fuego {
-  background-color: var(--box-fuego-bg);
-  color: var(--box-fuego-text);
-  border-color: #ff922b;
-  box-shadow: 0 4px 12px rgba(255, 146, 43, 0.3);
+  border-color: var(--box-hoja-border);
 }
 
 .box-cielo {
   background-color: var(--box-cielo-bg);
   color: var(--box-cielo-text);
-  border-color: #22b8cf;
-  box-shadow: 0 4px 12px rgba(34, 184, 207, 0.3);
+  border-color: var(--box-cielo-border);
 }
 
 .box-uva {
   background-color: var(--box-uva-bg);
   color: var(--box-uva-text);
-  border-color: #845ef7;
-  box-shadow: 0 4px 12px rgba(132, 94, 247, 0.3);
+  border-color: var(--box-uva-border);
 }
 
 .box-coral {
   background-color: var(--box-coral-bg);
   color: var(--box-coral-text);
-  border-color: #ff6b6b;
-  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+  border-color: var(--box-coral-border);
 }
+
+.box-fuego {
+  background-color: var(--box-fuego-bg);
+  color: var(--box-fuego-text);
+  border-color: var(--box-fuego-border);
+}
+
