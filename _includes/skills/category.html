@@ -3,24 +3,19 @@
     <h4 class="h6 fw-semibold mb-3 text-dark">{{ include.title }}</h4>
     {% endif %}
 
-    <div class="row g-3">
+    <div class="d-flex flex-wrap gap-2">
         {% for item in include.items %}
         {% assign color = item.color | default: '6c757d' %}
-        <div class="col-12 col-md-6">
-            <div class="pastel-box {{ include.class }} p-3 rounded h-100">
-                <div class="d-flex align-items-center gap-2 mb-2">
-                    <img
-                            src="https://img.shields.io/badge/-{{ item.name | uri_escape }}-{{ color }}?logo={{ item.logo | default: item.name | downcase | replace: ' ', '' }}&logoColor=white"
-                            alt="{{ item.name }}"
-                            class="badge-img"
-                            style="height: 20px;"
-                    >
-                    <strong class="mb-0">{{ item.name }}</strong>
-                </div>
-                {% if item.level %}
-                <div class="text-muted small">{{ item.level }}</div>
-                {% endif %}
-            </div>
+        <img
+                src="https://img.shields.io/badge/-{{ item.name | uri_escape }}-{{ color }}?logo={{ item.logo | default: item.name | downcase | replace: ' ', '' }}&logoColor=white"
+                alt="{{ item.name }}"
+                class="badge-img"
+        >
+        <div class="pastel-box {{ include.class }} p-3 rounded">
+            <strong>{{ item.name }}</strong>
+            {% if item.level %}
+            <div class="text-muted small">{{ item.level }}</div>
+            {% endif %}
         </div>
         {% endfor %}
     </div>
