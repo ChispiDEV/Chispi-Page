@@ -1,161 +1,155 @@
-/* === Variables de color === */
+/* ============================
+   🎨 1. Variables de Color
+   ============================ */
+
 :root {
+  /* Colores generales */
   --bg-color: #ffffff;
   --text-color: #212529;
   --overlay-bg: rgba(255, 255, 255, 0.8);
   --footer-bg: #ffffff;
-  --navbar-bg: #ffffff; /* fondo claro por defecto */
-  --footer-border: #e0e0e0; /* borde suave claro */
+  --navbar-bg: #ffffff;
+  --footer-border: #e0e0e0;
   --navbar-border: #e0e0e0;
-  --muted-text: #6c757d; /* gris oscuro claro */
+
+  /* Tipografía y énfasis */
+  --muted-text: #6c757d;
   --accent-text: #3cc88f;
   --icon-color: #212529;
+
+  /* Tonos verdes */
   --verde-1: #3cc88f;
   --verde-2: #28a97b;
   --verde-3: #2b7a6a;
   --verde-4: #1f564b;
+
+  /* Botones */
   --btn-verde-1: #28a745;
   --btn-verde-2: #218838;
   --btn-verde-3: #1e7e34;
   --btn-verde-4: #155724;
   --btn-rojo-1: #dc3545;
   --btn-rojo-2: #c82333;
-  --btn-text-color: #f8f9fa; /* blanco cálido para modo claro */
+  --btn-text-color: #f8f9fa;
   --btn-background-color: rgba(255, 255, 255, 0.2);
   --btn-text-hover-light: white;
-  --post-title-color: #1e7e34; /* verde oscuro bonito para modo claro */
-  --tag-bg-default: #e6f4ea;   /* verde muy suave */
-  --tag-text-default: #1e7e34;
+
+  /* Contenido */
+  --post-title-color: #1e7e34;
   --meta-text-color: #6c757d;
-  --summary-bg: #f0fdf4;       /* verde pálido */
-  --summary-text: #1e4620;     /* verde oscuro legible */
-  --box-sol-bg: #fff9c4;      /* amarillo pastel */
-  --box-sol-text: #665c00;
-  --box-sol-border: #f4e19c;
-  --box-mar-bg: #cce5ff;      /* azul pastel */
-  --box-mar-text: #204060;
-  --box-mar-border: #a3d0f7;
-  --box-flor-bg: #fddde6;     /* rosa pastel */
-  --box-flor-text: #75213d;
-  --box-flor-border: #f6b5c8;
-  --box-hoja-bg: #d4f8d4;     /* verde pastel */
-  --box-hoja-text: #275f3b;
-  --box-hoja-border: #b2e7b2;
-  --box-cielo-bg: #d8f3dc;    /* menta pastel */
-  --box-cielo-text: #285943;
-  --box-cielo-border: #b6e2cc;
-  --box-uva-bg: #e6ccff;      /* lila pastel */
-  --box-uva-text: #4e2a84;
-  --box-uva-border: #d1b3ff;
-  --box-coral-bg: #ffe0e0;    /* coral pastel */
-  --box-coral-text: #7b2c2c;
-  --box-coral-border: #f7b3b3;
-  --box-fuego-bg: #ffe9cc;    /* naranja pastel */
-  --box-fuego-text: #6b3e00;
-  --box-fuego-border: #fcd2a8;
+  --summary-bg: #f0fdf4;
+  --summary-text: #1e4620;
+  --tag-bg-default: #e6f4ea;
+  --tag-text-default: #1e7e34;
+
+  /* Cajas decorativas */
+  --box-sol-bg: #fff9c4; --box-sol-text: #665c00; --box-sol-border: #f4e19c;
+  --box-mar-bg: #cce5ff; --box-mar-text: #204060; --box-mar-border: #a3d0f7;
+  --box-flor-bg: #fddde6; --box-flor-text: #75213d; --box-flor-border: #f6b5c8;
+  --box-hoja-bg: #d4f8d4; --box-hoja-text: #275f3b; --box-hoja-border: #b2e7b2;
+  --box-cielo-bg: #d8f3dc; --box-cielo-text: #285943; --box-cielo-border: #b6e2cc;
+  --box-uva-bg: #e6ccff; --box-uva-text: #4e2a84; --box-uva-border: #d1b3ff;
+  --box-coral-bg: #ffe0e0; --box-coral-text: #7b2c2c; --box-coral-border: #f7b3b3;
+  --box-fuego-bg: #ffe9cc; --box-fuego-text: #6b3e00; --box-fuego-border: #fcd2a8;
 }
+
+/* ============================
+   🌙 2. Variables Modo Oscuro
+   ============================ */
 
 [data-theme="dark"] {
   --bg-color: #121212;
   --text-color: #f1f1f1;
   --overlay-bg: rgba(0, 0, 0, 0.7);
   --footer-bg: #212529;
-  --navbar-bg: #212529; /* fondo oscuro */
-  --footer-border: #333333; /* borde oscuro tenue */
+  --navbar-bg: #212529;
+  --footer-border: #333333;
   --navbar-border: #333333;
-  --muted-text: #bbbbbb; /* gris claro para fondo oscuro */
+
+  --muted-text: #bbbbbb;
   --accent-text: #57e6b6;
   --icon-color: #f1f1f1;
+
   --verde-1: #57e6b6;
   --verde-2: #3cc88f;
   --verde-3: #2ea97b;
   --verde-4: #1a5544;
+
   --btn-verde-1: #90ee90;
   --btn-verde-2: #7edc7e;
   --btn-verde-3: #6ecf6e;
   --btn-verde-4: #5eb25e;
   --btn-rojo-1: #ff6b6b;
   --btn-rojo-2: #ff4c4c;
-  --btn-text-color: #121212; /* negro suave para modo oscuro */
+  --btn-text-color: #121212;
   --btn-background-color: rgba(0, 0, 0, 0.2);
   --btn-text-hover-light: #121212;
-  --post-title-color: #90ee90; /* verde claro para modo oscuro */
-  --tag-bg-default: #214d30;   /* fondo verdoso oscuro */
-  --tag-text-default: #bfffc0;
+
+  --post-title-color: #90ee90;
   --meta-text-color: #bbbbbb;
-  --summary-bg: #1d2b1f;       /* verde oscuro suave */
-  --summary-text: #cce8cc;     /* verde claro legible */
-  --box-sol-bg: #5f5e2e;
-  --box-sol-text: #fffdd7;
-  --box-sol-border: #888755;
-  --box-mar-bg: #2d3a4d;
-  --box-mar-text: #ddefff;
-  --box-mar-border: #455a75;
-  --box-flor-bg: #442833;
-  --box-flor-text: #ffd7e6;
-  --box-flor-border: #a65376;
-  --box-hoja-bg: #2f4430;
-  --box-hoja-text: #dcffe0;
-  --box-hoja-border: #4c7a4f;
-  --box-cielo-bg: #2b3f38;
-  --box-cielo-text: #d8f3dc;
-  --box-cielo-border: #4f7664;
-  --box-uva-bg: #3b2f47;
-  --box-uva-text: #f1e7ff;
-  --box-uva-border: #6a4e7b;
-  --box-coral-bg: #4a2d2d;
-  --box-coral-text: #ffe0e0;
-  --box-coral-border: #a06666;
-  --box-fuego-bg: #503922;
-  --box-fuego-text: #ffeeda;
-  --box-fuego-border: #8c6a45;
+  --summary-bg: #1d2b1f;
+  --summary-text: #cce8cc;
+  --tag-bg-default: #214d30;
+  --tag-text-default: #bfffc0;
+
+  --box-sol-bg: #5f5e2e; --box-sol-text: #fffdd7; --box-sol-border: #888755;
+  --box-mar-bg: #2d3a4d; --box-mar-text: #ddefff; --box-mar-border: #455a75;
+  --box-flor-bg: #442833; --box-flor-text: #ffd7e6; --box-flor-border: #a65376;
+  --box-hoja-bg: #2f4430; --box-hoja-text: #dcffe0; --box-hoja-border: #4c7a4f;
+  --box-cielo-bg: #2b3f38; --box-cielo-text: #d8f3dc; --box-cielo-border: #4f7664;
+  --box-uva-bg: #3b2f47; --box-uva-text: #f1e7ff; --box-uva-border: #6a4e7b;
+  --box-coral-bg: #4a2d2d; --box-coral-text: #ffe0e0; --box-coral-border: #a06666;
+  --box-fuego-bg: #503922; --box-fuego-text: #ffeeda; --box-fuego-border: #8c6a45;
 }
 
-/* === General === */
+/* ============================
+   🎨 1. Variables de Color
+   ============================ */
+
+:root {
+  /* ... ya definido ... */
+}
+
+/* ============================
+   🌙 2. Variables Modo Oscuro
+   ============================ */
+
+[data-theme="dark"] {
+  /* ... ya definido ... */
+}
+
+/* ============================
+   🧱 3. Estructura General
+   ============================ */
+
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
-  transition: background-color 0.3s, color 0.3s;
-  margin: 0;
   font-family: sans-serif;
+  margin: 0;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-/* === HERO === */
+/* ============================
+   🏞️ 4. Sección Hero
+   ============================ */
+
 .hero {
   position: relative;
   overflow: hidden;
+  background-color: transparent !important;
   background-size: cover;
   background-position: center;
-  background-color: transparent !important;
-  box-shadow: none !important;
-  color: var(--text-color);
-  background-repeat: no-repeat;
   min-height: 100vh;
-  padding-top: 4rem; /* Deja espacio para los botones del header si hay */
-}
-
-.overlay {
-  background: var(--overlay-bg);
+  padding-top: 4rem;
+  color: var(--text-color);
 }
 
 .hero-section {
-  background: linear-gradient(
-    to bottom right,
-    var(--bg-color),
-    var(--verde-1)
-  );
+  background: linear-gradient(to bottom right, var(--bg-color), var(--verde-1));
   border-radius: 1rem;
   padding: 2rem;
-  color: var(--text-color);
   transition: background-color 0.3s ease;
-}
-
-.hero-section .btn {
-  min-width: 160px;
-}
-
-.text-verde-1 {
-  color: var(--btn-verde-1);
 }
 
 .hero-box {
@@ -164,14 +158,15 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Para tema claro */
 body.theme-dark .hero-box {
-  background-color: rgba(0, 0, 0, 0.6); /* fondo oscuro por defecto */
+  background-color: rgba(0, 0, 0, 0.6);
   color: white;
 }
 
+/* ============================
+   📝 5. Contenido de Texto
+   ============================ */
 
-/* === TEXT BOX === */
 .text-box {
   background: var(--overlay-bg);
   color: var(--text-color);
@@ -179,309 +174,6 @@ body.theme-dark .hero-box {
   border-radius: 1rem;
 }
 
-/* === NAVBAR === */
-#navbar {
-  background-color: var(--navbar-bg);
-  color: var(--text-color);
-  transition: background-color 0.3s ease, border-bottom 0.3s ease;
-  border-bottom: 1px solid var(--navbar-border);
-}
-
-.navbar-brand {
-  color: var(--text-color);
-  transition: color 0.3s ease;
-  text-decoration: none;
-}
-
-.navbar-brand:hover {
-  color: var(--btn-verde-1);
-}
-
-/* === FOOTER === */
-footer {
-  background-color: var(--footer-bg);
-  color: var(--text-color);
-  text-align: center;
-  padding: 20px 0;
-  border-top: 1px solid var(--footer-border);
-  transition: background-color 0.3s ease, border-top 0.3s ease;
-}
-
-footer small {
-  color: var(--muted-text);
-  transition: color 0.3s ease;
-}
-
-footer a {
-  margin: 0 0.5rem;
-  transition: opacity 0.2s ease, color 0.3s ease;
-}
-
-footer a:hover,
-footer a:focus {
-  opacity: 0.8; /* efecto sutil además del color */
-}
-
-/* === Iconos personalizados === */
-.icon-github::before,
-.icon-linkedin::before,
-.icon-email::before {
-  font-family: "Font Awesome 6 Brands", "Font Awesome 6 Free";
-  font-weight: 900;
-  font-size: 1.5rem;
-  margin: 0 10px;
-  color: var(--icon-color);
-  transition: color 0.3s;
-}
-
-.icon-github::before { content: "\f09b"; }
-.icon-linkedin::before { content: "\f08c"; }
-.icon-email::before { content: "\f0e0"; }
-
-.icon-github:hover::before,
-.icon-linkedin:hover::before,
-.icon-email:hover::before {
-  color: var(--btn-verde-1);
-}
-
-/* === Botones redondos estilo uniforme === */
-.icon-button {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 45px;
-  height: 45px;
-  border: none;
-  border-radius: 50%;
-  background-color: var(--btn-verde-1);
-  color: var(--btn-text-color);
-  cursor: pointer;
-  font-size: 20px;
-  position: relative;
-  z-index: 1100;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.icon-button:hover {
-  background-color: var(--btn-verde-2);
-}
-
-/* === Íconos con Font Awesome === */
-#menu-toggle::before {
-  content: "\f0c9"; /* ícono hamburguesa */
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
-}
-
-#close-menu-toggle::before {
-  content: "\f00d"; /* ícono cerrar */
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
-}
-
-.scroll-to-top {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  display: none; /* Oculto por defecto */
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 1100;
-}
-
-.scroll-to-top::before {
-  content: "\f106"; /* flecha arriba */
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
-}
-
-.scroll-to-top:hover {
-  background-color: var(--btn-verde-2);
-}
-
-#theme-toggle::before {
-  content: "\f186"; /* luna por defecto */
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
-}
-
-[data-theme="dark"] #theme-toggle::before {
-  content: "\f0eb"; /* bombilla en modo oscuro */
-}
-
-/* === Botón idioma === */
-#language-toggle::before {
-  content: "\f57d"; /* ícono globo idioma */
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
-}
-
-/* === Menú lateral === */
-#sidebar-wrapper {
-  position: fixed;
-  top: 0;
-  right: -250px;
-  width: 250px;
-  height: 100%;
-  background-color: var(--footer-bg);
-  color: var(--text-color);
-  transition: right 0.3s ease;
-  z-index: 10000;
-  padding: 1rem;
-}
-
-#sidebar-wrapper.active {
-  right: 0;
-}
-
-.sidebar-nav {
-  list-style: none;
-  padding: 0;
-  margin-top: 3rem;
-}
-
-.sidebar-nav li {
-  margin: 1rem 0;
-}
-
-.sidebar-nav a {
-  color: var(--text-color);
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.2s;
-}
-
-.sidebar-nav a:hover {
-  color: var(--btn-verde-1);
-}
-
-/* === Botón de cerrar menú lateral con tema adaptativo === */
-#close-menu-toggle {
-  background-color: var(--btn-rojo-1);
-  color: var(--btn-text-color);
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  z-index: 11000;
-}
-
-#close-menu-toggle:hover {
-  background-color: var(--btn-rojo-2);
-}
-
-/* === Botones personalizados === */
-[class^="btn-outline-verde-"] {
-  border: 2px solid;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  font-weight: bold;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-block;
-  background-color: var(--btn-background-color); /* Fondo semitransparente */
-  backdrop-filter: blur(2px);          /* Suaviza el fondo detrás (opcional) */
-
-}
-
-.btn-outline-verde-1 {
-  border-color: var(--btn-verde-1);
-  color: var(--btn-verde-1);
-}
-.btn-outline-verde-1:hover {
-  background-color: var(--btn-verde-1);
-  color: var(--btn-text-hover-light);
-}
-
-.btn-outline-verde-2 {
-  border-color: var(--btn-verde-2);
-  color: var(--btn-verde-2);
-}
-.btn-outline-verde-2:hover {
-  background-color: var(--btn-verde-2);
-  color: var(--btn-text-hover-light);
-}
-
-.btn-outline-verde-3 {
-  border-color: var(--btn-verde-3);
-  color: var(--btn-verde-3);
-}
-.btn-outline-verde-3:hover {
-  background-color: var(--btn-verde-3);
-  color: var(--btn-text-hover-light);
-}
-
-.btn-outline-verde-4 {
-  border-color: var(--btn-verde-4);
-  color: var(--btn-verde-4);
-}
-.btn-outline-verde-4:hover {
-  background-color: var(--btn-verde-4);
-  color: var(--btn-text-hover-light);
-}
-
-/* === Partículas === */
-#particles-js {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  background-size: cover;
-  background-position: center;
-}
-
-/* === TÍTULOS DE POSTS === */
-.post-meta {
-  color: var(--meta-text-color);
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
-  transition: color 0.3s;
-}
-
-.post-title {
-  color: var(--post-title-color);
-  transition: color 0.3s;
-}
-
-/* === TAGS === */
-.tag {
-  display: inline-block;
-  padding: 0.25rem 0.5rem;
-  margin: 0.25rem;
-  font-size: 0.85rem;
-  border-radius: 0.3rem;
-  font-weight: bold;
-  background-color: var(--tag-bg-default);
-  color: var(--tag-text-default);
-  transition: background-color 0.3s, color 0.3s;
-}
-
-/* === COLORES DE TAGS DIFERENTES === */
-.tag-color-0 { background-color: #e6f4ea; color: #1e7e34; } /* verde claro */
-.tag-color-1 { background-color: #eaf4ff; color: #1a73e8; } /* azul claro */
-.tag-color-2 { background-color: #fff4e6; color: #e67e22; } /* naranja claro */
-.tag-color-3 { background-color: #fce8e6; color: #d93025; } /* rojo claro */
-.tag-color-4 { background-color: #f3e5f5; color: #6a1b9a; } /* púrpura claro */
-.tag-color-5 { background-color: #f1f8e9; color: #558b2f; } /* verde oliva */
-
-[data-theme="dark"] .tag-color-0 { background-color: #214d30; color: #bfffc0; }
-[data-theme="dark"] .tag-color-1 { background-color: #1e3a5f; color: #a0cfff; }
-[data-theme="dark"] .tag-color-2 { background-color: #5c3d1b; color: #ffddaa; }
-[data-theme="dark"] .tag-color-3 { background-color: #4b1e1e; color: #ffb3b3; }
-[data-theme="dark"] .tag-color-4 { background-color: #3a2a4d; color: #e1c4ff; }
-[data-theme="dark"] .tag-color-5 { background-color: #2e4220; color: #d7f3c1; }
-
-.post-summary {
-  background-color: var(--summary-bg);
-  color: var(--summary-text);
-  border-left: 4px solid var(--btn-verde-2);
-  padding: 0.75rem 1rem;
-  margin: 1rem 0;
-  border-radius: 0.5rem;
-  font-style: italic;
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-}
-
-/* === Estilos personalizados para página de post === */
 .text-title {
   color: var(--btn-verde-2);
   transition: color 0.3s;
@@ -492,12 +184,218 @@ footer a:focus {
   transition: color 0.3s;
 }
 
-.post-meta {
-  color: var(--muted-text);
+/* ============================
+   🧭 6. Navegación y Navbar
+   ============================ */
+
+#navbar {
+  background-color: var(--navbar-bg);
+  border-bottom: 1px solid var(--navbar-border);
+  transition: background-color 0.3s, border-bottom 0.3s;
+}
+
+.navbar-brand {
+  color: var(--text-color);
+  text-decoration: none;
   transition: color 0.3s;
 }
 
-/* Etiquetas con color automático */
+.navbar-brand:hover {
+  color: var(--btn-verde-1);
+}
+
+/* ============================
+   🦶 7. Footer
+   ============================ */
+
+footer {
+  background-color: var(--footer-bg);
+  color: var(--text-color);
+  text-align: center;
+  padding: 20px 0;
+  border-top: 1px solid var(--footer-border);
+  transition: background-color 0.3s ease, border-top 0.3s ease;
+}
+
+footer small,
+footer a {
+  color: var(--muted-text);
+  transition: color 0.3s ease, opacity 0.2s ease;
+}
+
+footer a:hover {
+  opacity: 0.8;
+}
+
+/* ============================
+   📚 8. Menú Lateral (Sidebar)
+   ============================ */
+
+#sidebar-wrapper {
+  position: fixed;
+  top: 0;
+  right: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: var(--footer-bg);
+  color: var(--text-color);
+  padding: 1rem;
+  transition: right 0.3s ease;
+  z-index: 10000;
+}
+
+#sidebar-wrapper.active {
+  right: 0;
+}
+
+.sidebar-nav {
+  list-style: none;
+  margin-top: 3rem;
+  padding: 0;
+}
+
+.sidebar-nav li {
+  margin: 1rem 0;
+}
+
+.sidebar-nav a {
+  color: var(--text-color);
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.sidebar-nav a:hover {
+  color: var(--btn-verde-1);
+}
+
+/* ============================
+   🎯 9. Botones e Iconos
+   ============================ */
+
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--btn-verde-1);
+  color: var(--btn-text-color);
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.icon-button:hover {
+  background-color: var(--btn-verde-2);
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none;
+  opacity: 0;
+  z-index: 1100;
+  transition: opacity 0.3s;
+}
+
+.scroll-to-top:hover {
+  background-color: var(--btn-verde-2);
+}
+
+/* ============================
+   🔤 10. Iconos Font Awesome
+   ============================ */
+
+#menu-toggle::before,
+#close-menu-toggle::before,
+#theme-toggle::before,
+#language-toggle::before {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+}
+
+#menu-toggle::before { content: "\f0c9"; }
+#close-menu-toggle::before { content: "\f00d"; }
+#theme-toggle::before { content: "\f186"; }
+[data-theme="dark"] #theme-toggle::before { content: "\f0eb"; }
+#language-toggle::before { content: "\f57d"; }
+
+/* ============================
+   🖼️ 11. Botones Outline
+   ============================ */
+
+[class^="btn-outline-verde-"] {
+  border: 2px solid;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  display: inline-block;
+  background-color: var(--btn-background-color);
+  backdrop-filter: blur(2px);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-outline-verde-1 {
+  border-color: var(--btn-verde-1);
+  color: var(--btn-verde-1);
+}
+
+.btn-outline-verde-1:hover {
+  background-color: var(--btn-verde-1);
+  color: var(--btn-text-hover-light);
+}
+
+.btn-outline-verde-2 {
+  border-color: var(--btn-verde-2);
+  color: var(--btn-verde-2);
+}
+
+.btn-outline-verde-2:hover {
+  background-color: var(--btn-verde-2);
+  color: var(--btn-text-hover-light);
+}
+
+.btn-outline-verde-3 {
+  border-color: var(--btn-verde-3);
+  color: var(--btn-verde-3);
+}
+
+.btn-outline-verde-3:hover {
+  background-color: var(--btn-verde-3);
+  color: var(--btn-text-hover-light);
+}
+
+.btn-outline-verde-4 {
+  border-color: var(--btn-verde-4);
+  color: var(--btn-verde-4);
+}
+
+.btn-outline-verde-4:hover {
+  background-color: var(--btn-verde-4);
+  color: var(--btn-text-hover-light);
+}
+
+/* ============================
+   🏷️ 12. Etiquetas y Tags
+   ============================ */
+
+.tag {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  margin: 0.25rem;
+  font-size: 0.85rem;
+  font-weight: bold;
+  border-radius: 0.3rem;
+  background-color: var(--tag-bg-default);
+  color: var(--tag-text-default);
+  transition: background-color 0.3s, color 0.3s;
+}
+
 .tag-badge {
   display: inline-block;
   padding: 0.3em 0.6em;
@@ -506,137 +404,77 @@ footer a:focus {
   border-radius: 0.5em;
   background-color: hsl(calc(var(--tag-hue, 180) + var(--tag-index, 0) * 37), 65%, 75%);
   color: #222;
-  text-decoration: none;
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* Dark mode adjustments for tag */
 [data-theme="dark"] .tag-badge {
   background-color: hsl(calc(var(--tag-hue, 180) + var(--tag-index, 0) * 37), 65%, 30%);
   color: #f0f0f0;
 }
 
-/* === Miniaturas de posts === */
-.post-thumbnail {
-  min-width: 120px;
-  flex-shrink: 0;
+/* === Dropdown container === */
+.dropdown {
+  position: relative;
+  display: inline-block;
 }
 
-.post-thumbnail img {
-  width: 120px;
-  height: 100px;
-  object-fit: cover;
+/* === Menú desplegable === */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--footer-bg);
+  border: 1px solid var(--navbar-border);
+  min-width: 160px;
+  z-index: 10000;
+  padding: 0.5rem 0;
   border-radius: 0.5rem;
-  transition: transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: opacity 0.3s ease;
 }
 
-.post-thumbnail img:hover {
-  transform: scale(1.03);
+/* Se muestra cuando tiene la clase .show */
+.dropdown-menu.show {
+  display: block;
 }
 
-.imagen-circular {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 3px solid var(--btn-verde-2);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-
-.imagen-poligono {
-  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
-}
-
-.box {
-  padding: 1.5rem;
-  border-radius: 1rem;
-  font-weight: bold;
-  border: 2px solid transparent;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  transition: background 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
-}
-
-.box:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-}
-
-.box-container {
+/* === Elementos del menú === */
+.dropdown-item {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem; /* separa horizontal y vertical */
+  align-items: center;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  font-size: 0.95rem;
+  color: var(--text-color);
+  transition: background-color 0.2s;
 }
 
-.box-sol {
-  background-color: var(--box-sol-bg);
-  color: var(--box-sol-text);
-  border-color: var(--box-sol-border);
+.dropdown-item:hover {
+  background-color: var(--summary-bg);
 }
 
-.box-mar {
-  background-color: var(--box-mar-bg);
-  color: var(--box-mar-text);
-  border-color: var(--box-mar-border);
+.dropdown-item.active {
+  font-weight: bold;
+  background-color: var(--tag-bg-default);
+  color: var(--tag-text-default);
 }
 
-.box-flor {
-  background-color: var(--box-flor-bg);
-  color: var(--box-flor-text);
-  border-color: var(--box-flor-border);
+/* === Iconos de bandera === */
+.flag-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
-.box-hoja {
-  background-color: var(--box-hoja-bg);
-  color: var(--box-hoja-text);
-  border-color: var(--box-hoja-border);
+/* === Modo oscuro === */
+[data-theme="dark"] .dropdown-menu {
+  background-color: var(--navbar-bg);
+  border-color: var(--navbar-border);
 }
 
-.box-cielo {
-  background-color: var(--box-cielo-bg);
-  color: var(--box-cielo-text);
-  border-color: var(--box-cielo-border);
+[data-theme="dark"] .dropdown-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
 }
-
-.box-uva {
-  background-color: var(--box-uva-bg);
-  color: var(--box-uva-text);
-  border-color: var(--box-uva-border);
-}
-
-.box-coral {
-  background-color: var(--box-coral-bg);
-  color: var(--box-coral-text);
-  border-color: var(--box-coral-border);
-}
-
-.box-fuego {
-  background-color: var(--box-fuego-bg);
-  color: var(--box-fuego-text);
-  border-color: var(--box-fuego-border);
-}
-
-.pastel-box {
-  background-color: #fdf7ff; /* tono pastel base, lo puedes variar si quieres múltiples */
-  border: 1px solid #e7e7f5;
-  transition: background 0.3s ease;
-}
-
-/* Puedes alternar colores con clases adicionales como .pastel-1, .pastel-2 si quieres */
-.pastel-1 { background-color: #fef6e4; border-color: #f7e9d7; } /* amarillo claro */
-.pastel-2 { background-color: #e8f8f5; border-color: #d2f1eb; } /* azul agua */
-.pastel-3 { background-color: #fcefee; border-color: #f8dbe0; } /* rosa claro */
-.pastel-4 { background-color: #eef6fd; border-color: #d6e8fa; } /* azul pastel */
-.pastel-5 { background-color: #f2f9ed; border-color: #d8efcc; } /* verde claro */
-
-.badge-img {
-  height: 28px;
-  border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.badge-img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-}
-
