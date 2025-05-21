@@ -53,13 +53,19 @@ subtitle: "Desarrolladora | Diseñadora | Analista de Datos"
       <div class="col-12">
         <div class="box box-hoja">
           <h3 class="text-2xl font-semibold mb-4">🔧 Habilidades</h3>
-          
-          {% for section in site.data.skills %}
-            {% include skills/section.html section=section %}
-          {% endfor %}
+
+          <!-- Grid de secciones: 1 columna móvil, 2 en tablet, 3 en escritorio -->
+          <div class="row g-4">
+            {% for section in site.data.skills-en %}
+            <div class="col-12 col-md-6 col-lg-4">
+              {% include skills/section.html section=section %}
+            </div>
+            {% endfor %}
+          </div>
 
         </div>
       </div>
+
 
       <div class="col-12 col-md-6">
         <div class="box box-mar">
