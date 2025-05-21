@@ -103,22 +103,6 @@
 }
 
 /* ============================
-   🎨 1. Variables de Color
-   ============================ */
-
-:root {
-  /* ... ya definido ... */
-}
-
-/* ============================
-   🌙 2. Variables Modo Oscuro
-   ============================ */
-
-[data-theme="dark"] {
-  /* ... ya definido ... */
-}
-
-/* ============================
    🧱 3. Estructura General
    ============================ */
 
@@ -477,4 +461,23 @@ footer a:hover {
 
 [data-theme="dark"] .dropdown-item:hover {
   background-color: rgba(255, 255, 255, 0.05);
+}
+
+.pastel-box {
+  background-color: #fdf7ff; /* tono pastel base, lo puedes variar si quieres múltiples */
+  border: 1px solid #e7e7f5;
+  transition: background 0.3s ease;
+}
+
+/* Cajitas de Skills*/
+.pastel-1 { background-color: #fef6e4; border-color: #f7e9d7; } /* amarillo claro */
+.pastel-2 { background-color: #e8f8f5; border-color: #d2f1eb; } /* azul agua */
+.pastel-3 { background-color: #fcefee; border-color: #f8dbe0; } /* rosa claro */
+.pastel-4 { background-color: #eef6fd; border-color: #d6e8fa; } /* azul pastel */
+.pastel-5 { background-color: #f2f9ed; border-color: #d8efcc; } /* verde claro */
+
+.badge-img {
+  height: 28px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
