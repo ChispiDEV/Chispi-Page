@@ -1,71 +1,63 @@
 ---
 layout: default
-title: About me
+title: About Me
+lang: en
 hero_image_dark: "/assets/img/sobre-mi-bg-dark.jpg"
 hero_image_light: "/assets/img/sobre-mi-bg-light.jpg"
-subtitle: "Developer | Designer | Content creator"
+subtitle: "Developer | Designer | Data Analyst"
 ---
 
-<section id="sobre-mi" class="py-16">
+<section id="about-me" class="py-16">
   <div class="container max-w-3xl mx-auto px-4">
 
-    <!-- Imagen centrada -->
+    <!-- Profile -->
     <div class="flex flex-col items-center text-center mb-12">
-      <img src="{{ '/assets/img/foto-perfil.jpg' | relative_url }}" alt="Foto de Cristina"
-           class="rounded-circle shadow-lg border border-4 border-verde-1 mb-3 mx-auto d-block"
+      <img src="{{ '/assets/img/foto-perfil.jpg' | relative_url }}" alt="Cristina's profile photo"
+           class="rounded-full shadow-lg border-4 border-verde-1 mb-3"
            style="width: 130px; height: 130px; object-fit: cover;">
-      <h2 class="text-4xl font-bold mb-2">🧑‍💻 About me</h2>
-      <p class="text-lg text-gray-600 dark:text-gray-300 mt-2">👋 I'm Cristina (often called Chispi by colleagues). Welcome to my Page!</p>
+      <h2 class="text-4xl font-bold mb-2">🧑‍💻 About Me</h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300 mt-2">
+        👋 I'm Cristina — my friends call me Chispi. Welcome to my site!
+      </p>
     </div>
 
-    <!-- Contenido en bloques con buen espaciado -->
+    <!-- Content Blocks -->
     <div class="row g-4 text-left text-lg leading-relaxed">
 
       <div class="col-12 col-md-6">
         <div class="box box-sol">
-           <p>👩‍🔬 Former <strong>mathematics and science teacher</strong> turned <strong>data analyst</strong> with a passion for technology, education, and problem-solving. Specialized in:</p>
-           <ul class="list-disc list-inside mt-3 pl-2">
-             <li>📊 <strong>Data Analytics:</strong> Python, Pandas, SQL</li>
-             <li>📄 <strong>Document Automation:</strong> LaTeX, Pandoc</li>
-             <li>📈 <strong>Visualization:</strong> Matplotlib, Seaborn, Power BI</li>
-           </ul>
+          <p>👩‍🔬 Former <strong>biology teacher</strong> turned <strong>data analyst</strong> with a passion for tech, education, and creative problem solving. My focus areas include:</p>
+          <ul class="list-disc list-inside mt-3 pl-2">
+            <li>📊 <strong>Data Analysis:</strong> Python, Pandas, SQL</li>
+            <li>📄 <strong>Document Automation:</strong> LaTeX, Pandoc</li>
+            <li>📈 <strong>Visualization:</strong> Matplotlib, Seaborn, Power BI</li>
+          </ul>
         </div>
       </div>
-        
+
       <div class="col-12 col-md-6">
         <div class="box box-fuego">
-           <p>🍀 Recently completed a <strong>Data Analysis Bootcamp at IMMUNE Institute</strong>, gaining hands-on experience in:</p>
-           <ul class="list-disc list-inside mt-3 pl-2">
-             <li>Machine Learning</li>
-             <li>Data Visualization</li>
-             <li>Advanced Analytics</li>
-           </ul>
+          <p>🍀 I recently completed a <strong>Data Analytics Bootcamp at IMMUNE Institute</strong> with hands-on projects in:</p>
+          <ul class="list-disc list-inside mt-3 pl-2">
+            <li>Machine Learning</li>
+            <li>Data Visualization</li>
+            <li>Advanced Analytics</li>
+          </ul>
         </div>
       </div>
 
       <div class="col-12">
         <div class="box box-coral">
-          <p>👀 My background in <strong>biochemistry and education</strong> helps me blend scientific reasoning with creativity in data projects.</p>
+          <p>👀 My background in <strong>biochemistry and education</strong> gives me a unique perspective that blends logic, clarity, and creativity.</p>
         </div>
       </div>
 
       <div class="col-12">
-        <div class="box box-hoja"> 
+        <div class="box box-hoja">
           <h3 class="text-2xl font-semibold mb-4">🔧 Skills</h3>
-          <p><strong>Programming Languages:</strong> 
-            <div class="flex flex-wrap gap-2 mb-2">
-              <img src="https://img.shields.io/badge/-Python-blue" alt="Python">
-              <img src="https://img.shields.io/badge/-SQL-orange" alt="SQL">
-              <img src="https://img.shields.io/badge/-HTML-pink" alt="HTML">
-              <img src="https://img.shields.io/badge/-CSS-green" alt="CSS">
-              <img src="https://img.shields.io/badge/-R-red" alt="R">
-            </div>
-          </p>
-        
-          <p><strong>Frameworks:</strong> Pandas, NumPy, SciPy, Matplotlib, Pytest, scikit-learn, Seaborn</p>
-          <p><strong>Visualization Tools:</strong> Power BI, Tableau</p>
-          <p><strong>Development Tools:</strong> LaTeX, Pandoc, Jupyter Notebook, Google Colab, Git, Anaconda</p>
-          <p><strong>Databases:</strong> MySQL, OracleSQL</p>
+          {% for section in site.data.skills-en %}
+          {% include skills/section.html section=section %}
+          {% endfor %}
         </div>
       </div>
 
@@ -80,12 +72,12 @@ subtitle: "Developer | Designer | Content creator"
       </div>
 
       <div class="col-12 col-md-6">
-        <div class="box box-cielo">      
-          <h3 class="text-2xl font-semibold mb-4">🔥 What am I doing now?</h3>
+        <div class="box box-cielo">
+          <h3 class="text-2xl font-semibold mb-4">🔥 What I'm Working On</h3>
           <ul class="list-disc list-inside mt-3 pl-2">
-            <li>💻 Improving my skills in <strong>data modeling and interactive dashboards</strong>.</li>
-            <li>📖 Learning about social network analysis with <strong>NetworkX</strong>.</li>
-            <li>🤝 Open to collaborations on projects related to data analytics or automation.</li>
+            <li>💻 Building interactive dashboards and refining data models.</li>
+            <li>📖 Exploring social network analysis with <strong>NetworkX</strong>.</li>
+            <li>🤝 Open to data and automation-related collaborations.</li>
           </ul>
         </div>
       </div>
@@ -94,15 +86,15 @@ subtitle: "Developer | Designer | Content creator"
         <div class="box box-uva">
           <h3 class="text-2xl font-semibold mb-4">🎉 Fun Facts</h3>
           <ul class="list-disc list-inside mt-3 pl-2">
-            <li>🎮 Gamer with over <strong>500 hours in Stardew Valley</strong>.</li>
-            <li>✈️ Former <strong>support specialist at Riot Games</strong>.</li>
-            <li>🐶 Dog mom to <strong>Riven</strong> and <strong>Haru</strong>.</li>
-            <li>🎨 Avid knitter and nail artist.</li>
-            <li>🌍 Studying Japanese to fulfil one of my dreams: visiting <strong>Kumamoto</strong>, home of the One Piece statues!</li>
+            <li>🎮 500+ hours playing Stardew Valley</li>
+            <li>✈️ Former support specialist at Riot Games</li>
+            <li>🐶 Proud dog mom to <strong>Riven</strong> and <strong>Haru</strong></li>
+            <li>🎨 Nail artist and knitting enthusiast</li>
+            <li>🌍 Learning Japanese to one day visit <strong>Kumamoto</strong> — home of the One Piece statues!</li>
           </ul>
         </div>
       </div>
-      
-     </div> 
+
+    </div>
   </div>
 </section>

@@ -5,7 +5,12 @@
 
     <!-- Botones: Idioma, Tema, Menú -->
     <div class="d-flex align-items-center gap-2">
-      <button class="icon-button" id="language-toggle" aria-label="Cambiar idioma" title="Cambiar idioma"></button>
+      <a href="{% if page.lang == 'es' %}/en{% else %}/es{% endif %}{{ page.url }}"
+         class="icon-button"
+         title="{% if page.lang == 'es' %}Switch to English{% else %}Cambiar a Español{% endif %}"
+         aria-label="Cambiar idioma"
+         id="language-toggle">
+      </a>
       <button class="icon-button" id="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema"></button>
       <button class="icon-button" id="menu-toggle" aria-label="Abrir menú" title="Menú"></button>
     </div>
@@ -15,12 +20,21 @@
 <!-- Menú lateral -->
 <div id="sidebar-wrapper">
   <ul class="sidebar-nav">
-    <li><a href="{{ '/' | relative_url }}">Inicio</a></li>
-    <li><a href="{{ '/sobre-mi.html' | relative_url }}">Sobre mí</a></li>
-    <li><a href="{{ '/posts.html' | relative_url }}">Devlogs</a></li>
-    <li><a href="{{ '/proyectos.html' | relative_url }}">Proyectos</a></li>
-    <li><a href="{{ '/recursos.html' | relative_url }}">Recursos</a></li>
-    <li><a href="{{ '/contacto.html' | relative_url }}">Contacto</a></li>
+    {% if page.lang == "es" %}
+      <li><a href="{{ '/' | relative_url }}">Inicio</a></li>
+      <li><a href="{{ '/sobre-mi.html' | relative_url }}">Sobre mí</a></li>
+      <li><a href="{{ '/posts.html' | relative_url }}">Devlogs</a></li>
+      <li><a href="{{ '/proyectos.html' | relative_url }}">Proyectos</a></li>
+      <li><a href="{{ '/recursos.html' | relative_url }}">Recursos</a></li>
+      <li><a href="{{ '/contacto.html' | relative_url }}">Contacto</a></li>
+    {% else %}
+    <li><a href="{{ '/en' | relative_url }}">Home</a></li>
+    <li><a href="{{ '/en/sobre-mi.html' | relative_url }}">About Me</a></li>
+    <li><a href="{{ '/en/posts.html' | relative_url }}">Devlogs</a></li>
+    <li><a href="{{ '/en/proyectos.html' | relative_url }}">Projects</a></li>
+    <li><a href="{{ '/en/recursos.html' | relative_url }}">Resources</a></li>
+    <li><a href="{{ '/en/contacto.html' | relative_url }}">Contact</a></li>
+    {% endif %}
   </ul>
 
   <!-- Botón para cerrar menú -->

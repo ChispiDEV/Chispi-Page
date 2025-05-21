@@ -1,4 +1,4 @@
-- section: Lenguajes de programación
+- section: Programming Languages
   items:
     - name: Python
       logo: python
@@ -16,40 +16,32 @@
       logo: r
       color: 276DC3
 
-- section: Frameworks y librerías
+- section: Frameworks and Libraries
   items:
     - name: Pandas
-      logo: pandas
       color: 150458
     - name: NumPy
-      logo: numpy
       color: 013243
     - name: SciPy
-      logo: scipy
       color: 8CAAE6
     - name: Matplotlib
-      logo: matplotlib
       color: 11557C
     - name: Seaborn
-      logo: python
-      color: 43BCCD
+      color: 3D506F
     - name: scikit-learn
-      logo: scikitlearn
+      logo: scikit-learn
       color: F7931E
     - name: Pytest
-      logo: python
       color: 0A9EDC
 
-- section: Visualización de datos
+- section: Data Visualization
   items:
     - name: Power BI
-      logo: powerbi
       color: F2C811
     - name: Tableau
-      logo: tableau
       color: E97627
 
-- section: Herramientas de desarrollo
+- section: Development Tools
   items:
     - name: Jupyter Notebook
       logo: jupyter
@@ -64,16 +56,14 @@
       logo: anaconda
       color: 44A833
     - name: LaTeX
-      logo: latex
       color: 008080
     - name: Pandoc
-      logo: pandoc
-      color: 025B99
+      color: 002B36
     - name: JetBrains Rider
       logo: jetbrains
       color: 000000
 
-- section: Bases de datos
+- section: Databases
   items:
     - name: MySQL
       logo: mysql
@@ -82,7 +72,7 @@
       logo: oracle
       color: F80000
 
-- section: IDE favoritos
+- section: Favorite IDEs
   items:
     - name: VS Code
       logo: visualstudiocode
@@ -97,50 +87,26 @@
       logo: jetbrains
       color: 000000
 
-- section: Estilo de trabajo
+- section: Work Style
   items:
-    - name: Documentación clara
-      logo: book
-      color: 4CAF50
+    - name: Clear Documentation
     - name: Visual Thinking
-      logo: drawio
-      color: F7761F
-    - name: Colaboración abierta
-      logo: people
-      color: 00BFA6
+    - name: Open Collaboration
 
-- section: Deseo aprender
+- section: Want to Learn
   subsections:
-    - name: Lenguajes
+    - name: Languages
       items:
         - name: JavaScript
-          logo: javascript
-          color: F7DF1E
         - name: TypeScript
-          logo: typescript
-          color: 3178C6
     - name: Cloud Computing
       items:
         - name: AWS
-          logo: amazonaws
-          color: FF9900
         - name: Google Cloud
-          logo: googlecloud
-          color: 4285F4
-    - name: Frameworks y herramientas
+    - name: Frameworks and Tools
       items:
         - name: NetworkX
-          logo: python
-          color: 4B8BBE
         - name: React
-          logo: react
-          color: 61DAFB
         - name: Tailwind CSS
-          logo: tailwindcss
-          color: 38B2AC
         - name: Vite
-          logo: vite
-          color: 646CFF
         - name: Next.js
-          logo: nextdotjs
-          color: 000000

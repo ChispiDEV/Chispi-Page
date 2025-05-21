@@ -13,17 +13,15 @@ plugins:
   - jekyll-sitemap
   - jekyll-archives
 
-# Para que Jekyll busque plugins en _plugins/
 plugins_dir: _plugins
 
-# Paginación general para index/posts.html
+# Configuración de paginación
 pagination:
   enabled: true
   per_page: 5
   permalink: /page/:num/
   title: ":title - Página :num"
 
-# Paginación automática por etiqueta (tags)
 pagination_tag:
   enabled: true
   per_page: 5
@@ -36,21 +34,31 @@ collections:
   projects:
     output: true
 
-# Layout por defecto para posts y proyectos
+# Configuración por defecto para posts y colecciones
 defaults:
   - scope:
       path: ""
       type: "posts"
     values:
       layout: devlog
+      lang: es
   - scope:
       path: "projects"
       type: "projects"
     values:
       layout: project
-  # Habilita salida de las páginas generadas por plugins
+      lang: es
   - scope:
       path: ""
       type: "tags"
     values:
       layout: tag
+  - scope:
+      path: ""
+    values:
+      layout: default
+      lang: es
+
+# Soporte para múltiples idiomas (manual)
+languages: ["es", "en"]
+default_lang: "es"
