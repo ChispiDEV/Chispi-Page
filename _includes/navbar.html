@@ -28,9 +28,11 @@
                 aria-label="Cambiar idioma" 
                 title="Cambiar idioma">
         </button>
+        
+        {% assign base_url = page.url | replace_first:'/en','' %}
 
         <div class="dropdown-menu">
-          <a href="{{ '/es' | append: page.url | relative_url }}" class="dropdown-item {% if page.lang == 'es' %}active{% endif %}">
+          <a href="{{ page.url | relative_url }}" class="dropdown-item {% if page.lang == 'es' %}active{% endif %}">
             <img src="{{ '/assets/icons/es-variant.svg' | relative_url }}" alt="Español" class="flag-icon"> Español
           </a>
           <a href="{{ '/en' | append: page.url | relative_url }}" class="dropdown-item {% if page.lang == 'en' %}active{% endif %}">

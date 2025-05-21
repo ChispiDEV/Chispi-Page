@@ -436,6 +436,7 @@ footer a:hover {
 
 .dropdown-item:hover {
   background-color: var(--summary-bg);
+  color: var(--summary-text);
 }
 
 .dropdown-item.active {
