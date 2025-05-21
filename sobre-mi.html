@@ -3,7 +3,7 @@ layout: default
 title: Sobre mí
 hero_image_dark: "/assets/img/sobre-mi-bg-dark.jpg"
 hero_image_light: "/assets/img/sobre-mi-bg-light.jpg"
-subtitle: "Desarrolladora | Diseñadora | Creadora de contenido"
+subtitle: "Desarrolladora | Diseñadora | Analista de Datos"
 ---
 
 <section id="sobre-mi" class="py-16">
@@ -19,10 +19,10 @@ subtitle: "Desarrolladora | Diseñadora | Creadora de contenido"
     </div>
 
     <!-- Contenido en bloques con buen espaciado -->
-    <div class="row g-4 text-left text-lg leading-relaxed">
+    <div class="row g-4 align-items-stretch">
       
-      <div class="col-12 col-md-6">
-        <div class="box box-sol">
+      <div class="col-12 col-md-6 d-flex">
+        <div class="box box-sol h-100 w-100 d-flex flex-column justify-content-center">
           <p>👩‍🔬 <strong>Bióloga y exprofesora</strong> orientada al <strong>análisis de datos</strong>. Me especializo en:</p>
           <ul class="list-disc list-inside mt-3 pl-2">
             <li>📊 <strong>Python, Pandas, SQL</strong></li>
@@ -32,8 +32,8 @@ subtitle: "Desarrolladora | Diseñadora | Creadora de contenido"
         </div>
       </div>
 
-      <div class="col-12 col-md-6">
-        <div class="box box-fuego">
+      <div class="col-12 col-md-6 d-flex">
+        <div class="box box-fuego h-100 w-100 d-flex flex-column justify-content-center">
           <p>🍀 Graduada del bootcamp de <strong>IMMUNE Institute</strong>:</p>
           <ul class="list-disc list-inside mt-3 pl-2">
             <li>Machine Learning</li>
@@ -43,33 +43,20 @@ subtitle: "Desarrolladora | Diseñadora | Creadora de contenido"
         </div>
       </div>
         
-      <div class="col-12">
-        <div class="box box-coral">
+      <div class="col-12 d-flex">
+        <div class="box box-coral flex-fill">
           <p>👀 Mi formación en <strong>bioquímica y educación</strong> me permite aportar una mirada única.</p>
         </div>
       </div>
 
-      <div class="col-12">
-        <div class="box box-hoja">
+      <div class="col-12 d-flex">
+        <div class="box box-hoja flex-fill">
           <h3 class="text-2xl font-semibold mb-4">🔧 Habilidades</h3>
-          <p><strong>Lenguajes de Programación:</strong>
-           <div class="flex flex-wrap gap-2 mb-2">
-             <img src="https://img.shields.io/badge/-Python-blue" alt="Python">
-             <img src="https://img.shields.io/badge/-SQL-orange" alt="SQL">
-             <img src="https://img.shields.io/badge/-HTML-pink" alt="HTML">
-             <img src="https://img.shields.io/badge/-CSS-green" alt="CSS">
-             <img src="https://img.shields.io/badge/-R-red" alt="R">
-           </div>
-          </p>
-  
-          <p><strong>Frameworks:</strong> Pandas, NumPy, SciPy, Matplotlib, Pytest, scikit-learn, Seaborn</p>
-          <p><strong>Herramientas de Visualización:</strong> Power BI, Tableau</p>
-          <p><strong>Herramientas de Desarrollo:</strong> LaTeX, Pandoc, Jupyter Notebook, Google Colab, Git, Anaconda</p>
-          <p><strong>Bases de Datos:</strong> MySQL, OracleSQL</p>
+          {% include skills/section.html %}
         </div>
       </div>
 
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-6 h-100 w-100 d-flex flex-column justify-content-center">
         <div class="box box-mar">
           <h3 class="text-2xl font-semibold mb-4">🖥️ Tecnologías Principales</h3>
           <div class="flex flex-wrap gap-3">
@@ -79,7 +66,7 @@ subtitle: "Desarrolladora | Diseñadora | Creadora de contenido"
         </div>
       </div>
 
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-6 h-100 w-100 d-flex flex-column justify-content-center">
         <div class="box box-cielo">
           <h3 class="text-2xl font-semibold mb-4">🔥 ¿Qué estoy haciendo ahora?</h3>
           <ul class="list-disc list-inside mt-3 pl-2">
@@ -90,8 +77,8 @@ subtitle: "Desarrolladora | Diseñadora | Creadora de contenido"
         </div>
       </div>
 
-      <div class="col-12">
-        <div class="box box-uva">
+      <div class="col-12 d-flex">
+        <div class="box box-uva flex-fill">
           <h3 class="text-2xl font-semibold mb-4">🎉 Curiosidades Sobre Mí</h3>
           <ul class="list-disc list-inside mt-3 pl-2">
             <li>🎮 500+ horas en Stardew Valley</li>

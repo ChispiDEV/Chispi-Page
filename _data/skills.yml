@@ -1,0 +1,78 @@
+- section: Lenguajes de programación
+  items:
+    - name: Python
+      logo: python
+      color: 3776AB
+    - name: SQL
+      logo: postgresql
+      color: FF6F00
+    - name: HTML
+      logo: html5
+      color: E44D26
+    - name: CSS
+      logo: css3
+      color: 1572B6
+    - name: R
+      logo: r
+      color: 276DC3
+
+- section: Frameworks y librerías
+  items:
+    - name: Pandas
+    - name: NumPy
+    - name: SciPy
+    - name: Matplotlib
+    - name: Seaborn
+    - name: scikit-learn
+    - name: Pytest
+
+- section: Visualización de datos
+  items:
+    - name: Power BI
+    - name: Tableau
+
+- section: Herramientas de desarrollo
+  items:
+    - name: Jupyter Notebook
+    - name: Google Colab
+    - name: Git
+    - name: Anaconda
+    - name: LaTeX
+    - name: Pandoc
+    - name: JetBrains Rider
+
+- section: Bases de datos
+  items:
+    - name: MySQL
+    - name: OracleSQL
+
+- section: IDE favoritos
+  items:
+    - name: VS Code
+    - name: JupyterLab
+    - name: RStudio
+    - name: JetBrains Rider
+
+- section: Estilo de trabajo
+  items:
+    - name: Documentación clara
+    - name: Visual Thinking
+    - name: Colaboración abierta
+
+- section: Deseo aprender
+  subsections:
+    - name: Lenguajes
+      items:
+        - name: JavaScript
+        - name: TypeScript
+    - name: Cloud Computing
+      items:
+        - name: AWS
+        - name: Google Cloud
+    - name: Frameworks y herramientas
+      items:
+        - name: NetworkX
+        - name: React
+        - name: Tailwind CSS
+        - name: Vite
+        - name: Next.js

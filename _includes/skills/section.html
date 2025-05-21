@@ -1,0 +1,16 @@
+{% for section in site.data.skills %}
+<div class="mb-10">
+    <h3 class="text-2xl font-bold mb-4">{{ section.section }}</h3>
+
+    {% if section.items %}
+    {% include skills/category.html items=section.items %}
+    {% endif %}
+
+    {% if section.categories %}
+    {% for category in section.categories %}
+    {% include skills/category.html items=category.items title=category.title %}
+    {% endfor %}
+    {% endif %}
+
+</div>
+{% endfor %}
