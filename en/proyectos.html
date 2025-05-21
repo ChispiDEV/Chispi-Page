@@ -35,33 +35,36 @@
     <div class="d-flex align-items-center gap-2">
       <a class="navbar-brand" href="/Chispi-Page/">Chispi Page</a>
 
-      <!-- Bandera de idioma actual -->
       
       <img src="/Chispi-Page/assets/icons/gb.svg"
            alt="English"
            style="width: 20px; height: 20px; border-radius: 50%;">
       
     </div>
-    
+
     <!-- Botones: Idioma, Tema, Menú -->
     <div class="d-flex align-items-center gap-2">
 
       <!-- Menú desplegable de idiomas -->
       <div class="dropdown" id="language-dropdown">
-        <button class="icon-button" 
-                id="language-toggle" 
-                type="button" 
-                aria-label="Cambiar idioma" 
+        <button class="icon-button"
+                id="language-toggle"
+                type="button"
+                aria-label="Cambiar idioma"
                 title="Cambiar idioma">
         </button>
+
         
         
 
         <div class="dropdown-menu">
-          <a href="/Chispi-Page/en/proyectos.html" class="dropdown-item ">
+          <!-- Versión en español (raíz del sitio) -->
+          <a href="/Chispi-Page/proyectos.html" class="dropdown-item ">
             <img src="/Chispi-Page/assets/icons/es-variant.svg" alt="Español" class="flag-icon"> Español
           </a>
-          <a href="/Chispi-Page/en/en/proyectos.html" class="dropdown-item active">
+
+          <!-- Versión en inglés (prefijo /en/) -->
+          <a href="/Chispi-Page/en/proyectos.html" class="dropdown-item active">
             <img src="/Chispi-Page/assets/icons/gb.svg" alt="English" class="flag-icon"> English
           </a>
         </div>
