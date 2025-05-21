@@ -31,15 +31,14 @@
         </button>
 
         <div class="dropdown-menu">
-          <a href="/es{{ page.url }}" class="dropdown-item {% if page.lang == 'es' %}active{% endif %}">
+          <a href="{{ '/es' | append: page.url | relative_url }}" class="dropdown-item {% if page.lang == 'es' %}active{% endif %}">
             <img src="{{ '/assets/icons/es-variant.svg' | relative_url }}" alt="Español" class="flag-icon"> Español
           </a>
-          <a href="/en{{ page.url }}" class="dropdown-item {% if page.lang == 'en' %}active{% endif %}">
+          <a href="{{ '/en' | append: page.url | relative_url }}" class="dropdown-item {% if page.lang == 'en' %}active{% endif %}">
             <img src="{{ '/assets/icons/gb.svg' | relative_url }}" alt="English" class="flag-icon"> English
           </a>
         </div>
       </div>
-
 
       <button class="icon-button" id="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema"></button>
       <button class="icon-button" id="menu-toggle" aria-label="Abrir menú" title="Menú"></button>
