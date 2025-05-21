@@ -556,6 +556,11 @@ footer a:focus {
   transition: background 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
 }
 
+.box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
 .box-container {
   display: flex;
   flex-wrap: wrap;
@@ -608,5 +613,30 @@ footer a:focus {
   background-color: var(--box-fuego-bg);
   color: var(--box-fuego-text);
   border-color: var(--box-fuego-border);
+}
+
+.pastel-box {
+  background-color: #fdf7ff; /* tono pastel base, lo puedes variar si quieres múltiples */
+  border: 1px solid #e7e7f5;
+  transition: background 0.3s ease;
+}
+
+/* Puedes alternar colores con clases adicionales como .pastel-1, .pastel-2 si quieres */
+.pastel-1 { background-color: #fef6e4; border-color: #f7e9d7; } /* amarillo claro */
+.pastel-2 { background-color: #e8f8f5; border-color: #d2f1eb; } /* azul agua */
+.pastel-3 { background-color: #fcefee; border-color: #f8dbe0; } /* rosa claro */
+.pastel-4 { background-color: #eef6fd; border-color: #d6e8fa; } /* azul pastel */
+.pastel-5 { background-color: #f2f9ed; border-color: #d8efcc; } /* verde claro */
+
+.badge-img {
+  height: 28px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.badge-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
