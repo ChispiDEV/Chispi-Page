@@ -22,12 +22,11 @@
 
       <!-- Menú desplegable de idiomas -->
       <div class="dropdown" id="language-dropdown">
-        <button class="icon-button" id="language-toggle" type="button" aria-label="Cambiar idioma">
-          {% if page.lang == 'es' %}
-          <img src="{{ '/assets/icons/es-variant.svg' | relative_url }}" alt="Español" class="flag-icon">
-          {% else %}
-          <img src="{{ '/assets/icons/gb.svg' | relative_url }}" alt="English" class="flag-icon">
-          {% endif %}
+        <button class="icon-button" 
+                id="language-toggle" 
+                type="button" 
+                aria-label="Cambiar idioma" 
+                title="Cambiar idioma">
         </button>
 
         <div class="dropdown-menu">
