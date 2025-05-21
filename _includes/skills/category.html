@@ -6,12 +6,12 @@
     <div class="d-flex flex-wrap gap-2">
         {% for item in include.items %}
         {% assign color = item.color | default: '6c757d' %}
-        {% assign logo = item.logo | default: item.name | downcase | replace: ' ', '' %}
         <img
-                src="https://img.shields.io/badge/-{{ item.name | uri_escape }}-{{ color }}?logo={{ logo }}&logoColor=white"
+                src="https://img.shields.io/badge/-{{ item.name | uri_escape }}-{{ color }}?logo={{ item.logo | default: item.name | downcase | replace: ' ', '' }}&logoColor=white"
                 alt="{{ item.name }}"
                 class="badge-img"
         >
         {% endfor %}
     </div>
 </div>
+

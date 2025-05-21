@@ -17,7 +17,7 @@
     <div class="row g-4">
         {% for category in include.section.subsections %}
         {% assign pastel_class = pastel_classes[pastel_index] %}
-        <div class="col-12 col-md-6 col-lg-4">
+        <div class="col-12">
             {% include skills/category.html items=category.items title=category.name class=pastel_class %}
         </div>
         {% assign pastel_index = pastel_index | plus: 1 %}
