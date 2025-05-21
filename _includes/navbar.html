@@ -1,16 +1,46 @@
 <nav id="navbar" class="navbar fixed-top" style="z-index: 9999;">
   <div class="container-fluid d-flex justify-content-between align-items-center">
-    <!-- Branding -->
-    <a class="navbar-brand" href="{{ '/' | relative_url }}">Chispi Page</a>
 
+    <!-- Branding con bandera al lado -->
+    <div class="d-flex align-items-center gap-2">
+      <a class="navbar-brand" href="{{ '/' | relative_url }}">Chispi Page</a>
+
+      <!-- Bandera de idioma actual -->
+      {% if page.lang == 'es' %}
+      <img src="{{ '/assets/icons/es-variant.svg' | relative_url }}"
+           alt="Español"
+           style="width: 20px; height: 20px; border-radius: 50%;">
+      {% else %}
+      <img src="{{ '/assets/icons/gb.svg' | relative_url }}"
+           alt="English"
+           style="width: 20px; height: 20px; border-radius: 50%;">
+      {% endif %}
+    </div>
+    
     <!-- Botones: Idioma, Tema, Menú -->
     <div class="d-flex align-items-center gap-2">
-      <a href="{% if page.lang == 'es' %}/en{% else %}/es{% endif %}{{ page.url }}"
-         class="icon-button"
-         title="{% if page.lang == 'es' %}Switch to English{% else %}Cambiar a Español{% endif %}"
-         aria-label="Cambiar idioma"
-         id="language-toggle">
-      </a>
+
+      <!-- Menú desplegable de idiomas -->
+      <div class="dropdown" id="language-dropdown">
+        <button class="icon-button" id="language-toggle" type="button" aria-label="Cambiar idioma">
+          {% if page.lang == 'es' %}
+          <img src="{{ '/assets/icons/es-variant.svg' | relative_url }}" alt="Español" class="flag-icon">
+          {% else %}
+          <img src="{{ '/assets/icons/gb.svg' | relative_url }}" alt="English" class="flag-icon">
+          {% endif %}
+        </button>
+
+        <div class="dropdown-menu">
+          <a href="/es{{ page.url }}" class="dropdown-item {% if page.lang == 'es' %}active{% endif %}">
+            <img src="{{ '/assets/icons/es-variant.svg' | relative_url }}" alt="Español" class="flag-icon"> Español
+          </a>
+          <a href="/en{{ page.url }}" class="dropdown-item {% if page.lang == 'en' %}active{% endif %}">
+            <img src="{{ '/assets/icons/gb.svg' | relative_url }}" alt="English" class="flag-icon"> English
+          </a>
+        </div>
+      </div>
+
+
       <button class="icon-button" id="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema"></button>
       <button class="icon-button" id="menu-toggle" aria-label="Abrir menú" title="Menú"></button>
     </div>

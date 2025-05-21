@@ -6,30 +6,48 @@ window.addEventListener('DOMContentLoaded', () => {
   const scrollToTop = document.querySelector('.scroll-to-top');
   const themeToggle = document.getElementById('theme-toggle');
   const languageToggle = document.getElementById('language-toggle');
+  const languageDropdown = languageToggle?.closest('.dropdown');
+  const languageMenu = languageDropdown?.querySelector('.dropdown-menu');
   let scrollToTopVisible = false;
 
-  const BASE_URL = '/Chispi-Page'; // Cambiar si mueves la carpeta
+  const BASE_URL = '/Chispi-Page';
 
   // === MENÚ LATERAL ===
   if (menuToggle && closeMenuToggle && sidebarWrapper) {
+    const closeSidebar = () => {
+      sidebarWrapper.classList.remove('active');
+      closeMenuToggle.style.display = 'none';
+      menuToggle.style.display = 'flex';
+    };
+
     menuToggle.addEventListener('click', () => {
       sidebarWrapper.classList.add('active');
       menuToggle.style.display = 'none';
       closeMenuToggle.style.display = 'flex';
     });
 
-    closeMenuToggle.addEventListener('click', () => {
-      sidebarWrapper.classList.remove('active');
-      closeMenuToggle.style.display = 'none';
-      menuToggle.style.display = 'flex';
-    });
+    closeMenuToggle.addEventListener('click', closeSidebar);
 
     sidebarWrapper.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        sidebarWrapper.classList.remove('active');
-        closeMenuToggle.style.display = 'none';
-        menuToggle.style.display = 'flex';
-      });
+      link.addEventListener('click', closeSidebar);
+    });
+
+    // ✅ Cerrar menú al hacer clic fuera
+    document.addEventListener('click', (e) => {
+      const isClickInsideSidebar = sidebarWrapper.contains(e.target);
+      const isClickOnMenuToggle = menuToggle.contains(e.target);
+      const isSidebarOpen = sidebarWrapper.classList.contains('active');
+
+      if (!isClickInsideSidebar && !isClickOnMenuToggle && isSidebarOpen) {
+        closeSidebar();
+      }
+    });
+
+    // ✅ Cerrar menú con tecla Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && sidebarWrapper.classList.contains('active')) {
+        closeSidebar();
+      }
     });
   }
 
@@ -77,23 +95,29 @@ window.addEventListener('DOMContentLoaded', () => {
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
       html.setAttribute('data-theme', newTheme);
       updateImagesForTheme(newTheme);
-      loadParticles(newTheme); // ACTUALIZADO: cambiar partículas
+      loadParticles(newTheme);
     });
   }
 
   // === CAMBIO DE IDIOMA ===
-  if (languageToggle) {
-    languageToggle.addEventListener('click', () => {
-      const currentLang = html.getAttribute('lang') || 'es';
-      const newLang = currentLang === 'es' ? 'en' : 'es';
+  if (languageToggle && languageMenu) {
+    languageToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      languageMenu.classList.toggle('show');
+    });
 
-      const path = window.location.pathname.replace(BASE_URL, '');
-      const newPath = path.startsWith('/en/')
-        ? path.replace('/en/', '/')
-        : `/en${path}`;
+    // Cierra el menú si haces clic fuera
+    document.addEventListener('click', (e) => {
+      if (!languageDropdown.contains(e.target)) {
+        languageMenu.classList.remove('show');
+      }
+    });
 
-      html.setAttribute('lang', newLang);
-      window.location.href = `${window.location.origin}${BASE_URL}${newPath}`;
+    // Cierra el menú con Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        languageMenu.classList.remove('show');
+      }
     });
   }
 
@@ -111,7 +135,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const initialTheme = html.getAttribute('data-theme') || 'dark';
   html.setAttribute('data-theme', initialTheme);
   updateImagesForTheme(initialTheme);
-  loadParticles(initialTheme); // ACTUALIZADO: cargar al inicio
+  loadParticles(initialTheme);
 
   function updateImagesForTheme(theme) {
     const hero = document.querySelector('header.hero');
