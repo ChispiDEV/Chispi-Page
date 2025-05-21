@@ -41,6 +41,7 @@
   --summary-text: #1e4620;
   --tag-bg-default: #e6f4ea;
   --tag-text-default: #1e7e34;
+  --title-color: #222;
 
   /* Cajas decorativas */
   --box-sol-bg: #fff9c4; --box-sol-text: #665c00; --box-sol-border: #f4e19c;
@@ -91,6 +92,7 @@
   --summary-text: #cce8cc;
   --tag-bg-default: #214d30;
   --tag-text-default: #bfffc0;
+  --title-color: #f0f0f0;
 
   --box-sol-bg: #5f5e2e; --box-sol-text: #fffdd7; --box-sol-border: #888755;
   --box-mar-bg: #2d3a4d; --box-mar-text: #ddefff; --box-mar-border: #455a75;
@@ -534,22 +536,38 @@ footer a:hover {
   border-color: var(--box-fuego-border);
 }
 
-/* Cajitas de Skills*/
-
-.pastel-1 { background-color: #fef6e4; border-color: #f7e9d7; } /* amarillo claro */
-.pastel-2 { background-color: #e8f8f5; border-color: #d2f1eb; } /* azul agua */
-.pastel-3 { background-color: #fcefee; border-color: #f8dbe0; } /* rosa claro */
-.pastel-4 { background-color: #eef6fd; border-color: #d6e8fa; } /* azul pastel */
-.pastel-5 { background-color: #f2f9ed; border-color: #d8efcc; } /* verde claro */
-
-.pastel-box {
-  background-color: #fdf7ff; /* tono pastel base, lo puedes variar si quieres múltiples */
-  border: 1px solid #e7e7f5;
-  transition: background 0.3s ease;
+/* Títulos de sección adaptables */
+.section-title {
+  color: var(--title-color);
 }
 
-/* Tags de Skills*/
+/* Secciones generales de habilidades */
+.skill-section {
+  padding: 1rem 0;
+}
 
+/* Opcional: transición suave */
+.section-title {
+  transition: color 0.3s ease;
+}
+
+/* Estilo general de las cajas pastel */
+.pastel-box {
+  background-color: #fdf7ff;
+  border: 1px solid #e7e7f5;
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Variaciones por color */
+.pastel-1 { background-color: #fef6e4; border-color: #f7e9d7; }
+.pastel-2 { background-color: #e8f8f5; border-color: #d2f1eb; }
+.pastel-3 { background-color: #fcefee; border-color: #f8dbe0; }
+.pastel-4 { background-color: #eef6fd; border-color: #d6e8fa; }
+.pastel-5 { background-color: #f2f9ed; border-color: #d8efcc; }
+
+/* Tags de Skills*/
 .badge-img {
   height: 28px;
   border-radius: 6px;
