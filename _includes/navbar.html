@@ -5,7 +5,6 @@
     <div class="d-flex align-items-center gap-2">
       <a class="navbar-brand" href="{{ '/' | relative_url }}">Chispi Page</a>
 
-      <!-- Bandera de idioma actual -->
       {% if page.lang == 'es' %}
       <img src="{{ '/assets/icons/es-variant.svg' | relative_url }}"
            alt="Español"
@@ -16,26 +15,33 @@
            style="width: 20px; height: 20px; border-radius: 50%;">
       {% endif %}
     </div>
-    
+
     <!-- Botones: Idioma, Tema, Menú -->
     <div class="d-flex align-items-center gap-2">
 
       <!-- Menú desplegable de idiomas -->
       <div class="dropdown" id="language-dropdown">
-        <button class="icon-button" 
-                id="language-toggle" 
-                type="button" 
-                aria-label="Cambiar idioma" 
+        <button class="icon-button"
+                id="language-toggle"
+                type="button"
+                aria-label="Cambiar idioma"
                 title="Cambiar idioma">
         </button>
-        
-        {% assign base_url = page.url | replace_first:'/en','' %}
+
+        {% comment %}
+        Creamos una versión "base" del URL actual sin el prefijo '/en' (si lo tiene)
+        Esto permite generar el path correcto en español que va en la raíz
+        {% endcomment %}
+        {% assign base_url = page.url | remove_first: '/en' %}
 
         <div class="dropdown-menu">
-          <a href="{{ page.url | relative_url }}" class="dropdown-item {% if page.lang == 'es' %}active{% endif %}">
+          <!-- Versión en español (raíz del sitio) -->
+          <a href="{{ base_url | relative_url }}" class="dropdown-item {% if page.lang == 'es' %}active{% endif %}">
             <img src="{{ '/assets/icons/es-variant.svg' | relative_url }}" alt="Español" class="flag-icon"> Español
           </a>
-          <a href="{{ '/en' | append: page.url | relative_url }}" class="dropdown-item {% if page.lang == 'en' %}active{% endif %}">
+
+          <!-- Versión en inglés (prefijo /en/) -->
+          <a href="{{ '/en' | append: base_url | relative_url }}" class="dropdown-item {% if page.lang == 'en' %}active{% endif %}">
             <img src="{{ '/assets/icons/gb.svg' | relative_url }}" alt="English" class="flag-icon"> English
           </a>
         </div>
