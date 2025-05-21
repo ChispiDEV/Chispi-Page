@@ -34,7 +34,7 @@
       logo: python
       color: 43BCCD
     - name: scikit-learn
-      logo: scikitlearn
+      logo: scikit-learn
       color: F7931E
     - name: Pytest
       logo: python

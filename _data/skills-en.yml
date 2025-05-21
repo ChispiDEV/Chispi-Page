@@ -29,7 +29,7 @@
     - name: Seaborn
       color: 3D506F
     - name: scikit-learn
-      logo: scikitlearn
+      logo: scikit-learn
       color: F7931E
     - name: Pytest
       color: 0A9EDC
