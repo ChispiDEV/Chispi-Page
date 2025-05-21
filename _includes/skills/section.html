@@ -1,23 +1,20 @@
 {% assign pastel_classes = "pastel-1,pastel-2,pastel-3,pastel-4,pastel-5" | split: "," %}
 {% assign pastel_index = 0 %}
 
-{% for section in site.data.skills %}
 <div class="mb-5">
-    <h3 class="h4 fw-bold border-bottom pb-2 mb-4 text-secondary">{{ section.section }}</h3>
+    <h3 class="h4 fw-bold border-bottom pb-2 mb-4 text-secondary">{{ include.section.section }}</h3>
 
-    {% if section.items %}
+    {% if include.section.items %}
     {% assign pastel_class = pastel_classes[pastel_index] %}
-    {% include skills/category.html items=section.items class=pastel_class %}
+    {% include skills/category.html items=include.section.items class=pastel_class %}
     {% assign pastel_index = pastel_index | plus: 1 %}
     {% endif %}
 
-    {% if section.subsections %}
-    {% for category in section.subsections %}
+    {% if include.section.subsections %}
+    {% for category in include.section.subsections %}
     {% assign pastel_class = pastel_classes[pastel_index] %}
     {% include skills/category.html items=category.items title=category.name class=pastel_class %}
     {% assign pastel_index = pastel_index | plus: 1 %}
     {% endfor %}
     {% endif %}
 </div>
-{% endfor %}
-
