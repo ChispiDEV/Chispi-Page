@@ -3,7 +3,9 @@ Renderiza una sección con título y contenido arbitrario.
 Parámetros:
 - title: título de la sección
 - class: clases opcionales para el wrapper
-- content: contenido interno si se pasa como include.variable
+- content: contenido HTML directo (texto o tags)
+- content_include: nombre del include a renderizar como contenido (opcional)
+- content_data: datos para pasar al include (opcional, por ejemplo una lista)
 {%- endcomment -%}
 
 <section class="mb-6 {{ include.class }}">
@@ -11,6 +13,10 @@ Parámetros:
     <h3 class="text-2xl font-semibold mb-4 text-verde-1">{{ include.title }}</h3>
     {% endif %}
     <div class="section-content">
+        {% if include.content %}
         {{ include.content }}
+        {% elsif include.content_include %}
+        {% include {{ include.content_include }} stack=include.content_data %}
+        {% endif %}
     </div>
 </section>

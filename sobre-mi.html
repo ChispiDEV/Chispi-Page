@@ -73,15 +73,13 @@ subtitle: "Desarrolladora | Diseñadora | Analista de Datos"
       <!-- 🖥️ Tecnologías principales -->
       <div class="col-12 col-md-6">
         <div class="box box-mar">
-          {% capture tech_block %}
-            {% assign tech_stack = site.data.skills_tech_main %}
-            {% include components/stack.html stack=tech_stack %}
-          {% endcapture %}
-
           {% include components/section.html
             title="🖥️ Tecnologías principales"
-            content=tech_block
+            content_include="components/stack.html"
+            content_data=site.data.skills_tech_main
           %}
+        </div>
+
         </div>
       </div>
 
