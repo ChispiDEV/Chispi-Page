@@ -14,18 +14,63 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // === MENÚ LATERAL ===
   if (menuToggle && closeMenuToggle && sidebarWrapper) {
+    // Asegurarse que sidebar puede recibir foco para accesibilidad
+    if (!sidebarWrapper.hasAttribute('tabindex')) {
+      sidebarWrapper.setAttribute('tabindex', '-1');
+    }
+
+    // Inicializa aria-expanded y aria-labels para accesibilidad
+    menuToggle.setAttribute('aria-controls', 'sidebar-wrapper');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.setAttribute('aria-label', 'Abrir menú lateral');
+    closeMenuToggle.setAttribute('aria-label', 'Cerrar menú lateral');
+
     const closeSidebar = () => {
       sidebarWrapper.classList.remove('active');
+      sidebarWrapper.setAttribute('aria-hidden', 'true');
       closeMenuToggle.style.display = 'none';
       menuToggle.style.display = 'flex';
+      menuToggle.setAttribute('aria-expanded', 'false');
       menuToggle.focus();
+
+      // Remover focus trap
+      sidebarWrapper.removeEventListener('keydown', trapFocus);
+    };
+
+    const trapFocus = (e) => {
+      if (e.key === 'Tab') {
+        const focusableElements = sidebarWrapper.querySelectorAll(
+            'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])'
+        );
+        const firstFocusable = focusableElements[0];
+        const lastFocusable = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey) {
+          // Shift + Tab
+          if (document.activeElement === firstFocusable) {
+            e.preventDefault();
+            lastFocusable.focus();
+          }
+        } else {
+          // Tab
+          if (document.activeElement === lastFocusable) {
+            e.preventDefault();
+            firstFocusable.focus();
+          }
+        }
+      }
     };
 
     menuToggle.addEventListener('click', () => {
       sidebarWrapper.classList.add('active');
+      sidebarWrapper.setAttribute('aria-hidden', 'false');
       menuToggle.style.display = 'none';
       closeMenuToggle.style.display = 'flex';
+      menuToggle.setAttribute('aria-expanded', 'true');
       sidebarWrapper.focus();
+
+      // Añadir focus trap
+      sidebarWrapper.addEventListener('keydown', trapFocus);
     });
 
     closeMenuToggle.addEventListener('click', closeSidebar);
@@ -100,26 +145,50 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   // === CAMBIO DE IDIOMA ===
-  if (languageToggle && languageMenu) {
+  if (languageToggle && languageMenu && languageDropdown) {
+    languageToggle.setAttribute('aria-haspopup', 'true');
+    languageToggle.setAttribute('aria-expanded', 'false');
+
     languageToggle.addEventListener('click', (e) => {
       e.stopPropagation();
-      languageMenu.classList.toggle('show');
+      const expanded = languageMenu.classList.toggle('show');
+      languageToggle.setAttribute('aria-expanded', expanded);
+
       const first = languageMenu.querySelector('a, button');
-      if (first && languageMenu.classList.contains('show')) first.focus();
+      if (first && expanded) first.focus();
     });
 
     document.addEventListener('click', (e) => {
       if (!languageDropdown.contains(e.target)) {
         languageMenu.classList.remove('show');
+        languageToggle.setAttribute('aria-expanded', 'false');
       }
     });
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
+      if (e.key === 'Escape' && languageMenu.classList.contains('show')) {
         languageMenu.classList.remove('show');
+        languageToggle.setAttribute('aria-expanded', 'false');
+        languageToggle.focus();
+      }
+    });
+
+    languageMenu.addEventListener('keydown', (e) => {
+      const items = [...languageMenu.querySelectorAll('a, button')];
+      const i = items.indexOf(document.activeElement);
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        items[(i + 1) % items.length]?.focus();
+      }
+
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        items[(i - 1 + items.length) % items.length]?.focus();
       }
     });
   }
+
 
   // === CARGAR PARTICULAS SEGÚN TEMA ===
   function loadParticles(theme) {
