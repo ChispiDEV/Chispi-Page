@@ -21,9 +21,11 @@
 
       <!-- Menú desplegable de idiomas -->
       <div class="dropdown" id="language-dropdown">
-        <button class="icon-button"
+        <button class="icon-button dropdown-toggle"
                 id="language-toggle"
                 type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
                 aria-label="Cambiar idioma"
                 title="Cambiar idioma">
         </button>
@@ -34,17 +36,18 @@
         {% endcomment %}
         {% assign base_url = page.url | remove_first: '/en' %}
 
-        <div class="dropdown-menu">
-          <!-- Versión en español (raíz del sitio) -->
-          <a href="{{ base_url | relative_url }}" class="dropdown-item {% if page.lang == 'es' %}active{% endif %}">
-            <img src="{{ '/assets/icons/es-variant.svg' | relative_url }}" alt="Español" class="flag-icon"> Español
-          </a>
-
-          <!-- Versión en inglés (prefijo /en/) -->
-          <a href="{{ '/en' | append: base_url | relative_url }}" class="dropdown-item {% if page.lang == 'en' %}active{% endif %}">
-            <img src="{{ '/assets/icons/gb.svg' | relative_url }}" alt="English" class="flag-icon"> English
-          </a>
-        </div>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="language-toggle">
+          <li>
+            <a href="{{ base_url | relative_url }}" class="dropdown-item {% if page.lang == 'es' %}active{% endif %}">
+              <img src="{{ '/assets/icons/es-variant.svg' | relative_url }}" alt="Español" class="flag-icon me-2" style="width:16px; height:16px;"> Español
+            </a>
+          </li>
+          <li>
+            <a href="{{ '/en' | append: base_url | relative_url }}" class="dropdown-item {% if page.lang == 'en' %}active{% endif %}">
+              <img src="{{ '/assets/icons/gb.svg' | relative_url }}" alt="English" class="flag-icon me-2" style="width:16px; height:16px;"> English
+            </a>
+          </li>
+        </ul>
       </div>
 
       <button class="icon-button" id="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema"></button>
@@ -54,8 +57,8 @@
 </nav>
 
 <!-- Menú lateral -->
-<div id="sidebar-wrapper">
-  <ul class="sidebar-nav">
+<div id="sidebar-wrapper" class="sidebar d-none">
+  <ul class="sidebar-nav list-unstyled" role="menu">
     {% if page.lang == "es" %}
       <li><a href="{{ '/' | relative_url }}">Inicio</a></li>
       <li><a href="{{ '/sobre-mi.html' | relative_url }}">Sobre mí</a></li>
