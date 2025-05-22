@@ -79,7 +79,7 @@ pagination:
         
             <p class="post-meta">
               Publicado el 
-              {{ post.date | date: '%d de %B, %Y' }} · {% include read_time.html content=post.content %}
+              {{ post.date | date: '%d de %B, %Y' }} · {% include layout/read_time.html content=post.content %}
             </p>
           </div>
         </article>      
