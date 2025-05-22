@@ -116,6 +116,20 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
+.overlay {
+  background: var(--overlay-bg);
+}
+
+/* === Partículas === */
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+}
+
 /* ============================
    🏞️ 4. Sección Hero
    ============================ */
@@ -129,6 +143,7 @@ body {
   min-height: 100vh;
   padding-top: 4rem;
   color: var(--text-color);
+  background-repeat: no-repeat;
 }
 
 .hero-section {
@@ -136,6 +151,11 @@ body {
   border-radius: 1rem;
   padding: 2rem;
   transition: background-color 0.3s ease;
+  color: var(--text-color);
+}
+
+.hero-section .btn {
+  min-width: 160px;
 }
 
 .hero-box {
@@ -170,12 +190,17 @@ body.theme-dark .hero-box {
   transition: color 0.3s;
 }
 
+.text-verde-1 {
+  color: var(--btn-verde-1);
+}
+
 /* ============================
    🧭 6. Navegación y Navbar
    ============================ */
 
 #navbar {
   background-color: var(--navbar-bg);
+  color: var(--text-color);
   border-bottom: 1px solid var(--navbar-border);
   transition: background-color 0.3s, border-bottom 0.3s;
 }
@@ -183,7 +208,7 @@ body.theme-dark .hero-box {
 .navbar-brand {
   color: var(--text-color);
   text-decoration: none;
-  transition: color 0.3s;
+  transition: color 0.3s ease;
 }
 
 .navbar-brand:hover {
@@ -207,9 +232,11 @@ footer small,
 footer a {
   color: var(--muted-text);
   transition: color 0.3s ease, opacity 0.2s ease;
+  margin: 0 0.5rem;
 }
 
-footer a:hover {
+footer a:hover,
+footer a:focus {
   opacity: 0.8;
 }
 
@@ -271,11 +298,26 @@ footer a:hover {
   color: var(--btn-text-color);
   font-size: 20px;
   cursor: pointer;
+  position: relative;
+  z-index: 1100;
   transition: background-color 0.3s, color 0.3s;
 }
 
 .icon-button:hover {
   background-color: var(--btn-verde-2);
+}
+
+#close-menu-toggle {
+  background-color: var(--btn-rojo-1);
+  color: var(--btn-text-color);
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 11000;
+}
+
+#close-menu-toggle:hover {
+  background-color: var(--btn-rojo-2);
 }
 
 /* === Iconos personalizados === */
@@ -308,6 +350,12 @@ footer a:hover {
   opacity: 0;
   z-index: 1100;
   transition: opacity 0.3s;
+}
+
+.scroll-to-top::before {
+  content: "\f106"; /* flecha arriba */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
 }
 
 .scroll-to-top:hover {
@@ -404,6 +452,7 @@ footer a:hover {
   transition: background-color 0.3s, color 0.3s;
 }
 
+/* Etiquetas con color automático */
 .tag-badge {
   display: inline-block;
   padding: 0.3em 0.6em;
@@ -426,6 +475,12 @@ footer a:hover {
   display: inline-block;
 }
 
+.dropdown-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
 /* === Menú desplegable === */
 .dropdown-menu {
   display: none;
@@ -440,6 +495,10 @@ footer a:hover {
   border-radius: 0.5rem;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   transition: opacity 0.3s ease;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
 }
 
 /* Se muestra cuando tiene la clase .show */
