@@ -51,6 +51,7 @@
       <li>
         <strong>📅 Publicado:</strong>
         {{ page.date | date: '%d de %B, %Y' }} ·
+        {% include components/stack.html %}
         {% include layout/read_time.html content=content %}
       </li>
 
