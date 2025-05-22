@@ -47,9 +47,11 @@
 
       <!-- Menú desplegable de idiomas -->
       <div class="dropdown" id="language-dropdown">
-        <button class="icon-button"
+        <button class="icon-button dropdown-toggle"
                 id="language-toggle"
                 type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
                 aria-label="Cambiar idioma"
                 title="Cambiar idioma">
         </button>
@@ -57,17 +59,18 @@
         
         
 
-        <div class="dropdown-menu">
-          <!-- Versión en español (raíz del sitio) -->
-          <a href="/Chispi-Page/" class="dropdown-item ">
-            <img src="/Chispi-Page/assets/icons/es-variant.svg" alt="Español" class="flag-icon"> Español
-          </a>
-
-          <!-- Versión en inglés (prefijo /en/) -->
-          <a href="/Chispi-Page/en/" class="dropdown-item active">
-            <img src="/Chispi-Page/assets/icons/gb.svg" alt="English" class="flag-icon"> English
-          </a>
-        </div>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="language-toggle">
+          <li>
+            <a href="/Chispi-Page/" class="dropdown-item ">
+              <img src="/Chispi-Page/assets/icons/es-variant.svg" alt="Español" class="flag-icon me-2" style="width:16px; height:16px;"> Español
+            </a>
+          </li>
+          <li>
+            <a href="/Chispi-Page/en/" class="dropdown-item active">
+              <img src="/Chispi-Page/assets/icons/gb.svg" alt="English" class="flag-icon me-2" style="width:16px; height:16px;"> English
+            </a>
+          </li>
+        </ul>
       </div>
 
       <button class="icon-button" id="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema"></button>
@@ -77,8 +80,8 @@
 </nav>
 
 <!-- Menú lateral -->
-<div id="sidebar-wrapper">
-  <ul class="sidebar-nav">
+<div id="sidebar-wrapper" class="sidebar d-none">
+  <ul class="sidebar-nav list-unstyled" role="menu">
     
     <li><a href="/Chispi-Page/en">Home</a></li>
     <li><a href="/Chispi-Page/en/sobre-mi.html">About Me</a></li>
