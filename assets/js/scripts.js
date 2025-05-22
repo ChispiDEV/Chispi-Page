@@ -18,7 +18,6 @@ window.addEventListener('DOMContentLoaded', () => {
       sidebarWrapper.classList.remove('active');
       closeMenuToggle.style.display = 'none';
       menuToggle.style.display = 'flex';
-      // Opcional: quitar focus para accesibilidad
       menuToggle.focus();
     };
 
@@ -26,7 +25,6 @@ window.addEventListener('DOMContentLoaded', () => {
       sidebarWrapper.classList.add('active');
       menuToggle.style.display = 'none';
       closeMenuToggle.style.display = 'flex';
-      // Opcional: mover focus al sidebar
       sidebarWrapper.focus();
     });
 
@@ -36,18 +34,13 @@ window.addEventListener('DOMContentLoaded', () => {
       link.addEventListener('click', closeSidebar);
     });
 
-    // ✅ Cerrar menú al hacer clic fuera
     document.addEventListener('click', (e) => {
-      const isClickInsideSidebar = sidebarWrapper.contains(e.target);
-      const isClickOnMenuToggle = menuToggle.contains(e.target);
-      const isSidebarOpen = sidebarWrapper.classList.contains('active');
-
-      if (!isClickInsideSidebar && !isClickOnMenuToggle && isSidebarOpen) {
-        closeSidebar();
-      }
+      const isClickInside = sidebarWrapper.contains(e.target);
+      const isClickToggle = menuToggle.contains(e.target);
+      const isOpen = sidebarWrapper.classList.contains('active');
+      if (!isClickInside && !isClickToggle && isOpen) closeSidebar();
     });
 
-    // ✅ Cerrar menú con tecla Escape
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && sidebarWrapper.classList.contains('active')) {
         closeSidebar();
@@ -70,22 +63,22 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  function fadeIn(element) {
-    element.style.display = 'flex';
-    element.style.opacity = 0;
+  function fadeIn(el) {
+    el.style.display = 'flex';
+    el.style.opacity = 0;
     (function fade() {
-      let val = parseFloat(element.style.opacity);
+      let val = parseFloat(el.style.opacity);
       if (!((val += 0.1) > 1)) {
-        element.style.opacity = val;
+        el.style.opacity = val;
         requestAnimationFrame(fade);
       }
     })();
   }
 
-  function fadeOut(element) {
+  function fadeOut(el) {
     (function fade() {
-      if ((element.style.opacity -= 0.1) < 0) {
-        element.style.display = 'none';
+      if ((el.style.opacity -= 0.1) < 0) {
+        el.style.display = 'none';
       } else {
         requestAnimationFrame(fade);
       }
@@ -95,14 +88,13 @@ window.addEventListener('DOMContentLoaded', () => {
   // === CAMBIO DE TEMA ===
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
-      const currentTheme = html.getAttribute('data-theme') || 'light';
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', newTheme);
-      updateImagesForTheme(newTheme);
-      loadParticles(newTheme);
-      // Opcional: guarda la preferencia en localStorage
+      const current = html.getAttribute('data-theme') || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      updateImagesForTheme(next);
+      loadParticles(next);
       try {
-        localStorage.setItem('theme', newTheme);
+        localStorage.setItem('theme', next);
       } catch {}
     });
   }
@@ -112,21 +104,16 @@ window.addEventListener('DOMContentLoaded', () => {
     languageToggle.addEventListener('click', (e) => {
       e.stopPropagation();
       languageMenu.classList.toggle('show');
-      // Opcional: enfocar primer item para accesibilidad
-      if (languageMenu.classList.contains('show')) {
-        const firstItem = languageMenu.querySelector('a, button');
-        if (firstItem) firstItem.focus();
-      }
+      const first = languageMenu.querySelector('a, button');
+      if (first && languageMenu.classList.contains('show')) first.focus();
     });
 
-    // Cierra el menú si haces clic fuera
     document.addEventListener('click', (e) => {
       if (!languageDropdown.contains(e.target)) {
         languageMenu.classList.remove('show');
       }
     });
 
-    // Cierra el menú con Escape
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         languageMenu.classList.remove('show');
@@ -134,7 +121,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // === CAMBIAR PARTICULAS SEGÚN EL TEMA ===
+  // === CARGAR PARTICULAS SEGÚN TEMA ===
   function loadParticles(theme) {
     const configFile = theme === 'dark' ? 'particles-dark.json' : 'particles-light.json';
     if (window.pJSDom && window.pJSDom.length > 0) {
@@ -144,55 +131,48 @@ window.addEventListener('DOMContentLoaded', () => {
     particlesJS.load('particles-js', `${BASE_URL}/assets/particles/${configFile}`);
   }
 
-  // === ACTUALIZAR IMÁGENES SEGÚN TEMA ===
+  // === ACTUALIZAR IMÁGENES Y FONDOS ===
   function updateImagesForTheme(theme) {
-    // Hero dinámico (header con data-img-dark/light)
     const heroHeader = document.querySelector('header.hero');
-    if (heroHeader && heroHeader.dataset.imgDark && heroHeader.dataset.imgLight) {
+    if (heroHeader?.dataset.imgDark && heroHeader?.dataset.imgLight) {
+      heroHeader.style.transition = 'background-image 0.5s ease-in-out';
       heroHeader.style.backgroundImage = `url('${theme === 'dark' ? heroHeader.dataset.imgDark : heroHeader.dataset.imgLight}')`;
     }
 
-    // Hero post (con clase .post-hero-image)
     const heroPost = document.querySelector('.post-hero-image');
-    if (heroPost && heroPost.dataset.bgDark && heroPost.dataset.bgLight) {
+    if (heroPost?.dataset.bgDark && heroPost?.dataset.bgLight) {
+      heroPost.style.transition = 'background-image 0.5s ease-in-out';
       heroPost.style.backgroundImage = `url('${theme === 'dark' ? heroPost.dataset.bgDark : heroPost.dataset.bgLight}')`;
     }
 
-    // Imágenes con data-img-dark & data-img-light (cambiar src)
-    const themeImages = document.querySelectorAll('[data-img-dark][data-img-light]');
-    themeImages.forEach(img => {
+    const themeImgs = document.querySelectorAll('[data-img-dark][data-img-light]');
+    themeImgs.forEach(img => {
       if (img.tagName === 'IMG') {
-        img.src = theme === 'dark' ? img.dataset.imgDark : img.dataset.imgLight;
+        img.style.transition = 'opacity 0.5s ease-in-out';
+        img.style.opacity = 0;
+        setTimeout(() => {
+          img.src = theme === 'dark' ? img.dataset.imgDark : img.dataset.imgLight;
+          img.style.opacity = 1;
+        }, 200);
       }
     });
 
-    // También actualizar fondo para divs que usen data-bg-dark y data-bg-light
-    const bgImages = document.querySelectorAll('[data-bg-dark][data-bg-light]');
-    bgImages.forEach(el => {
-      // Evita reescribir el hero post ya manejado arriba
+    const bgImgs = document.querySelectorAll('[data-bg-dark][data-bg-light]');
+    bgImgs.forEach(el => {
       if (!el.classList.contains('post-hero-image')) {
+        el.style.transition = 'background-image 0.5s ease-in-out';
         el.style.backgroundImage = `url('${theme === 'dark' ? el.dataset.bgDark : el.dataset.bgLight}')`;
       }
     });
   }
 
-    // También actualizar fondo para divs que usen data-bg-dark y data-bg-light
-    const bgImages = document.querySelectorAll('[data-bg-dark][data-bg-light]');
-    bgImages.forEach(el => {
-      el.style.backgroundImage = `url('${theme === 'dark' ? el.dataset.bgDark : el.dataset.bgLight}')`;
-    });
-  }
-
-
   // === INICIALIZACIÓN ===
-  // Carga preferencia guardada o fallback a dark
   let initialTheme = 'dark';
   try {
-    const storedTheme = localStorage.getItem('theme');
-    if (storedTheme === 'light' || storedTheme === 'dark') initialTheme = storedTheme;
+    const stored = localStorage.getItem('theme');
+    if (stored === 'light' || stored === 'dark') initialTheme = stored;
   } catch {}
-  
   html.setAttribute('data-theme', initialTheme);
   updateImagesForTheme(initialTheme);
   loadParticles(initialTheme);
-
+});
