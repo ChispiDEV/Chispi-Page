@@ -18,12 +18,16 @@ window.addEventListener('DOMContentLoaded', () => {
       sidebarWrapper.classList.remove('active');
       closeMenuToggle.style.display = 'none';
       menuToggle.style.display = 'flex';
+      // Opcional: quitar focus para accesibilidad
+      menuToggle.focus();
     };
 
     menuToggle.addEventListener('click', () => {
       sidebarWrapper.classList.add('active');
       menuToggle.style.display = 'none';
       closeMenuToggle.style.display = 'flex';
+      // Opcional: mover focus al sidebar
+      sidebarWrapper.focus();
     });
 
     closeMenuToggle.addEventListener('click', closeSidebar);
@@ -96,6 +100,10 @@ window.addEventListener('DOMContentLoaded', () => {
       html.setAttribute('data-theme', newTheme);
       updateImagesForTheme(newTheme);
       loadParticles(newTheme);
+      // Opcional: guarda la preferencia en localStorage
+      try {
+        localStorage.setItem('theme', newTheme);
+      } catch {}
     });
   }
 
@@ -104,6 +112,11 @@ window.addEventListener('DOMContentLoaded', () => {
     languageToggle.addEventListener('click', (e) => {
       e.stopPropagation();
       languageMenu.classList.toggle('show');
+      // Opcional: enfocar primer item para accesibilidad
+      if (languageMenu.classList.contains('show')) {
+        const firstItem = languageMenu.querySelector('a, button');
+        if (firstItem) firstItem.focus();
+      }
     });
 
     // Cierra el menú si haces clic fuera
@@ -131,23 +144,55 @@ window.addEventListener('DOMContentLoaded', () => {
     particlesJS.load('particles-js', `${BASE_URL}/assets/particles/${configFile}`);
   }
 
-  // === INICIALIZACIÓN ===
-  const initialTheme = html.getAttribute('data-theme') || 'dark';
-  html.setAttribute('data-theme', initialTheme);
-  updateImagesForTheme(initialTheme);
-  loadParticles(initialTheme);
-
+  // === ACTUALIZAR IMÁGENES SEGÚN TEMA ===
   function updateImagesForTheme(theme) {
-    const hero = document.querySelector('header.hero');
-    if (hero && hero.dataset.imgDark && hero.dataset.imgLight) {
-      hero.style.backgroundImage = `url('${theme === 'dark' ? hero.dataset.imgDark : hero.dataset.imgLight}')`;
+    // Hero dinámico (header con data-img-dark/light)
+    const heroHeader = document.querySelector('header.hero');
+    if (heroHeader && heroHeader.dataset.imgDark && heroHeader.dataset.imgLight) {
+      heroHeader.style.backgroundImage = `url('${theme === 'dark' ? heroHeader.dataset.imgDark : heroHeader.dataset.imgLight}')`;
     }
 
+    // Hero post (con clase .post-hero-image)
+    const heroPost = document.querySelector('.post-hero-image');
+    if (heroPost && heroPost.dataset.bgDark && heroPost.dataset.bgLight) {
+      heroPost.style.backgroundImage = `url('${theme === 'dark' ? heroPost.dataset.bgDark : heroPost.dataset.bgLight}')`;
+    }
+
+    // Imágenes con data-img-dark & data-img-light (cambiar src)
     const themeImages = document.querySelectorAll('[data-img-dark][data-img-light]');
     themeImages.forEach(img => {
       if (img.tagName === 'IMG') {
         img.src = theme === 'dark' ? img.dataset.imgDark : img.dataset.imgLight;
       }
     });
+
+    // También actualizar fondo para divs que usen data-bg-dark y data-bg-light
+    const bgImages = document.querySelectorAll('[data-bg-dark][data-bg-light]');
+    bgImages.forEach(el => {
+      // Evita reescribir el hero post ya manejado arriba
+      if (!el.classList.contains('post-hero-image')) {
+        el.style.backgroundImage = `url('${theme === 'dark' ? el.dataset.bgDark : el.dataset.bgLight}')`;
+      }
+    });
   }
-});
+
+    // También actualizar fondo para divs que usen data-bg-dark y data-bg-light
+    const bgImages = document.querySelectorAll('[data-bg-dark][data-bg-light]');
+    bgImages.forEach(el => {
+      el.style.backgroundImage = `url('${theme === 'dark' ? el.dataset.bgDark : el.dataset.bgLight}')`;
+    });
+  }
+
+
+  // === INICIALIZACIÓN ===
+  // Carga preferencia guardada o fallback a dark
+  let initialTheme = 'dark';
+  try {
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme === 'light' || storedTheme === 'dark') initialTheme = storedTheme;
+  } catch {}
+  
+  html.setAttribute('data-theme', initialTheme);
+  updateImagesForTheme(initialTheme);
+  loadParticles(initialTheme);
+

@@ -1,0 +1,14 @@
+{%- comment -%}
+Muestra subsecciones de habilidades (por ejemplo "Deseo aprender").
+Espera:
+- include.subsections: lista de objetos con name + items
+- Usa stack.html para cada lista de items
+{%- endcomment -%}
+
+{% for sub in include.subsections %}
+<div class="mb-4">
+    <h4 class="fw-semibold text-verde-1 mb-2">{{ sub.name }}</h4>
+    {% include skills/stack.html stack=sub.items %}
+</div>
+{% endfor %}
+

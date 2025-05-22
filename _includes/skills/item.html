@@ -1,0 +1,8 @@
+<!-- skills/item.html -->
+<div class="skill-item d-flex align-items-center gap-2 rounded px-2 py-1 text-white small fw-medium shadow-sm"
+     style="background-color: #{{ include.color }};">
+    {% if include.logo %}
+    <i class="devicon-{{ include.logo | downcase }}-plain"></i>
+    {% endif %}
+    <span>{{ include.name }}</span>
+</div>

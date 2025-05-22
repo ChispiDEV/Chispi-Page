@@ -1,27 +1,24 @@
-{% assign pastel_classes = "pastel-1,pastel-2,pastel-3,pastel-4,pastel-5" | split: "," %}
-{% assign pastel_index = 0 %}
+<!-- skills/section.html -->
 
-<section class="skill-section mb-5">
-    <!-- Título adaptable -->
-    <h3 class="section-title h4 fw-bold border-bottom pb-2 mb-4">{{ include.section.section }}</h3>
+{% assign pastel_classes = "pastel-1,pastel-2,pastel-3,pastel-4,pastel-5,pastel-6" | split: "," %}
+{% assign pastel_index = forloop.index0 | default: 0 %}
+{% assign pastel_class = pastel_classes[pastel_index] %}
+
+<section class="box {{ pastel_class }} p-4 rounded mb-4 shadow-sm">
+    <h3 class="h5 fw-bold mb-3">{{ include.section.section }}</h3>
 
     {% if include.section.items %}
-    {% assign pastel_class = pastel_classes[pastel_index] %}
-    <div class="mb-4">
-        {% include skills/category.html items=include.section.items class=pastel_class %}
-    </div>
-    {% assign pastel_index = pastel_index | plus: 1 %}
+    {% include skills/category.html items=include.section.items %}
     {% endif %}
 
     {% if include.section.subsections %}
-    <div class="row g-4">
+    <div class="d-flex flex-column gap-3">
         {% for category in include.section.subsections %}
-        {% assign pastel_class = pastel_classes[pastel_index] %}
-        <div class="col-12">
-            {% include skills/category.html items=category.items title=category.name class=pastel_class %}
-        </div>
-        {% assign pastel_index = pastel_index | plus: 1 %}
+        {% include skills/category.html
+        title=category.name
+        items=category.items %}
         {% endfor %}
     </div>
     {% endif %}
 </section>
+

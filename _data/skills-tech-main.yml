@@ -1,0 +1,7 @@
+- name: Python
+  color: 3776AB
+  logo: python
+
+- name: LaTeX
+  color: 008080
+  logo: latex

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="dark">
+<html lang="{{ page.lang | default: site.default_lang }}" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +10,7 @@
     <script src="https://kit.fontawesome.com/98ca02228e.js" crossorigin="anonymous"></script>
 
     <!-- Favicon (opcional) -->
-    <link rel="icon" href="{{ '/assets/img/favicon.ico' | relative_url }}" type="image/x-icon">
+    <link rel="icon" href="{{ '/assets/icons/favicon.ico' | relative_url }}" type="image/x-icon">
 
     <!-- Estilos CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -28,24 +28,27 @@
 
 <body>
     <!-- Navbar -->
-    {% include navbar.html %}
+    {% include layout/navbar.html %}
 
     <!-- Cabecera de cada página -->
-    {% unless page.hide_header %}
-      {% include header.html %}
-    {% endunless %}
+    {% if page.hero %}
+        {% include components/hero-header.html %}
+    {% elsif page.show_header != false %}
+        {% include layout/header.html %}
+    {% endif %}
+
 
     <!-- Contenido dinámico -->
-    {% if page.hide_header %}
-      {{ content }}
-    {% else %}
-      <main class="container mt-5 pt-5">
+    {% if page.hero %}
         {{ content }}
-      </main>
+    {% else %}
+        <main class="container mt-5 pt-5">
+            {{ content }}
+        </main>
     {% endif %}
 
     <!-- Footer -->
-    {% include footer.html %}
+    {% include layout/footer.html %}
 
       <!-- Botón de Scroll-To-Top -->
       <button class="scroll-to-top icon-button" 

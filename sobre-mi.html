@@ -19,7 +19,7 @@ subtitle: "Desarrolladora | Diseñadora | Analista de Datos"
       <p class="text-lg text-gray-600 dark:text-gray-300 mt-2">👋 Soy Cristina — o Chispi, como me conocen muchos colegas. ¡Gracias por visitar mi página!</p>
     </div>
 
-    <!-- Contenido -->
+    <!-- Biografía y bootcamp -->
     <div class="row g-4 text-left text-lg leading-relaxed">
 
       <div class="col-12 col-md-6">
@@ -50,54 +50,68 @@ subtitle: "Desarrolladora | Diseñadora | Analista de Datos"
         </div>
       </div>
 
+      <!-- 🔧 Habilidades -->
       <div class="col-12">
         <div class="box box-hoja">
           <h3 class="text-2xl font-semibold mb-4">🔧 Habilidades</h3>
 
           <!-- Grid de secciones: 1 columna móvil, 2 en tablet, 3 en escritorio -->
           <div class="row g-4">
-            {% for section in site.data.skills-en %}
+            {% for section in site.data.skills %}
             <div class="col-12 col-md-6 col-lg-4">
-              {% include skills/section.html section=section %}
+              {% if section.subsections %}
+                {% include skills/subsection.html subsections=section.subsections %}
+              {% else %}
+                {% include skills/section.html section=section %}
+              {% endif %}
             </div>
             {% endfor %}
           </div>
-
         </div>
       </div>
 
-
+      <!-- 🖥️ Tecnologías principales -->
       <div class="col-12 col-md-6">
         <div class="box box-mar">
-          <h3 class="text-2xl font-semibold mb-4">🖥️ Tecnologías principales</h3>
-          <div class="flex flex-wrap gap-3">
-            <img src="https://img.shields.io/badge/-Python-3776AB?logo=python&logoColor=white" alt="Python">
-            <img src="https://img.shields.io/badge/-LaTeX-008080?logo=latex&logoColor=white" alt="LaTeX">
-          </div>
+          {% capture tech_block %}
+            {% assign tech_stack = site.data.skills_tech_main %}
+            {% include components/stack.html stack=tech_stack %}
+          {% endcapture %}
+
+          {% include components/section.html
+            title="🖥️ Tecnologías principales"
+            content=tech_block
+          %}
         </div>
       </div>
 
+      <!-- 🔥 Qué estoy haciendo -->
       <div class="col-12 col-md-6">
         <div class="box box-cielo">
-          <h3 class="text-2xl font-semibold mb-4">🔥 ¿Qué estoy haciendo ahora?</h3>
-          <ul class="list-disc list-inside mt-3 pl-2">
+          {% include components/section.html
+           title="🔥 ¿Qué estoy haciendo ahora?"
+           content="<ul class='list-disc list-inside mt-3 pl-2'>
             <li>💻 Mejorando habilidades en dashboards interactivos y modelado de datos.</li>
             <li>📖 Explorando análisis de redes sociales con <strong>NetworkX</strong>.</li>
             <li>🤝 Abierta a colaborar en proyectos de datos o automatización.</li>
-          </ul>
+          </ul>"
+          %}
         </div>
       </div>
 
+      <!-- 🎉 Curiosidades -->
       <div class="col-12">
         <div class="box box-uva">
-          <h3 class="text-2xl font-semibold mb-4">🎉 Curiosidades</h3>
-          <ul class="list-disc list-inside mt-3 pl-2">
-            <li>🎮 Más de 500 horas en Stardew Valley</li>
-            <li>✈️ Soporte técnico en Riot Games</li>
-            <li>🐶 Mamá perruna de <strong>Riven</strong> y <strong>Haru</strong></li>
-            <li>🎨 Apasionada del tejido y el nail art</li>
-            <li>🌍 Estudiando japonés para visitar <strong>Kumamoto</strong> (¡hogar de las estatuas de One Piece!)</li>
-          </ul>
+          {% include components/section.html
+          title="🎉 Curiosidades"
+          content="<ul class='list-disc list-inside mt-3 pl-2'>
+          <li>🎮 Más de 500 horas en Stardew Valley</li>
+          <li>✈️ Soporte técnico en Riot Games</li>
+          <li>🐶 Mamá perruna de <strong>Riven</strong> y <strong>Haru</strong></li>
+          <li>🎨 Apasionada del tejido y el nail art</li>
+          <li>🌍 Estudiando japonés para visitar <strong>Kumamoto</strong> (¡hogar de las estatuas de One Piece!)</li>
+        </ul>"
+          %}
         </div>
       </div>
 

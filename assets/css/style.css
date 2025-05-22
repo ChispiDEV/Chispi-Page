@@ -636,3 +636,106 @@ footer a:hover {
 .imagen-poligono {
   clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
 }
+
+/* === ESTILOS PARA PÁGINAS DE PROYECTO === */
+.project {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  font-family: var(--body-font, sans-serif);
+}
+
+/* Contenido principal */
+.project-content {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-color, #333);
+}
+
+.project-content h2,
+.project-content h3 {
+  margin-top: 2rem;
+  color: var(--title-color);
+}
+
+.project-content a {
+  color: var(--btn-verde-2);
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.project-content a:hover {
+  color: var(--btn-verde-1);
+}
+
+/* Imágenes dentro del contenido del proyecto */
+.project-content img {
+  max-width: 100%;
+  border-radius: var(--border-radius, 0.5rem);
+  margin: 1.5rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Código y bloques pre */
+.project-content pre,
+.project-content code {
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.95rem;
+  overflow-x: auto;
+  display: block;
+  margin: 1rem 0;
+  color: #2a2a2a;
+}
+
+/* Imagen destacada del proyecto */
+.project-hero-image {
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  filter: brightness(0.95);
+  text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+/* Badges de etiquetas */
+.project .tag-badge {
+  display: inline-block;
+  background-color: hsl(var(--tag-hue, 180), 70%, 92%);
+  color: hsl(var(--tag-hue, 180), 30%, 30%);
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  margin-right: 0.4rem;
+  margin-bottom: 0.3rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Botones de navegación */
+.project .btn-outline-verde-1,
+.project .btn-outline-verde-3 {
+  border: 1px solid var(--btn-verde-1);
+  color: var(--btn-verde-1);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  background-color: transparent;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.project .btn-outline-verde-1:hover,
+.project .btn-outline-verde-3:hover {
+  background-color: var(--btn-verde-1);
+  color: white;
+}
+
+/* Tech-stack */
+.project-tech-stack .tech-card {
+  border-radius: 0.75rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-tech-stack .tech-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+}
+
