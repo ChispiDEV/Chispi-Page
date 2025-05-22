@@ -546,6 +546,18 @@ footer a:hover {
   padding: 1rem 0;
 }
 
+/* Skill badge individual */
+.skill-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  border-radius: 0.4rem;
+  padding: 0.25rem 0.5rem;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
 /* Opcional: transición suave */
 .section-title {
   transition: color 0.3s ease;
@@ -739,3 +751,36 @@ footer a:hover {
   box-shadow: 0 6px 16px rgba(0,0,0,0.1);
 }
 
+/* Estilo para tarjetas de tecnologías */
+.tech-card {
+  background: #ffffffcc; /* blanco translúcido */
+  border-radius: 1rem;
+  padding: 0.75rem;
+  box-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.tech-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+}
+
+.tech-card .badge-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Responsividad para secciones grid de habilidades */
+@media (max-width: 768px) {
+  .tech-card .badge-img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .tech-card .fw-bold {
+    font-size: 0.85rem;
+  }
+}
