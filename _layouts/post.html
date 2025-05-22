@@ -51,7 +51,7 @@
       <li>
         <strong>📅 Publicado:</strong>
         {{ page.date | date: '%d de %B, %Y' }} ·
-        {% include components/read_time.html content=content %}
+        {% include layout/read_time.html content=content %}
       </li>
 
       {% if page.mood %}
