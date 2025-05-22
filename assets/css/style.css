@@ -278,6 +278,28 @@ footer a:hover {
   background-color: var(--btn-verde-2);
 }
 
+/* === Iconos personalizados === */
+.icon-github::before,
+.icon-linkedin::before,
+.icon-email::before {
+  font-family: "Font Awesome 6 Brands", "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 1.5rem;
+  margin: 0 10px;
+  color: var(--icon-color);
+  transition: color 0.3s;
+}
+
+.icon-github::before { content: "\f09b"; }
+.icon-linkedin::before { content: "\f08c"; }
+.icon-email::before { content: "\f0e0"; }
+
+.icon-github:hover::before,
+.icon-linkedin:hover::before,
+.icon-email:hover::before {
+  color: var(--btn-verde-1);
+}
+
 .scroll-to-top {
   position: fixed;
   bottom: 20px;
