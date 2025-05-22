@@ -3,7 +3,38 @@
    ============================ */
 
 :root {
-  /* Colores generales */
+  /* 🎨 Paleta de colores base */
+  --primary-color: #0d6efd;
+  --secondary-color: #6c757d;
+  --success-color: #198754;
+  --danger-color: #dc3545;
+  --warning-color: #ffc107;
+  --info-color: #0dcaf0;
+  --light-color: #f8f9fa;
+  --dark-color: #212529;
+
+  /* 🧠 Accesibilidad y focus */
+  --focus-outline: 2px solid var(--info-color);
+  --focus-outline-offset: 2px;
+
+  /* 🖋 Tipografía */
+  --font-family: 'Open Sans', sans-serif;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-sm: 0.875rem;
+
+  /* 📏 Espaciado */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 3rem;
+
+  /* 🔲 Estilo general */
+  --border-radius: 0.375rem;
+  --transition-speed: 0.3s;
+
+  /* 🧱 Layout & fondo */
   --bg-color: #ffffff;
   --text-color: #212529;
   --overlay-bg: rgba(255, 255, 255, 0.8);
@@ -12,18 +43,18 @@
   --footer-border: #e0e0e0;
   --navbar-border: #e0e0e0;
 
-  /* Tipografía y énfasis */
+  /* ✍️ Tipografía secundaria */
   --muted-text: #6c757d;
   --accent-text: #3cc88f;
   --icon-color: #212529;
 
-  /* Tonos verdes */
+  /* 🌿 Tonos verdes */
   --verde-1: #3cc88f;
   --verde-2: #28a97b;
   --verde-3: #2b7a6a;
   --verde-4: #1f564b;
 
-  /* Botones */
+  /* 🔘 Botones */
   --btn-verde-1: #28a745;
   --btn-verde-2: #218838;
   --btn-verde-3: #1e7e34;
@@ -34,7 +65,7 @@
   --btn-background-color: rgba(255, 255, 255, 0.2);
   --btn-text-hover-light: white;
 
-  /* Contenido */
+  /* 📝 Contenido */
   --post-title-color: #1e7e34;
   --meta-text-color: #6c757d;
   --summary-bg: #f0fdf4;
@@ -43,7 +74,7 @@
   --tag-text-default: #1e7e34;
   --title-color: #222;
 
-  /* Cajas decorativas */
+  /* 📦 Cajas decorativas */
   --box-sol-bg: #fff9c4; --box-sol-text: #665c00; --box-sol-border: #f4e19c;
   --box-mar-bg: #cce5ff; --box-mar-text: #204060; --box-mar-border: #a3d0f7;
   --box-flor-bg: #fddde6; --box-flor-text: #75213d; --box-flor-border: #f6b5c8;
@@ -59,6 +90,10 @@
    ============================ */
 
 [data-theme="dark"] {
+  /* 🧠 Accesibilidad y focus */
+  --focus-outline: 2px solid var(--accent-text);
+  --focus-outline-offset: 2px;
+  
   --bg-color: #121212;
   --text-color: #f1f1f1;
   --overlay-bg: rgba(0, 0, 0, 0.7);
@@ -105,29 +140,249 @@
 }
 
 /* ============================
-   🧱 3. Estructura General
+   🧱 3. RESET Y CONFIGURACIÓN BÁSICA
    ============================ */
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%; /* previene zoom en iOS */
+}
+
 body {
+  font-family: var(--font-family);
   background-color: var(--bg-color);
   color: var(--text-color);
-  font-family: sans-serif;
-  margin: 0;
-  transition: background-color 0.3s, color 0.3s;
+  line-height: 1.6;
+  font-size: clamp(1rem, 1.5vw, var(--font-size-lg));
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ====================================
+   TIPOGRAFÍA Y ENCABEZADOS
+==================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family);
+  color: var(--text-color);
+  margin-top: 0;
+  margin-bottom: var(--spacing-md);
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+h4, h5, h6 {
+  font-size: 1rem;
+  font-weight: 600; /* mantengo tu peso para estos */
+  margin-bottom: var(--spacing-sm);
+}
+
+/* ====================================
+   ENLACES Y BOTONES
+==================================== */
+
+a {
+  text-decoration: none;
+  color: var(--accent-text);
+  transition: color 0.3s ease;
+}
+
+a:hover,
+a:focus {
+  color: var(--primary-color);
+  outline: none;
+  text-decoration: underline;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  background-color: var(--btn-background-color);
+  color: var(--btn-text-color);
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
+  padding: var(--spacing-sm) var(--spacing-md);
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+}
+
+button:hover,
+button:focus {
+  background-color: var(--primary-color);
+  color: var(--btn-text-hover-light);
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+button:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 3px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  background-color: var(--secondary-color);
+  color: var(--light-color);
+  border-color: var(--secondary-color);
+}
+
+/* ====================================
+   FOCUS VISUAL ACCESSIBLE
+==================================== */
+
+:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+
+/* ====================================
+   FORMULARIOS
+==================================== */
+
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+  font-size: inherit;
+  border: 1px solid var(--border-color, #ccc);
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius);
+  transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--muted-text);
+  opacity: 1; /* Para consistencia entre navegadores */
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+button:focus-visible {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.4); /* Ajuste a color primary-color con opacidad */
+  outline: none; /* Evita doble outline */
+}
+
+/* ====================================
+   MEDIOS E IMÁGENES
+==================================== */
+
+img,
+picture,
+video,
+canvas,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  vertical-align: middle; /* evita espacios debajo en línea */
+  border-style: none; /* elimina borde por defecto en enlaces de imágenes */
+}
+
+/* ====================================
+   LISTAS
+==================================== */
+
+ul, ol {
+  padding-left: var(--spacing-lg);
+  margin-top: 0;
+  margin-bottom: var(--spacing-md);
+}
+
+li {
+  margin-bottom: var(--spacing-sm);
+}
+
+/* ====================================
+   TABLAS (opcional)
+==================================== */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: var(--spacing-lg);
+}
+
+th,
+td {
+  padding: var(--spacing-md);
+  text-align: left;
+  border-bottom: 1px solid var(--border-color, #ccc);
+  vertical-align: top;
+}
+
+th {
+  font-weight: 600;
+  background-color: var(--summary-bg);
+  color: var(--text-color);
+}
+
+/* ====================================
+   UTILIDADES RESPONSIVAS (opcional extra)
+==================================== */
+
+.container {
+  width: min(90%, 1200px);
+  max-width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--spacing-md);
+  box-sizing: border-box; /* asegurar padding dentro del ancho */
 }
 
 .overlay {
   background: var(--overlay-bg);
+  position: fixed; /* si la usas para superponer */
+  inset: 0; /* top, right, bottom, left = 0 */
+  z-index: 1000; /* para que esté arriba de otros elementos */
 }
 
-/* === Partículas === */
+/* Partículas con id específico */
+
 #particles-js {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   z-index: 0;
   background-size: cover;
   background-position: center;
+  pointer-events: none; /* que no bloquee clicks */
 }
 
 /* ============================
@@ -137,13 +392,13 @@ body {
 .hero {
   position: relative;
   overflow: hidden;
-  background-color: transparent !important;
+  background-color: transparent;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   min-height: 100vh;
   padding-top: 4rem;
   color: var(--text-color);
-  background-repeat: no-repeat;
 }
 
 .hero-section {
@@ -159,18 +414,20 @@ body {
 }
 
 .hero-box {
-  background-color: rgba(255, 255, 255, 0.75);
-  color: #000;
+  background-color: var(--hero-box-bg, rgba(255, 255, 255, 0.75));
+  color: var(--hero-box-text, #000);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-body.theme-dark .hero-box {
-  background-color: rgba(0, 0, 0, 0.6);
-  color: white;
+/* Modo oscuro para hero-box usando variables para mejor mantenimiento */
+
+body.theme-dark {
+  --hero-box-bg: rgba(0, 0, 0, 0.6);
+  --hero-box-text: #fff;
 }
 
 /* ============================
-   📝 5. Contenido de Texto
+   📝 5. Contenido de Texto Mejorado
    ============================ */
 
 .text-box {
@@ -178,54 +435,212 @@ body.theme-dark .hero-box {
   color: var(--text-color);
   padding: 2rem;
   border-radius: 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
+}
+
+body.theme-dark .text-box {
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
 }
 
 .text-title {
   color: var(--btn-verde-2);
-  transition: color 0.3s;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  transition: color 0.3s ease;
 }
 
 .text-subtitle {
   color: var(--muted-text);
-  transition: color 0.3s;
+  font-weight: 500;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  transition: color 0.3s ease;
 }
 
 .text-verde-1 {
   color: var(--btn-verde-1);
+  font-weight: 600;
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
 }
 
+/* Mejorar foco accesible */
+.text-title:focus-visible,
+.text-subtitle:focus-visible {
+  outline: 2px solid var(--btn-verde-2);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Responsividad para móviles */
+@media (max-width: 600px) {
+  .text-box {
+    padding: 1rem;
+  }
+
+  .text-title {
+    font-size: 1.5rem;
+  }
+
+  .text-subtitle {
+    font-size: 1rem;
+  }
+}
 /* ============================
-   🧭 6. Navegación y Navbar
+   🧭 6. Navegación y Navbar Mejorado
    ============================ */
 
 #navbar {
   background-color: var(--navbar-bg);
   color: var(--text-color);
   border-bottom: 1px solid var(--navbar-border);
-  transition: background-color 0.3s, border-bottom 0.3s;
+  transition: background-color 0.3s ease, border-bottom 0.3s ease, color 0.3s ease;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .navbar-brand {
   color: var(--text-color);
   text-decoration: none;
+  font-weight: 700;
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
   transition: color 0.3s ease;
+  outline-offset: 2px;
 }
 
-.navbar-brand:hover {
+.navbar-brand:hover,
+.navbar-brand:focus-visible {
   color: var(--btn-verde-1);
+  outline: none;
+  text-decoration: underline;
+  outline-offset: 3px;
+}
+
+/* === Contenedor dropdown === */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Botón toggle sin estilos predeterminados */
+.dropdown-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer; /* Indica que es clicable */
+}
+
+/* === Menú desplegable === */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--footer-bg);
+  border: 1px solid var(--navbar-border);
+  min-width: 160px;
+  z-index: 10000;
+  padding: 0.5rem 0;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  pointer-events: none; /* Evita interacción cuando está oculto */
+}
+
+/* Mostrar menú al hover del dropdown */
+.dropdown:hover .dropdown-menu {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Mostrar menú al tener clase .show (útil para toggle JS) */
+.dropdown-menu.show {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* === Elementos del menú === */
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  font-size: 0.95rem;
+  color: var(--text-color);
+  transition: background-color 0.2s;
+  cursor: pointer; /* Para mejorar UX */
+}
+
+/* Hover */
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: var(--summary-bg);
+  color: var(--summary-text);
+  outline: none; /* Para manejar focus visual con JS o :focus-visible */
+}
+
+/* Estado activo */
+.dropdown-item.active {
+  font-weight: bold;
+  background-color: var(--tag-bg-default);
+  color: var(--tag-text-default);
+}
+
+/* === Iconos de bandera === */
+.flag-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0; /* Evita que la imagen se reduzca si el contenedor se achica */
+}
+
+/* === Modo oscuro === */
+[data-theme="dark"] .dropdown-menu {
+  background-color: var(--navbar-bg);
+  border-color: var(--navbar-border);
+}
+
+[data-theme="dark"] .dropdown-item:hover,
+[data-theme="dark"] .dropdown-item:focus {
+  background-color: var(--summary-bg);
+  color: var(--summary-text); /* Asegúrate de que el color contraste bien */
+}
+
+/* Añadir estilo para focus visible accesible */
+#navbar a:focus-visible {
+  outline: 2px solid var(--btn-verde-1);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Responsive: Menú básico centrado */
+@media (max-width: 768px) {
+  #navbar {
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.25rem;
+  }
 }
 
 /* ============================
-   🦶 7. Footer
+   🦶 7. Footer Mejorado
    ============================ */
 
 footer {
   background-color: var(--footer-bg);
   color: var(--text-color);
   text-align: center;
-  padding: 20px 0;
+  padding: 1.25rem 0;
   border-top: 1px solid var(--footer-border);
-  transition: background-color 0.3s ease, border-top 0.3s ease;
+  transition: background-color 0.3s ease, border-top 0.3s ease, color 0.3s ease;
+  font-size: 0.875rem;
 }
 
 footer small,
@@ -233,32 +648,49 @@ footer a {
   color: var(--muted-text);
   transition: color 0.3s ease, opacity 0.2s ease;
   margin: 0 0.5rem;
+  text-decoration: none;
+  outline-offset: 2px;
 }
 
 footer a:hover,
-footer a:focus {
+footer a:focus-visible {
   opacity: 0.8;
+  color: var(--btn-verde-1);
+  outline: 2px solid var(--btn-verde-1);
+  border-radius: 4px;
 }
 
+/* Mejor espaciado en móviles */
+@media (max-width: 600px) {
+  footer {
+    padding: 1rem 1rem;
+    font-size: 0.8rem;
+  }
+}
 /* ============================
-   📚 8. Menú Lateral (Sidebar)
+   📚 8. Menú Lateral (Sidebar) Mejorado
    ============================ */
 
 #sidebar-wrapper {
   position: fixed;
   top: 0;
-  right: -250px;
+  right: 0;
   width: 250px;
   height: 100%;
   background-color: var(--footer-bg);
   color: var(--text-color);
   padding: 1rem;
-  transition: right 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
   z-index: 10000;
+  box-shadow: -2px 0 8px rgba(0,0,0,0.15);
+  overflow-y: auto;
+  transform: translateX(100%);
+  outline: none; /* para poder hacer focus sin mostrar borde por defecto */
+  tabindex: -1; /* Asegúrate de añadir tabindex="-1" también en el HTML */
 }
 
 #sidebar-wrapper.active {
-  right: 0;
+  transform: translateX(0);
 }
 
 .sidebar-nav {
@@ -273,19 +705,48 @@ footer a:focus {
 
 .sidebar-nav a {
   color: var(--text-color);
-  font-weight: bold;
+  font-weight: 600;
   text-decoration: none;
-  transition: color 0.2s;
+  transition: color 0.2s ease;
+  display: inline-block;
+  outline-offset: 3px;
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
 }
 
-.sidebar-nav a:hover {
+.sidebar-nav a:hover,
+.sidebar-nav a:focus-visible {
   color: var(--btn-verde-1);
+  background-color: rgba(60, 200, 143, 0.1);
+  outline: 2px solid var(--btn-verde-1);
 }
 
+#sidebar-wrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+#sidebar-wrapper::-webkit-scrollbar-thumb {
+  background-color: var(--btn-verde-2);
+  border-radius: 4px;
+}
+
+#sidebar-wrapper::-webkit-scrollbar-track {
+  background-color: transparent;
+}
 /* ============================
    🎯 9. Botones e Iconos
    ============================ */
+.btn:focus-visible,
+.icon-button:focus-visible,
+.dropdown-item:focus-visible,
+.navbar-brand:focus-visible,
+.sidebar-nav a:focus-visible {
+  outline: 2px dashed var(--btn-verde-2);
+  outline-offset: 4px;
+  /* Asegura que el outline no se confunda con el fondo */
+}
 
+/* Botones circulares con centrado y transición */
 .icon-button {
   display: inline-flex;
   align-items: center;
@@ -303,24 +764,40 @@ footer a:focus {
   transition: background-color 0.3s, color 0.3s;
 }
 
-.icon-button:hover {
+.icon-button:hover,
+.icon-button:focus-visible {
   background-color: var(--btn-verde-2);
+  outline-offset: 2px;
 }
 
+/* Botón cerrar menú lateral (más destacado y posicionado dentro del sidebar) */
 #close-menu-toggle {
   background-color: var(--btn-rojo-1);
   color: var(--btn-text-color);
   position: absolute;
   top: 1rem;
   right: 1rem;
-  z-index: 11000;
+  z-index: 11001; /* un poco más alto para que esté encima de todo */
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  display: none; /* inicial: oculto hasta que el menú esté abierto */
+  transition: background-color 0.3s, color 0.3s;
+  box-shadow: 0 0 6px rgba(0,0,0,0.15);
 }
 
-#close-menu-toggle:hover {
+#close-menu-toggle:hover,
+#close-menu-toggle:focus-visible {
   background-color: var(--btn-rojo-2);
+  outline-offset: 2px;
 }
 
-/* === Iconos personalizados === */
+/* Mostrar botón cerrar cuando el sidebar está activo */
+#sidebar-wrapper.active #close-menu-toggle {
+  display: inline-flex;
+}
+
+/* Iconos personalizados FontAwesome */
 .icon-github::before,
 .icon-linkedin::before,
 .icon-email::before {
@@ -342,6 +819,7 @@ footer a:focus {
   color: var(--btn-verde-1);
 }
 
+/* Scroll to top */
 .scroll-to-top {
   position: fixed;
   bottom: 20px;
@@ -358,8 +836,10 @@ footer a:focus {
   font-weight: 900;
 }
 
-.scroll-to-top:hover {
+.scroll-to-top:hover,
+.scroll-to-top:focus-visible {
   background-color: var(--btn-verde-2);
+  outline-offset: 2px;
 }
 
 /* ============================
@@ -372,13 +852,16 @@ footer a:focus {
 #language-toggle::before {
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
+  pointer-events: none; /* que el icono no intercepte clicks/focus */
+  user-select: none;
 }
 
-#menu-toggle::before { content: "\f0c9"; }
-#close-menu-toggle::before { content: "\f00d"; }
-#theme-toggle::before { content: "\f186"; }
-[data-theme="dark"] #theme-toggle::before { content: "\f0eb"; }
-#language-toggle::before { content: "\f57d"; }
+#menu-toggle::before { content: "\f0c9"; }       /* hamburguesa */
+#close-menu-toggle::before { content: "\f00d"; } /* X */
+#theme-toggle::before { content: "\f186"; }      /* sol */
+[data-theme="dark"] #theme-toggle::before { content: "\f0eb"; } /* luna */
+#language-toggle::before { content: "\f57d"; }   /* globo */
+
 
 /* ============================
    🖼️ 11. Botones Outline
@@ -392,50 +875,66 @@ footer a:focus {
   display: inline-block;
   background-color: var(--btn-background-color);
   backdrop-filter: blur(2px);
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   text-decoration: none;
+  cursor: pointer;
 }
 
+/* Verde 1 */
 .btn-outline-verde-1 {
   border-color: var(--btn-verde-1);
   color: var(--btn-verde-1);
 }
 
-.btn-outline-verde-1:hover {
+.btn-outline-verde-1:hover,
+.btn-outline-verde-1:focus {
   background-color: var(--btn-verde-1);
   color: var(--btn-text-hover-light);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(34, 139, 34, 0.5); /* ejemplo verde suave */
 }
 
+/* Verde 2 */
 .btn-outline-verde-2 {
   border-color: var(--btn-verde-2);
   color: var(--btn-verde-2);
 }
 
-.btn-outline-verde-2:hover {
+.btn-outline-verde-2:hover,
+.btn-outline-verde-2:focus {
   background-color: var(--btn-verde-2);
   color: var(--btn-text-hover-light);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.5);
 }
 
+/* Verde 3 */
 .btn-outline-verde-3 {
   border-color: var(--btn-verde-3);
   color: var(--btn-verde-3);
 }
 
-.btn-outline-verde-3:hover {
+.btn-outline-verde-3:hover,
+.btn-outline-verde-3:focus {
   background-color: var(--btn-verde-3);
   color: var(--btn-text-hover-light);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 128, 0, 0.5);
 }
 
+/* Verde 4 */
 .btn-outline-verde-4 {
   border-color: var(--btn-verde-4);
   color: var(--btn-verde-4);
 }
 
-.btn-outline-verde-4:hover {
+.btn-outline-verde-4:hover,
+.btn-outline-verde-4:focus {
   background-color: var(--btn-verde-4);
   color: var(--btn-text-hover-light);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 100, 0, 0.5);
 }
-
 /* ============================
    🏷️ 12. Etiquetas y Tags
    ============================ */
@@ -450,6 +949,7 @@ footer a:focus {
   background-color: var(--tag-bg-default);
   color: var(--tag-text-default);
   transition: background-color 0.3s, color 0.3s;
+  user-select: none; /* Evita selección accidental */
 }
 
 /* Etiquetas con color automático */
@@ -459,92 +959,19 @@ footer a:focus {
   font-size: 0.85em;
   font-weight: 600;
   border-radius: 0.5em;
+  /* Uso de HSL con calc() es muy bueno para colores dinámicos */
   background-color: hsl(calc(var(--tag-hue, 180) + var(--tag-index, 0) * 37), 65%, 75%);
   color: #222;
   transition: background-color 0.3s, color 0.3s;
+  user-select: none;
+  /* Puedes agregar cursor si son interactivos */
+  /* cursor: default; */
 }
 
+/* Modo oscuro: mejor contraste */
 [data-theme="dark"] .tag-badge {
   background-color: hsl(calc(var(--tag-hue, 180) + var(--tag-index, 0) * 37), 65%, 30%);
   color: #f0f0f0;
-}
-
-/* === Dropdown container === */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-toggle {
-  background: none;
-  border: none;
-  padding: 0;
-}
-
-/* === Menú desplegable === */
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: var(--footer-bg);
-  border: 1px solid var(--navbar-border);
-  min-width: 160px;
-  z-index: 10000;
-  padding: 0.5rem 0;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  transition: opacity 0.3s ease;
-}
-
-.dropdown:hover .dropdown-menu {
-  display: block;
-}
-
-/* Se muestra cuando tiene la clase .show */
-.dropdown-menu.show {
-  display: block;
-}
-
-/* === Elementos del menú === */
-.dropdown-item {
-  display: flex;
-  align-items: center;
-  padding: 0.5rem 1rem;
-  text-decoration: none;
-  font-size: 0.95rem;
-  color: var(--text-color);
-  transition: background-color 0.2s;
-}
-
-.dropdown-item:hover {
-  background-color: var(--summary-bg);
-  color: var(--summary-text);
-}
-
-.dropdown-item.active {
-  font-weight: bold;
-  background-color: var(--tag-bg-default);
-  color: var(--tag-text-default);
-}
-
-/* === Iconos de bandera === */
-.flag-icon {
-  width: 20px;
-  height: 20px;
-  margin-right: 0.5rem;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-/* === Modo oscuro === */
-[data-theme="dark"] .dropdown-menu {
-  background-color: var(--navbar-bg);
-  border-color: var(--navbar-border);
-}
-
-[data-theme="dark"] .dropdown-item:hover {
-  background-color: rgba(255, 255, 255, 0.05);
 }
 
 /* Cajitas */
@@ -555,20 +982,29 @@ footer a:focus {
   font-weight: bold;
   border: 2px solid transparent;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  transition: background 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+  transition: background 0.3s ease, border 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
+/* Interacción */
 .box:hover {
   transform: translateY(-4px);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
 
+/* Accesibilidad */
+.box:focus-visible {
+  outline: 2px dashed var(--focus-color, #444);
+  outline-offset: 4px;
+}
+
+/* Contenedor */
 .box-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem; /* separa horizontal y vertical */
+  gap: 1rem;
 }
 
+/* Temas de color */
 .box-sol {
   background-color: var(--box-sol-bg);
   color: var(--box-sol-text);
@@ -620,11 +1056,18 @@ footer a:focus {
 /* Títulos de sección adaptables */
 .section-title {
   color: var(--title-color);
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
 }
 
 /* Secciones generales de habilidades */
 .skill-section {
   padding: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 /* Skill badge individual */
@@ -634,33 +1077,61 @@ footer a:focus {
   gap: 0.4rem;
   font-size: 0.85rem;
   border-radius: 0.4rem;
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 0.6rem;
   line-height: 1.2;
   white-space: nowrap;
+  font-weight: 500;
+  background-color: hsl(
+          calc(var(--skill-hue, 200) + var(--skill-index, 0) * 33),
+          70%,
+          85%
+  );
+  color: #222;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Opcional: transición suave */
-.section-title {
-  transition: color 0.3s ease;
+.skill-item:focus-visible {
+  outline: 2px dashed var(--focus-color, #555);
+  outline-offset: 4px;
+}
+
+[data-theme="dark"] .skill-item {
+  background-color: hsl(
+          calc(var(--skill-hue, 200) + var(--skill-index, 0) * 33),
+          70%,
+          25%
+  );
+  color: #f0f0f0;
 }
 
 /* Estilo general de las cajas pastel */
 .pastel-box {
   background-color: #fdf7ff;
   border: 1px solid #e7e7f5;
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius, 1rem);
   padding: 1rem;
   transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Variaciones por color */
+.pastel-box:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+/* Variaciones por color pastel */
 .pastel-1 { background-color: #fef6e4; border-color: #f7e9d7; }
 .pastel-2 { background-color: #e8f8f5; border-color: #d2f1eb; }
 .pastel-3 { background-color: #fcefee; border-color: #f8dbe0; }
 .pastel-4 { background-color: #eef6fd; border-color: #d6e8fa; }
 .pastel-5 { background-color: #f2f9ed; border-color: #d8efcc; }
 
-/* Tags de Skills*/
+/* Modo oscuro (opcional) */
+[data-theme="dark"] .pastel-box {
+  background-color: var(--dark-bg, #2a2a2a);
+  border-color: var(--dark-border, #444);
+  color: var(--dark-text, #f0f0f0);
+}
+
+/* Tags de Skills */
 .badge-img {
   height: 28px;
   border-radius: 6px;
@@ -673,7 +1144,8 @@ footer a:focus {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* === TÍTULOS DE POSTS === */
+
+/* === METADATOS Y TÍTULOS DE POSTS === */
 .post-meta {
   color: var(--meta-text-color);
   font-size: 0.9rem;
@@ -684,8 +1156,16 @@ footer a:focus {
 .post-title {
   color: var(--post-title-color);
   transition: color 0.3s;
+  font-size: 1.3rem;
+  transition: color 0.3s ease;
 }
 
+.post-title:focus-visible {
+  outline: 2px dashed var(--btn-verde-1);
+  outline-offset: 4px;
+}
+
+/* === RESUMEN DE POSTS === */
 .post-summary {
   background-color: var(--summary-bg);
   color: var(--summary-text);
@@ -715,8 +1195,7 @@ footer a:focus {
   transform: scale(1.03);
 }
 
-/* Fotos */
-
+/* === IMÁGENES DE PERFIL === */
 .imagen-circular {
   width: 150px;
   height: 150px;
@@ -730,10 +1209,9 @@ footer a:focus {
   clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
 }
 
-/* === ESTILOS PARA PÁGINAS DE PROYECTO === */
+/* === PÁGINAS DE PROYECTO === */
 .project {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding: 2rem 0;
   font-family: var(--body-font, sans-serif);
 }
 
@@ -756,11 +1234,16 @@ footer a:focus {
   transition: color 0.2s ease;
 }
 
+.project-content a:focus-visible {
+  outline: 2px dashed var(--btn-verde-1);
+  outline-offset: 3px;
+}
+
 .project-content a:hover {
   color: var(--btn-verde-1);
 }
 
-/* Imágenes dentro del contenido del proyecto */
+/* IMÁGENES DE PROYECTO */
 .project-content img {
   max-width: 100%;
   border-radius: var(--border-radius, 0.5rem);
@@ -768,7 +1251,15 @@ footer a:focus {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* Código y bloques pre */
+.project-hero-image {
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  filter: brightness(0.95);
+  text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+/* BLOQUES DE CÓDIGO */
 .project-content pre,
 .project-content code {
   background-color: #f8f9fa;
@@ -782,16 +1273,7 @@ footer a:focus {
   color: #2a2a2a;
 }
 
-/* Imagen destacada del proyecto */
-.project-hero-image {
-  background-size: cover;
-  background-position: center;
-  min-height: 100vh;
-  filter: brightness(0.95);
-  text-shadow: 0 2px 6px rgba(0,0,0,0.3);
-}
-
-/* Badges de etiquetas */
+/* BADGES DE ETIQUETAS */
 .project .tag-badge {
   display: inline-block;
   background-color: hsl(var(--tag-hue, 180), 70%, 92%);
@@ -804,7 +1286,7 @@ footer a:focus {
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* Botones de navegación */
+/* BOTONES DE NAVEGACIÓN */
 .project .btn-outline-verde-1,
 .project .btn-outline-verde-3 {
   border: 1px solid var(--btn-verde-1);
@@ -815,37 +1297,33 @@ footer a:focus {
   transition: background-color 0.3s, color 0.3s;
 }
 
+.project .btn-outline-verde-1:focus-visible,
+.project .btn-outline-verde-3:focus-visible {
+  outline: 2px solid var(--btn-verde-2);
+  outline-offset: 2px;
+}
+
 .project .btn-outline-verde-1:hover,
 .project .btn-outline-verde-3:hover {
   background-color: var(--btn-verde-1);
   color: white;
 }
 
-/* Tech-stack */
+/* TECH STACK */
 .project-tech-stack .tech-card {
-  border-radius: 0.75rem;
+  background: #ffffffcc;
+  border-radius: 1rem;
+  padding: 0.75rem;
+  box-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.05);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .project-tech-stack .tech-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-}
-
-/* Estilo para tarjetas de tecnologías */
-.tech-card {
-  background: #ffffffcc; /* blanco translúcido */
-  border-radius: 1rem;
-  padding: 0.75rem;
-  box-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease;
-}
-
-.tech-card:hover {
-  transform: translateY(-4px);
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
 }
 
+/* Estilo para tarjetas de tecnologías */
 .tech-card .badge-img {
   width: 32px;
   height: 32px;
@@ -866,7 +1344,11 @@ footer a:focus {
   }
 }
 
-/* Transiciones suaves para cambios visuales */
-img, header.hero, .post-hero-image, [data-bg-dark], [data-bg-light] {
+/* === TRANSICIONES GLOBALES === */
+img,
+header.hero,
+.post-hero-image,
+[data-bg-dark],
+[data-bg-light] {
   transition: background-image 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
