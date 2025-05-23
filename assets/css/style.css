@@ -1175,6 +1175,38 @@ footer a:focus-visible {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
+/* Tippy.js tooltip themes */
+.tippy-box[data-theme~='light'] {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+  font-size: 0.8rem;
+}
+
+.tippy-box[data-theme~='material'] {
+  background-color: #333;
+  color: #f0f0f0;
+  font-size: 0.8rem;
+  border-radius: 4px;
+}
+
+span[tabindex="0"]:focus-visible {
+  outline: 2px solid var(--verde-1);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* Estilo base del elemento que tiene tooltip */
+[data-tippy-content] {
+  outline: none; /* Evita bordes innecesarios en clic */
+}
+
+/* Muestra borde solo al navegar con teclado */
+[data-tippy-content]:focus-visible {
+  outline: 2px solid var(--verde-acento, #00cc99);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
 
 /* === METADATOS Y TÍTULOS DE POSTS === */
 .post-meta {
