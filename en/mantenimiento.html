@@ -1,25 +1,13 @@
 ---
 layout: landing
 title: Maintenance
-permalink: /en/maintenance.html
+permalink: {{ '/en/maintenance.html' | relative_url }}
 lang: en
+hero_img: "{{ '/assets/icons/maintenance-light.svg' | relative_url }}"
+hero_img_dark: "{{ '/assets/icons/maintenance-dark.svg' | relative_url }}"
+hero_title: "We are <span class='text-verde-1'>working on it</span>"
+hero_description: "The site is under maintenance. We'll be back shortly. Thanks for your patience 💚"
+hero_cta_text: "Back to Home"
+hero_cta_url: "{{ '/en' | relative_url }}"
+no_content: true
 ---
-
-<header class="hero d-flex align-items-center justify-content-center text-center position-relative" style="min-height: 100vh;">
-    <div class="container px-4 px-lg-5 text-center" style="z-index: 2;">
-        <div class="text-box">
-
-            <div class="mb-4">
-                <picture>
-                    <source srcset="/assets/icons/maintenance-dark.svg" media="(prefers-color-scheme: dark)">
-                    <img src="/assets/icons/maintenance-light.svg" alt="Site under maintenance" width="240" class="img-fluid">
-                </picture>
-            </div>
-
-            <h1 class="display-4 fw-bold">We are <span class="text-verde-1">working on it</span></h1>
-            <p class="lead mb-4">The site is under maintenance. We'll be back shortly. Thanks for your patience 💚</p>
-
-            <a href="/en/" class="btn btn-outline-verde-1 btn-lg">Back to Home</a>
-        </div>
-    </div>
-</header>
