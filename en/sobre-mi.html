@@ -72,13 +72,20 @@ subtitle: "Developer | Designer | Data Analyst"
       <div class="col-12 col-md-6">
         <div class="box box-mar">
           <h3 class="text-2xl font-semibold mb-4">🖥️ Main Technologies</h3>
-          <div class="flex flex-wrap gap-3">
-            <img src="https://img.shields.io/badge/-Python-3776AB?logo=python&logoColor=white" alt="Python">
-            <img src="https://img.shields.io/badge/-LaTeX-008080?logo=latex&logoColor=white" alt="LaTeX">
+          <!-- Grid de secciones: 1 columna móvil, 2 en tablet, 3 en escritorio -->
+          <div class="row g-4">
+            {% for section in site.data.skills-tech-main %}
+            {% include skills-tech-main/item.html
+            name=item.name
+            logo=item.logo
+            color=item.color
+            tooltip=item.tooltip %}
+            {% endfor %}
           </div>
+          {% endfor %}
         </div>
       </div>
-
+        
       <div class="col-12 col-md-6">
         <div class="box box-cielo">
           <h3 class="text-2xl font-semibold mb-4">🔥 What I'm Working On</h3>

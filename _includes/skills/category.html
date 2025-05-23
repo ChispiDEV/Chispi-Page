@@ -6,11 +6,11 @@
 
     <div class="d-flex flex-wrap gap-2">
         {% for item in include.items %}
-        {% include skills/item.html
-        name=item.name
-        logo=item.logo
-        color=item.color
-        tooltip=item.tooltip %}
+            {% include skills/item.html
+                name=item.name
+                logo=item.logo
+                color=item.color
+                tooltip=item.tooltip %}
         {% endfor %}
     </div>
 </div>
