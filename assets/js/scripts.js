@@ -130,7 +130,7 @@ window.addEventListener('DOMContentLoaded', () => {
     })();
   }
 
-  // === CAMBIO DE TEMA ===
+// === CAMBIO DE TEMA ===
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
       const current = html.getAttribute('data-theme') || 'light';
@@ -138,6 +138,7 @@ window.addEventListener('DOMContentLoaded', () => {
       html.setAttribute('data-theme', next);
       updateImagesForTheme(next);
       loadParticles(next);
+      updateTippyTheme(next);  // <--- añadir aquí para sincronizar tooltips
       try {
         localStorage.setItem('theme', next);
       } catch {}
@@ -260,19 +261,5 @@ function updateTippyTheme(theme) {
     if (el._tippy) {
       el._tippy.setProps({ theme: theme === 'dark' ? 'material' : 'light' });
     }
-  });
-}
-
-// Integración con tu sistema actual de toggle
-const themeToggle = document.getElementById('theme-toggle');
-if (themeToggle) {
-  themeToggle.addEventListener('click', () => {
-    const current = document.documentElement.getAttribute('data-theme') || 'light';
-    const next = current === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    try {
-      localStorage.setItem('theme', next);
-    } catch {}
-    updateTippyTheme(next);
   });
 }
