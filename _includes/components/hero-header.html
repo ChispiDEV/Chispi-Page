@@ -20,25 +20,20 @@
             {% endif %}
 
             <!-- Imagen -->
-            {% if page.hero_img %}
-                {% assign is_svg = page.hero_img | slice: -4 %}
-                    {% if is_svg == ".svg" %}
-                        <picture class="mb-3 d-block mx-auto">
-                            <source srcset="{{ page.hero_img_dark | relative_url }}" media="(prefers-color-scheme: dark)">
-                            <img src="{{ page.hero_img_light | relative_url }}"
-                                 alt="Ilustración"
-                                 style="width: 160px; max-width: 100%;">
-                        </picture>
-                    {% else %}
-                        <img src="{{ page.hero_img | relative_url }}"
-                             alt="Avatar"
-                             class="rounded-circle shadow-lg border border-4 border-verde-1 mb-3 mx-auto d-block"
-                             style="width: 120px; height: 120px; object-fit: cover;">
-                {% endif %}
+            {% if page.hero_img_dark or page.hero_img_light %}
+            <picture class="mb-3 d-block mx-auto">
+                <source srcset="{{ page.hero_img_dark | relative_url }}" media="(prefers-color-scheme: dark)">
+                <img src="{{ page.hero_img_light | relative_url }}"
+                     alt="Ilustración"
+                     style="width: 160px; max-width: 100%;">
+            </picture>
+            {% else %}
+            <img src="{{ include.img | default: '/assets/img/perfil-Chispi.jpg' | relative_url }}"
+                 alt="Avatar"
+                 class="rounded-circle shadow-lg border border-4 border-verde-1 mb-3 mx-auto d-block"
+                 style="width: 120px; height: 120px; object-fit: cover;">
             {% endif %}
-
-
-
+            
             <!-- Título -->
             <h1 class="display-3 fw-bold">
                 {{ include.title | default: lang == 'en'
