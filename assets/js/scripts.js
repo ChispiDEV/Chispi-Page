@@ -245,3 +245,25 @@ window.addEventListener('DOMContentLoaded', () => {
   updateImagesForTheme(initialTheme);
   loadParticles(initialTheme);
 });
+
+// Inicializar tooltips
+tippy('[data-tippy-content]', {
+  animation: 'shift-away',
+  theme: localStorage.getItem('theme') === 'dark' ? 'material' : 'light',
+  delay: [100, 50],
+  arrow: true,
+});
+
+// Reconfigurar tooltips si el tema cambia dinámicamente
+function updateTippyTheme(theme) {
+  document.querySelectorAll('[data-tippy-content]').forEach(el => {
+    el._tippy.setProps({ theme: theme === 'dark' ? 'material' : 'light' });
+  });
+}
+
+// Escuchar cambios de tema (adaptar esto a tu sistema de toggle)
+document.getElementById('theme-toggle').addEventListener('click', () => {
+  const theme = document.documentElement.classList.toggle('dark') ? 'dark' : 'light';
+  localStorage.setItem('theme', theme);
+  updateTippyTheme(theme);
+});
