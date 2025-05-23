@@ -1146,6 +1146,13 @@ footer a:focus-visible {
   color: #f0f0f0;
 }
 
+.subsection {
+  background-color: rgba(255, 255, 255, 0.05); /* sutil fondo interno */
+  padding: 0.75rem 1rem;
+  border-left: 3px solid var(--verde-1); /* indica jerarquía */
+  border-radius: 0.5rem;
+}
+
 /* Tags de Skills */
 .badge-img {
   height: 28px;
