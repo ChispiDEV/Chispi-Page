@@ -1,7 +1,9 @@
 - name: Python
   color: 3776AB
   logo: python
+  tooltip: Lenguaje de programación versátil para ciencia de datos y automatización
 
 - name: LaTeX
   color: 008080
   logo: latex
+  tooltip: Sistema de tipografía para documentos científicos y técnicos

@@ -12,11 +12,16 @@ Parámetros:
     {% if include.title %}
     <h3 class="text-2xl font-semibold mb-4 text-verde-1">{{ include.title }}</h3>
     {% endif %}
+    
     <div class="section-content">
         {% if include.content %}
-        {{ include.content }}
+            {{ include.content }}
         {% elsif include.content_include %}
-        {% include {{ include.content_include }} stack=include.content_data %}
+            {% case include.content_include %}
+                {% when "components/stack.html" %}
+                    {% include components/stack.html stack=include.content_data %}
+                {# añadir más "when" aquí para otros includes #}
+            {% endcase %}
         {% endif %}
     </div>
 </section>

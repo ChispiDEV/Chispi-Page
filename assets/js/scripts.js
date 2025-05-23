@@ -249,21 +249,30 @@ window.addEventListener('DOMContentLoaded', () => {
 // Inicializar tooltips
 tippy('[data-tippy-content]', {
   animation: 'shift-away',
-  theme: localStorage.getItem('theme') === 'dark' ? 'material' : 'light',
+  theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'material' : 'light',
   delay: [100, 50],
   arrow: true,
 });
 
-// Reconfigurar tooltips si el tema cambia dinámicamente
+// Función para actualizar los tooltips si cambia el tema
 function updateTippyTheme(theme) {
   document.querySelectorAll('[data-tippy-content]').forEach(el => {
-    el._tippy.setProps({ theme: theme === 'dark' ? 'material' : 'light' });
+    if (el._tippy) {
+      el._tippy.setProps({ theme: theme === 'dark' ? 'material' : 'light' });
+    }
   });
 }
 
-// Escuchar cambios de tema (adaptar esto a tu sistema de toggle)
-document.getElementById('theme-toggle').addEventListener('click', () => {
-  const theme = document.documentElement.classList.toggle('dark') ? 'dark' : 'light';
-  localStorage.setItem('theme', theme);
-  updateTippyTheme(theme);
-});
+// Integración con tu sistema actual de toggle
+const themeToggle = document.getElementById('theme-toggle');
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme') || 'light';
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try {
+      localStorage.setItem('theme', next);
+    } catch {}
+    updateTippyTheme(next);
+  });
+}
