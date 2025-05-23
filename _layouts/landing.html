@@ -1,11 +1,36 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang }}">
+<html lang="{{ page.lang | default: site.default_lang }}" data-theme="dark">
 <head>
-    {% include head.html %}
-</head>
-<body class="landing-page">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ page.description | default: 'Mi portfolio personal con proyectos, contacto y más.' }}">
+    <title data-i18n="title">{{ page.title }} | {{ site.title }}</title>
 
-{% include header.html %}
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/98ca02228e.js" crossorigin="anonymous"></script>
+
+    <!-- Favicon -->
+    <link rel="icon" href="{{ '/assets/icons/favicon.ico' | relative_url }}" type="image/x-icon">
+
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KKN4WJL07V"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-KKN4WJL07V');
+    </script>
+</head>
+
+<body class="landing-page">
+<!-- Navbar -->
+{% include layout/navbar.html %}
+
+{% include layout/header.html %}
 
 {% assign lang = page.lang | default: 'es' %}
 {% assign hero_buttons = site.data.buttons[lang] | default: site.data.buttons['es'] %}
@@ -13,8 +38,18 @@
 <!-- Hero siempre presente en el layout landing -->
 {% include components/hero-header.html img=page.hero_img title=page.hero_title subtitle=page.hero_subtitle description=page.hero_description buttons=hero_buttons %}
 
-{% include footer.html %}
 
+<!-- Footer -->
+{% include layout/footer.html %}
+
+<!-- Scroll-To-Top -->
+<button class="scroll-to-top icon-button" aria-label="Volver arriba"></button>
+
+<!-- Scripts -->
+<script src="{{ '/assets/js/scripts.js' | relative_url }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 </body>
 </html>
 
+<body class="landing-page">
