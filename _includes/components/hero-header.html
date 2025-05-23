@@ -51,7 +51,7 @@
             {% if buttons %}
             <div class="d-flex flex-wrap gap-3 justify-content-center">
                 {% for btn in buttons %}
-                <a href="{{ lang_prefix }}{{ btn.url }}" class="btn {{ btn.class }} btn-lg">{{ btn.text }}</a>
+                <a href="{{ site.baseurl }}{{ lang_prefix }}{{ btn.url }}" class="btn {{ btn.class }} btn-lg">{{ btn.text }}</a>
                 {% endfor %}
             </div>
             {% endif %}
