@@ -7,8 +7,15 @@
 
 {% include header.html %}
 
+{% assign lang = page.lang | default: 'es' %}
 <!-- Hero siempre presente en el layout landing -->
-{% include components/hero-header.html img=page.hero_img title=page.hero_title subtitle=page.hero_subtitle description=page.hero_description buttons=site.data.buttons[page.lang | default: 'es'] %}
+{% include components/hero-header.html
+img=page.hero_img
+title=page.hero_title
+subtitle=page.hero_subtitle
+description=page.hero_description
+buttons=site.data.buttons[lang]
+%}
 
 {% include footer.html %}
 
