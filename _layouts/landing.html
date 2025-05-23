@@ -5,18 +5,12 @@
 </head>
 <body class="landing-page">
 
-    {% include header.html %}
-    
-    <!-- Hero siempre presente en el layout landing -->
-    {% include components/hero-header.html (
-        img=page.hero_img,
-        title=page.hero_title,
-        subtitle=page.hero_subtitle,
-        description=page.hero_description,
-        buttons=site.data.buttons[page.lang | default: 'es']
-    ) %}
-    
-    {% include footer.html %}
+{% include header.html %}
+
+<!-- Hero siempre presente en el layout landing -->
+{% include components/hero-header.html img=page.hero_img title=page.hero_title subtitle=page.hero_subtitle description=page.hero_description buttons=site.data.buttons[page.lang | default: 'es'] %}
+
+{% include footer.html %}
 
 </body>
 </html>
