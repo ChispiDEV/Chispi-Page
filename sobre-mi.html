@@ -59,11 +59,7 @@ subtitle: "Desarrolladora | Diseñadora | Analista de Datos"
           <div class="row g-4">
             {% for section in site.data.skills %}
             <div class="col-12 col-md-6 col-lg-4">
-              {% if section.subsections %}
-                {% include skills/subsection.html subsections=section.subsections %}
-              {% else %}
-                {% include skills/section.html section=section %}
-              {% endif %}
+              {% include skills/section.html section=section %}
             </div>
             {% endfor %}
           </div>
