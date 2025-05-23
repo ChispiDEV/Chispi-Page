@@ -3,111 +3,141 @@
     - name: Python
       logo: python
       color: 3776AB
+      tooltip: "Lenguaje versátil, ideal para ciencia de datos, automatización y más"
     - name: SQL
       logo: postgresql
       color: FF6F00
+      tooltip: "Lenguaje para gestionar y consultar bases de datos relacionales"
     - name: HTML
       logo: html5
       color: E44D26
+      tooltip: "Estructura el contenido de las páginas web"
     - name: CSS
       logo: css3
       color: 1572B6
+      tooltip: "Aplica estilos visuales a sitios web"
     - name: R
       logo: r
       color: 276DC3
+      tooltip: "Lenguaje usado en análisis estadístico y visualización de datos"
 
 - section: Frameworks y librerías
   items:
     - name: Pandas
       logo: pandas
       color: 150458
+      tooltip: "Librería para análisis y manipulación de datos"
     - name: NumPy
       logo: numpy
       color: 013243
+      tooltip: "Soporte para arrays y operaciones numéricas en Python"
     - name: SciPy
       logo: scipy
       color: 8CAAE6
+      tooltip: "Herramientas científicas y técnicas para Python"
     - name: Matplotlib
       logo: matplotlib
       color: 11557C
+      tooltip: "Librería para crear gráficos en 2D"
     - name: Seaborn
       logo: python
       color: 43BCCD
+      tooltip: "Visualización estadística basada en Matplotlib"
     - name: scikit--learn
       logo: scikit-learn
       color: F7931E
+      tooltip: "Librería para machine learning en Python"
     - name: Pytest
       logo: python
       color: 0A9EDC
+      tooltip: "Framework para testing automatizado en Python"
 
 - section: Visualización de datos
   items:
     - name: Power BI
       logo: powerbi
       color: F2C811
+      tooltip: "Herramienta de Microsoft para dashboards y análisis visual"
     - name: Tableau
       logo: tableau
       color: E97627
+      tooltip: "Software potente para visualización interactiva de datos"
 
 - section: Herramientas de desarrollo
   items:
     - name: Jupyter Notebook
       logo: jupyter
       color: F37626
+      tooltip: "Entorno interactivo para notebooks de datos y código"
     - name: Google Colab
       logo: googlecolab
       color: F9AB00
+      tooltip: "Jupyter notebooks en la nube con soporte para GPU"
     - name: Git
       logo: git
       color: F05032
+      tooltip: "Sistema de control de versiones distribuido"
     - name: Anaconda
       logo: anaconda
       color: 44A833
+      tooltip: "Distribución de Python orientada a ciencia de datos"
     - name: LaTeX
       logo: latex
       color: 008080
+      tooltip: "Sistema de tipografía para documentos técnicos"
     - name: Pandoc
       logo: pandoc
       color: 025B99
+      tooltip: "Conversor universal de formatos de documentos"
     - name: JetBrains Rider
       logo: jetbrains
       color: 000000
+      tooltip: "IDE potente para desarrollo multiplataforma .NET"
 
 - section: Bases de datos
   items:
     - name: MySQL
       logo: mysql
       color: 4479A1
+      tooltip: "Sistema de base de datos relacional popular y de código abierto"
     - name: OracleSQL
       logo: oracle
       color: F80000
+      tooltip: "Sistema de bases de datos empresarial de Oracle"
 
 - section: IDE favoritos
   items:
     - name: VS Code
       logo: visualstudiocode
       color: 007ACC
+      tooltip: "Editor de código moderno y personalizable"
     - name: JupyterLab
       logo: jupyter
       color: F37626
+      tooltip: "Interfaz de desarrollo extensible basada en notebooks"
     - name: RStudio
       logo: rstudio
       color: 75AADB
+      tooltip: "IDE dedicado para desarrollo en R"
     - name: JetBrains Rider
       logo: jetbrains
       color: 000000
+      tooltip: "IDE para .NET, desarrollo web y multiplataforma"
 
 - section: Estilo de trabajo
   items:
     - name: Documentación clara
       logo: book
       color: 4CAF50
+      tooltip: "Escribir código bien documentado facilita el trabajo en equipo"
     - name: Visual Thinking
       logo: drawio
       color: F7761F
+      tooltip: "Usar esquemas e ilustraciones para organizar ideas"
     - name: Colaboración abierta
       logo: people
       color: 00BFA6
+      tooltip: "Participar activamente con otros en el desarrollo"
 
 - section: Deseo aprender
   subsections:
@@ -116,31 +146,40 @@
         - name: JavaScript
           logo: javascript
           color: F7DF1E
+          tooltip: "Lenguaje esencial para desarrollo web frontend"
         - name: TypeScript
           logo: typescript
           color: 3178C6
+          tooltip: "JavaScript con tipado estático opcional"
     - name: Cloud Computing
       items:
         - name: AWS
           logo: amazonaws
           color: FF9900
+          tooltip: "Servicios de computación en la nube de Amazon"
         - name: Google Cloud
           logo: googlecloud
           color: 4285F4
+          tooltip: "Infraestructura en la nube de Google"
     - name: Frameworks y herramientas
       items:
         - name: NetworkX
           logo: python
           color: 4B8BBE
+          tooltip: "Librería para análisis de grafos en Python"
         - name: React
           logo: react
           color: 61DAFB
+          tooltip: "Librería para construir interfaces de usuario"
         - name: Tailwind CSS
           logo: tailwindcss
           color: 38B2AC
+          tooltip: "Framework CSS de utilidad para diseño rápido"
         - name: Vite
           logo: vite
           color: 646CFF
+          tooltip: "Bundler ultrarrápido para desarrollo frontend moderno"
         - name: Next.js
           logo: nextdotjs
           color: 000000
+          tooltip: "Framework React para aplicaciones web estáticas y dinámicas"

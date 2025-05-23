@@ -1147,10 +1147,19 @@ footer a:focus-visible {
 }
 
 .subsection {
-  background-color: rgba(255, 255, 255, 0.05); /* sutil fondo interno */
+  background-color: var(--box-cielo-bg); /* sutil fondo interno */
   padding: 0.75rem 1rem;
-  border-left: 3px solid var(--verde-1); /* indica jerarquía */
+  border-left: 3px solid var(--box-cielo-border); /* indica jerarquía */
   border-radius: 0.5rem;
+  color: var(--box-cielo-text);
+}
+
+.subsection-box {
+  background: var(--box-mar-bg); /* translúcido sobre color pastel */
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  color: var(--box-mar-text);
 }
 
 /* Tags de Skills */

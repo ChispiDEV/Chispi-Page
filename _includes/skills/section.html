@@ -1,41 +1,25 @@
 <!-- skills/section.html -->
-
 {% assign pastel_classes = "pastel-1,pastel-2,pastel-3,pastel-4,pastel-5,pastel-6,pastel-7,pastel-8,pastel-9,pastel-10" | split: "," %}
 {% assign pastel_index = forloop.index0 | default: 0 %}
 {% assign pastel_class = pastel_classes[pastel_index] %}
 
 <section class="box {{ pastel_class }} p-4 rounded mb-4 shadow-sm">
-    <!-- Título de la sección -->
+    <!-- Título principal -->
     <h3 class="h5 fw-bold mb-3">{{ include.section.section }}</h3>
 
-    <!-- Lista de ítems simples -->
+    <!-- Ítems principales (sin subsección) -->
     {% if include.section.items %}
-    <div class="d-flex flex-wrap gap-2">
-        {% for item in include.section.items %}
-        {% include skills/item.html
-        name=item.name
-        logo=item.logo
-        color=item.color %}
-        {% endfor %}
-    </div>
+    {% include skills/category.html items=include.section.items %}
     {% endif %}
 
-    <!-- Subcategorías dentro de la sección -->
+    <!-- Subcategorías -->
     {% if include.section.subsections %}
     <div class="d-flex flex-column gap-3 mt-4">
         {% for category in include.section.subsections %}
-        <div class="subsection bg-white bg-opacity-5 p-3 rounded">
-            {% if category.name %}
-            <h4 class="h6 fw-semibold text-verde-1 mb-2">{{ category.name }}</h4>
-            {% endif %}
-            <div class="d-flex flex-wrap gap-2">
-                {% for item in category.items %}
-                {% include skills/item.html
-                name=item.name
-                logo=item.logo
-                color=item.color %}
-                {% endfor %}
-            </div>
+        <div class="subsection-box">
+            {% include skills/category.html
+            title=category.name
+            items=category.items %}
         </div>
         {% endfor %}
     </div>
