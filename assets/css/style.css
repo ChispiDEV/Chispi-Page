@@ -458,9 +458,10 @@ body.theme-dark .text-box {
 }
 
 .text-verde-1 {
-  color: var(--btn-verde-1);
-  font-weight: 600;
-  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  color: var(--verde-1);
+  font-weight: inherit;
+  font-size: inherit;
+  font-family: inherit;
 }
 
 /* Mejorar foco accesible */

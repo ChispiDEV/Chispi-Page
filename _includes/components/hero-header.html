@@ -13,7 +13,11 @@
         <div class="text-box">
 
             {% assign lang = page.lang | default: 'es' %}
-            {% assign lang_prefix = lang == 'en' | ? '/en' : '' %}
+            {% if lang == 'en' %}
+            {% assign lang_prefix = '/en' %}
+            {% else %}
+            {% assign lang_prefix = '' %}
+            {% endif %}
 
             <!-- Imagen -->
             <img src="{{ include.img | default: '/assets/img/perfil-Chispi.jpg' | relative_url }}"
@@ -23,35 +27,23 @@
 
             <!-- Título -->
             <h1 class="display-3 fw-bold">
-                {% if include.title %}
-                {{ include.title }}
-                {% elsif lang == 'en' %}
-                Hi! I'm <span class="text-verde-1">Chispi</span>
-                {% else %}
-                ¡Hola! Soy <span class="text-verde-1">Chispi</span>
-                {% endif %}
+                {{ include.title | default: lang == 'en'
+                | ternary: "Hi! I'm <span class='text-verde-1'>Chispi</span>",
+                "¡Hola! Soy <span class='text-verde-1'>Chispi</span>" }}
             </h1>
 
             <!-- Subtítulo -->
             <p class="lead fst-italic">
-                {% if include.subtitle %}
-                {{ include.subtitle }}
-                {% elsif lang == 'en' %}
-                Developer | Data Analyst | Content Creator
-                {% else %}
-                Desarrolladora | Analista de Datos | Creadora de contenido
-                {% endif %}
+                {{ include.subtitle | default: lang == 'en'
+                | ternary: "Developer | Data Analyst | Content Creator",
+                "Desarrolladora | Analista de Datos | Creadora de contenido" }}
             </p>
 
             <!-- Descripción -->
             <p class="lead mb-4">
-                {% if include.description %}
-                {{ include.description }}
-                {% elsif lang == 'en' %}
-                Welcome to <strong>Chispi Page</strong>: a place where I share my ideas, projects, devlogs, art and more.
-                {% else %}
-                Bienvenida a <strong>Chispi Page</strong>: un rincón creativo donde comparto mis ideas, proyectos, devlogs, arte y más.
-                {% endif %}
+                {{ include.description | default: lang == 'en'
+                | ternary: "Welcome to <strong>Chispi Page</strong>: a place where I share my ideas, projects, devlogs, art and more.",
+                "Bienvenida a <strong>Chispi Page</strong>: un rincón creativo donde comparto mis ideas, proyectos, devlogs, arte y más." }}
             </p>
 
             <!-- Botones -->
