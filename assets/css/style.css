@@ -1105,31 +1105,45 @@ footer a:focus-visible {
   color: #f0f0f0;
 }
 
-/* Estilo general de las cajas pastel */
 .pastel-box {
-  background-color: #fdf7ff;
-  border: 1px solid #e7e7f5;
   border-radius: var(--border-radius, 1rem);
   padding: 1rem;
   transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .pastel-box:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
-/* Variaciones por color pastel */
-.pastel-1 { background-color: #fef6e4; border-color: #f7e9d7; }
-.pastel-2 { background-color: #e8f8f5; border-color: #d2f1eb; }
-.pastel-3 { background-color: #fcefee; border-color: #f8dbe0; }
-.pastel-4 { background-color: #eef6fd; border-color: #d6e8fa; }
-.pastel-5 { background-color: #f2f9ed; border-color: #d8efcc; }
+/* Colores pastel */
+.pastel-1  { background-color: #fef6e4; border: 1px solid #f7e9d7; color: #7a4e1e; }
+.pastel-2  { background-color: #e8f8f5; border: 1px solid #d2f1eb; color: #14655b; }
+.pastel-3  { background-color: #fcefee; border: 1px solid #f8dbe0; color: #9b3654; }
+.pastel-4  { background-color: #eef6fd; border: 1px solid #d6e8fa; color: #335b9a; }
+.pastel-5  { background-color: #f2f9ed; border: 1px solid #d8efcc; color: #487843; }
+.pastel-6  { background-color: #fff3f1; border: 1px solid #fbd5d0; color: #9b3922; }
+.pastel-7  { background-color: #f5efff; border: 1px solid #dfd7f2; color: #4a3790; }
+.pastel-8  { background-color: #f3f8ff; border: 1px solid #cfe5fb; color: #005691; }
+.pastel-9  { background-color: #fffbe6; border: 1px solid #f6edb8; color: #786600; }
+.pastel-10 { background-color: #ecfdf3; border: 1px solid #c8f5da; color: #17623e; }
+
+/* Títulos y texto controlados */
+.pastel-box h1, .pastel-box h2, .pastel-box h3 {
+  color: var(--title-color);
+  margin-top: 0;
+  font-weight: bold;
+}
+
+.pastel-box p {
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
 
 /* Modo oscuro (opcional) */
 [data-theme="dark"] .pastel-box {
-  background-color: var(--dark-bg, #2a2a2a);
-  border-color: var(--dark-border, #444);
-  color: var(--dark-text, #f0f0f0);
+  background-color: #2a2a2a;
+  border-color: #444;
+  color: #f0f0f0;
 }
 
 /* Tags de Skills */
