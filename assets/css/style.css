@@ -850,7 +850,8 @@ footer a:focus-visible {
 #menu-toggle::before,
 #close-menu-toggle::before,
 #theme-toggle::before,
-#language-toggle::before {
+#language-toggle::before,
+#send-toggle::before {
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
   pointer-events: none; /* que el icono no intercepte clicks/focus */
@@ -862,7 +863,7 @@ footer a:focus-visible {
 #theme-toggle::before { content: "\f186"; }      /* sol */
 [data-theme="dark"] #theme-toggle::before { content: "\f0eb"; } /* luna */
 #language-toggle::before { content: "\f57d"; }   /* globo */
-
+#send-toggle::before { content: "\f1d8"; }
 
 /* ============================
    🖼️ 11. Botones Outline
