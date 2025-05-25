@@ -4,22 +4,41 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Portfolio, Devlogs, Proyectos y Recursos">
-  <title>Iniciando el DevBlog - Semana 1 | Dashboard Personal</title>
+  <title data-i18n="title">Iniciando el DevBlog - Semana 1 | Dashboard Personal</title>
 
   <!-- FontAwesome -->
   <script src="https://kit.fontawesome.com/98ca02228e.js" crossorigin="anonymous"></script>
 
-  <!-- Favicon -->
-  <link rel="icon" href="/Chispi-Page/assets/images/favicon.ico" type="image/x-icon">
+  <!-- Favicon (opcional) -->
+  <link rel="icon" href="/Chispi-Page/assets/icons/favicon.ico" type="image/x-icon">
 
-  <!-- Estilos -->
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/Chispi-Page/assets/css/style.css">
+
+  <!-- Tippy.js CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/dist/tippy.css" />
+  <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/themes/light.css" />
+  <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/themes/material.css" />
+
+  <!-- Tippy.js Script -->
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <script src="https://unpkg.com/tippy.js@6"></script>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KKN4WJL07V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KKN4WJL07V');
+  </script>
 </head>
 
 <body>
-<!-- Navbar -->
-<nav id="navbar" class="navbar fixed-top" style="z-index: 9999;">
+  <!-- Navbar -->
+  <nav id="navbar" class="navbar fixed-top" style="z-index: 9999;">
   <div class="container-fluid d-flex justify-content-between align-items-center">
 
     <!-- Branding con bandera al lado -->
@@ -85,12 +104,27 @@
     
   </ul>
 </div>
+  
+  <!-- Cabecera de cada página -->
+  
+    <header class="hero d-flex align-items-center justify-content-center text-center"
+  data-img-dark="/Chispi-Page/assets/img/hero-bg-dark.jpg"
+  data-img-light="/Chispi-Page/assets/img/hero-bg-light.jpg">
+  
+  <div id="particles-js" 
+       style="position: absolute; width: 100%; height: 100%; z-index: 0;"></div>
 
-<!-- Hero Image dinámico (dark/light) -->
+  <div class="container px-4 px-lg-5 text-center" style="position: relative; z-index: 2;">
+    <div class="text-box">
+      <h1 class="display-3 fw-bold">Iniciando el DevBlog - Semana 1</h1>
+      <p class="lead mt-3">Primera semana del DevBlog.
+ Conecto Notion con mi blog y exporto mis posts automáticamente usando Python.</p>
+    </div>
+  </div>
+</header>
 
 
-
-
+  
 
 <!-- Contenido principal del post -->
 <article class="post container py-5">
