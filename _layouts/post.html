@@ -1,50 +1,51 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="dark">
+<html lang="{{ page.lang | default: site.default_lang }}" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="{{ page.description | default: site.description }}">
-  <title>{{ page.title }} | {{ site.title }}</title>
+  <title data-i18n="title">{{ page.title }} | {{ site.title }}</title>
 
   <!-- FontAwesome -->
   <script src="https://kit.fontawesome.com/98ca02228e.js" crossorigin="anonymous"></script>
 
-  <!-- Favicon -->
-  <link rel="icon" href="{{ '/assets/images/favicon.ico' | relative_url }}" type="image/x-icon">
+  <!-- Favicon (opcional) -->
+  <link rel="icon" href="{{ '/assets/icons/favicon.ico' | relative_url }}" type="image/x-icon">
 
-  <!-- Estilos -->
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+
+  <!-- Tippy.js CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/dist/tippy.css" />
+  <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/themes/light.css" />
+  <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/themes/material.css" />
+
+  <!-- Tippy.js Script -->
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <script src="https://unpkg.com/tippy.js@6"></script>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KKN4WJL07V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KKN4WJL07V');
+  </script>
 </head>
 
 <body>
-<!-- Navbar -->
-{% include layout/navbar.html %}
-
-<!-- Hero Image dinámico (dark/light) -->
-{% assign hero_img_dark = page.hero_image_dark | default: page.hero_image %}
-{% assign hero_img_light = page.hero_image_light | default: page.hero_image %}
-
-{% if page.hero_image_dark or page.hero_image_light %}
-<div class="post-hero-image d-flex align-items-center justify-content-center text-center w-100 mb-5 position-relative"
-     style="background-image: url('{{ page.hero_image_dark | relative_url }}')"
-     data-bg-light="{{ page.hero_image_light | relative_url }}"
-     data-bg-dark="{{ page.hero_image_dark | relative_url }}">
-
-  <!-- Partículas -->
-  <div id="particles-js" class="position-absolute top-0 start-0 w-100 h-100" style="z-index: 0;"></div>
-
-  <!-- Contenido centrado -->
-  <div class="container px-4 px-lg-5" style="position: relative; z-index: 2;">
-    <div class="text-box p-4 rounded">
-      <h1 class="display-3 fw-bold text-verde-1">{{ page.title }}</h1>
-      {% if page.subtitle %}
-      <p class="lead mb-4">{{ page.subtitle }}</p>
-      {% endif %}
-    </div>
-  </div>
-</div>
-{% endif %}
+  <!-- Navbar -->
+  {% include layout/navbar.html %}
+  
+  <!-- Cabecera de cada página -->
+  {% if page.hero %}
+    {% include components/hero-header.html %}
+  {% elsif page.show_header != false %}
+    {% include layout/header.html %}
+  {% endif %}
 
 <!-- Contenido principal del post -->
 <article class="post container py-5">
