@@ -137,15 +137,30 @@ window.addEventListener('DOMContentLoaded', () => {
     themeToggle.setAttribute('aria-haspopup', 'true');
     themeToggle.setAttribute('aria-expanded', 'false');
 
+    const themeButtons = themeMenu.querySelectorAll('[data-theme-choice]');
+
+    const setActiveTheme = (theme) => {
+      html.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      updateImagesForTheme(theme);
+      loadParticles(theme);
+      updateTippyTheme(theme);
+
+      // Actualizar clase activa visualmente
+      themeButtons.forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-theme-choice') === theme);
+      });
+
+    // Al hacer clic en el botón del toggle
     themeToggle.addEventListener('click', (e) => {
       e.stopPropagation();
       const expanded = themeMenu.classList.toggle('show');
       themeToggle.setAttribute('aria-expanded', expanded);
-
       const first = themeMenu.querySelector('button');
       if (first && expanded) first.focus();
     });
 
+    // Cerrar al hacer clic fuera
     document.addEventListener('click', (e) => {
       if (!themeDropdown.contains(e.target)) {
         themeMenu.classList.remove('show');
@@ -153,6 +168,7 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    // Cerrar con Escape
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && themeMenu.classList.contains('show')) {
         themeMenu.classList.remove('show');
@@ -161,38 +177,39 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    // Navegación con teclado en el menú
     themeMenu.addEventListener('keydown', (e) => {
       const items = [...themeMenu.querySelectorAll('button')];
       const i = items.indexOf(document.activeElement);
-
       if (e.key === 'ArrowDown') {
         e.preventDefault();
         items[(i + 1) % items.length]?.focus();
       }
-
       if (e.key === 'ArrowUp') {
         e.preventDefault();
         items[(i - 1 + items.length) % items.length]?.focus();
       }
     });
 
-    themeMenu.querySelectorAll('[data-theme-choice]').forEach(btn => {
+    // Clic en opciones de tema
+    themeButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         const selectedTheme = btn.getAttribute('data-theme-choice');
-        html.setAttribute('data-theme', selectedTheme);
-        try {
-          localStorage.setItem('theme', selectedTheme);
-        } catch {}
-        updateImagesForTheme(selectedTheme);
-        loadParticles(selectedTheme);
-        updateTippyTheme(selectedTheme);
+        setActiveTheme(selectedTheme);
         themeMenu.classList.remove('show');
         themeToggle.setAttribute('aria-expanded', 'false');
         themeToggle.focus();
       });
     });
-  }
 
+    // Inicializar con el tema guardado
+    let initialTheme = 'dark';
+    try {
+      const stored = localStorage.getItem('theme');
+      if (stored) initialTheme = stored;
+    } catch {}
+    setActiveTheme(initialTheme);
+  }
 
   // === CAMBIO DE IDIOMA ===
   if (languageToggle && languageMenu && languageDropdown) {
@@ -285,30 +302,25 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // === INICIALIZACIÓN ===
-  let initialTheme = 'dark';
-  try {
-    const stored = localStorage.getItem('theme');
-    if (stored === 'light' || stored === 'dark') initialTheme = stored;
-  } catch {}
-  html.setAttribute('data-theme', initialTheme);
-  updateImagesForTheme(initialTheme);
-  loadParticles(initialTheme);
-});
-
 // Inicializar tooltips
-tippy('[data-tippy-content]', {
-  animation: 'shift-away',
-  theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'material' : 'light',
-  delay: [100, 50],
-  arrow: true,
-});
+    tippy('[data-tippy-content]', {
+      animation: 'shift-away',
+      theme: (['dark', 'colorblind-dark'].includes(document.documentElement.getAttribute('data-theme')))
+          ? 'material'
+          : 'light',
+      delay: [100, 50],
+      arrow: true,
+    });
 
 // Función para actualizar los tooltips si cambia el tema
 function updateTippyTheme(theme) {
+  // Asignar el tema de tippy según el modo actual
+  const tippyTheme = (theme === 'dark' || theme === 'colorblind-dark') ? 'material' : 'light';
+
   document.querySelectorAll('[data-tippy-content]').forEach(el => {
     if (el._tippy) {
-      el._tippy.setProps({ theme: theme === 'dark' ? 'material' : 'light' });
+      el._tippy.setProps({ theme: tippyTheme });
     }
   });
 }
+
