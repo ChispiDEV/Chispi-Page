@@ -82,8 +82,43 @@
           </li>
         </ul>
       </div>
+      
+      <!-- Menú desplegable de temas -->
+      <div class="dropdown" id="theme-dropdown">
+        <button class="icon-button dropdown-toggle"
+                id="theme-toggle"
+                type="button"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-label="Change theme"
+                title="Change theme">
+        </button>
 
-      <button class="icon-button" id="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema"></button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="theme-toggle">
+          <li>
+            <button class="dropdown-item icon-theme-light" data-theme-choice="light">
+              Light
+            </button>
+          </li>
+          <li>
+            <button class="dropdown-item icon-theme-dark" data-theme-choice="dark">
+              Dark
+            </button>
+          </li>
+          <li>
+            <button class="dropdown-item icon-theme-colorblind" data-theme-choice="colorblind">
+              Colorblind
+            </button>
+          </li>
+          <li>
+            <button class="dropdown-item icon-theme-colorblind-dark" data-theme-choice="colorblind-dark">
+              Colorblind Dark
+            </button>
+          </li>
+        </ul>
+      </div>
+
+
       <button class="icon-button" id="menu-toggle" aria-label="Abrir menú" title="Menú"></button>
     </div>
   </div>

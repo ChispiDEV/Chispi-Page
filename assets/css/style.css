@@ -3,17 +3,17 @@
    ============================ */
 
 :root {
-  /* 🎨 Paleta de colores base */
-  --primary-color: #0d6efd;
-  --secondary-color: #6c757d;
-  --success-color: #198754;
-  --danger-color: #dc3545;
-  --warning-color: #ffc107;
-  --info-color: #0dcaf0;
-  --light-color: #f8f9fa;
-  --dark-color: #212529;
+  /* 🎨 Colores base */
+  --primary-color: #3cc88f;      /* Verde menta armónico con acento verde */
+  --secondary-color: #8a8d91;    /* Gris suave, legible y moderno */
+  --success-color: #28a97b;      /* Verde vibrante complementario */
+  --danger-color: #e36565;       /* Rojo coral amigable */
+  --warning-color: #f5c56b;      /* Amarillo cálido, no agresivo */
+  --info-color: #57c4dc;         /* Celeste suave */
+  --light-color: #f9fafb;        /* Muy claro, fondo ideal */
+  --dark-color: #1e1e1e;         /* Oscuro elegante, sin llegar a negro absoluto */
 
-  /* 🧠 Accesibilidad y focus */
+  /* 🧠 Accesibilidad */
   --focus-outline: 2px solid var(--info-color);
   --focus-outline-offset: 2px;
 
@@ -34,7 +34,7 @@
   --border-radius: 0.375rem;
   --transition-speed: 0.3s;
 
-  /* 🧱 Layout & fondo */
+  /* 🧱 Fondo y layout */
   --bg-color: #ffffff;
   --text-color: #212529;
   --overlay-bg: rgba(255, 255, 255, 0.8);
@@ -83,17 +83,41 @@
   --box-uva-bg: #e6ccff; --box-uva-text: #4e2a84; --box-uva-border: #d1b3ff;
   --box-coral-bg: #ffe0e0; --box-coral-text: #7b2c2c; --box-coral-border: #f7b3b3;
   --box-fuego-bg: #ffe9cc; --box-fuego-text: #6b3e00; --box-fuego-border: #fcd2a8;
+
+  /* 🎨 Colores pastel */
+  --pastel-1-bg: #fef6e4; --pastel-1-border: #f7e9d7; --pastel-1-text: #7a4e1e;
+  --pastel-2-bg: #e8f8f5; --pastel-2-border: #d2f1eb; --pastel-2-text: #14655b;
+  --pastel-3-bg: #fcefee; --pastel-3-border: #f8dbe0; --pastel-3-text: #9b3654;
+  --pastel-4-bg: #eef6fd; --pastel-4-border: #d6e8fa; --pastel-4-text: #335b9a;
+  --pastel-5-bg: #f2f9ed; --pastel-5-border: #d8efcc; --pastel-5-text: #487843;
+  --pastel-6-bg: #fff3f1; --pastel-6-border: #fbd5d0; --pastel-6-text: #9b3922;
+  --pastel-7-bg: #f5efff; --pastel-7-border: #dfd7f2; --pastel-7-text: #4a3790;
+  --pastel-8-bg: #f3f8ff; --pastel-8-border: #cfe5fb; --pastel-8-text: #005691;
+  --pastel-9-bg: #fffbe6; --pastel-9-border: #f6edb8; --pastel-9-text: #786600;
+  --pastel-10-bg: #ecfdf3; --pastel-10-border: #c8f5da; --pastel-10-text: #17623e;
 }
 
-/* ============================
-   🌙 2. Variables Modo Oscuro
-   ============================ */
+
+  /* ============================
+     🌙 2. Variables Modo Oscuro
+     ============================ */
 
 [data-theme="dark"] {
+  /* 🎨 Colores base */
+  --primary-color: #57e6b6;      /* Verde menta brillante, buen contraste */
+  --secondary-color: #999999;    /* Gris claro legible en fondos oscuros */
+  --success-color: #3cc88f;      /* Verde más saturado en fondo oscuro */
+  --danger-color: #ff6b6b;       /* Rojo neón coral visible sin herir la vista */
+  --warning-color: #ffc078;      /* Amarillo dorado pero suave */
+  --info-color: #66d9ef;         /* Azul cielo adaptado a fondo oscuro */
+  --light-color: #2b2b2b;        /* Gris oscuro para "light" en tema oscuro */
+  --dark-color: #121212;         /* Fondo profundo */
+  
   /* 🧠 Accesibilidad y focus */
   --focus-outline: 2px solid var(--accent-text);
   --focus-outline-offset: 2px;
-  
+
+  /* 🧱 Fondo y layout */
   --bg-color: #121212;
   --text-color: #f1f1f1;
   --overlay-bg: rgba(0, 0, 0, 0.7);
@@ -102,15 +126,18 @@
   --footer-border: #333333;
   --navbar-border: #333333;
 
+  /* ✍️ Tipografía secundaria */
   --muted-text: #bbbbbb;
   --accent-text: #57e6b6;
   --icon-color: #f1f1f1;
 
+  /* 🌿 Tonos verdes */
   --verde-1: #57e6b6;
   --verde-2: #3cc88f;
   --verde-3: #2ea97b;
   --verde-4: #1a5544;
 
+  /* 🔘 Botones */
   --btn-verde-1: #90ee90;
   --btn-verde-2: #7edc7e;
   --btn-verde-3: #6ecf6e;
@@ -121,6 +148,7 @@
   --btn-background-color: rgba(0, 0, 0, 0.2);
   --btn-text-hover-light: #121212;
 
+  /* 📝 Contenido */
   --post-title-color: #90ee90;
   --meta-text-color: #bbbbbb;
   --summary-bg: #1d2b1f;
@@ -129,6 +157,7 @@
   --tag-text-default: #bfffc0;
   --title-color: #f0f0f0;
 
+  /* 📦 Cajas decorativas */
   --box-sol-bg: #5f5e2e; --box-sol-text: #fffdd7; --box-sol-border: #888755;
   --box-mar-bg: #2d3a4d; --box-mar-text: #ddefff; --box-mar-border: #455a75;
   --box-flor-bg: #442833; --box-flor-text: #ffd7e6; --box-flor-border: #a65376;
@@ -137,6 +166,182 @@
   --box-uva-bg: #3b2f47; --box-uva-text: #f1e7ff; --box-uva-border: #6a4e7b;
   --box-coral-bg: #4a2d2d; --box-coral-text: #ffe0e0; --box-coral-border: #a06666;
   --box-fuego-bg: #503922; --box-fuego-text: #ffeeda; --box-fuego-border: #8c6a45;
+
+  /* Pasteles adaptados para contraste oscuro */
+  --pastel-1-bg: #4a4033; --pastel-1-border: #7a6a58; --pastel-1-text: #f9e9c7;
+  --pastel-2-bg: #2f4a47; --pastel-2-border: #4e736e; --pastel-2-text: #b1ebe0;
+  --pastel-3-bg: #4b353a; --pastel-3-border: #905a6a; --pastel-3-text: #ffd2e0;
+  --pastel-4-bg: #3a4a5a; --pastel-4-border: #5f7890; --pastel-4-text: #cfe5fa;
+  --pastel-5-bg: #394a39; --pastel-5-border: #607a60; --pastel-5-text: #d8efcc;
+  --pastel-6-bg: #4b3b36; --pastel-6-border: #996a5a; --pastel-6-text: #ffe0d9;
+  --pastel-7-bg: #443a5a; --pastel-7-border: #7a6a99; --pastel-7-text: #e0dbff;
+  --pastel-8-bg: #3a495a; --pastel-8-border: #5a7899; --pastel-8-text: #d6ecff;
+  --pastel-9-bg: #4a472f; --pastel-9-border: #797444; --pastel-9-text: #fff6c4;
+  --pastel-10-bg: #2f4a3a; --pastel-10-border: #4c7a5d; --pastel-10-text: #c8f5da;
+}
+
+/* ============================
+   👁️ 1.2. Variables Modo Daltónico
+   ============================ */
+
+[data-theme="colorblind"] {
+  /* 🎨 Colores base */
+  --primary-color: #0072b2;      /* Azul accesible CUD */
+  --secondary-color: #999999;    /* Gris neutro y estable */
+  --success-color: #009e73;      /* Verde CUD (distingue del rojo) */
+  --danger-color: #d55e00;       /* Naranja oscuro en vez de rojo puro */
+  --warning-color: #e69f00;      /* Amarillo fuerte pero no brillante */
+  --info-color: #56b4e9;         /* Azul claro CUD */
+  --light-color: #f7f7f7;        /* Muy claro, neutral */
+  --dark-color: #2b2b2b;         /* Oscuro sin ser puro negro */
+
+  /* 🧠 Accesibilidad */
+  --focus-outline: 2px solid var(--info-color);
+  --focus-outline-offset: 2px;
+
+  /* 🧱 Fondo y layout */
+  --bg-color: #ffffff;
+  --text-color: #212529;
+  --overlay-bg: rgba(255, 255, 255, 0.85);
+  --footer-bg: #ffffff;
+  --navbar-bg: #ffffff;
+  --footer-border: #cccccc;
+  --navbar-border: #cccccc;
+
+  /* ✍️ Tipografía secundaria */
+  --muted-text: #666666;
+  --accent-text: #0072b2;
+  --icon-color: #212529;
+
+  /* 🌿 Tonos verdes */
+  --verde-1: #0072b2;
+  --verde-2: #005a8d;
+  --verde-3: #004b75;
+  --verde-4: #003b5f;
+
+  /* 🔘 Botones */
+  --btn-verde-1: #0072b2;
+  --btn-verde-2: #005a8d;
+  --btn-verde-3: #004b75;
+  --btn-verde-4: #003b5f;
+  --btn-rojo-1: #d55e00;
+  --btn-rojo-2: #b34700;
+  --btn-text-color: #ffffff;
+  --btn-background-color: rgba(0, 114, 178, 0.2);
+  --btn-text-hover-light: #ffffff;
+
+  /* 📝 Contenido */
+  --post-title-color: #0072b2;
+  --meta-text-color: #666666;
+  --summary-bg: #e6f2f9;
+  --summary-text: #004b75;
+  --tag-bg-default: #cfe7f2;
+  --tag-text-default: #004b75;
+  --title-color: #212529;
+
+  /* 📦 Cajas decorativas */
+  --box-sol-bg: #fff7cc; --box-sol-text: #5a4a00; --box-sol-border: #f0e68c;
+  --box-mar-bg: #d0ecf8; --box-mar-text: #1c3f57; --box-mar-border: #a5d0e7;
+  --box-flor-bg: #e8d6e8; --box-flor-text: #572957; --box-flor-border: #d1b3d1;
+  --box-hoja-bg: #e0f2f1; --box-hoja-text: #104f4f; --box-hoja-border: #b2dfdb;
+  --box-cielo-bg: #d6f4ff; --box-cielo-text: #004f66; --box-cielo-border: #ace7ff;
+  --box-uva-bg: #d9cfff; --box-uva-text: #3e2f76; --box-uva-border: #c0b0e6;
+  --box-coral-bg: #ffd6cc; --box-coral-text: #5a2b1e; --box-coral-border: #f7b3a0;
+  --box-fuego-bg: #ffe2cc; --box-fuego-text: #5f3b00; --box-fuego-border: #f8c894;
+
+  /* 🎨 Colores pastel */
+  --pastel-1-bg: #f0f5f9; --pastel-1-border: #d0e4f2; --pastel-1-text: #003d66;
+  --pastel-2-bg: #e5f9f7; --pastel-2-border: #c0ede8; --pastel-2-text: #005652;
+  --pastel-3-bg: #ffe9d9; --pastel-3-border: #ffd1b3; --pastel-3-text: #802d00;
+  --pastel-4-bg: #e6eef9; --pastel-4-border: #cddff2; --pastel-4-text: #204060;
+  --pastel-5-bg: #ecf9f1; --pastel-5-border: #d1f0dd; --pastel-5-text: #1e4d3b;
+  --pastel-6-bg: #fff0e5; --pastel-6-border: #ffd9c2; --pastel-6-text: #8c3e00;
+  --pastel-7-bg: #f0e6ff; --pastel-7-border: #d6ccff; --pastel-7-text: #3c2e77;
+  --pastel-8-bg: #e6f7ff; --pastel-8-border: #cdeeff; --pastel-8-text: #004f66;
+  --pastel-9-bg: #fff9cc; --pastel-9-border: #f5e68c; --pastel-9-text: #665c00;
+  --pastel-10-bg: #e6f9f1; --pastel-10-border: #c8f5da; --pastel-10-text: #146655;
+}
+
+/* ============================
+   👁 2.2. Variables Modo Daltónico Oscuro
+   ============================ */
+
+[data-theme="colorblind-dark"] {
+  /* 🎨 Colores base */
+  --primary-color: #56b4e9;      /* Azul claro CUD */
+  --secondary-color: #bbbbbb;    /* Gris claro para contraste */
+  --success-color: #009e73;      /* Verde CUD accesible */
+  --danger-color: #e69f00;       /* Naranja fuerte, en vez de rojo */
+  --warning-color: #ffd700;      /* Amarillo cálido y visible */
+  --info-color: #a1d8f0;         /* Azul hielo claro */
+  --light-color: #2a2a2a;        /* “Light” relativo para fondo oscuro */
+  --dark-color: #121212;
+
+  /* 🧠 Accesibilidad */
+  --focus-outline: 2px solid var(--info-color);
+  --focus-outline-offset: 2px;
+
+  /* 🧱 Fondo y layout */
+  --bg-color: #121212;
+  --text-color: #f1f1f1;
+  --overlay-bg: rgba(0, 0, 0, 0.85);
+  --footer-bg: #1a1a1a;
+  --navbar-bg: #1a1a1a;
+  --footer-border: #333333;
+  --navbar-border: #333333;
+
+  /* ✍️ Tipografía secundaria */
+  --muted-text: #888888;
+  --accent-text: #56b4e9;
+  --icon-color: #f1f1f1;
+
+  /* 🌿 Tonos verdes */
+  --verde-1: #56b4e9;
+  --verde-2: #429fcd;
+  --verde-3: #3685a9;
+  --verde-4: #2b6d8a;
+
+  /* 🔘 Botones */
+  --btn-verde-1: #56b4e9;
+  --btn-verde-2: #429fcd;
+  --btn-verde-3: #3685a9;
+  --btn-verde-4: #2b6d8a;
+  --btn-rojo-1: #e69f00;
+  --btn-rojo-2: #cc8c00;
+  --btn-text-color: #121212;
+  --btn-background-color: rgba(86, 180, 233, 0.15);
+  --btn-text-hover-light: #121212;
+
+  /* 📝 Contenido */
+  --post-title-color: #56b4e9;
+  --meta-text-color: #aaaaaa;
+  --summary-bg: #1b2a33;
+  --summary-text: #ccefff;
+  --tag-bg-default: #1e3540;
+  --tag-text-default: #a1d8f0;
+  --title-color: #f1f1f1;
+
+  /* 📦 Cajas decorativas */
+  --box-sol-bg: #4d4c24; --box-sol-text: #fffdd7; --box-sol-border: #888755;
+  --box-mar-bg: #213846; --box-mar-text: #ddefff; --box-mar-border: #456a75;
+  --box-flor-bg: #3d3141; --box-flor-text: #ffd7e6; --box-flor-border: #9c6a91;
+  --box-hoja-bg: #1f3a39; --box-hoja-text: #ccf2ec; --box-hoja-border: #4e7874;
+  --box-cielo-bg: #1d3642; --box-cielo-text: #cdefff; --box-cielo-border: #4f7d96;
+  --box-uva-bg: #372f4a; --box-uva-text: #f1e7ff; --box-uva-border: #8c76b3;
+  --box-coral-bg: #4a2d2d; --box-coral-text: #ffe0e0; --box-coral-border: #c47766;
+  --box-fuego-bg: #493821; --box-fuego-text: #ffeeda; --box-fuego-border: #a88663;
+
+  /* 🎨 Colores pastel */
+  --pastel-1-bg: #1e2c33; --pastel-1-border: #3a5166; --pastel-1-text: #a1cde6;
+  --pastel-2-bg: #1f3d3b; --pastel-2-border: #39746f; --pastel-2-text: #bce9e5;
+  --pastel-3-bg: #4a2e1a; --pastel-3-border: #a35f2a; --pastel-3-text: #ffe5cc;
+  --pastel-4-bg: #202b3d; --pastel-4-border: #3f577a; --pastel-4-text: #a9c9f2;
+  --pastel-5-bg: #1d372d; --pastel-5-border: #4e7a64; --pastel-5-text: #c3f1e2;
+  --pastel-6-bg: #4a3021; --pastel-6-border: #a8704a; --pastel-6-text: #ffd7bb;
+  --pastel-7-bg: #2f2744; --pastel-7-border: #665d99; --pastel-7-text: #e6ddff;
+  --pastel-8-bg: #1e2e3b; --pastel-8-border: #497799; --pastel-8-text: #cceeff;
+  --pastel-9-bg: #4c441a; --pastel-9-border: #9e9140; --pastel-9-text: #fff5cc;
+  --pastel-10-bg: #193b31; --pastel-10-border: #529276; --pastel-10-text: #d2ffea;
 }
 
 /* ============================
@@ -799,6 +1004,10 @@ footer a:focus-visible {
 }
 
 /* Iconos personalizados FontAwesome */
+.icon-theme-light::before,
+.icon-theme-dark::before,
+.icon-theme-colorblind::before,
+.icon-theme-colorblind-dark::before,
 .icon-github::before,
 .icon-linkedin::before,
 .icon-email::before {
@@ -810,10 +1019,16 @@ footer a:focus-visible {
   transition: color 0.3s;
 }
 
+/* Asignar códigos Unicode de Font Awesome */
+.icon-theme-light::before { content: "\f185"; } /* fa-sun */
+.icon-theme-dark::before { content: "\f186"; } /* fa-moon */
+.icon-theme-colorblind::before { content: "\f5b0"; } /* fa-low-vision */
+.icon-theme-colorblind-dark::before{ content: "\f070"; } /* fa-eye-slash (como alternativa) */
 .icon-github::before { content: "\f09b"; }
 .icon-linkedin::before { content: "\f08c"; }
 .icon-email::before { content: "\f0e0"; }
 
+.dropdown-item:hover::before,
 .icon-github:hover::before,
 .icon-linkedin:hover::before,
 .icon-email:hover::before {
@@ -860,8 +1075,7 @@ footer a:focus-visible {
 
 #menu-toggle::before { content: "\f0c9"; }       /* hamburguesa */
 #close-menu-toggle::before { content: "\f00d"; } /* X */
-#theme-toggle::before { content: "\f186"; }      /* sol */
-[data-theme="dark"] #theme-toggle::before { content: "\f0eb"; } /* luna */
+#theme-toggle::before { content: "f042"; }      /* circulo blanco y negro */
 #language-toggle::before { content: "\f57d"; }   /* globo */
 #send-toggle::before { content: "\f1d8"; }
 
@@ -1115,18 +1329,6 @@ footer a:focus-visible {
 .pastel-box:hover {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
-
-/* Colores pastel */
-.pastel-1  { background-color: #fef6e4; border: 1px solid #f7e9d7; color: #7a4e1e; }
-.pastel-2  { background-color: #e8f8f5; border: 1px solid #d2f1eb; color: #14655b; }
-.pastel-3  { background-color: #fcefee; border: 1px solid #f8dbe0; color: #9b3654; }
-.pastel-4  { background-color: #eef6fd; border: 1px solid #d6e8fa; color: #335b9a; }
-.pastel-5  { background-color: #f2f9ed; border: 1px solid #d8efcc; color: #487843; }
-.pastel-6  { background-color: #fff3f1; border: 1px solid #fbd5d0; color: #9b3922; }
-.pastel-7  { background-color: #f5efff; border: 1px solid #dfd7f2; color: #4a3790; }
-.pastel-8  { background-color: #f3f8ff; border: 1px solid #cfe5fb; color: #005691; }
-.pastel-9  { background-color: #fffbe6; border: 1px solid #f6edb8; color: #786600; }
-.pastel-10 { background-color: #ecfdf3; border: 1px solid #c8f5da; color: #17623e; }
 
 /* Títulos y texto controlados */
 .pastel-box h1, .pastel-box h2, .pastel-box h3 {
