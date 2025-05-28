@@ -1022,8 +1022,8 @@ footer a:focus-visible {
 /* Asignar códigos Unicode de Font Awesome */
 .icon-theme-light::before { content: "\f185"; } /* fa-sun */
 .icon-theme-dark::before { content: "\f186"; } /* fa-moon */
-.icon-theme-colorblind::before { content: "\f5b0"; } /* fa-low-vision */
-.icon-theme-colorblind-dark::before{ content: "\f070"; } /* fa-eye-slash (como alternativa) */
+.icon-theme-colorblind::before { content: "\f070"; } /* fa-low-vision */
+.icon-theme-colorblind-dark::before{ content: "\f2a8"; } /* fa-eye-slash (como alternativa) */
 .icon-github::before { content: "\f09b"; }
 .icon-linkedin::before { content: "\f08c"; }
 .icon-email::before { content: "\f0e0"; }
@@ -1075,7 +1075,7 @@ footer a:focus-visible {
 
 #menu-toggle::before { content: "\f0c9"; }       /* hamburguesa */
 #close-menu-toggle::before { content: "\f00d"; } /* X */
-#theme-toggle::before { content: "f042"; }      /* circulo blanco y negro */
+#theme-toggle::before { content: "\f042"; }      /* circulo blanco y negro */
 #language-toggle::before { content: "\f57d"; }   /* globo */
 #send-toggle::before { content: "\f1d8"; }
 
