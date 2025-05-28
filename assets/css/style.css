@@ -1020,7 +1020,7 @@ footer a:focus-visible {
 }
 
 /* Asignar códigos Unicode de Font Awesome */
-.icon-theme-light::before { content: "\f185"; } /* fa-sun */
+.icon-theme-light::before { content: "\f0eb"; } /* fa-lightbulb */
 .icon-theme-dark::before { content: "\f186"; } /* fa-moon */
 .icon-theme-colorblind::before { content: "\f070"; } /* fa-low-vision */
 .icon-theme-colorblind-dark::before{ content: "\f2a8"; } /* fa-eye-slash (como alternativa) */
