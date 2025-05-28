@@ -5,6 +5,8 @@ window.addEventListener('DOMContentLoaded', () => {
   const sidebarWrapper = document.getElementById('sidebar-wrapper');
   const scrollToTop = document.querySelector('.scroll-to-top');
   const themeToggle = document.getElementById('theme-toggle');
+  const themeDropdown = document.getElementById('theme-dropdown');
+  const themeMenu = themeDropdown?.querySelector('.dropdown-menu');
   const languageToggle = document.getElementById('language-toggle');
   const languageDropdown = languageToggle?.closest('.dropdown');
   const languageMenu = languageDropdown?.querySelector('.dropdown-menu');
@@ -130,20 +132,67 @@ window.addEventListener('DOMContentLoaded', () => {
     })();
   }
 
-// === CAMBIO DE TEMA ===
-  if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      const current = html.getAttribute('data-theme') || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      updateImagesForTheme(next);
-      loadParticles(next);
-      updateTippyTheme(next);  // <--- añadir aquí para sincronizar tooltips
-      try {
-        localStorage.setItem('theme', next);
-      } catch {}
+  // === CAMBIO DE TEMA MULTI-OPCIÓN ===
+  if (themeToggle && themeDropdown && themeMenu) {
+    themeToggle.setAttribute('aria-haspopup', 'true');
+    themeToggle.setAttribute('aria-expanded', 'false');
+
+    themeToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const expanded = themeMenu.classList.toggle('show');
+      themeToggle.setAttribute('aria-expanded', expanded);
+
+      const first = themeMenu.querySelector('button');
+      if (first && expanded) first.focus();
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!themeDropdown.contains(e.target)) {
+        themeMenu.classList.remove('show');
+        themeToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && themeMenu.classList.contains('show')) {
+        themeMenu.classList.remove('show');
+        themeToggle.setAttribute('aria-expanded', 'false');
+        themeToggle.focus();
+      }
+    });
+
+    themeMenu.addEventListener('keydown', (e) => {
+      const items = [...themeMenu.querySelectorAll('button')];
+      const i = items.indexOf(document.activeElement);
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        items[(i + 1) % items.length]?.focus();
+      }
+
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        items[(i - 1 + items.length) % items.length]?.focus();
+      }
+    });
+
+    themeMenu.querySelectorAll('[data-theme-choice]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const selectedTheme = btn.getAttribute('data-theme-choice');
+        html.setAttribute('data-theme', selectedTheme);
+        try {
+          localStorage.setItem('theme', selectedTheme);
+        } catch {}
+        updateImagesForTheme(selectedTheme);
+        loadParticles(selectedTheme);
+        updateTippyTheme(selectedTheme);
+        themeMenu.classList.remove('show');
+        themeToggle.setAttribute('aria-expanded', 'false');
+        themeToggle.focus();
+      });
     });
   }
+
 
   // === CAMBIO DE IDIOMA ===
   if (languageToggle && languageMenu && languageDropdown) {

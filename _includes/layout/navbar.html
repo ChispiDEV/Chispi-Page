@@ -49,8 +49,43 @@
           </li>
         </ul>
       </div>
+      
+      <!-- Menú desplegable de temas -->
+      <div class="dropdown" id="theme-dropdown">
+        <button class="icon-button dropdown-toggle"
+                id="theme-toggle"
+                type="button"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-label="{% if page.lang == 'es' %}Cambiar tema{% else %}Change theme{% endif %}"
+                title="{% if page.lang == 'es' %}Cambiar tema{% else %}Change theme{% endif %}">
+        </button>
 
-      <button class="icon-button" id="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema"></button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="theme-toggle">
+          <li>
+            <button class="dropdown-item icon-theme-light" data-theme-choice="light">
+              {% if page.lang == 'es' %}Claro{% else %}Light{% endif %}
+            </button>
+          </li>
+          <li>
+            <button class="dropdown-item icon-theme-dark" data-theme-choice="dark">
+              {% if page.lang == 'es' %}Oscuro{% else %}Dark{% endif %}
+            </button>
+          </li>
+          <li>
+            <button class="dropdown-item icon-theme-colorblind" data-theme-choice="colorblind">
+              {% if page.lang == 'es' %}Daltónico{% else %}Colorblind{% endif %}
+            </button>
+          </li>
+          <li>
+            <button class="dropdown-item icon-theme-colorblind-dark" data-theme-choice="colorblind-dark">
+              {% if page.lang == 'es' %}Daltónico Oscuro{% else %}Colorblind Dark{% endif %}
+            </button>
+          </li>
+        </ul>
+      </div>
+
+
       <button class="icon-button" id="menu-toggle" aria-label="Abrir menú" title="Menú"></button>
     </div>
   </div>
