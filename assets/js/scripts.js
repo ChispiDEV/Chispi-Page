@@ -16,12 +16,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // === MENÚ LATERAL ===
   if (menuToggle && closeMenuToggle && sidebarWrapper) {
-    // Asegurarse que sidebar puede recibir foco para accesibilidad
     if (!sidebarWrapper.hasAttribute('tabindex')) {
       sidebarWrapper.setAttribute('tabindex', '-1');
     }
 
-    // Inicializa aria-expanded y aria-labels para accesibilidad
     menuToggle.setAttribute('aria-controls', 'sidebar-wrapper');
     menuToggle.setAttribute('aria-expanded', 'false');
     menuToggle.setAttribute('aria-label', 'Abrir menú lateral');
@@ -34,8 +32,6 @@ window.addEventListener('DOMContentLoaded', () => {
       menuToggle.style.display = 'flex';
       menuToggle.setAttribute('aria-expanded', 'false');
       menuToggle.focus();
-
-      // Remover focus trap
       sidebarWrapper.removeEventListener('keydown', trapFocus);
     };
 
@@ -46,15 +42,12 @@ window.addEventListener('DOMContentLoaded', () => {
         );
         const firstFocusable = focusableElements[0];
         const lastFocusable = focusableElements[focusableElements.length - 1];
-
         if (e.shiftKey) {
-          // Shift + Tab
           if (document.activeElement === firstFocusable) {
             e.preventDefault();
             lastFocusable.focus();
           }
         } else {
-          // Tab
           if (document.activeElement === lastFocusable) {
             e.preventDefault();
             firstFocusable.focus();
@@ -70,8 +63,6 @@ window.addEventListener('DOMContentLoaded', () => {
       closeMenuToggle.style.display = 'flex';
       menuToggle.setAttribute('aria-expanded', 'true');
       sidebarWrapper.focus();
-
-      // Añadir focus trap
       sidebarWrapper.addEventListener('keydown', trapFocus);
     });
 
@@ -82,10 +73,9 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     document.addEventListener('click', (e) => {
-      const isClickInside = sidebarWrapper.contains(e.target);
-      const isClickToggle = menuToggle.contains(e.target);
-      const isOpen = sidebarWrapper.classList.contains('active');
-      if (!isClickInside && !isClickToggle && isOpen) closeSidebar();
+      if (!sidebarWrapper.contains(e.target) && !menuToggle.contains(e.target) && sidebarWrapper.classList.contains('active')) {
+        closeSidebar();
+      }
     });
 
     document.addEventListener('keydown', (e) => {
@@ -132,7 +122,7 @@ window.addEventListener('DOMContentLoaded', () => {
     })();
   }
 
-  // === CAMBIO DE TEMA MULTI-OPCIÓN ===
+  // === TEMA ===
   if (themeToggle && themeDropdown && themeMenu) {
     themeToggle.setAttribute('aria-haspopup', 'true');
     themeToggle.setAttribute('aria-expanded', 'false');
@@ -146,12 +136,11 @@ window.addEventListener('DOMContentLoaded', () => {
       loadParticles(theme);
       updateTippyTheme(theme);
 
-      // Actualizar clase activa visualmente
       themeButtons.forEach(btn => {
         btn.classList.toggle('active', btn.getAttribute('data-theme-choice') === theme);
       });
+    };
 
-    // Al hacer clic en el botón del toggle
     themeToggle.addEventListener('click', (e) => {
       e.stopPropagation();
       const expanded = themeMenu.classList.toggle('show');
@@ -160,7 +149,6 @@ window.addEventListener('DOMContentLoaded', () => {
       if (first && expanded) first.focus();
     });
 
-    // Cerrar al hacer clic fuera
     document.addEventListener('click', (e) => {
       if (!themeDropdown.contains(e.target)) {
         themeMenu.classList.remove('show');
@@ -168,7 +156,6 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Cerrar con Escape
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && themeMenu.classList.contains('show')) {
         themeMenu.classList.remove('show');
@@ -177,21 +164,18 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Navegación con teclado en el menú
     themeMenu.addEventListener('keydown', (e) => {
       const items = [...themeMenu.querySelectorAll('button')];
       const i = items.indexOf(document.activeElement);
       if (e.key === 'ArrowDown') {
         e.preventDefault();
         items[(i + 1) % items.length]?.focus();
-      }
-      if (e.key === 'ArrowUp') {
+      } else if (e.key === 'ArrowUp') {
         e.preventDefault();
         items[(i - 1 + items.length) % items.length]?.focus();
       }
     });
 
-    // Clic en opciones de tema
     themeButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         const selectedTheme = btn.getAttribute('data-theme-choice');
@@ -202,7 +186,7 @@ window.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Inicializar con el tema guardado
+    // Tema inicial
     let initialTheme = 'dark';
     try {
       const stored = localStorage.getItem('theme');
@@ -220,7 +204,6 @@ window.addEventListener('DOMContentLoaded', () => {
       e.stopPropagation();
       const expanded = languageMenu.classList.toggle('show');
       languageToggle.setAttribute('aria-expanded', expanded);
-
       const first = languageMenu.querySelector('a, button');
       if (first && expanded) first.focus();
     });
@@ -247,17 +230,14 @@ window.addEventListener('DOMContentLoaded', () => {
       if (e.key === 'ArrowDown') {
         e.preventDefault();
         items[(i + 1) % items.length]?.focus();
-      }
-
-      if (e.key === 'ArrowUp') {
+      } else if (e.key === 'ArrowUp') {
         e.preventDefault();
         items[(i - 1 + items.length) % items.length]?.focus();
       }
     });
   }
 
-
-  // === CARGAR PARTICULAS SEGÚN TEMA ===
+  // === FUNCIONES DE TEMA ===
   function loadParticles(theme) {
     const configFile = theme === 'dark' ? 'particles-dark.json' : 'particles-light.json';
     if (window.pJSDom && window.pJSDom.length > 0) {
@@ -267,7 +247,6 @@ window.addEventListener('DOMContentLoaded', () => {
     particlesJS.load('particles-js', `${BASE_URL}/assets/particles/${configFile}`);
   }
 
-  // === ACTUALIZAR IMÁGENES Y FONDOS ===
   function updateImagesForTheme(theme) {
     const heroHeader = document.querySelector('header.hero');
     if (heroHeader?.dataset.imgDark && heroHeader?.dataset.imgLight) {
@@ -302,25 +281,23 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-// Inicializar tooltips
-    tippy('[data-tippy-content]', {
-      animation: 'shift-away',
-      theme: (['dark', 'colorblind-dark'].includes(document.documentElement.getAttribute('data-theme')))
-          ? 'material'
-          : 'light',
-      delay: [100, 50],
-      arrow: true,
+  function updateTippyTheme(theme) {
+    const tippyTheme = (theme === 'dark' || theme === 'colorblind-dark') ? 'material' : 'light';
+    document.querySelectorAll('[data-tippy-content]').forEach(el => {
+      if (el._tippy) {
+        el._tippy.setProps({ theme: tippyTheme });
+      }
     });
+  }
 
-// Función para actualizar los tooltips si cambia el tema
-function updateTippyTheme(theme) {
-  // Asignar el tema de tippy según el modo actual
-  const tippyTheme = (theme === 'dark' || theme === 'colorblind-dark') ? 'material' : 'light';
-
-  document.querySelectorAll('[data-tippy-content]').forEach(el => {
-    if (el._tippy) {
-      el._tippy.setProps({ theme: tippyTheme });
-    }
+  // Inicializar tooltips
+  tippy('[data-tippy-content]', {
+    animation: 'shift-away',
+    theme: (['dark', 'colorblind-dark'].includes(document.documentElement.getAttribute('data-theme')))
+        ? 'material'
+        : 'light',
+    delay: [100, 50],
+    arrow: true,
   });
-}
 
+});
