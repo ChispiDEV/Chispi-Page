@@ -1,0 +1,19 @@
+// themes/_high-contrast.scss
+// ⚡ Máxima accesibilidad (modo alto contraste)
+
+[data-theme="high-contrast"] {
+  --color-primary: #00ff00;   // Verde puro
+  --color-secondary: #0000ff; // Azul puro
+  --color-success: #00ff00;
+  --color-danger: #ff0000;
+  --color-warning: #ffff00;
+  --color-info: #00ffff;
+
+  --color-bg: #000000;
+  --color-text: #ffffff;
+  --color-muted: #eeeeee;
+
+  --navbar-bg: #000000;
+  --footer-bg: #000000;
+  --border-color: #ffffff;
+}

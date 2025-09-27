@@ -1,0 +1,19 @@
+// themes/_dark.scss
+// 🌙 Tema oscuro
+
+[data-theme="dark"] {
+  --color-primary: #57e6b6;
+  --color-secondary: #66d9ef;
+  --color-success: #3cc88f;
+  --color-danger: #ff6b6b;
+  --color-warning: #ffc078;
+  --color-info: #66d9ef;
+
+  --color-bg: #121212;
+  --color-text: #f1f1f1;
+  --color-muted: #bbbbbb;
+
+  --navbar-bg: #212529;
+  --footer-bg: #212529;
+  --border-color: #333333;
+}

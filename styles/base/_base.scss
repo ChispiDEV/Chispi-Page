@@ -1,0 +1,72 @@
+// base/_base.scss
+// Estilos globales de layout y elementos comunes
+
+/* ============================
+   🖼 Body y contenedor global
+   ============================ */
+body {
+  background-color: $color-bg;
+  color: $color-text;
+  font-family: $font-family-base;
+}
+
+/* ============================
+   📦 Contenedores
+   ============================ */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* ============================
+   📋 Listas
+   ============================ */
+ul, ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+li {
+  margin-bottom: 0.25rem;
+}
+
+/* ============================
+   📷 Imágenes
+   ============================ */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: $border-radius;
+}
+
+/* ============================
+   📌 Tablas
+   ============================ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+th, td {
+  padding: 0.75rem;
+  border: 1px solid gray(300);
+  text-align: left;
+}
+
+/* ============================
+   🎯 Utilidades generales
+   ============================ */
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-muted {
+  color: gray(600);
+}

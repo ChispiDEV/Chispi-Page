@@ -1,0 +1,63 @@
+// abstracts/_mixins.scss
+
+/* ============================
+   📦 Mixins Generales
+   ============================ */
+
+/* 1. Flexbox centrado */
+@mixin flex-center($direction: row, $gap: 0) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: center;
+  justify-content: center;
+  gap: $gap;
+}
+
+/* 2. Texto truncado con puntos suspensivos */
+@mixin text-truncate($lines: 1) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+}
+
+/* 3. Botón genérico */
+@mixin button($bg, $color: #fff) {
+  background-color: $bg;
+  color: $color;
+  border: none;
+  border-radius: $border-radius;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color $transition-speed ease;
+
+  &:hover {
+    background-color: darken($bg, 8%);
+  }
+}
+
+/* 4. Breakpoints (responsive) */
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == sm {
+    @media (max-width: 576px) { @content; }
+  }
+  @else if $breakpoint == md {
+    @media (max-width: 768px) { @content; }
+  }
+  @else if $breakpoint == lg {
+    @media (max-width: 992px) { @content; }
+  }
+  @else if $breakpoint == xl {
+    @media (max-width: 1200px) { @content; }
+  }
+}
+
+/* 5. Tarjetas */
+@mixin card($bg: $color-bg, $border: $gray-300) {
+  background-color: $bg;
+  border: 1px solid $border;
+  border-radius: $border-radius;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}

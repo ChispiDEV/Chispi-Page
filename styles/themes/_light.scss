@@ -1,0 +1,19 @@
+// themes/_light.scss
+// 🌞 Tema claro
+
+[data-theme="light"] {
+  --color-primary: #3cc88f;
+  --color-secondary: #335b9a;
+  --color-success: #28a97b;
+  --color-danger: #e36565;
+  --color-warning: #f5c56b;
+  --color-info: #57c4dc;
+
+  --color-bg: #f9fafb;
+  --color-text: #212529;
+  --color-muted: #8a8d91;
+
+  --navbar-bg: #ffffff;
+  --footer-bg: #ffffff;
+  --border-color: #e0e0e0;
+}

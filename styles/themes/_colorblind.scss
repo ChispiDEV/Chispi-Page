@@ -1,0 +1,19 @@
+// themes/_colorblind.scss
+// 👁 Paleta CUD (Color Universal Design)
+
+[data-theme="colorblind"] {
+  --color-primary: #0072b2;   // Azul accesible
+  --color-secondary: #005a8d; // Azul oscuro
+  --color-success: #009e73;   // Verde CUD
+  --color-danger: #d55e00;    // Naranja en vez de rojo
+  --color-warning: #e69f00;   // Amarillo fuerte
+  --color-info: #56b4e9;      // Azul claro
+
+  --color-bg: #ffffff;
+  --color-text: #212529;
+  --color-muted: #666666;
+
+  --navbar-bg: #ffffff;
+  --footer-bg: #ffffff;
+  --border-color: #cccccc;
+}

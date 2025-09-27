@@ -1,0 +1,19 @@
+// themes/_sepia.scss
+// 📖 Estilo lectura amigable
+
+[data-theme="sepia"] {
+  --color-primary: #704214;
+  --color-secondary: #5b3711;
+  --color-success: #38755b;
+  --color-danger: #993333;
+  --color-warning: #b58900;
+  --color-info: #268bd2;
+
+  --color-bg: #f4ecd8;
+  --color-text: #5b4636;
+  --color-muted: #7c6f64;
+
+  --navbar-bg: #fdf6e3;
+  --footer-bg: #fdf6e3;
+  --border-color: #e6d9b9;
+}

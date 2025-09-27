@@ -1,0 +1,55 @@
+// base/_typography.scss
+// Configuración tipográfica global
+
+/* ============================
+   📖 Base
+   ============================ */
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  line-height: 1.6;
+  color: $color-text;
+}
+
+/* ============================
+   🔠 Encabezados
+   ============================ */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  color: $color-secondary;
+}
+
+h1 { font-size: 2.25rem; }
+h2 { font-size: 1.875rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.125rem; }
+h6 { font-size: 1rem; }
+
+/* ============================
+   ✍️ Texto
+   ============================ */
+p {
+  margin-bottom: 1rem;
+  color: gray(800);
+}
+
+small {
+  font-size: $font-size-sm;
+  color: gray(600);
+}
+
+/* ============================
+   🔗 Links
+   ============================ */
+a {
+  color: $color-info;
+  transition: color $transition-speed ease;
+
+  &:hover,
+  &:focus {
+    color: darken($color-info, 10%);
+  }
+}
