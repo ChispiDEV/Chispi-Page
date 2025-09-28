@@ -1,0 +1,19 @@
+// themes/_photophobia.scss
+// 🌙 Tema especial para personas con fotofobia o sensibilidad lumínica
+
+[data-theme="photophobia"] {
+  --color-primary: #6ba58f;   // Verde grisáceo suave
+  --color-secondary: #5a6a8c; // Azul grisáceo apagado
+  --color-success: #7fa87f;   // Verde mate
+  --color-danger: #b36b6b;    // Rojo suave (sin brillo)
+  --color-warning: #c9a76a;   // Amarillo tostado
+  --color-info: #7da7b3;      // Azul pastel apagado
+
+  --color-bg: #f2f2f2;        // Gris claro (no blanco puro)
+  --color-text: #2d2d2d;      // Gris oscuro (no negro absoluto)
+  --color-muted: #666666;
+
+  --navbar-bg: #e6e6e6;
+  --footer-bg: #e6e6e6;
+  --border-color: #cccccc;
+}

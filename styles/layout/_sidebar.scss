@@ -1,0 +1,96 @@
+// ============================
+// 📚 Menú lateral (Sidebar)
+// ============================
+
+#sidebar-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 260px;
+  height: 100%;
+  background-color: $color-bg;
+  color: $color-text;
+  padding: 1rem;
+  transition: transform $transition-speed ease, background-color $transition-speed ease, color $transition-speed ease;
+  z-index: 10000;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+  overflow-y: auto;
+  transform: translateX(100%);
+  outline: none;
+
+  &.active {
+    transform: translateX(0);
+  }
+
+  // Scroll accesible
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $color-primary;
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+}
+
+// Lista de navegación dentro del sidebar
+.sidebar-nav {
+  list-style: none;
+  margin-top: 3rem;
+  padding: 0;
+
+  li {
+    margin: 1rem 0;
+  }
+
+  a {
+    color: $color-text;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease, background-color 0.2s ease;
+    display: inline-block;
+    outline-offset: 3px;
+    border-radius: 4px;
+    padding: 0.25rem 0.5rem;
+
+    &:hover,
+    &:focus-visible {
+      color: $color-primary;
+      background-color: rgba($color-primary, 0.1);
+      outline: 2px solid $color-primary;
+    }
+  }
+}
+
+// Botón de cerrar (si usas icono en el sidebar)
+#close-menu-toggle {
+  background-color: $color-danger;
+  color: #fff;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 11001;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  border-radius: 50%;
+  display: none;
+  transition: background-color $transition-speed ease, color $transition-speed ease;
+  box-shadow: 0 0 6px rgba(0,0,0,0.15);
+
+  &:hover,
+  &:focus-visible {
+    background-color: darken($color-danger, 10%);
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+}
+
+// Mostrar botón cerrar cuando el sidebar está activo
+#sidebar-wrapper.active #close-menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

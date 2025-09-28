@@ -1,0 +1,22 @@
+/* ============================
+   🏷️ Header / Hero Section
+============================ */
+
+header {
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding: 2rem 1rem;
+  text-align: center;
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+header h1, header h2, header h3 {
+  margin: 0.5rem 0;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+header p {
+  color: var(--color-muted);
+  font-size: 1.1rem;
+}

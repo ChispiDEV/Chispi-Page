@@ -1,0 +1,95 @@
+// components/_buttons.scss
+// 🎯 Estilos de botones y enlaces
+
+a {
+  text-decoration: none;
+  color: $color-info;
+  transition: color $transition-speed ease;
+
+  &:hover,
+  &:focus {
+    color: $color-primary;
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
+  }
+}
+
+button,
+.btn {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: $border-radius;
+  padding: 0.5rem 1.25rem;
+  transition: all $transition-speed ease;
+
+  &:focus-visible {
+    outline: 3px solid $color-primary;
+    outline-offset: 3px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    background-color: $gray-1;
+    color: $color-bg;
+  }
+}
+
+/* 🌟 Botones principales */
+.btn-primary {
+  background-color: $color-primary;
+  color: white;
+
+  &:hover,
+  &:focus {
+    background-color: $color-secondary;
+    border-color: $color-secondary;
+  }
+}
+
+.btn-secondary {
+  background-color: $color-secondary;
+  color: white;
+
+  &:hover,
+  &:focus {
+    background-color: darken($color-secondary, 10%);
+  }
+}
+
+/* Outline buttons */
+.btn-outline {
+  background: transparent;
+  border: 2px solid currentColor;
+  font-weight: 600;
+
+  &:hover {
+    background-color: currentColor;
+    color: white;
+  }
+}
+
+/* Icon buttons */
+.icon-button {
+  @extend .btn;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $color-primary;
+  color: white;
+  font-size: 1.2rem;
+
+  &:hover {
+    background-color: $color-secondary;
+  }
+}

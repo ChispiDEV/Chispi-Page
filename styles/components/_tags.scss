@@ -1,0 +1,59 @@
+// components/_tags.scss
+// 🏷️ Etiquetas, badges y skills
+
+.tag {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  margin: 0.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 0.4rem;
+  background-color: lighten($color-secondary, 40%);
+  color: $color-secondary;
+  transition: all $transition-speed ease;
+  user-select: none;
+
+  &:hover {
+    background-color: $color-secondary;
+    color: white;
+  }
+}
+
+/* Badges dinámicos */
+.tag-badge {
+  display: inline-block;
+  padding: 0.3em 0.6em;
+  font-size: 0.8em;
+  font-weight: 600;
+  border-radius: 0.5em;
+  background-color: $color-info;
+  color: $color-text;
+
+  [data-theme="dark"] & {
+    background-color: darken($color-info, 25%);
+    color: white;
+  }
+}
+
+/* Skill badges */
+.skill-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.4rem;
+  font-weight: 500;
+  background-color: lighten($color-primary, 35%);
+  color: $color-text;
+
+  &:focus-visible {
+    outline: 2px dashed $color-secondary;
+    outline-offset: 4px;
+  }
+
+  [data-theme="dark"] & {
+    background-color: darken($color-primary, 25%);
+    color: white;
+  }
+}

@@ -1,0 +1,36 @@
+// components/_forms.scss
+// 📝 Formularios accesibles y consistentes
+
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: 1rem;
+  border: 1px solid lighten($gray-1, 20%);
+  padding: 0.5rem 0.75rem;
+  border-radius: $border-radius;
+  background-color: $color-bg;
+  color: $color-text;
+  transition: border-color $transition-speed ease, box-shadow $transition-speed ease;
+
+  &::placeholder {
+    color: $gray-1;
+  }
+
+  &:focus-visible {
+    border-color: $color-primary;
+    box-shadow: 0 0 0 3px rgba($color-primary, 0.4);
+    outline: none;
+  }
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  display: inline-block;
+  color: $color-secondary;
+}
+
+button[type="submit"] {
+  @extend .btn-primary;
+}

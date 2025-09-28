@@ -1,0 +1,79 @@
+// layout/_grid.scss
+// Sistema de grillas responsivo (tipo Bootstrap simplificado)
+
+// ============================
+// 📐 Grid Responsiva
+// ============================
+
+// Contenedor principal
+.container {
+  width: min(90%, 1200px);
+  margin-inline: auto;
+  padding-inline: 1rem;
+  box-sizing: border-box;
+}
+
+// Row (flexbox)
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-inline: -0.5rem;
+}
+
+// Columnas (12-grid system)
+[class*="col-"] {
+  padding-inline: 0.5rem;
+  box-sizing: border-box;
+  flex: 1;
+}
+
+// Generador de columnas 1-12
+@for $i from 1 through 12 {
+  .col-#{$i} {
+    flex: 0 0 percentage($i / 12);
+    max-width: percentage($i / 12);
+  }
+}
+
+// Alineación de columnas
+.row-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.row-between {
+  justify-content: space-between;
+  align-items: center;
+}
+
+// Responsivo (breakpoints móviles → escritorio)
+@media (max-width: 768px) {
+  .col-sm-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+// Grid con CSS Grid (alternativa más moderna)
+.grid {
+  display: grid;
+  gap: 1rem;
+
+  &-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  &-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  &-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
