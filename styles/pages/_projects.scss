@@ -1,0 +1,44 @@
+// ============================
+// 💻 Página Projects
+// ============================
+
+.page-projects {
+  padding: 4rem 2rem;
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .project-card {
+    background-color: $color-bg;
+    border: 1px solid $gray-1;
+    border-radius: $border-radius;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    }
+
+    h3 {
+      color: $color-secondary;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      color: $gray-1;
+    }
+
+    .tags {
+      margin-top: 1rem;
+
+      .tag {
+        margin-right: 0.25rem;
+      }
+    }
+  }
+}

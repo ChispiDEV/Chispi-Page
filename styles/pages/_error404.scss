@@ -1,0 +1,29 @@
+// ============================
+// ❌ Página Error 404
+// ============================
+
+.page-error404 {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+
+  h1 {
+    font-size: 5rem;
+    font-weight: 700;
+    color: $color-danger;
+  }
+
+  p {
+    margin-top: 1rem;
+    color: $gray-1;
+  }
+
+  a.btn {
+    margin-top: 2rem;
+    @include button-variant($color-primary, #fff);
+  }
+}

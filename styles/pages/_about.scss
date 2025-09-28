@@ -1,0 +1,36 @@
+// ============================
+// 📄 Página About
+// ============================
+
+.page-about {
+  padding: 4rem 2rem;
+
+  .profile-card {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: $color-bg;
+    border: 1px solid $gray-1;
+    border-radius: $border-radius;
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    text-align: center;
+
+    img {
+      max-width: 180px;
+      border-radius: 50%;
+      margin-bottom: 1.5rem;
+      border: 4px solid $color-primary;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: $color-secondary;
+    }
+
+    p {
+      color: $gray-1;
+      margin-top: 1rem;
+      line-height: 1.6;
+    }
+  }
+}
