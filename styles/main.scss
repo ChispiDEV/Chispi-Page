@@ -10,6 +10,8 @@
 @import "base/helpers";
 
 // Layout
+@import "layout/sections";
+@import "layout/sidebar";
 @import "layout/header";
 @import "layout/navbar";
 @import "layout/footer";
@@ -25,8 +27,15 @@
 @import "themes/light";
 @import "themes/dark";
 @import "themes/colorblind";
+@import "themes/high-contrast";
+@import "themes/sepia";
+@import "themes/photophobia";
 
 // Pages
 @import "pages/home";
 @import "pages/about";
 @import "pages/projects";
+@import "pages/devlog";
+@import "pages/contact";
+@import "pages/error404";
+@import "pages/maintenance";
