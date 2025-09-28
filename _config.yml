@@ -1,4 +1,4 @@
-title: "Dashboard Personal"
+title: "Chispi-Page || Dashboard Personal"
 description: "Portfolio, Devlogs, Proyectos y Recursos"
 baseurl: "/Chispi-Page"
 url: "https://ChispiDEV.github.io"
@@ -69,3 +69,16 @@ defaults:
 # Soporte para múltiples idiomas (manual)
 languages: ["es", "en"]
 default_lang: "es"
+
+# Archivos y carpetas a incluir en la compilación
+include:
+  - assets/css/main.css
+  - assets/js/dist
+
+# Archivos/carpetas que no deben procesarse
+exclude:
+  - node_modules
+  - build.js
+  - esbuild.config.js
+  - package.json
+  - package-lock.json
