@@ -10,7 +10,7 @@ permissions:
   contents: write  # 🔑 Necesario para hacer push al branch gh-pages
 
 jobs:
-  build-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
