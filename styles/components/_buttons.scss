@@ -1,56 +1,39 @@
-// components/_buttons.scss
-// 🎯 Estilos de botones y enlaces
+/* ============================
+   COMPONENTE BOTONES
+   ============================ */
 
-a {
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: $border-radius;
+  font-weight: 600;
   text-decoration: none;
-  color: $color-info;
-  transition: color $transition-speed ease;
-
-  &:hover,
-  &:focus {
-    color: $color-primary;
-    text-decoration: underline;
-  }
+  transition: all $transition-speed ease;
+  border: 2px solid transparent;
+  cursor: pointer;
 
   &:focus-visible {
     outline: 2px solid $color-primary;
     outline-offset: 2px;
   }
-}
-
-button,
-.btn {
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: 600;
-  cursor: pointer;
-  border: 1px solid transparent;
-  border-radius: $border-radius;
-  padding: 0.5rem 1.25rem;
-  transition: all $transition-speed ease;
-
-  &:focus-visible {
-    outline: 3px solid $color-primary;
-    outline-offset: 3px;
-  }
 
   &:disabled {
-    cursor: not-allowed;
     opacity: 0.6;
-    background-color: $gray-1;
-    color: $color-bg;
+    cursor: not-allowed;
   }
 }
 
-/* 🌟 Botones principales */
+// Button variants
 .btn-primary {
   background-color: $color-primary;
   color: white;
 
-  &:hover,
-  &:focus {
-    background-color: $color-secondary;
-    border-color: $color-secondary;
+  &:hover:not(:disabled) {
+    background-color: darken($color-primary, 10%);
+    transform: translateY(-1px);
   }
 }
 
@@ -58,38 +41,79 @@ button,
   background-color: $color-secondary;
   color: white;
 
-  &:hover,
-  &:focus {
+  &:hover:not(:disabled) {
     background-color: darken($color-secondary, 10%);
   }
 }
 
-/* Outline buttons */
 .btn-outline {
-  background: transparent;
-  border: 2px solid currentColor;
-  font-weight: 600;
+  background-color: transparent;
+  border-color: $color-primary;
+  color: $color-primary;
 
-  &:hover {
-    background-color: currentColor;
+  &:hover:not(:disabled) {
+    background-color: $color-primary;
     color: white;
   }
 }
 
-/* Icon buttons */
-.icon-button {
-  @extend .btn;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background-color: $color-primary;
-  color: white;
-  font-size: 1.2rem;
+.btn-ghost {
+  background-color: transparent;
+  color: $color-text;
 
-  &:hover {
-    background-color: $color-secondary;
+  &:hover:not(:disabled) {
+    background-color: $gray-100;
+  }
+}
+
+// Button sizes
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: $font-size-sm;
+}
+
+.btn-lg {
+  padding: 1rem 2rem;
+  font-size: $font-size-lg;
+}
+
+// Icon buttons
+.btn-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border-radius: 50%;
+
+  &.btn-sm {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  &.btn-lg {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+// Button group
+.btn-group {
+  display: inline-flex;
+
+  .btn {
+    border-radius: 0;
+
+    &:first-child {
+      border-top-left-radius: $border-radius;
+      border-bottom-left-radius: $border-radius;
+    }
+
+    &:last-child {
+      border-top-right-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+    }
+
+    &:not(:last-child) {
+      border-right: none;
+    }
   }
 }

@@ -1,0 +1,153 @@
+/* ============================
+   TEMA DISLEXIA (Lectura fácil)
+   ============================ */
+
+[data-theme="dyslexia"] {
+  // Fuentes específicas para dislexia
+  --font-family-base: 'OpenDyslexic', 'Comic Sans MS', sans-serif;
+  --font-family-heading: 'OpenDyslexic', 'Comic Sans MS', sans-serif;
+
+  // Colores suaves
+  --color-bg: #fefefe;
+  --color-bg-alt: #f6f6f6;
+  --color-bg-card: #ffffff;
+  --color-text: #333333;
+  --color-text-muted: #666666;
+  --color-text-light: #999999;
+
+  // Espaciado aumentado para lectura
+  --font-size-base: 1.125rem; // 18px
+  --line-height-base: 1.8;
+
+  // Estilos específicos para dislexia
+  body {
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    letter-spacing: 0.5px;
+    word-spacing: 1px;
+  }
+
+  // Mejorar legibilidad del texto
+  p, li, dd, dt {
+    line-height: var(--line-height-base);
+    margin-bottom: 1.5rem;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-heading);
+    line-height: 1.4;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  // Espaciado entre letras y palabras
+  .dyslexia-friendly {
+    letter-spacing: 0.75px;
+    word-spacing: 1.5px;
+
+    p {
+      margin-bottom: 2rem;
+    }
+  }
+
+  // Fondos de texto para mejorar contraste
+  .text-highlight {
+    background: linear-gradient(transparent 60%, rgba(255, 255, 0, 0.3) 60%);
+  }
+
+  // Navegación mejorada
+  .nav__link {
+    padding: 0.75rem 1rem;
+    border-radius: $border-radius;
+    font-weight: 600;
+
+    &:focus {
+      background-color: rgba($color-primary, 0.1);
+      outline: 3px solid $color-primary;
+    }
+  }
+
+  // Botones con mejor legibilidad
+  .btn {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 0.875rem 1.75rem;
+
+    &:focus {
+      outline: 3px solid $color-primary;
+      outline-offset: 2px;
+    }
+  }
+
+  // Formularios optimizados
+  .form__label {
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .form__control {
+    font-size: 1.125rem;
+    padding: 0.875rem 1rem;
+    border: 2px solid var(--color-border);
+
+    &:focus {
+      border-color: $color-primary;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba($color-primary, 0.1);
+    }
+  }
+
+  // Tablas legibles
+  table {
+    border-collapse: collapse;
+    width: 100%;
+
+    th, td {
+      padding: 1rem;
+      border: 2px solid var(--color-border);
+      text-align: left;
+    }
+
+    th {
+      background-color: var(--color-bg-alt);
+      font-weight: 600;
+    }
+  }
+
+  // Listas con mejor espaciado
+  ul, ol {
+    padding-left: 2rem;
+
+    li {
+      margin-bottom: 0.75rem;
+    }
+  }
+
+  // Remover efectos que distraen
+  .blink, .marquee {
+    display: none;
+  }
+
+  // Modo lectura profunda
+  .reading-mode {
+    max-width: 65ch;
+    margin: 0 auto;
+    font-size: 1.25rem;
+    line-height: 2;
+
+    p {
+      margin-bottom: 2.5rem;
+    }
+  }
+}
+
+// Cargar fuente OpenDyslexic si está disponible
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('/fonts/OpenDyslexic-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

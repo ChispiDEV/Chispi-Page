@@ -1,0 +1,337 @@
+/* ============================
+   COMPONENTE NAVEGACIÓN
+   ============================ */
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  &--vertical {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  &--pills {
+    .nav__link {
+      padding: 0.5rem 1rem;
+      border-radius: $border-radius;
+
+      &.active {
+        background-color: $color-primary;
+        color: white;
+      }
+    }
+  }
+}
+
+.nav__link {
+  color: $color-text;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  transition: color $transition-speed ease;
+  position: relative;
+
+  &:hover,
+  &:focus {
+    color: $color-primary;
+  }
+
+  &.active {
+    color: $color-primary;
+    font-weight: 600;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: $color-primary;
+    }
+  }
+}
+
+// Mobile navigation
+.nav-mobile {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 300px;
+  height: 100vh;
+  background-color: $color-bg;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  transition: right $transition-speed ease;
+  z-index: 1000;
+  padding: 2rem;
+
+  &.active {
+    right: 0;
+  }
+
+  &__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+}
+
+// Breadcrumb
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: $font-size-sm;
+  color: $gray-600;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &:not(:last-child)::after {
+      content: '/';
+      color: $gray-400;
+    }
+
+    &:last-child {
+      color: $color-text;
+      font-weight: 500;
+    }
+  }
+
+  &__link {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+}
+
+/* ============================
+   NAVBAR LEGACY (Compatibilidad)
+   ============================ */
+
+// Navbar principal
+#navbar {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  border-bottom: 2px solid $color-secondary;
+  transition: all $transition-speed ease;
+  position: sticky;
+  top: 0;
+  z-index: $z-index-sticky;
+  padding: 0.75rem 1.5rem;
+
+  @include mobile {
+    padding: 0.5rem 1rem;
+  }
+}
+
+// Marca del navbar
+.navbar-brand {
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: $font-weight-bold;
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  transition: color $transition-speed ease;
+
+  &:hover,
+  &:focus-visible {
+    color: $color-primary;
+    outline: 2px solid $color-primary;
+    outline-offset: 3px;
+    text-decoration: underline;
+    border-radius: $border-radius-sm;
+  }
+}
+
+/* ============================
+   SIDEBAR LEGACY (Compatibilidad)
+   ============================ */
+
+#sidebar-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: $sidebar-width;
+  height: 100%;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  padding: 1rem;
+  transition: transform $transition-speed ease;
+  z-index: $z-index-sidebar;
+  box-shadow: $shadow-lg;
+  overflow-y: auto;
+  transform: translateX(100%);
+  outline: none;
+
+  &.active {
+    transform: translateX(0);
+  }
+
+  // Scroll accesible
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $color-primary;
+    border-radius: $border-radius-sm;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+}
+
+// Lista de navegación dentro del sidebar
+.sidebar-nav {
+  list-style: none;
+  margin-top: 3rem;
+  padding: 0;
+
+  li {
+    margin: 1rem 0;
+  }
+
+  a {
+    color: var(--color-text);
+    font-weight: $font-weight-semibold;
+    text-decoration: none;
+    transition: all $transition-speed-fast ease;
+    display: inline-block;
+    outline-offset: 3px;
+    border-radius: $border-radius-sm;
+    padding: 0.25rem 0.5rem;
+
+    &:hover,
+    &:focus-visible {
+      color: $color-primary;
+      background-color: var(--color-overlay-primary);
+      outline: 2px solid $color-primary;
+    }
+  }
+}
+
+// Botón de cerrar del sidebar
+#close-menu-toggle {
+  background-color: $color-danger;
+  color: #fff;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: $z-index-sidebar + 1;
+  width: 40px;
+  height: 40px;
+  font-size: 1.125rem;
+  border-radius: 50%;
+  display: none;
+  transition: all $transition-speed ease;
+  box-shadow: $shadow;
+  @include flex-center;
+
+  &:hover,
+  &:focus-visible {
+    background-color: darken($color-danger, 10%);
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+}
+
+// Mostrar botón cerrar cuando el sidebar está activo
+#sidebar-wrapper.active #close-menu-toggle {
+  display: inline-flex;
+}
+
+/* ============================
+   DROPDOWN LEGACY (Compatibilidad)
+   ============================ */
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+// Botón toggle sin estilos predeterminados
+.dropdown-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+// Menú desplegable
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  min-width: 180px;
+  z-index: $z-index-dropdown;
+  padding: 0.5rem 0;
+  border-radius: $border-radius;
+  box-shadow: $shadow-md;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity $transition-speed ease;
+}
+
+// Estado abierto
+.dropdown-menu.show {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+// Items del dropdown
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  transition: all $transition-speed-fast ease;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    background-color: $color-info;
+    color: $gray-200;
+    outline: none;
+  }
+
+  &.active {
+    font-weight: $font-weight-bold;
+    background-color: $color-primary;
+    color: #fff;
+  }
+}
+
+/* ============================
+   MIGRACIÓN PROGRESIVA
+   ============================ */
+
+// Clases de transición para migrar gradualmente
+.navbar-legacy {
+  // Mantener compatibilidad con el código existente
+  @extend #navbar;
+}
+
+.sidebar-legacy {
+  // Mantener compatibilidad con el código existente
+  @extend #sidebar-wrapper;
+}

@@ -1,0 +1,121 @@
+/* ============================
+   TIPPY.JS STYLES
+   ============================ */
+
+.tippy-box {
+    background-color: #333;
+    color: white;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+    position: absolute;
+    z-index: 9999;
+    max-width: 200px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.tippy-arrow {
+    width: 8px;
+    height: 8px;
+    position: absolute;
+}
+
+.tippy-arrow::before {
+    content: '';
+    position: absolute;
+    border-color: transparent;
+    border-style: solid;
+}
+
+.tippy-box[data-placement^='top'] > .tippy-arrow {
+    bottom: -8px;
+}
+
+.tippy-box[data-placement^='top'] > .tippy-arrow::before {
+    bottom: -7px;
+    left: 0;
+    border-width: 8px 8px 0;
+    border-top-color: #333;
+    transform: translateX(-50%);
+}
+
+.tippy-box[data-placement^='bottom'] > .tippy-arrow {
+    top: -8px;
+}
+
+.tippy-box[data-placement^='bottom'] > .tippy-arrow::before {
+    top: -7px;
+    left: 0;
+    border-width: 0 8px 8px;
+    border-bottom-color: #333;
+    transform: translateX(-50%);
+}
+
+.tippy-box[data-placement^='left'] > .tippy-arrow {
+    right: -8px;
+}
+
+.tippy-box[data-placement^='left'] > .tippy-arrow::before {
+    right: -7px;
+    top: 0;
+    border-width: 8px 0 8px 8px;
+    border-left-color: #333;
+    transform: translateY(-50%);
+}
+
+.tippy-box[data-placement^='right'] > .tippy-arrow {
+    left: -8px;
+}
+
+.tippy-box[data-placement^='right'] > .tippy-arrow::before {
+    left: -7px;
+    top: 0;
+    border-width: 8px 8px 8px 0;
+    border-right-color: #333;
+    transform: translateY(-50%);
+}
+
+/* Temas */
+.tippy-theme-light {
+    background-color: white;
+    color: #333;
+    border: 1px solid #e1e1e1;
+}
+
+.tippy-theme-light .tippy-arrow::before {
+    border-top-color: #e1e1e1;
+    border-bottom-color: #e1e1e1;
+    border-left-color: #e1e1e1;
+    border-right-color: #e1e1e1;
+}
+
+.tippy-theme-material {
+    background-color: #424242;
+    color: white;
+    border-radius: 2px;
+    font-weight: 500;
+}
+
+.tippy-theme-material .tippy-arrow::before {
+    border-top-color: #424242;
+    border-bottom-color: #424242;
+    border-left-color: #424242;
+    border-right-color: #424242;
+}
+
+/* Animaciones */
+.tippy-box[data-animation="shift-away"] {
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.tippy-box[data-animation="shift-away"][data-state="visible"] {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.tippy-box[data-animation="shift-away"][data-state="hidden"] {
+    opacity: 0;
+    transform: translateY(10px);
+}

@@ -1,0 +1,123 @@
+/* ============================
+   SECCIÓN HERO
+   ============================ */
+
+.hero {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
+
+  &__container {
+    @include container;
+    position: relative;
+    z-index: 2;
+  }
+
+  &__content {
+    max-width: 600px;
+
+    &--center {
+      text-align: center;
+      margin: 0 auto;
+    }
+  }
+
+  &__title {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: var(--color-text);
+
+    @include mobile {
+      font-size: 2.25rem;
+    }
+  }
+
+  &__subtitle {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: var(--color-text-muted);
+
+    @include mobile {
+      font-size: 1.125rem;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    &--center {
+      justify-content: center;
+    }
+  }
+
+  &__image {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    max-width: 50%;
+    height: auto;
+
+    @include tablet {
+      position: relative;
+      top: auto;
+      right: auto;
+      transform: none;
+      max-width: 100%;
+      margin-top: 3rem;
+    }
+
+    @include mobile {
+      margin-top: 2rem;
+    }
+  }
+
+  // Variantes
+  &--split {
+    .hero__container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+
+      @include tablet {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+  }
+
+  &--with-bg {
+    background-size: cover;
+    background-position: center;
+    color: white;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--color-overlay);
+      z-index: 1;
+    }
+
+    .hero__title,
+    .hero__subtitle {
+      color: white;
+    }
+  }
+
+  &--small {
+    min-height: 40vh;
+    padding: 4rem 0;
+  }
+}

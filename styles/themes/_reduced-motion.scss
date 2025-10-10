@@ -1,0 +1,164 @@
+/* ============================
+   TEMA MOVIMIENTO REDUCIDO
+   ============================ */
+
+[data-theme="reduced-motion"] {
+  // Estilos para usuarios que prefieren movimiento reducido
+
+  // Remover o reemplazar animaciones
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  // Transiciones suaves alternativas
+  .btn,
+  .nav__link,
+  .card {
+    transition: opacity 0.1s ease, background-color 0.1s ease !important;
+  }
+
+  // Slideshows y carousels estáticos
+  .carousel,
+  .slider {
+    .slide {
+      display: none;
+
+      &.active {
+        display: block;
+      }
+    }
+
+    // Navegación por botones en lugar de auto-play
+    .carousel-nav,
+    .slider-dots {
+      display: flex;
+    }
+  }
+
+  // Loading states simplificados
+  .loading {
+    opacity: 0.7;
+
+    &::after {
+      content: 'Cargando...';
+      display: block;
+      text-align: center;
+      padding: 1rem;
+    }
+  }
+
+  .loading-spinner {
+    display: none;
+  }
+
+  // Tooltips y popovers inmediatos
+  .tooltip,
+  .popover {
+    transition: none !important;
+    opacity: 1 !important;
+
+    &.hidden {
+      display: none;
+    }
+  }
+
+  // Modals sin animaciones
+  .modal {
+    .modal__content {
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+
+  // Scroll suave desactivado
+  html {
+    scroll-behavior: auto;
+  }
+
+  // Efectos de hover simplificados
+  .hover-effect {
+    &:hover {
+      transform: none !important;
+      box-shadow: var(--shadow-sm) !important;
+    }
+  }
+
+  // Imágenes con lazy loading inmediato
+  img[loading="lazy"] {
+    loading: eager;
+  }
+
+  // Videos sin autoplay
+  video {
+    autoplay: false;
+    muted: false;
+
+    &[autoplay] {
+      display: none;
+    }
+  }
+
+  // Canvas y WebGL desactivados si son animados
+  canvas[data-animated="true"] {
+    display: none;
+  }
+
+  // Notificaciones sin desvanecimiento
+  .notification,
+  .toast {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  // Progress bars estáticas
+  .progress-bar {
+    animation: none !important;
+
+    &::after {
+      content: attr(data-progress);
+      display: block;
+      text-align: center;
+      font-weight: 600;
+    }
+  }
+
+  // Charts y gráficos estáticos
+  .chart {
+    svg {
+      animation: none !important;
+
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  }
+
+  // Counters inmediatos
+  .counter {
+    animation: none !important;
+
+    &::after {
+      content: attr(data-final-value);
+    }
+  }
+}
+
+// Detección de preferencias del sistema
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-theme]) {
+    // Aplicar estilos de movimiento reducido por defecto
+    // si el usuario lo prefiere en el sistema
+    @extend [data-theme="reduced-motion"];
+  }
+}
+
+// Clase utilitaria para forzar movimiento reducido
+.no-motion {
+  @extend [data-theme="reduced-motion"];
+}

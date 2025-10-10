@@ -1,79 +1,78 @@
-// layout/_grid.scss
-// Sistema de grillas responsivo (tipo Bootstrap simplificado)
+/* ============================
+   SISTEMA DE GRID FLEX
+   ============================ */
 
-// ============================
-// 📐 Grid Responsiva
-// ============================
-
-// Contenedor principal
 .container {
-  width: min(90%, 1200px);
-  margin-inline: auto;
-  padding-inline: 1rem;
-  box-sizing: border-box;
-}
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
 
-// Row (flexbox)
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  margin-inline: -0.5rem;
-}
-
-// Columnas (12-grid system)
-[class*="col-"] {
-  padding-inline: 0.5rem;
-  box-sizing: border-box;
-  flex: 1;
-}
-
-// Generador de columnas 1-12
-@for $i from 1 through 12 {
-  .col-#{$i} {
-    flex: 0 0 percentage($i / 12);
-    max-width: percentage($i / 12);
+  @media (min-width: 768px) {
+    padding: 0 2rem;
   }
 }
 
-// Alineación de columnas
-.row-center {
-  justify-content: center;
-  align-items: center;
-}
-
-.row-between {
-  justify-content: space-between;
-  align-items: center;
-}
-
-// Responsivo (breakpoints móviles → escritorio)
-@media (max-width: 768px) {
-  .col-sm-12 {
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-}
-
-// Grid con CSS Grid (alternativa más moderna)
+// Grid system
 .grid {
   display: grid;
-  gap: 1rem;
+  gap: 1.5rem;
 
-  &-2 {
-    grid-template-columns: repeat(2, 1fr);
+  &--2 {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
-  &-3 {
-    grid-template-columns: repeat(3, 1fr);
+
+  &--3 {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
-  &-4 {
-    grid-template-columns: repeat(4, 1fr);
+
+  &--4 {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 }
 
-@media (max-width: 768px) {
-  .grid-2,
-  .grid-3,
-  .grid-4 {
-    grid-template-columns: 1fr;
+// Flexbox utilities
+.flex {
+  display: flex;
+
+  &--center {
+    justify-content: center;
+    align-items: center;
+  }
+
+  &--between {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &--column {
+    flex-direction: column;
+  }
+
+  &--wrap {
+    flex-wrap: wrap;
+  }
+}
+
+// Responsive grid helpers
+@for $i from 1 through 12 {
+  .col-#{$i} {
+    grid-column: span $i;
+  }
+}
+
+@media (min-width: 768px) {
+  @for $i from 1 through 12 {
+    .col-md-#{$i} {
+      grid-column: span $i;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  @for $i from 1 through 12 {
+    .col-lg-#{$i} {
+      grid-column: span $i;
+    }
   }
 }

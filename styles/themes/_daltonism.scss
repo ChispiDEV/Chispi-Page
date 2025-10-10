@@ -1,0 +1,114 @@
+/* ============================
+   TEMA DALTONISMO (Protanopia, Deuteranopia, Tritanopia)
+   ============================ */
+
+[data-theme="daltonism"] {
+  // Paleta optimizada para daltonismo
+  --color-primary: #0066cc;    // Azul fácil de distinguir
+  --color-secondary: #cc6600;  // Naranja contrastante
+  --color-success: #00aa55;    // Verde azulado
+  --color-danger: #cc0000;     // Rojo oscuro
+  --color-warning: #ffaa00;    // Amarillo anaranjado
+  --color-info: #0099cc;       // Azul claro
+
+  // Mantener fondos y texto estándar
+  --color-bg: #ffffff;
+  --color-bg-alt: #f8f9fa;
+  --color-bg-card: #ffffff;
+  --color-text: #212529;
+  --color-text-muted: #6c757d;
+  --color-text-light: #adb5bd;
+  --color-border: #dee2e6;
+  --color-border-light: #e9ecef;
+
+  // Estilos específicos para daltonismo
+  .color-indicator {
+    // Agregar patrones o íconos además del color
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.3;
+    }
+  }
+
+  // Estados con múltiples indicadores
+  .status-success {
+    color: var(--color-success);
+    font-weight: 600;
+
+    &::before {
+      content: '✓ ';
+    }
+  }
+
+  .status-warning {
+    color: var(--color-warning);
+    font-weight: 600;
+
+    &::before {
+      content: '! ';
+    }
+  }
+
+  .status-danger {
+    color: var(--color-danger);
+    font-weight: 600;
+
+    &::before {
+      content: '✗ ';
+    }
+  }
+
+  // Gráficos y datos
+  .chart-bar {
+    border: 1px solid currentColor;
+
+    &--primary { background: repeating-linear-gradient(45deg, var(--color-primary), var(--color-primary) 4px, transparent 4px, transparent 8px); }
+    &--secondary { background: repeating-linear-gradient(-45deg, var(--color-secondary), var(--color-secondary) 4px, transparent 4px, transparent 8px); }
+    &--success { background: repeating-linear-gradient(0deg, var(--color-success), var(--color-success) 2px, transparent 2px, transparent 4px); }
+  }
+
+  // Formularios con mejor feedback
+  .form__control:invalid {
+    border-color: var(--color-danger);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='5' fill='%23cc0000'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 12px 12px;
+  }
+
+  .form__control:valid {
+    border-color: var(--color-success);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='5' fill='%2300aa55'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 12px 12px;
+  }
+}
+
+// Variantes específicas de daltonismo
+[data-daltonism-type="protanopia"] {
+  // Optimizado para protanopia
+  --color-primary: #0055aa;
+  --color-danger: #aa0000;
+}
+
+[data-daltonism-type="deuteranopia"] {
+  // Optimizado para deuteranopia
+  --color-primary: #0044aa;
+  --color-success: #008855;
+}
+
+[data-daltonism-type="tritanopia"] {
+  // Optimizado para tritanopia
+  --color-primary: #aa5500;
+  --color-info: #55aa00;
+}

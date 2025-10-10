@@ -1,36 +1,144 @@
-// components/_forms.scss
-// 📝 Formularios accesibles y consistentes
+/* ============================
+   COMPONENTE FORMULARIOS
+   ============================ */
 
-input,
-textarea,
-select {
-  font-family: inherit;
-  font-size: 1rem;
-  border: 1px solid lighten($gray-1, 20%);
-  padding: 0.5rem 0.75rem;
+.form {
+  &__group {
+    margin-bottom: 1.5rem;
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--color-text);
+
+    &--required::after {
+      content: '*';
+      color: $color-danger;
+      margin-left: 0.25rem;
+    }
+  }
+
+  &__control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: $border-radius;
+    background-color: var(--color-bg-card);
+    color: var(--color-text);
+    transition: all $transition-speed ease;
+    font-size: $font-size-base;
+
+    &:focus {
+      outline: none;
+      border-color: $color-primary;
+      box-shadow: 0 0 0 3px rgba($color-primary, 0.1);
+    }
+
+    &:disabled {
+      background-color: var(--color-bg-alt);
+      color: var(--color-text-muted);
+      cursor: not-allowed;
+    }
+
+    &--error {
+      border-color: $color-danger;
+
+      &:focus {
+        box-shadow: 0 0 0 3px rgba($color-danger, 0.1);
+      }
+    }
+
+    &--success {
+      border-color: $color-success;
+    }
+  }
+
+  &__textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  &__select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+  }
+
+  &__help {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: $font-size-sm;
+    color: var(--color-text-muted);
+
+    &--error {
+      color: $color-danger;
+    }
+
+    &--success {
+      color: $color-success;
+    }
+  }
+
+  &__checkbox,
+  &__radio {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+
+    input {
+      width: auto;
+    }
+  }
+
+  &__inline {
+    display: flex;
+    gap: 1rem;
+
+    .form__group {
+      flex: 1;
+      margin-bottom: 0;
+    }
+
+    @include mobile {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  }
+}
+
+// Fieldset
+.fieldset {
+  border: 1px solid var(--color-border);
   border-radius: $border-radius;
-  background-color: $color-bg;
-  color: $color-text;
-  transition: border-color $transition-speed ease, box-shadow $transition-speed ease;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
 
-  &::placeholder {
-    color: $gray-1;
-  }
-
-  &:focus-visible {
-    border-color: $color-primary;
-    box-shadow: 0 0 0 3px rgba($color-primary, 0.4);
-    outline: none;
+  &__legend {
+    font-weight: 600;
+    padding: 0 0.5rem;
+    color: var(--color-text);
   }
 }
 
-label {
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-  display: inline-block;
-  color: $color-secondary;
-}
+// Form variants
+.form--inline {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
 
-button[type="submit"] {
-  @extend .btn-primary;
+  @include mobile {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form__group {
+    margin-bottom: 0;
+    flex: 1;
+  }
 }

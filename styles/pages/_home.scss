@@ -1,37 +1,88 @@
-// ============================
-// 🏠 Página Home
-// ============================
+/* ============================
+   PÁGINA INICIO
+   ============================ */
 
-.page-home {
-  .hero {
-    min-height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.home {
+  // Estilos específicos para la página de inicio
+
+  &__hero {
+    // Extiende la sección hero con estilos específicos
+    background: linear-gradient(135deg,
+            rgba($color-primary, 0.1) 0%,
+            rgba($color-secondary, 0.1) 100%);
+  }
+
+  &__cta {
+    margin-top: 4rem;
     text-align: center;
-    background: linear-gradient(135deg, $color-primary 0%, $color-secondary 100%);
-    color: #fff;
+  }
+}
+
+// Secciones específicas de la home
+.quick-links {
+  padding: 4rem 0;
+  background-color: var(--color-bg-alt);
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  &__item {
+    text-align: center;
     padding: 2rem;
+    background-color: var(--color-bg-card);
+    border-radius: $border-radius;
+    transition: transform $transition-speed ease;
 
-    .hero-content {
-      max-width: 800px;
+    &:hover {
+      transform: translateY(-4px);
+    }
+  }
 
-      h1 {
-        font-size: clamp(2rem, 5vw, 3rem);
-        margin-bottom: 1rem;
-      }
+  &__icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 1rem;
+    color: $color-primary;
+  }
 
-      p {
-        font-size: 1.2rem;
-        margin-bottom: 2rem;
-        color: rgba(255, 255, 255, 0.9);
-      }
+  &__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+  }
 
-      .btn-primary {
-        @include button-variant($color-primary, #fff);
-        font-size: 1.1rem;
-        padding: 0.75rem 1.5rem;
-      }
+  &__description {
+    color: var(--color-text-muted);
+    font-size: $font-size-sm;
+  }
+}
+
+.recent-posts {
+  padding: 4rem 0;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  &__title {
+    font-size: 2rem;
+    color: var(--color-text);
+  }
+
+  &__view-all {
+    color: $color-primary;
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
     }
   }
 }

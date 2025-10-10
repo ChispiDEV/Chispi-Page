@@ -1,41 +1,63 @@
-// Abstracts
-@import "abstracts/variables";
-@import "abstracts/mixins";
-@import "abstracts/functions";
+/* ============================
+   ARCHIVO MAESTRO - IMPORTS
+   ============================ */
 
-// Base
-@import "base/reset";
-@import "base/typography";
-@import "base/base";
-@import "base/helpers";
+// Base (siempre primero)
+@import 'base/reset';
+@import 'base/variables';
+@import 'base/typography';
+@import 'base/accessibility';
 
 // Layout
-@import "layout/sections";
-@import "layout/sidebar";
-@import "layout/header";
-@import "layout/navbar";
-@import "layout/footer";
-@import "layout/grid";
+@import 'layout/grid';
+@import 'layout/spacing';
+@import 'layout/containers';
+@import 'layout/layout';
 
 // Components
-@import "components/buttons";
-@import "components/cards";
-@import "components/forms";
-@import "components/tags";
+@import 'components/buttons';
+@import 'components/theme-selector';
+@import 'components/nav';
+@import 'components/header';
+@import 'components/footer';
+@import 'components/sidebar';
+@import 'components/cards';
+@import 'components/forms';
+@import 'components/modals';
+@import 'components/tags';
 
-// Themes
-@import "themes/light";
-@import "themes/dark";
-@import "themes/colorblind";
-@import "themes/high-contrast";
-@import "themes/sepia";
-@import "themes/photophobia";
+// Sections
+@import 'sections/hero';
+@import 'sections/features';
+@import 'sections/about-section';
+@import 'sections/projects-section';
+@import 'sections/contact-section';
+@import 'sections/blog-list';
+@import 'sections/cta';
+@import 'sections/faq';
+@import 'sections/testimonials';
+@import 'sections/newsletter';
+
+// Utils
+@import 'utils/mixins';
+@import 'utils/helpers';
 
 // Pages
-@import "pages/home";
-@import "pages/about";
-@import "pages/projects";
-@import "pages/devlog";
-@import "pages/contact";
-@import "pages/error404";
-@import "pages/maintenance";
+@import 'pages/home';
+@import 'pages/about';
+@import 'pages/projects';
+@import 'pages/devblog';
+@import 'pages/error404';
+@import 'pages/maintenance';
+
+// Themes (siempre al final para que sobrescriban)
+@import 'themes/light';
+@import 'themes/dark';
+@import 'themes/high-contrast';
+@import 'themes/sepia';
+@import 'themes/photophobia';
+@import 'themes/daltonism';
+@import 'themes/dyslexia';
+@import 'themes/reading';
+@import 'themes/reduced-motion';
+@import 'themes/grayscale';

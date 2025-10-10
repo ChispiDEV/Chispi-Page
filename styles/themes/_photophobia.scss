@@ -1,19 +1,81 @@
-// themes/_photophobia.scss
-// 🌙 Tema especial para personas con fotofobia o sensibilidad lumínica
+/* ============================
+   TEMA FOTOFOBIA (Sensibilidad a la luz)
+   ============================ */
 
 [data-theme="photophobia"] {
-  --color-primary: #6ba58f;   // Verde grisáceo suave
-  --color-secondary: #5a6a8c; // Azul grisáceo apagado
-  --color-success: #7fa87f;   // Verde mate
-  --color-danger: #b36b6b;    // Rojo suave (sin brillo)
-  --color-warning: #c9a76a;   // Amarillo tostado
-  --color-info: #7da7b3;      // Azul pastel apagado
+  // Colores suaves y contrastados pero no brillantes
+  --color-primary: #2a6e4f;    // Verde más oscuro
+  --color-secondary: #2c4a7a;  // Azul más oscuro
+  --color-success: #1e7d5e;    // Verde oscuro
+  --color-danger: #b35050;     // Rojo suavizado
+  --color-warning: #c19a4f;    // Ámbar oscuro
+  --color-info: #4a8fa1;       // Azul suavizado
 
-  --color-bg: #f2f2f2;        // Gris claro (no blanco puro)
-  --color-text: #2d2d2d;      // Gris oscuro (no negro absoluto)
-  --color-muted: #666666;
+  // Fondos oscuros pero no puros
+  --color-bg: #0a0a0a;
+  --color-bg-alt: #1a1a1a;
+  --color-bg-card: #1a1a1a;
 
-  --navbar-bg: #e6e6e6;
-  --footer-bg: #e6e6e6;
-  --border-color: #cccccc;
+  // Texto con contraste pero no blanco puro
+  --color-text: #e0e0e0;
+  --color-text-muted: #a0a0a0;
+  --color-text-light: #666666;
+
+  // Bordes sutiles
+  --color-border: #333333;
+  --color-border-light: #2a2a2a;
+
+  // Sombras muy sutiles o eliminadas
+  --shadow-sm: 0 1px 2px rgba(255, 255, 255, 0.05);
+  --shadow-md: 0 2px 4px rgba(255, 255, 255, 0.05);
+  --shadow-lg: 0 4px 8px rgba(255, 255, 255, 0.05);
+
+  // Overlays oscuros
+  --color-overlay: rgba(0, 0, 0, 0.8);
+
+  // Estilos específicos para fotofobia
+  * {
+    transition: background-color 0.5s ease, color 0.5s ease !important;
+  }
+
+  // Reducir brillo en imágenes y videos
+  img, video {
+    filter: brightness(0.8) contrast(1.1);
+    opacity: 0.9;
+  }
+
+  // Botones con menos contraste brillante
+  .btn-primary {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+
+    &:hover {
+      background-color: lighten(#2a6e4f, 5%);
+    }
+  }
+
+  // Remover animaciones brillantes
+  .loading-spinner,
+  .pulse-animation {
+    opacity: 0.7;
+  }
+
+  // Modo lectura mejorado
+  .reading-mode {
+    background-color: #1a1a1a !important;
+    color: #d0d0d0 !important;
+
+    p, li {
+      line-height: 1.8;
+      font-size: 1.1em;
+    }
+  }
+}
+
+// Detección de preferencias del sistema
+@media (prefers-color-scheme: light) {
+  [data-theme="photophobia"] {
+    // Forzar modo oscuro incluso si el sistema prefiere claro
+    @extend [data-theme="photophobia"];
+  }
 }

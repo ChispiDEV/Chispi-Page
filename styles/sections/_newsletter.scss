@@ -1,0 +1,139 @@
+/* ============================
+   SUSCRIPCIÓN NEWSLETTER
+   ============================ */
+
+.newsletter {
+  padding: 4rem 0;
+  background-color: var(--color-bg-alt);
+
+  &__container {
+    @include container;
+    max-width: 600px;
+  }
+
+  &__content {
+    text-align: center;
+  }
+
+  &__title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+
+    @include mobile {
+      font-size: 1.5rem;
+    }
+  }
+
+  &__description {
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  &__form {
+    display: flex;
+    gap: 1rem;
+
+    @include mobile {
+      flex-direction: column;
+    }
+
+    .form__group {
+      flex: 1;
+      margin-bottom: 0;
+    }
+  }
+
+  &__success {
+    background-color: rgba($color-success, 0.1);
+    border: 1px solid $color-success;
+    color: $color-success;
+    padding: 1rem;
+    border-radius: $border-radius;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  &__error {
+    background-color: rgba($color-danger, 0.1);
+    border: 1px solid $color-danger;
+    color: $color-danger;
+    padding: 1rem;
+    border-radius: $border-radius;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  &__privacy {
+    margin-top: 1rem;
+    font-size: $font-size-sm;
+    color: var(--color-text-muted);
+
+    a {
+      color: $color-primary;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  // Variantes
+  &--inline {
+    background: none;
+    padding: 2rem 0;
+
+    .newsletter__container {
+      max-width: none;
+    }
+
+    .newsletter__content {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      text-align: left;
+
+      @include mobile {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    .newsletter__text {
+      flex: 1;
+    }
+
+    .newsletter__form {
+      flex: 0 0 400px;
+
+      @include mobile {
+        flex: none;
+        width: 100%;
+      }
+    }
+  }
+
+  &--card {
+    background-color: var(--color-bg-card);
+    border-radius: $border-radius;
+    padding: 3rem;
+    box-shadow: var(--shadow-md);
+    margin: 2rem 0;
+
+    @include mobile {
+      padding: 2rem;
+    }
+  }
+
+  &--primary {
+    background: linear-gradient(135deg, $color-primary 0%, $color-secondary 100%);
+
+    .newsletter__title,
+    .newsletter__description {
+      color: white;
+    }
+  }
+}

@@ -1,19 +1,43 @@
-// themes/_sepia.scss
-// 📖 Estilo lectura amigable
+/* ============================
+   TEMA SEPIA
+   ============================ */
 
 [data-theme="sepia"] {
-  --color-primary: #704214;
-  --color-secondary: #5b3711;
-  --color-success: #38755b;
-  --color-danger: #993333;
-  --color-warning: #b58900;
-  --color-info: #268bd2;
+  // Colores sepia
+  --color-primary: #8b4513;
+  --color-secondary: #a0522d;
+  --color-success: #556b2f;
+  --color-danger: #8b0000;
+  --color-warning: #b8860b;
+  --color-info: #4682b4;
 
-  --color-bg: #f4ecd8;
-  --color-text: #5b4636;
-  --color-muted: #7c6f64;
+  // Fondos sepia
+  --color-bg: #f8f2e3;
+  --color-bg-alt: #e8dfc8;
+  --color-bg-card: #fbf7eb;
 
-  --navbar-bg: #fdf6e3;
-  --footer-bg: #fdf6e3;
-  --border-color: #e6d9b9;
+  // Texto
+  --color-text: #5c4b37;
+  --color-text-muted: #8c7a63;
+  --color-text-light: #a89981;
+
+  // Bordes
+  --color-border: #d9c9a9;
+  --color-border-light: #e8dfc8;
+
+  // Sombras suaves
+  --shadow-sm: 0 1px 2px rgba(91, 75, 55, 0.1);
+  --shadow-md: 0 4px 6px rgba(91, 75, 55, 0.1);
+  --shadow-lg: 0 10px 15px rgba(91, 75, 55, 0.1);
+
+  // Filtro global para imágenes (opcional)
+  img:not(.no-sepia) {
+    filter: sepia(0.3) brightness(0.9) contrast(1.1);
+  }
+
+  // Mejorar legibilidad
+  code, pre {
+    background-color: #e8dfc8 !important;
+    border-color: #d9c9a9 !important;
+  }
 }

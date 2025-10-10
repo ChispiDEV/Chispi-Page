@@ -1,55 +1,104 @@
-// base/_typography.scss
-// Configuración tipográfica global
-
 /* ============================
-   📖 Base
+   JERARQUÍA TIPOGRÁFICA
    ============================ */
+
 body {
   font-family: $font-family-base;
   font-size: $font-size-base;
   line-height: 1.6;
   color: $color-text;
+  background-color: $color-bg;
 }
 
-/* ============================
-   🔠 Encabezados
-   ============================ */
+// Headings
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 1.2;
-  margin-bottom: 0.5rem;
-  color: $color-secondary;
+  margin-bottom: 0.5em;
+  color: $gray-900;
 }
 
-h1 { font-size: 2.25rem; }
-h2 { font-size: 1.875rem; }
-h3 { font-size: 1.5rem; }
-h4 { font-size: 1.25rem; }
-h5 { font-size: 1.125rem; }
-h6 { font-size: 1rem; }
+h1 {
+  font-size: 2.5rem;
 
-/* ============================
-   ✍️ Texto
-   ============================ */
+  @media (min-width: 768px) {
+    font-size: 3rem;
+  }
+}
+
+h2 {
+  font-size: 2rem;
+
+  @media (min-width: 768px) {
+    font-size: 2.5rem;
+  }
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+// Text elements
 p {
   margin-bottom: 1rem;
-  color: gray(800);
+  line-height: 1.7;
 }
 
-small {
-  font-size: $font-size-sm;
-  color: gray(600);
-}
-
-/* ============================
-   🔗 Links
-   ============================ */
 a {
-  color: $color-info;
+  color: $color-primary;
   transition: color $transition-speed ease;
 
   &:hover,
   &:focus {
-    color: darken($color-info, 10%);
+    color: darken($color-primary, 10%);
+  }
+}
+
+strong {
+  font-weight: 700;
+}
+
+em {
+  font-style: italic;
+}
+
+blockquote {
+  border-left: 4px solid $color-primary;
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: $gray-600;
+}
+
+code {
+  background-color: $gray-100;
+  padding: 0.2em 0.4em;
+  border-radius: $border-radius;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+pre {
+  background-color: $gray-100;
+  padding: 1rem;
+  border-radius: $border-radius;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+
+  code {
+    background: none;
+    padding: 0;
   }
 }
