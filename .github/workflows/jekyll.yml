@@ -3,6 +3,8 @@ name: Deploy Jekyll Site
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [ "main" ]
 
 permissions:
   contents: write  # 🔑 Necesario para hacer push al branch gh-pages
@@ -13,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
@@ -21,17 +23,39 @@ jobs:
           ruby-version: 3.2
           bundler-cache: true
 
-      - name: Add Linux platform to bundle
-        run: bundle lock --add-platform x86_64-linux
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
 
-      - name: Install dependencies
-        run: bundle install
+      - name: Install npm dependencies
+        run: npm ci
 
-      - name: Build site with Jekyll
+      - name: Build assets
+        run: |
+          npm run build:css
+          npm run build:js
+
+      - name: Build Jekyll site
         run: bundle exec jekyll build
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}  # ✅ Token automático, no necesitas GH_PAT
-          publish_dir: ./_site
+          path: ./_site
+
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

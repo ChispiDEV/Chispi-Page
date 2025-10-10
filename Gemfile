@@ -2,19 +2,26 @@
 source "https://rubygems.org"
 
 # Jekyll
-gem "jekyll", "~> 4.3.2"
+gem "jekyll", "~> 4.3.0"
 
-# Plugins útiles
-gem "jekyll-feed"
-gem "jekyll-paginate-v2"
-gem "jekyll-seo-tag"
-gem "jekyll-sitemap"
-gem "jekyll-archives"
+# Plugins estándar de GitHub Pages
+gem "jekyll-feed", "~> 0.17"
+gem "jekyll-sitemap", "~> 1.4"
+gem "jekyll-seo-tag", "~> 2.8"
 
-# Compresión para producción
-group :production do
-  gem "jekyll-compress-html", "~> 0.5.0"
+# Plugins compatibles con GitHub Pages
+group :jekyll_plugins do
+  gem "jekyll-feed"
+  gem "jekyll-seo-tag"
+  gem "jekyll-sitemap"
 end
 
-# Plataforma específica
-gem "webrick", "~> 1.7"
+# Plugins para las páginas
+gem "jekyll-archives"
+gem "jekyll-paginate-v2"
+
+# Para desarrollo local
+gem "webrick", "~> 1.8"
+
+# Alternativa a jekyll-compress-html que SÍ existe
+gem "jekyll-minifier", "~> 0.1.10"

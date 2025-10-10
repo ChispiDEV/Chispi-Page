@@ -1,9 +1,13 @@
+# Configuración principal de Jekyll
 title: "Chispi-Page || Dashboard Personal"
 description: "Portfolio, Devlogs, Proyectos y Recursos"
 baseurl: "/Chispi-Page"
 url: "https://ChispiDEV.github.io"
 
+# Configuración de build
 markdown: kramdown
+permalink: pretty
+timezone: Europe/Madrid
 
 # Plugins necesarios
 plugins:
@@ -12,8 +16,16 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-archives
+  - jekyll-minifier
 
 plugins_dir: _plugins
+
+# Minificación (con jekyll-minifier)
+minifier:
+  compress_css: true
+  compress_javascript: true
+  remove_comments: true
+  remove_intertag_spaces: false
 
 # Configuración de paginación
 pagination:
@@ -31,8 +43,12 @@ pagination_tag:
 
 # Colecciones personalizadas
 collections:
+  posts:
+    output: true
+    permalink: /blog/:title/
   projects:
     output: true
+    permalink: /proyectos/:title/
 
 # Configuración por defecto para posts y colecciones
 defaults:
@@ -47,77 +63,76 @@ defaults:
       path: ""
       type: "posts"
     values:
-      layout: devlog
-      lang: es
+      layout: "post"
+      lang: "es"
   - scope:
-      path: "projects"
+      path: ""
       type: "projects"
     values:
-      layout: project
-      lang: es
+      layout: "project"
+      lang: "es"
   - scope:
       path: ""
       type: "tags"
     values:
-      layout: tag
+      layout: "tag"
   - scope:
-      path: ""
+      path: "en"
     values:
-      layout: default
-      lang: es
+      lang: "en"
 
 # Soporte para múltiples idiomas (manual)
 languages: ["es", "en"]
 default_lang: "es"
 
-# Configuración de assets
+# Excluir archivos de desarrollo
+exclude:
+  - node_modules
+  - package.json
+  - package-lock.json
+  - build-scripts.js
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .sass-cache
+  - .jekyll-cache
+
+# Assets configuration
 assets:
   css:
     main: "/assets/css/style.css"
-    vendors:
-      - "/assets/css/vendors/tippy.css"
-      - "/assets/css/vendors/particles.css"
-  
   js:
     main: "/assets/js/app.js"
-    vendors:
-      - "/assets/js/vendors/particles.js"
-      - "/assets/js/vendors/tippy.js"
-    modules:
-      - "/assets/js/modules/sidebar.js"
-      - "/assets/js/modules/scroll.js"
-      - "/assets/js/modules/theme.js"
-      - "/assets/js/modules/language.js"
-      - "/assets/js/modules/particles.js"
-      - "/assets/js/modules/tooltips.js"
-      - "/assets/js/modules/popups.js"
-    config:
-      - "/assets/particles/particles-config.js"
 
-# Orden de carga (importante para dependencias)
-load_order:
-  css:
-    - vendors
-    - main
-  js:
-    - vendors
-    - config
-    - modules
-    - main
-
-# CDNs externos
+# CDNs
 cdns:
   css:
     - "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
   js:
     - "https://kit.fontawesome.com/98ca02228e.js"
     - "https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    - "https://www.googletagmanager.com/gtag/js?id=G-KKN4WJL07V"
 
-# Archivos/carpetas que no deben procesarse
-exclude:
-  - node_modules
-  - build.js
-  - esbuild.config.js
-  - package.json
-  - package-lock.json
+# Datos del sitio
+data:
+  buttons:
+    es:
+      - text: "Sobre mí"
+        url: "/sobre-mi.html"
+        class: "btn--primary"
+      - text: "Proyectos"
+        url: "/proyectos.html"
+        class: "btn--secondary"
+      - text: "Contacto"
+        url: "/contacto.html"
+        class: "btn--outline"
+    en:
+      - text: "About Me"
+        url: "/sobre-mi.html"
+        class: "btn--primary"
+      - text: "Projects"
+        url: "/proyectos.html"
+        class: "btn--secondary"
+      - text: "Contact"
+        url: "/contacto.html"
+        class: "btn--outline"
