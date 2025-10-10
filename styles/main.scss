@@ -1,10 +1,13 @@
 /* ============================
-   ARCHIVO MAESTRO - IMPORTS
+   ARCHIVO MAESTRO - PRODUCCIÓN
    ============================ */
 
-// Base (siempre primero)
-@import 'base/reset';
+// Variables y configuraciones (se compilarán primero)
 @import 'base/variables';
+@import 'base/mixins';
+
+// Reset y base
+@import 'base/reset';
 @import 'base/typography';
 @import 'base/accessibility';
 
@@ -14,9 +17,8 @@
 @import 'layout/containers';
 @import 'layout/layout';
 
-// Components
+// Componentes
 @import 'components/buttons';
-@import 'components/theme-selector';
 @import 'components/nav';
 @import 'components/header';
 @import 'components/footer';
@@ -25,8 +27,10 @@
 @import 'components/forms';
 @import 'components/modals';
 @import 'components/tags';
+@import 'components/theme-selector';
+@import 'components/popups';
 
-// Sections
+// Secciones
 @import 'sections/hero';
 @import 'sections/features';
 @import 'sections/about-section';
@@ -38,19 +42,17 @@
 @import 'sections/testimonials';
 @import 'sections/newsletter';
 
-// Utils
-@import 'utils/mixins';
+// Utilidades (deben ir antes de los temas)
 @import 'utils/helpers';
 
-// Pages
+// Páginas
 @import 'pages/home';
 @import 'pages/about';
 @import 'pages/projects';
-@import 'pages/devblog';
 @import 'pages/error404';
 @import 'pages/maintenance';
 
-// Themes (siempre al final para que sobrescriban)
+// Temas (siempre al final)
 @import 'themes/light';
 @import 'themes/dark';
 @import 'themes/high-contrast';
@@ -61,3 +63,7 @@
 @import 'themes/reading';
 @import 'themes/reduced-motion';
 @import 'themes/grayscale';
+
+// Vendors (CSS de librerías externas)
+@import 'vendors/tippy';
+@import 'vendors/particles';
