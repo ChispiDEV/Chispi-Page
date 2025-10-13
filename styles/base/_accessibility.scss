@@ -1,6 +1,8 @@
 /* ============================
-   ACCESIBILIDAD GLOBAL
+   ACCESIBILIDAD
    ============================ */
+
+@use 'variables' as vars;
 
 // Screen reader only
 .sr-only {
@@ -20,12 +22,12 @@
   position: absolute;
   top: -40px;
   left: 6px;
-  background: $color-primary;
+  background: var(--color-primary);
   color: white;
-  padding: 8px 12px;
-  border-radius: $border-radius;
+  padding: vars.$spacing-3 vars.$spacing-4;
+  border-radius: vars.$border-radius;
   text-decoration: none;
-  z-index: 1000;
+  z-index: vars.$z-index-popover;
   transition: top 0.3s ease;
 
   &:focus {
@@ -35,7 +37,7 @@
 
 // Focus styles
 *:focus-visible {
-  outline: 2px solid $color-primary;
+  outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 
@@ -52,9 +54,16 @@
 // High contrast support
 @media (prefers-contrast: high) {
   :root {
-    --color-primary: #000000;
-    --color-secondary: #333333;
+    --color-border: var(--color-text);
+    --shadow-sm: 0 0 0 1px var(--color-text);
   }
+}
+
+// Disabled state
+[aria-disabled="true"],
+:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 // Accessibility helpers
@@ -70,4 +79,19 @@
 .focus-within-visible:focus-within {
   outline: 2px solid $color-primary;
   outline-offset: 2px;
+}
+
+// Print styles
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
 }

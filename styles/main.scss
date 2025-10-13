@@ -1,5 +1,5 @@
 /* ============================
-   ARCHIVO MAESTRO - PRODUCCIÓN
+   ARCHIVO PRINCIPAL SCSS
    ============================ */
 
 // Variables y configuraciones (se compilarán primero)
@@ -74,6 +74,10 @@
    ESTILOS GLOBALES
    ============================ */
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--font-family-base);
   font-size: var(--font-size-base);
@@ -85,11 +89,25 @@ body {
 
 // Utilidades globales
 .container {
-  @include container-responsive;
+  width: 100%;
+  max-width: var(--container-lg);
+  margin: 0 auto;
+  padding: 0 var(--spacing-4);
+
+  @include mixins.respond-to('xl') {
+    max-width: var(--container-xl);
+    padding: 0 var(--spacing-5);
+  }
 }
 
 .sr-only {
-  @include sr-only;
+  @include mixins.sr-only;
+}
+
+// Estados de carga
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
 }
 
 // Aplicar reducción de movimiento si está activo

@@ -2,6 +2,10 @@
    RESET CSS MODERNO
    ============================ */
 
+@use 'sass:color';
+@use 'variables' as vars;
+
+/* Box sizing rules */
 *,
 *::before,
 *::after {
@@ -19,6 +23,7 @@ html {
 body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
+  line-height: 1.5;
 }
 
 img,
@@ -41,6 +46,7 @@ button {
   cursor: pointer;
   border: none;
   background: none;
+  padding: 0;
 }
 
 a {
@@ -48,12 +54,34 @@ a {
   color: inherit;
 }
 
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
 ul,
 ol {
   list-style: none;
 }
 
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Selection styles */
+::selection {
+  background-color: color.adjust(vars.$color-primary, $alpha: -0.7);
+  color: var(--color-text);
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
   *,
   *::before,
   *::after {

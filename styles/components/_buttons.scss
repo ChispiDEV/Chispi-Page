@@ -2,23 +2,26 @@
    COMPONENTE BOTONES
    ============================ */
 
+@use 'sass:color';
+@use '../base/variables' as vars;
+@use '../base/mixins' as mix;
+
 .btn {
+  @include mix.button-reset;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: $border-radius;
-  font-weight: 600;
+  padding: vars.$btn-padding-y vars.$btn-padding-x;
+  border-radius: vars.$border-radius;
+  font-family: inherit;
+  font-size: vars.$font-size-base;
+  font-weight: vars.$font-weight-medium;
+  line-height: 1;
   text-decoration: none;
-  transition: all $transition-speed ease;
   border: 2px solid transparent;
   cursor: pointer;
-
-  &:focus-visible {
-    outline: 2px solid $color-primary;
-    outline-offset: 2px;
-  }
+  @include mix.transition(background-color);
+  @include mix.focus-visible;
 
   &:disabled {
     opacity: 0.6;
@@ -28,53 +31,67 @@
 
 // Button variants
 .btn-primary {
-  background-color: $color-primary;
+  background-color: var(--color-primary);
   color: white;
 
   &:hover:not(:disabled) {
-    background-color: darken($color-primary, 10%);
-    transform: translateY(-1px);
+    background-color: color.adjust(vars.$color-primary, $lightness: -10%);
   }
 }
 
 .btn-secondary {
-  background-color: $color-secondary;
+  background-color: var(--color-secondary);
   color: white;
 
   &:hover:not(:disabled) {
-    background-color: darken($color-secondary, 10%);
+    background-color: color.adjust(vars.$color-secondary, $lightness: -10%);
   }
 }
 
 .btn-outline {
   background-color: transparent;
-  border-color: $color-primary;
-  color: $color-primary;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
 
   &:hover:not(:disabled) {
-    background-color: $color-primary;
+    background-color: var(--color-primary);
     color: white;
   }
 }
 
 .btn-ghost {
   background-color: transparent;
-  color: $color-text;
+  color: var(--color-text);
 
   &:hover:not(:disabled) {
-    background-color: $gray-100;
+    background-color: var(--color-bg-alt);
+  }
+}
+
+.btn-danger {
+  background-color: var(--color-danger);
+  color: white;
+
+  &:hover:not(:disabled) {
+    background-color: color.adjust(vars.$color-danger, $lightness: -10%);
   }
 }
 
 // Button sizes
 .btn-sm {
-  padding: 0.5rem 1rem;
-  font-size: $font-size-sm;
+  padding: calc(vars.$btn-padding-y * 0.75) calc(vars.$btn-padding-x * 0.75);
+  font-size: vars.$font-size-sm;
 }
 
 .btn-lg {
-  padding: 1rem 2rem;
-  font-size: $font-size-lg;
+  padding: calc(vars.$btn-padding-y * 1.25) calc(vars.$btn-padding-x * 1.25);
+  font-size: vars.$font-size-lg;
+}
+
+// Botón de bloque completo
+.btn-block {
+  width: 100%;
+  justify-content: center;
 }
 
 // Icon buttons
@@ -98,18 +115,19 @@
 // Button group
 .btn-group {
   display: inline-flex;
+  gap: vars.$spacing-2;
 
   .btn {
     border-radius: 0;
 
     &:first-child {
-      border-top-left-radius: $border-radius;
-      border-bottom-left-radius: $border-radius;
+      border-top-left-radius: vars.$border-radius;
+      border-bottom-left-radius: vars.$border-radius;
     }
 
     &:last-child {
-      border-top-right-radius: $border-radius;
-      border-bottom-right-radius: $border-radius;
+      border-top-right-radius: vars.$border-radius;
+      border-bottom-right-radius: vars.$border-radius;
     }
 
     &:not(:last-child) {
