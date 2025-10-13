@@ -4,12 +4,12 @@
 
 [data-theme="photophobia"] {
   // Colores suaves y contrastados pero no brillantes
-  --color-primary: #2a6e4f;    // Verde más oscuro
-  --color-secondary: #2c4a7a;  // Azul más oscuro
-  --color-success: #1e7d5e;    // Verde oscuro
-  --color-danger: #b35050;     // Rojo suavizado
-  --color-warning: #c19a4f;    // Ámbar oscuro
-  --color-info: #4a8fa1;       // Azul suavizado
+  --color-primary: #4a6572;
+  --color-secondary: #344955;
+  --color-success: #2d5a4d;
+  --color-danger: #6d4c5a;
+  --color-warning: #756a4c;
+  --color-info: #3a5a6d;
 
   // Fondos oscuros pero no puros
   --color-bg: #0a0a0a;
@@ -18,30 +18,38 @@
 
   // Texto con contraste pero no blanco puro
   --color-text: #e0e0e0;
-  --color-text-muted: #a0a0a0;
-  --color-text-light: #666666;
+  --color-text-muted: #b0b0b0;
+  --color-text-light: #808080;
 
   // Bordes sutiles
   --color-border: #333333;
-  --color-border-light: #2a2a2a;
+  --color-border-light: #262626;
 
   // Sombras muy sutiles o eliminadas
-  --shadow-sm: 0 1px 2px rgba(255, 255, 255, 0.05);
-  --shadow-md: 0 2px 4px rgba(255, 255, 255, 0.05);
-  --shadow-lg: 0 4px 8px rgba(255, 255, 255, 0.05);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 1px 4px rgba(0, 0, 0, 0.1);
 
   // Overlays oscuros
   --color-overlay: rgba(0, 0, 0, 0.8);
 
+  // Reducir brillo máximo
+  --max-brightness: 80%;
+
   // Estilos específicos para fotofobia
   * {
+    filter: brightness(0.8);
     transition: background-color 0.5s ease, color 0.5s ease !important;
   }
-
+  
+  .bright-content {
+    filter: brightness(0.7) !important;
+  }
+  
   // Reducir brillo en imágenes y videos
-  img, video {
-    filter: brightness(0.8) contrast(1.1);
-    opacity: 0.9;
+  img, video,iframe {
+    filter: brightness(0.6) contrast(1.1);
+    opacity: 0.8;
   }
 
   // Botones con menos contraste brillante
@@ -50,6 +58,7 @@
     border-color: var(--color-primary);
 
     &:hover {
+      filter: brightness(1.1);
       background-color: lighten(#2a6e4f, 5%);
     }
   }

@@ -1,0 +1,87 @@
+/* ============================
+   VARIABLES CSS (Custom Properties)
+   ============================ */
+
+@use 'sass:color';
+@use 'variables' as vars;
+
+:root {
+  // Colores base (modo claro por defecto)
+  --color-primary: #{vars.$color-primary};
+  --color-secondary: #{vars.$color-secondary};
+  --color-success: #{vars.$color-success};
+  --color-danger: #{vars.$color-danger};
+  --color-warning: #{vars.$color-warning};
+  --color-info: #{vars.$color-info};
+
+  --color-bg: #{vars.$color-bg};
+  --color-bg-alt: #{vars.$color-bg-alt};
+  --color-bg-card: #{vars.$color-bg-card};
+  --color-text: #{vars.$color-text};
+  --color-text-muted: #{vars.$color-text-muted};
+  --color-text-light: #{vars.$color-text-light};
+  --color-border: #{vars.$color-border};
+  --color-border-light: #{vars.$color-border-light};
+  --color-overlay: #{vars.$color-overlay-dark};
+
+  // Tipografía
+  --font-family-base: #{vars.$font-family-base};
+  --font-family-heading: #{vars.$font-family-heading};
+  --font-family-mono: #{vars.$font-family-mono};
+
+  --font-size-base: #{vars.$font-size-base};
+  --font-size-sm: #{vars.$font-size-sm};
+  --font-size-lg: #{vars.$font-size-lg};
+  --font-size-xl: #{vars.$font-size-xl};
+
+  --font-weight-normal: #{vars.$font-weight-normal};
+  --font-weight-medium: #{vars.$font-weight-medium};
+  --font-weight-bold: #{vars.$font-weight-bold};
+
+  --line-height-base: #{vars.$line-height-base};
+  --line-height-tight: #{vars.$line-height-tight};
+
+  // Espaciado
+  --spacing-1: #{vars.$spacing-1};
+  --spacing-2: #{vars.$spacing-2};
+  --spacing-3: #{vars.$spacing-3};
+  --spacing-4: #{vars.$spacing-4};
+  --spacing-5: #{vars.$spacing-5};
+  --spacing-6: #{vars.$spacing-6};
+  --spacing-7: #{vars.$spacing-7};
+  --spacing-8: #{vars.$spacing-8};
+  --spacing-9: #{vars.$spacing-9};
+  --spacing-10: #{vars.$spacing-10};
+
+  // Border radius
+  --border-radius: #{vars.$border-radius};
+  --border-radius-sm: #{vars.$border-radius-sm};
+  --border-radius-lg: #{vars.$border-radius-lg};
+  --border-radius-xl: #{vars.$border-radius-xl};
+
+  // Transiciones
+  --transition-speed: #{vars.$transition-speed};
+  --transition-speed-fast: #{vars.$transition-speed-fast};
+  --transition-speed-slow: #{vars.$transition-speed-slow};
+
+  --ease-in-out: #{vars.$ease-in-out};
+  --ease-out: #{vars.$ease-out};
+
+  // Sombras
+  --shadow-sm: #{vars.$shadow-sm};
+  --shadow-md: #{vars.$shadow};
+  --shadow-lg: #{vars.$shadow-lg};
+  --shadow-xl: #{vars.$shadow-xl};
+
+  // Layout
+  --header-height: #{vars.$header-height};
+  --footer-height: #{vars.$footer-height};
+  --container-lg: #{vars.$container-lg};
+  --container-xl: #{vars.$container-xl};
+
+  // Z-index
+  --z-index-dropdown: #{vars.$z-index-dropdown};
+  --z-index-sticky: #{vars.$z-index-sticky};
+  --z-index-fixed: #{vars.$z-index-fixed};
+  --z-index-modal: #{vars.$z-index-modal};
+}

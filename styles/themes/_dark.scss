@@ -2,20 +2,24 @@
    TEMA OSCURO
    ============================ */
 
-[data-theme="dark"] {
-  --color-primary: #57e6b6;
-  --color-secondary: #66d9ef;
-  --color-success: #3cc88f;
-  --color-danger: #ff6b6b;
-  --color-warning: #ffc078;
-  --color-info: #66d9ef;
+@use 'sass:color';
+@use '../base/variables' as vars;
 
-  // Backgrounds (invertidos)
+[data-theme="dark"] {
+  // Colores vibrantes para modo oscuro
+  --color-primary: #{color.adjust(vars.$color-primary, $lightness: 10%)};
+  --color-secondary: #{color.adjust(vars.$color-secondary, $lightness: 15%)};
+  --color-success: #{vars.$color-success};
+  --color-danger: #{color.adjust(vars.$color-danger, $lightness: 5%)};
+  --color-warning: #{color.adjust(vars.$color-warning, $lightness: 5%)};
+  --color-info: #{color.adjust(vars.$color-info, $lightness: 10%)};
+
+  // Backgrounds
   --color-bg: #1a1a1a;
   --color-bg-alt: #2d2d2d;
   --color-bg-card: #2d2d2d;
 
-  // Text (invertido)
+  // Texto
   --color-text: #f8f9fa;
   --color-text-muted: #adb5bd;
   --color-text-light: #6c757d;
@@ -24,18 +28,35 @@
   --color-border: #495057;
   --color-border-light: #343a40;
 
-  // Shadows (más sutiles en oscuro)
+  // Sombras más sutiles en oscuro
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
-
-  // Overlays
-  --color-overlay: rgba(255, 255, 255, 0.1);
 }
 
-// Auto-detection del sistema
+// Auto-detection del sistema - SIN @extend
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    @extend [data-theme="dark"];
+    --color-primary: #{color.adjust(vars.$color-primary, $lightness: 10%)};
+    --color-secondary: #{color.adjust(vars.$color-secondary, $lightness: 15%)};
+    --color-success: #{vars.$color-success};
+    --color-danger: #{color.adjust(vars.$color-danger, $lightness: 5%)};
+    --color-warning: #{color.adjust(vars.$color-warning, $lightness: 5%)};
+    --color-info: #{color.adjust(vars.$color-info, $lightness: 10%)};
+
+    --color-bg: #1a1a1a;
+    --color-bg-alt: #2d2d2d;
+    --color-bg-card: #2d2d2d;
+
+    --color-text: #f8f9fa;
+    --color-text-muted: #adb5bd;
+    --color-text-light: #6c757d;
+
+    --color-border: #495057;
+    --color-border-light: #343a40;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
   }
 }

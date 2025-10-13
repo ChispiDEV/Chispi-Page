@@ -1,0 +1,60 @@
+{%- comment -%}
+Renderiza badges de tecnología con tooltips y soporte de subsecciones.
+- Soporta:
+- include.stack: lista simple de items
+- include.stack: lista con subsections (cada una con items)
+{%- endcomment -%}
+
+{%- assign stack = include.stack -%}
+
+{% if stack[0].items %}
+{%- comment -%} Tiene subsecciones {%- endcomment -%}
+{% for subsection in stack %}
+<h4 class="text-lg font-semibold mb-2 mt-4 text-verde-2">{{ subsection.name }}</h4>
+<div class="d-flex flex-wrap gap-2">
+    {% for item in subsection.items %}
+    {% assign name = item.name %}
+    {% assign color = item.color | default: '6c757d' %}
+    {% assign logo = item.logo | default: name | downcase | replace: ' ', '' %}
+
+    <a
+            href="#"
+            tabindex="0"
+            class="badge-img"
+            data-tippy-content="{{ name }}"
+            aria-label="{{ name }}"
+    >
+        <img
+                src="https://img.shields.io/badge/-{{ name | uri_escape }}-{{ color }}?logo={{ logo }}&logoColor=white"
+                alt="{{ name }}"
+                loading="lazy"
+        >
+    </a>
+    {% endfor %}
+</div>
+{% endfor %}
+{% else %}
+{%- comment -%} Lista plana de tecnologías {%- endcomment -%}
+<div class="d-flex flex-wrap gap-2">
+    {% for item in stack %}
+    {% assign name = item.name %}
+    {% assign color = item.color | default: '6c757d' %}
+    {% assign logo = item.logo | default: name | downcase | replace: ' ', '' %}
+
+    <a
+            href="#"
+            tabindex="0"
+            class="badge-img"
+            data-tippy-content="{{ name }}"
+            aria-label="{{ name }}"
+    >
+        <img
+                src="https://img.shields.io/badge/-{{ name | uri_escape }}-{{ color }}?logo={{ logo }}&logoColor=white"
+                alt="{{ name }}"
+                loading="lazy"
+        >
+    </a>
+    {% endfor %}
+</div>
+{% endif %}
+

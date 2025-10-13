@@ -1,0 +1,120 @@
+---
+layout: default
+title: Sobre mí
+lang: es
+hero_image_dark: "/assets/img/sobre-mi-bg-dark.jpg"
+hero_image_light: "/assets/img/sobre-mi-bg-light.jpg"
+subtitle: "Desarrolladora | Diseñadora | Analista de Datos"
+---
+
+<section id="sobre-mi" class="py-16">
+  <div class="container max-w-3xl mx-auto px-4">
+
+    <!-- Imagen y saludo -->
+    <div class="flex flex-col items-center text-center mb-12">
+      <img src="/Chispi-Page//assets/img/foto-perfil.jpg" alt="Foto de Cristina"
+           class="rounded-circle shadow-lg border border-4 border-verde-1 mb-3 mx-auto d-block"
+           style="width: 130px; height: 130px; object-fit: cover;">
+      <h2 class="text-4xl font-bold mb-2">🧑‍💻 Sobre mí</h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300 mt-2">👋 Soy Cristina — o Chispi, como me conocen muchos colegas. ¡Gracias por visitar mi página!</p>
+    </div>
+
+    <!-- Biografía y bootcamp -->
+    <div class="row g-4 text-left text-lg leading-relaxed">
+
+      <div class="col-12 col-md-6">
+        <div class="box box-sol">
+          <p>👩‍🔬 <strong>Bióloga y exprofesora</strong> especializada en <strong>análisis de datos</strong>. Algunas de mis herramientas favoritas:</p>
+          <ul class="list-disc list-inside mt-3 pl-2">
+            <li>📊 <strong>Python, Pandas, SQL</strong></li>
+            <li>📄 <strong>LaTeX, Pandoc</strong></li>
+            <li>📈 <strong>Matplotlib, Seaborn, Power BI</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <div class="box box-fuego">
+          <p>🍀 Recientemente completé un bootcamp de <strong>Análisis de Datos en IMMUNE Institute</strong>, trabajando en proyectos reales sobre:</p>
+          <ul class="list-disc list-inside mt-3 pl-2">
+            <li>Machine Learning</li>
+            <li>Visualización de Datos</li>
+            <li>Análisis Avanzado</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="box box-coral">
+          <p>👀 Gracias a mi formación en <strong>bioquímica y educación</strong>, combino el razonamiento científico con la creatividad para resolver problemas complejos.</p>
+        </div>
+      </div>
+
+      <!-- 🔧 Habilidades -->
+      <div class="col-12">
+        <div class="box box-hoja">
+          <h3 class="text-2xl font-semibold mb-4">🔧 Habilidades</h3>
+
+          <!-- Grid de secciones: 1 columna móvil, 2 en tablet, 3 en escritorio -->
+          <div class="row g-4">
+            {% for section in site.data.skills %}
+            <div class="col-12 col-md-6 col-lg-4">
+              <!-- Include no encontrado: skills/section.html section=section -->
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <!-- 🖥️ Tecnologías principales -->
+      <div class="col-12 col-md-6">
+        <div class="box box-mar">
+          <h3 class="text-2xl font-semibold mb-4">🖥️ Tecnologías principales</h3>
+
+          <div class="d-flex flex-wrap gap-2">
+            {% for item in site.data.skills-tech-main %}
+            {% include skills/item.html
+            name=item.name
+            logo=item.logo
+            color=item.color
+            tooltip=item.tooltip %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+
+      <!-- 🔥 Qué estoy haciendo -->
+      <div class="col-12 col-md-6">
+        <div class="box box-cielo">
+          {% include components/section.html
+           title="🔥 ¿Qué estoy haciendo ahora?"
+           content="<ul class='list-disc list-inside mt-3 pl-2'>
+            <li>💻 Mejorando habilidades en dashboards interactivos y modelado de datos.</li>
+            <li>📖 Explorando análisis de redes sociales con <strong>NetworkX</strong>.</li>
+            <li>🤝 Abierta a colaborar en proyectos de datos o automatización.</li>
+          </ul>"
+          %}
+        </div>
+      </div>
+
+      <!-- 🎉 Curiosidades -->
+      <div class="col-12">
+        <div class="box box-uva">
+          {% include components/section.html
+          title="🎉 Curiosidades"
+          content="<ul class='list-disc list-inside mt-3 pl-2'>
+          <li>🎮 Más de 500 horas en Stardew Valley</li>
+          <li>✈️ Soporte técnico en Riot Games</li>
+          <li>🐶 Mamá perruna de <strong>Riven</strong> y <strong>Haru</strong></li>
+          <li>🎨 Apasionada del tejido y el nail art</li>
+          <li>🌍 Estudiando japonés para visitar <strong>Kumamoto</strong> (¡hogar de las estatuas de One Piece!)</li>
+        </ul>"
+          %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+

@@ -8,22 +8,22 @@
   --color-secondary: #a0522d;
   --color-success: #556b2f;
   --color-danger: #8b0000;
-  --color-warning: #b8860b;
+  --color-warning: #8b7355;
   --color-info: #4682b4;
 
   // Fondos sepia
-  --color-bg: #f8f2e3;
-  --color-bg-alt: #e8dfc8;
-  --color-bg-card: #fbf7eb;
+  --color-bg: #f8f4e9;
+  --color-bg-alt: #f1e8d5;
+  --color-bg-card: #fdf6e3;
 
   // Texto
   --color-text: #5c4b37;
-  --color-text-muted: #8c7a63;
-  --color-text-light: #a89981;
+  --color-text-muted: #8c7b69;
+  --color-text-light: #a89a87;
 
   // Bordes
-  --color-border: #d9c9a9;
-  --color-border-light: #e8dfc8;
+  --color-border: #d6c7b2;
+  --color-border-light: #e8ddcd;
 
   // Sombras suaves
   --shadow-sm: 0 1px 2px rgba(91, 75, 55, 0.1);
@@ -37,7 +37,8 @@
 
   // Mejorar legibilidad
   code, pre {
-    background-color: #e8dfc8 !important;
-    border-color: #d9c9a9 !important;
+    background-color: #f1e8d5 !important;
+    border-color: #d6c7b2 !important;
+    color: #5c4b37 !important;
   }
 }

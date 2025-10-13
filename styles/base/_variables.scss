@@ -1,300 +1,178 @@
 /* ============================
-   🎨 PALETA PRINCIPAL (MODO CLARO)
+   🎨 VARIABLES SASS
    ============================ */
 
 // Colores primarios de la marca
-$color-primary:   #3cc88f;   // Verde menta (marca principal)
-$color-secondary: #335b9a;   // Azul marino (apoyo tecnológico)
-
-// Colores de estado y feedback
-$color-success:   #28a97b;   // Verde vivo (éxito/confirmación)
-$color-danger:    #e36565;   // Coral (error/peligro)
-$color-warning:   #f5c56b;   // Ámbar (advertencia/aviso)
-$color-info:      #57c4dc;   // Celeste (información)
-
-/* ============================
-   ⚫ ESCALA DE NEUTROS
-   ============================ */
-
-$gray-100: #f9fafb; // Fondo muy claro
-$gray-200: #e9ecef;
-$gray-300: #dee2e6;
-$gray-400: #ced4da;
-$gray-500: #adb5bd;
-$gray-600: #8a8d91; // Gris medio (texto secundario)
-$gray-700: #495057;
-$gray-800: #343a40;
-$gray-900: #212529; // Texto principal
-
-// Alias para compatibilidad (si los necesitas)
-$gray-1: $gray-100;
-$gray-2: $gray-200;
-
-/* ============================
-   🌗 FONDOS Y SUPERFICIES
-   ============================ */
-
-$color-bg:             $gray-100;                // Fondo general de la aplicación
-$color-bg-alt:         $gray-200;                // Fondo alternativo para secciones
-$color-bg-card:        #ffffff;                  // Fondo para tarjetas y componentes
-
-$color-text:           $gray-900;                // Texto principal
-$color-text-muted:     $gray-600;                // Texto secundario/atenuado
-$color-text-light:     $gray-400;                // Texto muy claro
-
-// Overlays y superposiciones
-$color-overlay-dark:   rgba(0, 0, 0, 0.6);       // Overlay oscuro
-$color-overlay-light:  rgba(255, 255, 255, 0.2); // Overlay claro
-$color-overlay-primary: rgba($color-primary, 0.1); // Overlay primario
-
-// Bordes
-$color-border:         $gray-300;                // Borde estándar
-$color-border-light:   $gray-200;                // Borde sutil
-$color-border-dark:    $gray-400;                // Borde destacado
-
-/* ============================
-   🖋 TIPOGRAFÍA
-   ============================ */
-
-// Familias de fuentes
-$font-family-base: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-$font-family-heading: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-$font-family-mono: 'Courier New', 'SFMono-Regular', 'Liberation Mono', Menlo, monospace;
-
-// Tamaños base
-$font-size-base: 1rem;      // 16px
-$font-size-sm:   0.875rem;  // 14px
-$font-size-lg:   1.25rem;   // 20px
-$font-size-xl:   1.5rem;    // 24px
-
-// Escala de fuentes
-$font-size-xs:   0.75rem;   // 12px
-$font-size-2xl:  1.75rem;   // 28px
-$font-size-3xl:  2rem;      // 32px
-$font-size-4xl:  2.5rem;    // 40px
-
-// Pesos de fuente
-$font-weight-light:   300;
-$font-weight-normal:  400;
-$font-weight-medium:  500;
-$font-weight-semibold:600;
-$font-weight-bold:    700;
-
-// Alturas de línea
-$line-height-tight: 1.25;
-$line-height-base:  1.6;
-$line-height-loose: 1.75;
-
-/* ============================
-   📏 ESPACIADO Y TAMAÑOS
-   ============================ */
-
-// Escala de espaciado (basada en 0.5rem = 8px)
-$spacing-1: 0.25rem;   // 4px
-$spacing-2: 0.5rem;    // 8px
-$spacing-3: 0.75rem;   // 12px
-$spacing-4: 1rem;      // 16px
-$spacing-5: 1.5rem;    // 24px
-$spacing-6: 2rem;      // 32px
-$spacing-7: 2.5rem;    // 40px
-$spacing-8: 3rem;      // 48px
-$spacing-9: 4rem;      // 64px
-$spacing-10: 5rem;     // 80px
-
-// Border radius
-$border-radius:     0.375rem;  // 6px
-$border-radius-sm:  0.25rem;   // 4px
-$border-radius-lg:  0.5rem;    // 8px
-$border-radius-xl:  0.75rem;   // 12px
-$border-radius-2xl: 1rem;      // 16px
-
-// Bordes
-$border-width:      1px;
-$border-width-2:    2px;
-$border-width-3:    3px;
-
-/* ============================
-   ⚡ TRANSICIONES Y ANIMACIONES
-   ============================ */
-
-$transition-speed:      0.3s;
-$transition-speed-fast: 0.15s;
-$transition-speed-slow: 0.5s;
-
-// Timing functions
-$ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-$ease-out:    cubic-bezier(0, 0, 0.2, 1);
-$ease-in:     cubic-bezier(0.4, 0, 1, 1);
-
-/* ============================
-   📐 LAYOUT Y CONTENEDORES
-   ============================ */
-
-// Breakpoints
-$breakpoint-xs:  480px;
-$breakpoint-sm:  640px;
-$breakpoint-md:  768px;
-$breakpoint-lg:  1024px;
-$breakpoint-xl:  1280px;
-$breakpoint-2xl: 1536px;
-
-// Contenedores
-$container-xs:  100%;
-$container-sm:  640px;
-$container-md:  768px;
-$container-lg:  1024px;
-$container-xl:  1280px;
-$container-2xl: 1536px;
-
-// Alturas
-$header-height: 4rem;      // 64px
-$footer-height: 6rem;      // 96px
-
-/* ============================
-   🎭 SOMBRAS Y PROFUNDIDAD
-   ============================ */
-
-$shadow-sm:  0 1px 2px 0 rgba(0, 0, 0, 0.05);
-$shadow:     0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-$shadow-md:  0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-$shadow-lg:  0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-$shadow-xl:  0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-$shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-
-// Sombras internas
-$shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
-
-/* ============================
-   🎯 Z-INDEX ESCALA
-   ============================ */
-
-$z-index-dropdown:    1000;
-$z-index-sticky:      1020;
-$z-index-fixed:       1030;
-$z-index-modal-backdrop: 1040;
-$z-index-modal:       1050;
-$z-index-popover:     1060;
-$z-index-tooltip:     1070;
-$z-index-toast:       1080;
-$z-index-sidebar:     10000;
-
-/* ============================
-   📦 MAPAS DE COLORES
-   ============================ */
-
-// Colores del tema
-$theme-colors: (
-        "primary":    $color-primary,
-        "secondary":  $color-secondary,
-        "success":    $color-success,
-        "danger":     $color-danger,
-        "warning":    $color-warning,
-        "info":       $color-info,
-        "text":       $color-text,
-        "bg":         $color-bg,
-        "bg-alt":     $color-bg-alt,
-        "bg-card":    $color-bg-card
-);
+$color-primary:   #3cc88f !default;
+$color-secondary: #335b9a !default;
+$color-success:   #28a97b !default;
+$color-danger:    #e36565 !default;
+$color-warning:   #f5c56b !default;
+$color-info:      #57c4dc !default;
 
 // Escala de grises
-$grays: (
-        "100": $gray-100,
-        "200": $gray-200,
-        "300": $gray-300,
-        "400": $gray-400,
-        "500": $gray-500,
-        "600": $gray-600,
-        "700": $gray-700,
-        "800": $gray-800,
-        "900": $gray-900
-);
+$gray-100: #f9fafb !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #8a8d91 !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
 
-// Colores de texto
-$text-colors: (
-        "primary":   $color-text,
-        "muted":     $color-text-muted,
-        "light":     $color-text-light,
-        "success":   $color-success,
-        "danger":    $color-danger,
-        "warning":   $color-warning,
-        "info":      $color-info
-);
+// Fondos y superficies (modo claro)
+$color-bg:             $gray-100 !default;
+$color-bg-alt:         $gray-200 !default;
+$color-bg-card:        #ffffff !default;
+$color-text:           $gray-900 !default;
+$color-text-muted:     $gray-600 !default;
+$color-text-light:     $gray-400 !default;
 
-/* ============================
-   🎪 COMPONENTES ESPECÍFICOS
-   ============================ */
+// Bordes
+$color-border:         $gray-300 !default;
+$color-border-light:   $gray-200 !default;
+$color-border-dark:    $gray-400 !default;
 
-// Navbar
-$navbar-bg:           $color-bg;
-$navbar-text:         $color-text;
-$navbar-border:       $color-secondary;
-$navbar-height:       $header-height;
+// Overlays
+$color-overlay-dark:   rgba(0, 0, 0, 0.6) !default;
+$color-overlay-light:  rgba(255, 255, 255, 0.2) !default;
+$color-overlay-primary: rgba($color-primary, 0.1) !default;
 
-// Sidebar
-$sidebar-width:       260px;
-$sidebar-bg:          $color-bg;
-$sidebar-text:        $color-text;
-$sidebar-z-index:     $z-index-sidebar;
+// Tipografía
+$font-family-base: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !default;
+$font-family-heading: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !default;
+$font-family-mono: 'Courier New', 'SFMono-Regular', 'Liberation Mono', Menlo, monospace !default;
 
-// Botones
-$btn-padding-y:       0.75rem;
-$btn-padding-x:       1.5rem;
-$btn-border-radius:   $border-radius;
+$font-size-base: 1rem !default;
+$font-size-sm:   0.875rem !default;
+$font-size-lg:   1.25rem !default;
+$font-size-xl:   1.5rem !default;
+$font-size-xs:   0.75rem !default;
+$font-size-2xl:  1.75rem !default;
+$font-size-3xl:  2rem !default;
+$font-size-4xl:  2.5rem !default;
 
-// Cards
-$card-bg:             $color-bg-card;
-$card-border-color:   $color-border;
-$card-border-radius:  $border-radius;
-$card-padding:        1.5rem;
+$font-weight-light:   300 !default;
+$font-weight-normal:  400 !default;
+$font-weight-medium:  500 !default;
+$font-weight-semibold:600 !default;
+$font-weight-bold:    700 !default;
 
-// Forms
-$input-bg:            $color-bg-card;
-$input-border-color:  $color-border;
-$input-border-radius: $border-radius;
-$input-padding-y:     0.75rem;
-$input-padding-x:     1rem;
+$line-height-tight: 1.25 !default;
+$line-height-base:  1.6 !default;
+$line-height-loose: 1.75 !default;
 
-/* ============================
-   🌙 MODO OSCURO (VARIABLES CSS)
-   ============================ */
+// Espaciado
+$spacing-1: 0.25rem !default;
+$spacing-2: 0.5rem !default;
+$spacing-3: 0.75rem !default;
+$spacing-4: 1rem !default;
+$spacing-5: 1.5rem !default;
+$spacing-6: 2rem !default;
+$spacing-7: 2.5rem !default;
+$spacing-8: 3rem !default;
+$spacing-9: 4rem !default;
+$spacing-10: 5rem !default;
 
-:root {
-  // Colores base (modo claro por defecto)
-  --color-bg: #{$color-bg};
-  --color-bg-alt: #{$color-bg-alt};
-  --color-bg-card: #{$color-bg-card};
-  --color-text: #{$color-text};
-  --color-text-muted: #{$color-text-muted};
-  --color-text-light: #{$color-text-light};
-  --color-border: #{$color-border};
-  --color-border-light: #{$color-border-light};
-}
+// Border radius
+$border-radius:     0.375rem !default;
+$border-radius-sm:  0.25rem !default;
+$border-radius-lg:  0.5rem !default;
+$border-radius-xl:  0.75rem !default;
+$border-radius-2xl: 1rem !default;
 
-/* ============================
-   📱 RESPONSIVE
-   ============================ */
+// Bordes
+$border-width:      1px !default;
+$border-width-2:    2px !default;
+$border-width-3:    3px !default;
 
-// Container queries (futuro)
-$container-narrow: 45rem;
-$container-wide:   75rem;
+// Transiciones
+$transition-speed:      0.3s !default;
+$transition-speed-fast: 0.15s !default;
+$transition-speed-slow: 0.5s !default;
 
-/* ============================
-   🎨 UTILIDADES
-   ============================ */
+$ease-in-out: cubic-bezier(0.4, 0, 0.2, 1) !default;
+$ease-out:    cubic-bezier(0, 0, 0.2, 1) !default;
+$ease-in:     cubic-bezier(0.4, 0, 1, 1) !default;
 
-// Opacidad
-$opacity-0:   0;
-$opacity-25:  0.25;
-$opacity-50:  0.5;
-$opacity-75:  0.75;
-$opacity-100: 1;
+// Breakpoints
+$breakpoint-xs:  480px !default;
+$breakpoint-sm:  640px !default;
+$breakpoint-md:  768px !default;
+$breakpoint-lg:  1024px !default;
+$breakpoint-xl:  1280px !default;
+$breakpoint-2xl: 1536px !default;
 
-// Blur
-$blur-sm:  blur(4px);
-$blur:     blur(8px);
-$blur-lg:  blur(16px);
-$blur-xl:  blur(24px);
+// Contenedores
+$container-xs:  100% !default;
+$container-sm:  640px !default;
+$container-md:  768px !default;
+$container-lg:  1024px !default;
+$container-xl:  1280px !default;
+$container-2xl: 1536px !default;
 
-// Gradientes
-$gradient-primary:   linear-gradient(135deg, $color-primary 0%, $color-secondary 100%);
-$gradient-overlay:   linear-gradient(135deg, rgba($color-primary, 0.1) 0%, rgba($color-secondary, 0.1) 100%);
+// Alturas
+$header-height: 4rem !default;
+$footer-height: 6rem !default;
+
+// Sombras
+$shadow-sm:  0 1px 2px 0 rgba(0, 0, 0, 0.05) !default;
+$shadow:     0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !default;
+$shadow-md:  0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !default;
+$shadow-lg:  0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !default;
+$shadow-xl:  0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !default;
+$shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !default;
+$shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06) !default;
+
+// Z-index
+$z-index-dropdown:    1000 !default;
+$z-index-sticky:      1020 !default;
+$z-index-fixed:       1030 !default;
+$z-index-modal-backdrop: 1040 !default;
+$z-index-modal:       1050 !default;
+$z-index-popover:     1060 !default;
+$z-index-tooltip:     1070 !default;
+$z-index-toast:       1080 !default;
+$z-index-sidebar:     10000 !default;
+
+// Componentes específicos
+$navbar-bg:           $color-bg !default;
+$navbar-text:         $color-text !default;
+$navbar-border:       $color-secondary !default;
+$navbar-height:       $header-height !default;
+
+$sidebar-width:       260px !default;
+$sidebar-bg:          $color-bg !default;
+$sidebar-text:        $color-text !default;
+$sidebar-z-index:     $z-index-sidebar !default;
+
+$btn-padding-y:       0.75rem !default;
+$btn-padding-x:       1.5rem !default;
+$btn-border-radius:   $border-radius !default;
+
+$card-bg:             $color-bg-card !default;
+$card-border-color:   $color-border !default;
+$card-border-radius:  $border-radius !default;
+$card-padding:        1.5rem !default;
+
+$input-bg:            $color-bg-card !default;
+$input-border-color:  $color-border !default;
+$input-border-radius: $border-radius !default;
+$input-padding-y:     0.75rem !default;
+$input-padding-x:     1rem !default;
+
+// Utilidades
+$opacity-0:   0 !default;
+$opacity-25:  0.25 !default;
+$opacity-50:  0.5 !default;
+$opacity-75:  0.75 !default;
+$opacity-100: 1 !default;
+
+$blur-sm:  blur(4px) !default;
+$blur:     blur(8px) !default;
+$blur-lg:  blur(16px) !default;
+$blur-xl:  blur(24px) !default;
+
+$gradient-primary:   linear-gradient(135deg, $color-primary 0%, $color-secondary 100%) !default;
+$gradient-overlay:   linear-gradient(135deg, rgba($color-primary, 0.1) 0%, rgba($color-secondary, 0.1) 100%) !default;

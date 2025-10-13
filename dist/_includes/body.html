@@ -1,0 +1,31 @@
+<body>
+<!-- Navbar -->
+<!-- Include no encontrado: layout/navbar.html -->
+
+<!-- Cabecera de cada página -->
+{% if page.hero %}
+<!-- Include no encontrado: components/hero-header.html -->
+{% elsif page.show_header != false %}
+<!-- Include no encontrado: layout/header.html -->
+{% endif %}
+
+<!-- Contenido dinámico -->
+{% if page.hero %}
+{{ content }}
+{% else %}
+<main class="main-content">
+    {{ content }}
+</main>
+{% endif %}
+
+<!-- Footer -->
+<!-- Include no encontrado: layout/footer.html -->
+
+<!-- Botón de Scroll-To-Top -->
+<button class="scroll-to-top" aria-label="Volver arriba">
+    <span class="scroll-to-top__icon">↑</span>
+</button>
+
+<!-- Carga automática de scripts -->
+<!-- Include no encontrado: assets/scripts.html -->
+</body>

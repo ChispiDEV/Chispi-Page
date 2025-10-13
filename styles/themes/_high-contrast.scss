@@ -1,8 +1,9 @@
 /* ============================
-   TEMA ALTO CONTRASTE
+   ALTO CONTRASTE
    ============================ */
 
 [data-theme="high-contrast"] {
+  // Colores de alto contraste
   --color-primary: #00ff00;   // Verde puro
   --color-secondary: #0000ff; // Azul puro
   --color-success: #00ff00;
@@ -32,6 +33,11 @@
   // Overlays
   --color-overlay: rgba(0, 0, 0, 0.8);
 
+  // Fuentes más legibles
+  --font-family-base: 'Arial', sans-serif;
+  --font-weight-normal: 700; // Texto más grueso
+}
+
   // Estilos específicos para alto contraste
   * {
     background-color: var(--color-bg) !important;
@@ -41,21 +47,22 @@
 
   a {
     text-decoration: underline !important;
+    text-underline-offset: 0.2em;
 
     &:focus {
-      outline: 3px solid #000000 !important;
+      outline: 3px solid var(--color-text) !important;
       outline-offset: 2px !important;
     }
   }
 
   button,
   .btn {
-    border: 2px solid #000000 !important;
-    background: #ffffff !important;
-    color: #000000 !important;
+    border: 2px solid var(--color-text) !important;
+    background: var(--color-bg) !important;
+    color: var(--color-text) !important;
 
     &:focus {
-      outline: 3px solid #000000 !important;
+      outline: 3px solid var(--color-text) !important;
       outline-offset: 2px !important;
     }
   }

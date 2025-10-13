@@ -1,24 +1,22 @@
 #!/bin/bash
 
-# Script de deploy para producción
-echo "🚀 Iniciando deploy..."
+echo "🚀 Iniciando deploy con Node.js..."
 
-# Construir para producción
+# Build producción
 echo "📦 Construyendo para producción..."
-export JEKYLL_ENV=production
-npm run production
+npm run build
 
-# Verificar que la build fue exitosa
 if [ $? -eq 0 ]; then
     echo "✅ Build completada exitosamente"
-    
-    # Aquí puedes agregar comandos de deploy
-    # Por ejemplo, para GitHub Pages:
-    # git add .
-    # git commit -m "Deploy: $(date)"
-    # git push origin main
-    
-    echo "🎉 Listo para deploy"
+    echo ""
+    echo "📋 Pasos para deploy:"
+    echo "1. La carpeta 'dist/' está lista para deploy"
+    echo "2. Opciones:"
+    echo "   a) GitHub Pages: Sube manualmente la carpeta dist/"
+    echo "   b) Netlify: Arrastra la carpeta dist/ a netlify.com"
+    echo "   c) Vercel: Usa 'npx vercel --prod'"
+    echo ""
+    echo "🎉 Build lista en: $(pwd)/dist"
 else
     echo "❌ Error en la build"
     exit 1

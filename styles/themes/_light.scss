@@ -1,40 +1,27 @@
 /* ============================
-   TEMA CLARO (Por defecto)
+   TEMA CLARO (EXPLÍCITO)
    ============================ */
 
-:root {
-  // Colors
-  --color-primary: #{$color-primary};
-  --color-secondary: #{$color-secondary};
-  --color-success: #{$color-success};
-  --color-danger: #{$color-danger};
-  --color-warning: #{$color-warning};
-  --color-info: #{$color-info};
+[data-theme="light"] {
+  // Asegura que el tema claro use siempre los valores por defecto
+  --color-primary: #{vars.$color-primary};
+  --color-secondary: #{vars.$color-secondary};
+  --color-success: #{vars.$color-success};
+  --color-danger: #{vars.$color-danger};
+  --color-warning: #{vars.$color-warning};
+  --color-info: #{vars.$color-info};
 
-  // Backgrounds
-  --color-bg: #{$color-bg};
-  --color-bg-alt: #{$gray-200};
-  --color-bg-card: #ffffff;
+  --color-bg: #{vars.$color-bg};
+  --color-bg-alt: #{vars.$color-bg-alt};
+  --color-bg-card: #{vars.$color-bg-card};
+  --color-text: #{vars.$color-text};
+  --color-text-muted: #{vars.$color-text-muted};
+  --color-text-light: #{vars.$color-text-light};
+  --color-border: #{vars.$color-border};
+  --color-border-light: #{vars.$color-border-light};
 
-  // Text
-  --color-text: #{$color-text};
-  --color-text-muted: #{$gray-600};
-  --color-text-light: #{$gray-400};
-
-  // Borders
-  --color-border: #{$gray-300};
-  --color-border-light: #{$gray-200};
-
-  // Shadows
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  // Sombras más definidas en modo claro
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-
-  // Overlays
-  --color-overlay: #{$color-overlay-dark};
-}
-
-[data-theme="light"] {
-  // Sobrescribe las variables CSS para forzar tema claro
-  @extend :root;
 }

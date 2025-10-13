@@ -1,0 +1,22 @@
+{%- comment -%}
+Genera badges con Shields.io para una lista de tecnologías.
+Usa include.stack con una lista de objetos que contengan:
+- name
+- color (hex sin #)
+- logo (opcional)
+{%- endcomment -%}
+
+<div class="d-flex flex-wrap gap-2">
+    {% for item in include.stack %}
+    {% assign name = item.name %}
+    {% assign color = item.color | default: '6c757d' %}
+    {% assign logo = item.logo | default: name | downcase | replace: ' ', '' %}
+
+    <img
+            src="https://img.shields.io/badge/-{{ name | uri_escape }}-{{ color }}?logo={{ logo }}&logoColor=white"
+            alt="{{ name }}"
+            class="badge-img"
+            loading="lazy"
+    >
+    {% endfor %}
+</div>

@@ -1,0 +1,27 @@
+---
+layout: default
+title: Proyectos
+lang: en
+hero_image_dark: "/assets/img/proyectos-bg-dark.jpg"
+hero_image_light: "/assets/img/proyectos-bg-light.jpg"
+---
+
+<section id="proyectos" class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center mb-4">Proyectos</h2>
+    <div class="row">
+      {% for project in site.projects %}
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          <img src="{{ project.image | relative_url }}" class="card-img-top" alt="{{ project.title }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ project.title }}</h5>
+            <p class="card-text">{{ project.excerpt }}</p>
+            <a href="{{ project.url | relative_url }}" class="btn btn-outline-primary">Ver más</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

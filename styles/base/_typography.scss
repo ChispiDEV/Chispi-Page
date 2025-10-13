@@ -2,72 +2,78 @@
    JERARQUÍA TIPOGRÁFICA
    ============================ */
 
+@use 'sass:color';
+@use 'variables' as vars;
+
 body {
-  font-family: $font-family-base;
-  font-size: $font-size-base;
-  line-height: 1.6;
-  color: $color-text;
-  background-color: $color-bg;
+  font-family: vars.$font-family-base;
+  font-size: vars.$font-size-base;
+  line-height: vars.$line-height-base;
+  color: var(--color-text);
+  background-color: var(--color-bg);
 }
 
 // Headings
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 0.5em;
-  color: $gray-900;
+  font-family: var(--font-family-heading);
+  font-weight: vars.$font-weight-bold;
+  line-height: vars.$line-height-tight;
+  margin-bottom: vars.$spacing-3;
+  color: var(--color-text);
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: vars.$font-size-4xl;
 
-  @media (min-width: 768px) {
-    font-size: 3rem;
+  @media (min-width: vars.$breakpoint-md) {
+    font-size: calc(vars.$font-size-4xl * 1.2);
   }
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: vars.$font-size-3xl;
 
-  @media (min-width: 768px) {
-    font-size: 2.5rem;
+  @media (min-width: vars.$breakpoint-md) {
+    font-size: calc(vars.$font-size-3xl * 1.1);
   }
 }
 
 h3 {
-  font-size: 1.75rem;
+  font-size: vars.$font-size-2xl;
 }
 
 h4 {
-  font-size: 1.5rem;
+  font-size: vars.$font-size-xl;
 }
 
 h5 {
-  font-size: 1.25rem;
+  font-size: vars.$font-size-lg;
 }
 
 h6 {
-  font-size: 1rem;
+  font-size: vars.$font-size-base;
 }
 
 // Text elements
 p {
-  margin-bottom: 1rem;
-  line-height: 1.7;
+  margin-bottom: vars.$spacing-4;
+  line-height: vars.$line-height-base;
 }
 
 a {
-  color: $color-primary;
-  transition: color $transition-speed ease;
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color vars.$transition-speed vars.$ease-in-out;
 
   &:hover,
   &:focus {
-    color: darken($color-primary, 10%);
+    color: color.adjust(vars.$color-primary, $lightness: -10%);
+    text-decoration: underline;
   }
 }
 
 strong {
-  font-weight: 700;
+  font-weight: vars.$font-weight-bold;
 }
 
 em {
@@ -75,30 +81,92 @@ em {
 }
 
 blockquote {
-  border-left: 4px solid $color-primary;
-  padding-left: 1rem;
-  margin: 1.5rem 0;
+  border-left: vars.$border-width-2 solid var(--color-primary);
+  padding-left: vars.$spacing-5;
+  margin: vars.$spacing-6 0;
   font-style: italic;
-  color: $gray-600;
+  color: var(--color-text-muted);
+  background-color: var(--color-bg-alt);
+  padding: vars.$spacing-5;
+  border-radius: vars.$border-radius;
 }
 
 code {
-  background-color: $gray-100;
-  padding: 0.2em 0.4em;
-  border-radius: $border-radius;
-  font-family: 'Courier New', monospace;
+  background-color: var(--color-bg-alt);
+  padding: vars.$spacing-1 vars.$spacing-2;
+  border-radius: vars.$border-radius-sm;
+  font-family: var(--font-family-mono);
   font-size: 0.9em;
+  color: var(--color-text);
 }
 
 pre {
-  background-color: $gray-100;
-  padding: 1rem;
-  border-radius: $border-radius;
+  background-color: var(--color-bg-alt);
+  padding: vars.$spacing-5;
+  border-radius: vars.$border-radius;
   overflow-x: auto;
-  margin: 1.5rem 0;
+  margin: vars.$spacing-6 0;
+  border: vars.$border-width solid var(--color-border);
 
   code {
     background: none;
     padding: 0;
+    border: none;
   }
+}
+
+// Lists
+ul, ol {
+  margin-bottom: vars.$spacing-4;
+  padding-left: vars.$spacing-5;
+}
+
+li {
+  margin-bottom: vars.$spacing-2;
+  line-height: vars.$line-height-base;
+}
+
+// Text utilities
+.text-lead {
+  font-size: vars.$font-size-lg;
+  line-height: vars.$line-height-loose;
+  color: var(--color-text-muted);
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-small {
+  font-size: vars.$font-size-sm;
+}
+
+.text-large {
+  font-size: vars.$font-size-lg;
+}
+
+// Alignment
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+// Text transforms
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-lowercase {
+  text-transform: lowercase;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
 }

@@ -1,0 +1,15 @@
+<header class="hero d-flex align-items-center justify-content-center text-center"
+  data-img-dark="{{ page.hero_image_dark | default: '/assets/img/hero-bg-dark.jpg' | relative_url }}"
+  data-img-light="{{ page.hero_image_light | default: '/assets/img/hero-bg-light.jpg' | relative_url }}">
+  
+  <div id="particles-js" 
+       style="position: absolute; width: 100%; height: 100%; z-index: 0;"></div>
+
+  <div class="container px-4 px-lg-5 text-center" style="position: relative; z-index: 2;">
+    <div class="text-box">
+      <h1 class="display-3 fw-bold">{{ page.title | default: '¡Bienvenido a Chispi Page!' }}</h1>
+      <p class="lead mt-3">{{ page.subtitle | default: 'Tu rincón especial en Internet' }}</p>
+    </div>
+  </div>
+</header>
+
