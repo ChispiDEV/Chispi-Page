@@ -1,0 +1,25 @@
+<span class="reading-time" title="Tiempo estimado de lectura">
+  <span class="read-time-text" data-i18n="read_time">Tiempo de lectura:</span>
+  <span class="read-time-value" id="read-time-value">1 min</span>
+</span>
+
+<script>
+  function calculateReadTime(contentElement) {
+    const text = contentElement.textContent || contentElement.innerText;
+    const words = text.trim().split(/\s+/).length;
+    const readingTime = Math.ceil(words / 200); // 200 palabras por minuto
+
+    const readTimeElement = document.getElementById('read-time-value');
+    if (readTimeElement) {
+      readTimeElement.textContent = readingTime === 1 ? '1 min' : `${readingTime} mins`;
+    }
+  }
+
+  // Usar en páginas de blog
+  document.addEventListener('DOMContentLoaded', function() {
+    const articleContent = document.querySelector('.blog-content');
+    if (articleContent) {
+      calculateReadTime(articleContent);
+    }
+  });
+</script>

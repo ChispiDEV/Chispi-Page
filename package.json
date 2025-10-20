@@ -1,24 +1,28 @@
 {
   "name": "chispi-page",
-  "version": "1.0.0",
   "type": "module",
-  "description": "Portfolio personal de Chispi",
-  "scripts": {
-    "dev": "node build.js --watch",
-    "build": "set NODE_ENV=production&& node build.js",
-    "build:dev": "set NODE_ENV=development&& node build.js",
-    "serve": "npx serve dist -p 3000",
-    "clean": "if exist dist rmdir /s dist && mkdir dist",
-    "deploy": "npm run build && echo 🚀 Listo para deploy"
+  "exports": {
+    "./*": "./*"
   },
-  "devDependencies": {
-    "sass": "^1.66.1",
-    "chokidar": "^3.5.3",
-    "fs-extra": "^11.1.1",
-    "html-minifier-terser": "^7.2.0",
-    "cssnano": "^6.0.1",
-    "terser": "^5.24.0",
-    "serve": "^14.2.1",
-    "glob": "^10.3.10"
+  "scripts": {
+    "check-structure": "node scripts/check-structure.js",
+    "check-structure-debug": "node scripts/check-structure-debug.js",
+    "verify": "node scripts/verify-functionality.js",
+    "full-check": "npm run check-structure && npm run verify",
+    "build:dev": "set NODE_ENV=development&& node scripts/build/adaptive-build.js",
+    "build:prod": "set NODE_ENV=production&& node scripts/build/adaptive-build.js",
+    "build": "node scripts/build/adaptive-build.js",
+    "test": "node scripts/test/test-runner.js",
+    "test:build": "npm run build:dev && npm run test",
+    "dev": "npm run build:dev && npx serve dist",
+    "deploy": "node scripts/deploy/deploy.js",
+    "clean": "rm -rf dist logs",
+    "analyze": "node scripts/analyze/analyze-build.js"
+  },
+  "dependencies": {
+    "fs-extra": "^11.3.2",
+    "glob": "^11.0.3",
+    "sass": "^1.93.2",
+    "terser": "^5.44.0"
   }
 }

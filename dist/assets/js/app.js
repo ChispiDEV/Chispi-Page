@@ -1,336 +1,6 @@
+// ChispiPage JS Bundle
 
-// ===== src\assets\scripts\js\app.js =====
-// ============================
-// APP CONTROLLER - CON CARGA AUTOMÁTICA
-// ============================
-
-class AppController {
-    constructor() {
-        this.modules = {};
-        this.BASE_URL = '{{ site.baseurl }}';
-        this.moduleStatus = new Map();
-        this.init();
-    }
-
-    async init() {
-        try {
-            // Esperar a que el DOM esté listo
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', () => this.startApp());
-            } else {
-                this.startApp();
-            }
-        } catch (error) {
-            console.error('❌ Error inicializando la app:', error);
-        }
-    }
-
-    async startApp() {
-        // Registrar módulos disponibles
-        this.registerModules();
-
-        // Inicializar módulos en orden
-        await this.initModules();
-
-        // Configurar eventos globales
-        this.setupGlobalEvents();
-
-        console.log('✅ App inicializada correctamente');
-    }
-
-    registerModules() {
-        // Módulos core (siempre presentes)
-        this.availableModules = {
-            'sidebar': 'SidebarController',
-            'scroll': 'ScrollController',
-            'theme': 'ThemeController',
-            'language': 'LanguageController',
-            'particles': 'ParticlesController',
-            'tooltips': 'TooltipsController',
-            'popups': 'PopupsController'
-        };
-
-        // Verificar qué módulos están realmente cargados
-        this.detectLoadedModules();
-    }
-
-    detectLoadedModules() {
-        Object.keys(this.availableModules).forEach(moduleName => {
-            const className = this.availableModules[moduleName];
-            if (window[className]) {
-                this.moduleStatus.set(moduleName, 'available');
-            } else {
-                this.moduleStatus.set(moduleName, 'missing');
-                console.warn(`⚠️ Módulo ${moduleName} no encontrado`);
-            }
-        });
-    }
-
-    async initModules() {
-        const initQueue = [];
-
-        // Crear instancias solo de módulos disponibles
-        for (const [moduleName, status] of this.moduleStatus) {
-            if (status === 'available') {
-                const className = this.availableModules[moduleName];
-                initQueue.push(this.createModuleInstance(moduleName, className));
-            }
-        }
-
-        // Inicializar módulos en paralelo
-        await Promise.allSettled(initQueue);
-
-        // Esperar a módulos críticos
-        await this.waitForCriticalModules();
-    }
-
-    async createModuleInstance(moduleName, className) {
-        try {
-            const ModuleClass = window[className];
-            this.modules[moduleName] = new ModuleClass();
-
-            // Si el módulo tiene una promesa ready, esperarla
-            if (this.modules[moduleName].ready) {
-                await this.modules[moduleName].ready;
-            }
-
-            this.moduleStatus.set(moduleName, 'initialized');
-            console.log(`✅ Módulo ${moduleName} inicializado`);
-
-        } catch (error) {
-            console.error(`❌ Error inicializando módulo ${moduleName}:`, error);
-            this.moduleStatus.set(moduleName, 'error');
-        }
-    }
-
-    async waitForCriticalModules() {
-        const criticalModules = ['theme', 'sidebar'];
-        const criticalPromises = criticalModules
-            .filter(module => this.moduleStatus.get(module) === 'initialized')
-            .map(module => this.modules[module].ready);
-
-        await Promise.allSettled(criticalPromises);
-    }
-
-    setupGlobalEvents() {
-        // Eventos globales del documento
-        document.addEventListener('keydown', this.handleGlobalKeys.bind(this));
-
-        // Botones en el HTML para abrir popups
-        this.setupPopupTriggers();
-
-        // Exponer módulos globalmente para debugging
-        window.app = this;
-    }
-
-    setupPopupTriggers() {
-        // Botón de accesibilidad
-        const accessibilityBtn = document.getElementById('accessibility-btn');
-        if (accessibilityBtn && this.modules.popups) {
-            accessibilityBtn.addEventListener('click', () => {
-                this.modules.popups.showAccessibilityPopup();
-            });
-        }
-
-        // Botón de contacto
-        const contactBtn = document.getElementById('contact-btn');
-        if (contactBtn && this.modules.popups) {
-            contactBtn.addEventListener('click', () => {
-                this.modules.popups.showContactPopup();
-            });
-        }
-
-        // Botón de descargar CV
-        const downloadBtn = document.getElementById('download-cv-btn');
-        if (downloadBtn && this.modules.popups) {
-            downloadBtn.addEventListener('click', () => {
-                this.modules.popups.showDownloadPopup();
-            });
-        }
-
-        // Botones rápidos del sidebar
-        document.querySelectorAll('[data-action="accessibility"]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                if (this.modules.popups) {
-                    this.modules.popups.showAccessibilityPopup();
-                }
-            });
-        });
-
-        document.querySelectorAll('[data-action="contact"]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                if (this.modules.popups) {
-                    this.modules.popups.showContactPopup();
-                }
-            });
-        });
-    }
-
-    handleGlobalKeys(event) {
-        // Atajos globales de teclado
-        if (event.altKey) {
-            switch(event.key) {
-                case 'a': // Alt + A para accesibilidad
-                    event.preventDefault();
-                    if (this.modules.popups) this.modules.popups.showAccessibilityPopup();
-                    break;
-                case 'c': // Alt + C para contacto
-                    event.preventDefault();
-                    if (this.modules.popups) this.modules.popups.showContactPopup();
-                    break;
-                case 'd': // Alt + D para descargar CV
-                    event.preventDefault();
-                    if (this.modules.popups) this.modules.popups.showDownloadPopup();
-                    break;
-            }
-        }
-
-        if (event.ctrlKey && event.altKey) {
-            switch(event.key) {
-                case 'm':
-                    event.preventDefault();
-                    if (this.modules.sidebar) this.modules.sidebar.toggle();
-                    break;
-                case 't':
-                    event.preventDefault();
-                    if (this.modules.theme) this.modules.theme.cycleThemes();
-                    break;
-                case 'l':
-                    event.preventDefault();
-                    if (this.modules.language) this.modules.language.toggle();
-                    break;
-            }
-        }
-    }
-
-    // Métodos utilitarios
-    getModule(name) {
-        return this.modules[name];
-    }
-
-    isModuleLoaded(name) {
-        return this.moduleStatus.get(name) === 'initialized';
-    }
-
-    getLoadedModules() {
-        return Array.from(this.moduleStatus.entries())
-            .filter(([_, status]) => status === 'initialized')
-            .map(([name]) => name);
-    }
-
-    async loadModule(moduleName) {
-        if (this.moduleStatus.get(moduleName) === 'initialized') {
-            return this.modules[moduleName];
-        }
-
-        // Aquí podrías implementar carga dinámica de módulos
-        console.warn(`Carga dinámica no implementada para: ${moduleName}`);
-        return null;
-    }
-
-    destroy() {
-        // Cleanup de todos los módulos
-        Object.values(this.modules).forEach(module => {
-            if (module && typeof module.destroy === 'function') {
-                module.destroy();
-            }
-        });
-
-        this.modules = {};
-        this.moduleStatus.clear();
-    }
-}
-
-// Inicialización automática
-window.appController = new AppController();
-
-// ===== src\assets\scripts\js\analyze-logs.js =====
-import fs from 'fs-extra';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-class LogAnalyzer {
-    constructor() {
-        this.logsPath = path.join(__dirname, 'logs');
-        this.analyticsFile = path.join(this.logsPath, 'build-analytics.json');
-    }
-
-    async loadAnalytics() {
-        try {
-            if (!await fs.pathExists(this.analyticsFile)) {
-                console.log('❌ No se encontraron datos de analytics');
-                return [];
-            }
-
-            const data = await fs.readFile(this.analyticsFile, 'utf8');
-            return JSON.parse(data);
-        } catch (error) {
-            console.log('❌ Error cargando analytics:', error.message);
-            return [];
-        }
-    }
-
-    generateStats(analytics) {
-        if (analytics.length === 0) {
-            console.log('📊 No hay datos para analizar');
-            return;
-        }
-
-        const totalBuilds = analytics.length;
-        const successfulBuilds = analytics.filter(a => a.success).length;
-        const failedBuilds = totalBuilds - successfulBuilds;
-        const successRate = ((successfulBuilds / totalBuilds) * 100).toFixed(1);
-
-        const avgBuildTime = (analytics.reduce((sum, a) => sum + parseFloat(a.buildTime), 0) / totalBuilds).toFixed(2);
-        const avgCssSize = (analytics.reduce((sum, a) => sum + parseFloat(a.cssSizeKB), 0) / totalBuilds).toFixed(2);
-        const avgJsSize = (analytics.reduce((sum, a) => sum + parseFloat(a.jsSizeKB), 0) / totalBuilds).toFixed(2);
-
-        const totalErrors = analytics.reduce((sum, a) => sum + a.totalErrors, 0);
-        const totalWarnings = analytics.reduce((sum, a) => sum + a.totalWarnings, 0);
-
-        console.log('\n' + '='.repeat(60));
-        console.log('📈 ANÁLISIS DE BUILDS - CHISPIPAGE');
-        console.log('='.repeat(60));
-        console.log(`📊 Total de builds: ${totalBuilds}`);
-        console.log(`✅ Exitosos: ${successfulBuilds} (${successRate}%)`);
-        console.log(`❌ Fallidos: ${failedBuilds}`);
-        console.log(`⏱️  Tiempo promedio: ${avgBuildTime}s`);
-        console.log(`🎨 CSS promedio: ${avgCssSize} KB`);
-        console.log(`⚡ JS promedio: ${avgJsSize} KB`);
-        console.log(`⚠️  Total advertencias: ${totalWarnings}`);
-        console.log(`💥 Total errores: ${totalErrors}`);
-
-        // Últimos 5 builds
-        console.log('\n🕒 ÚLTIMOS 5 BUILDS:');
-        console.log('-'.repeat(60));
-        analytics.slice(-5).reverse().forEach((build, index) => {
-            const status = build.success ? '✅' : '❌';
-            const date = new Date(build.timestamp).toLocaleString();
-            console.log(`${status} ${date} - ${build.buildTime}s - ${build.cssSizeKB}KB CSS - ${build.jsSizeKB}KB JS`);
-        });
-
-        // Tendencia de éxito
-        const recentBuilds = analytics.slice(-10);
-        const recentSuccessRate = (recentBuilds.filter(b => b.success).length / recentBuilds.length * 100).toFixed(1);
-        console.log(`\n📈 Tendencia reciente: ${recentSuccessRate}% éxito (últimos 10 builds)`);
-    }
-
-    async analyze() {
-        console.log('🔍 Analizando logs de build...');
-
-        const analytics = await this.loadAnalytics();
-        this.generateStats(analytics);
-    }
-}
-
-// Ejecutar análisis
-const analyzer = new LogAnalyzer();
-await analyzer.analyze();
-
-// ===== src\assets\scripts\js\vendors\tippy.js =====
+// src\assets\scripts\vendors\tippy.js
 // ============================
 // TIPPY.JS - Versión simplificada
 // ============================
@@ -516,7 +186,7 @@ await analyzer.analyze();
 
 })));
 
-// ===== src\assets\scripts\js\vendors\particles.js =====
+// src\assets\scripts\vendors\particles.js
 // ============================
 // PARTICLES.JS - Versión simplificada
 // ============================
@@ -680,7 +350,198 @@ if (typeof module !== 'undefined' && module.exports) {
     module.exports = particlesJS;
 }
 
-// ===== src\assets\scripts\js\modules\tooltips.js =====
+// src\assets\scripts\particles\particles-config.js
+// ============================
+// PARTICLES CONFIGURATION
+// ============================
+
+const ParticlesConfig = {
+    // Configuración base que se adapta a los temas
+    getConfig(theme = 'light') {
+        const baseConfig = {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: this.getParticleColor(theme)
+                },
+                shape: {
+                    type: "circle",
+                    stroke: {
+                        width: 0,
+                        color: "#000000"
+                    }
+                },
+                opacity: {
+                    value: 0.5,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 2,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: this.getLineColor(theme),
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: "grab"
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: "push"
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 200,
+                        line_linked: {
+                            opacity: 1
+                        }
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        };
+
+        // Ajustes específicos por tema
+        return this.applyThemeAdjustments(baseConfig, theme);
+    },
+
+    getParticleColor(theme) {
+        const colors = {
+            'light': '#3cc88f',
+            'dark': '#3cc88f',
+            'high-contrast': '#000000',
+            'sepia': '#8b4513',
+            'photophobia': '#2a6e4f',
+            'daltonism': '#0066cc',
+            'dyslexia': '#3cc88f',
+            'reading': '#2c2c2c',
+            'reduced-motion': '#3cc88f',
+            'grayscale': '#666666'
+        };
+        return colors[theme] || colors['light'];
+    },
+
+    getLineColor(theme) {
+        const colors = {
+            'light': '#3cc88f',
+            'dark': '#3cc88f',
+            'high-contrast': '#000000',
+            'sepia': '#a0522d',
+            'photophobia': '#2a6e4f',
+            'daltonism': '#0066cc',
+            'dyslexia': '#3cc88f',
+            'reading': '#2c2c2c',
+            'reduced-motion': '#3cc88f',
+            'grayscale': '#888888'
+        };
+        return colors[theme] || colors['light'];
+    },
+
+    applyThemeAdjustments(config, theme) {
+        const adjustments = {
+            'high-contrast': {
+                particles: {
+                    opacity: { value: 0.8 },
+                    line_linked: { opacity: 0.8 }
+                }
+            },
+            'photophobia': {
+                particles: {
+                    opacity: { value: 0.3 },
+                    line_linked: { opacity: 0.2 }
+                }
+            },
+            'reduced-motion': {
+                particles: {
+                    move: { speed: 0 },
+                    opacity: { anim: { enable: false } },
+                    size: { anim: { enable: false } }
+                }
+            },
+            'grayscale': {
+                particles: {
+                    color: { value: '#666666' },
+                    line_linked: { color: '#888888' }
+                }
+            }
+        };
+
+        return adjustments[theme]
+            ? this.deepMerge(config, adjustments[theme])
+            : config;
+    },
+
+    deepMerge(target, source) {
+        const output = Object.assign({}, target);
+        if (this.isObject(target) && this.isObject(source)) {
+            Object.keys(source).forEach(key => {
+                if (this.isObject(source[key])) {
+                    if (!(key in target))
+                        Object.assign(output, { [key]: source[key] });
+                    else
+                        output[key] = this.deepMerge(target[key], source[key]);
+                } else {
+                    Object.assign(output, { [key]: source[key] });
+                }
+            });
+        }
+        return output;
+    },
+
+    isObject(item) {
+        return item && typeof item === 'object' && !Array.isArray(item);
+    }
+};
+
+// Export para uso global
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = ParticlesConfig;
+} else {
+    window.ParticlesConfig = ParticlesConfig;
+}
+
+// src\assets\scripts\modules\tooltips.js
 // ============================
 // TOOLTIPS CONTROLLER
 // ============================
@@ -745,7 +606,7 @@ class TooltipsController {
     }
 }
 
-// ===== src\assets\scripts\js\modules\theme.js =====
+// src\assets\scripts\modules\theme.js
 // ============================
 // THEME CONTROLLER (Actualizado)
 // ============================
@@ -1112,7 +973,7 @@ class ThemeController {
     }
 }
 
-// ===== src\assets\scripts\js\modules\sidebar.js =====
+// src\assets\scripts\modules\sidebar.js
 // ============================
 // SIDEBAR CONTROLLER
 // ============================
@@ -1272,7 +1133,7 @@ class SidebarController {
     }
 }
 
-// ===== src\assets\scripts\js\modules\scroll.js =====
+// src\assets\scripts\modules\scroll.js
 // ============================
 // SCROLL CONTROLLER
 // ============================
@@ -1402,7 +1263,7 @@ class ScrollController {
     }
 }
 
-// ===== src\assets\scripts\js\modules\popups.js =====
+// src\assets\scripts\modules\popups.js
 // ============================
 // POPUPS CONTROLLER
 // ============================
@@ -2008,7 +1869,7 @@ class PopupsController {
     }
 }
 
-// ===== src\assets\scripts\js\modules\particles.js =====
+// src\assets\scripts\modules\particles.js
 // ============================
 // PARTICLES CONTROLLER
 // ============================
@@ -2216,9 +2077,9 @@ class ParticlesController {
     }
 }
 
-// ===== src\assets\scripts\js\modules\language.js =====
+// src\assets\scripts\modules\language.js
 // ============================
-// LANGUAGE CONTROLLER
+// LANGUAGE CONTROLLER - ADAPTADO
 // ============================
 
 class LanguageController {
@@ -2226,7 +2087,8 @@ class LanguageController {
         this.languageToggle = document.getElementById('language-toggle');
         this.languageDropdown = this.languageToggle?.closest('.dropdown');
         this.languageMenu = this.languageDropdown?.querySelector('.dropdown-menu');
-        this.currentLanguage = this.getSavedLanguage() || 'es';
+        this.currentLanguage = this.detectCurrentLanguage();
+        this.supportedLanguages = ['es', 'en'];
 
         this.init();
     }
@@ -2239,15 +2101,40 @@ class LanguageController {
 
         this.setupAccessibility();
         this.bindEvents();
-        this.applyLanguage(this.currentLanguage);
+        this.applyLanguage(this.currentLanguage, false); // No redirigir en inicialización
 
-        console.log('✅ Language controller inicializado');
+        console.log('✅ Language controller inicializado - Lenguaje actual:', this.currentLanguage);
+    }
+
+    detectCurrentLanguage() {
+        // 1. Primero verificar si hay un lenguaje guardado
+        const savedLang = this.getSavedLanguage();
+        if (savedLang) return savedLang;
+
+        // 2. Detectar basado en la URL
+        const path = window.location.pathname;
+        if (path.startsWith('/en')) return 'en';
+
+        // 3. Detectar basado en el HTML
+        const htmlLang = document.documentElement.lang;
+        if (htmlLang && this.supportedLanguages.includes(htmlLang)) return htmlLang;
+
+        // 4. Default
+        return 'es';
     }
 
     setupAccessibility() {
         this.languageToggle.setAttribute('aria-haspopup', 'true');
         this.languageToggle.setAttribute('aria-expanded', 'false');
-        this.languageToggle.setAttribute('aria-label', 'Seleccionar idioma');
+        this.updateAccessibilityLabel();
+    }
+
+    updateAccessibilityLabel() {
+        const labels = {
+            'es': 'Seleccionar idioma - Actual: Español',
+            'en': 'Select language - Current: English'
+        };
+        this.languageToggle.setAttribute('aria-label', labels[this.currentLanguage] || labels.es);
     }
 
     bindEvents() {
@@ -2259,7 +2146,7 @@ class LanguageController {
 
         // Cerrar al hacer click fuera
         document.addEventListener('click', (e) => {
-            if (!this.languageDropdown.contains(e.target)) {
+            if (this.languageDropdown && !this.languageDropdown.contains(e.target)) {
                 this.closeDropdown();
             }
         });
@@ -2268,15 +2155,27 @@ class LanguageController {
         this.languageMenu.addEventListener('keydown', (e) => this.handleDropdownNavigation(e));
 
         // Eventos de los items del lenguaje
-        this.languageMenu.querySelectorAll('a, button').forEach(item => {
+        this.languageMenu.querySelectorAll('.language-option, [data-lang]').forEach(item => {
             item.addEventListener('click', (e) => {
                 e.preventDefault();
-                const lang = item.getAttribute('data-lang') || item.getAttribute('href')?.replace('#', '');
-                if (lang) {
+                const lang = item.getAttribute('data-lang');
+                if (lang && this.supportedLanguages.includes(lang)) {
                     this.setLanguage(lang);
                 }
             });
         });
+
+        // Escuchar eventos de otros componentes
+        window.addEventListener('popstate', () => {
+            this.handleUrlChange();
+        });
+    }
+
+    handleUrlChange() {
+        const newLang = this.detectCurrentLanguage();
+        if (newLang !== this.currentLanguage) {
+            this.applyLanguage(newLang, false);
+        }
     }
 
     toggleDropdown() {
@@ -2284,7 +2183,7 @@ class LanguageController {
         this.languageToggle.setAttribute('aria-expanded', expanded.toString());
 
         if (expanded) {
-            const firstItem = this.languageMenu.querySelector('a, button');
+            const firstItem = this.languageMenu.querySelector('.language-option, [data-lang]');
             firstItem?.focus();
         }
     }
@@ -2303,7 +2202,7 @@ class LanguageController {
 
         if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
             e.preventDefault();
-            const items = Array.from(this.languageMenu.querySelectorAll('a, button'));
+            const items = Array.from(this.languageMenu.querySelectorAll('.language-option, [data-lang]'));
             const currentIndex = items.indexOf(document.activeElement);
             let nextIndex;
 
@@ -2315,31 +2214,135 @@ class LanguageController {
 
             items[nextIndex]?.focus();
         }
+
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const activeElement = document.activeElement;
+            const lang = activeElement.getAttribute('data-lang');
+            if (lang) {
+                this.setLanguage(lang);
+            }
+        }
     }
 
-    applyLanguage(lang) {
+    applyLanguage(lang, redirect = true) {
+        if (lang === this.currentLanguage) return;
+
         this.currentLanguage = lang;
         this.saveLanguage(lang);
-        this.updateDropdownState();
+        this.updateUI();
+        this.updateAccessibilityLabel();
+
+        if (redirect) {
+            this.redirectToLanguage(lang);
+        }
 
         // Disparar evento para que otros componentes reaccionen
         window.dispatchEvent(new CustomEvent('language:changed', {
-            detail: { language: lang }
+            detail: {
+                language: lang,
+                previousLanguage: this.currentLanguage
+            }
         }));
 
         console.log(`🌐 Idioma cambiado a: ${lang}`);
     }
 
-    updateDropdownState() {
+    updateUI() {
         // Actualizar estado visual del dropdown
-        const items = this.languageMenu.querySelectorAll('a, button');
+        const items = this.languageMenu.querySelectorAll('.language-option, [data-lang]');
         items.forEach(item => {
-            const itemLang = item.getAttribute('data-lang') || item.getAttribute('href')?.replace('#', '');
+            const itemLang = item.getAttribute('data-lang');
             const isActive = itemLang === this.currentLanguage;
 
             item.classList.toggle('active', isActive);
             item.setAttribute('aria-current', isActive ? 'true' : 'false');
         });
+
+        // Actualizar bandera en el toggle
+        this.updateFlagIcon();
+
+        // Actualizar elementos de la página según el idioma
+        this.updatePageContent();
+    }
+
+    updateFlagIcon() {
+        const flagElement = document.getElementById('current-language-flag');
+        if (flagElement) {
+            const flags = {
+                'es': '/assets/icons/es-flag.svg',
+                'en': '/assets/icons/gb-flag.svg'
+            };
+            flagElement.src = flags[this.currentLanguage];
+            flagElement.alt = this.currentLanguage === 'es' ? 'Español' : 'English';
+        }
+    }
+
+    updatePageContent() {
+        // Mostrar/ocultar elementos según idioma
+        document.querySelectorAll('[data-lang-specific]').forEach(element => {
+            const targetLang = element.getAttribute('data-lang-specific');
+            element.style.display = targetLang === this.currentLanguage ? 'block' : 'none';
+        });
+
+        // Actualizar textos con data-i18n
+        this.updateInternationalizedTexts();
+    }
+
+    updateInternationalizedTexts() {
+        // Esto puede expandirse con un sistema completo de i18n
+        const translations = {
+            'es': {
+                'nav_home': 'Inicio',
+                'nav_about': 'Sobre mí',
+                'nav_projects': 'Proyectos',
+                'nav_blog': 'Devlogs',
+                'nav_contact': 'Contacto',
+                'spanish': 'Español',
+                'english': 'English',
+                'theme_light': 'Claro',
+                'theme_dark': 'Oscuro',
+                'theme_contrast': 'Alto Contraste'
+            },
+            'en': {
+                'nav_home': 'Home',
+                'nav_about': 'About Me',
+                'nav_projects': 'Projects',
+                'nav_blog': 'Devlogs',
+                'nav_contact': 'Contact',
+                'spanish': 'Español',
+                'english': 'English',
+                'theme_light': 'Light',
+                'theme_dark': 'Dark',
+                'theme_contrast': 'High Contrast'
+            }
+        };
+
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            if (translations[this.currentLanguage] && translations[this.currentLanguage][key]) {
+                element.textContent = translations[this.currentLanguage][key];
+            }
+        });
+    }
+
+    redirectToLanguage(lang) {
+        const currentPath = window.location.pathname;
+        let newPath;
+
+        if (lang === 'es') {
+            // Quitar /en del path
+            newPath = currentPath.replace(/^\/en/, '') || '/';
+        } else {
+            // Agregar /en al path, asegurando no duplicar
+            newPath = currentPath === '/' ? '/en' : `/en${currentPath.replace(/^\/en/, '')}`;
+        }
+
+        // Mantener query parameters
+        const search = window.location.search;
+        const hash = window.location.hash;
+
+        window.location.href = newPath + search + hash;
     }
 
     getSavedLanguage() {
@@ -2350,9 +2353,14 @@ class LanguageController {
         localStorage.setItem('preferred-language', lang);
     }
 
-    // Métodos públicos
+    // ========== MÉTODOS PÚBLICOS ==========
+
     setLanguage(lang) {
-        this.applyLanguage(lang);
+        if (!this.supportedLanguages.includes(lang)) {
+            console.warn(`⚠️ Idioma no soportado: ${lang}`);
+            return;
+        }
+        this.applyLanguage(lang, true); // Redirigir cuando se cambia manualmente
         this.closeDropdown();
     }
 
@@ -2360,11 +2368,278 @@ class LanguageController {
         return this.currentLanguage;
     }
 
+    getSupportedLanguages() {
+        return [...this.supportedLanguages];
+    }
+
     toggle() {
         this.toggleDropdown();
     }
 
+    refresh() {
+        this.handleUrlChange();
+    }
+
     destroy() {
         this.closeDropdown();
+        // Limpiar event listeners si es necesario
     }
 }
+
+// Inicialización automática cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => {
+    window.languageController = new LanguageController();
+});
+
+export default LanguageController;
+
+// src\assets\scripts\core\theme.js
+
+
+// src\assets\scripts\core\router.js
+
+
+// src\assets\scripts\core\app.js
+// ============================
+// APP CONTROLLER - CON CARGA AUTOMÁTICA
+// ============================
+
+class AppController {
+    constructor() {
+        this.modules = {};
+        this.BASE_URL = '{{ site.baseurl }}';
+        this.moduleStatus = new Map();
+        this.init();
+    }
+
+    async init() {
+        try {
+            // Esperar a que el DOM esté listo
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => this.startApp());
+            } else {
+                this.startApp();
+            }
+        } catch (error) {
+            console.error('❌ Error inicializando la app:', error);
+        }
+    }
+
+    async startApp() {
+        // Registrar módulos disponibles
+        this.registerModules();
+
+        // Inicializar módulos en orden
+        await this.initModules();
+
+        // Configurar eventos globales
+        this.setupGlobalEvents();
+
+        console.log('✅ App inicializada correctamente');
+    }
+
+    registerModules() {
+        // Módulos core (siempre presentes)
+        this.availableModules = {
+            'sidebar': 'SidebarController',
+            'scroll': 'ScrollController',
+            'theme': 'ThemeController',
+            'language': 'LanguageController',
+            'particles': 'ParticlesController',
+            'tooltips': 'TooltipsController',
+            'popups': 'PopupsController'
+        };
+
+        // Verificar qué módulos están realmente cargados
+        this.detectLoadedModules();
+    }
+
+    detectLoadedModules() {
+        Object.keys(this.availableModules).forEach(moduleName => {
+            const className = this.availableModules[moduleName];
+            if (window[className]) {
+                this.moduleStatus.set(moduleName, 'available');
+            } else {
+                this.moduleStatus.set(moduleName, 'missing');
+                console.warn(`⚠️ Módulo ${moduleName} no encontrado`);
+            }
+        });
+    }
+
+    async initModules() {
+        const initQueue = [];
+
+        // Crear instancias solo de módulos disponibles
+        for (const [moduleName, status] of this.moduleStatus) {
+            if (status === 'available') {
+                const className = this.availableModules[moduleName];
+                initQueue.push(this.createModuleInstance(moduleName, className));
+            }
+        }
+
+        // Inicializar módulos en paralelo
+        await Promise.allSettled(initQueue);
+
+        // Esperar a módulos críticos
+        await this.waitForCriticalModules();
+    }
+
+    async createModuleInstance(moduleName, className) {
+        try {
+            const ModuleClass = window[className];
+            this.modules[moduleName] = new ModuleClass();
+
+            // Si el módulo tiene una promesa ready, esperarla
+            if (this.modules[moduleName].ready) {
+                await this.modules[moduleName].ready;
+            }
+
+            this.moduleStatus.set(moduleName, 'initialized');
+            console.log(`✅ Módulo ${moduleName} inicializado`);
+
+        } catch (error) {
+            console.error(`❌ Error inicializando módulo ${moduleName}:`, error);
+            this.moduleStatus.set(moduleName, 'error');
+        }
+    }
+
+    async waitForCriticalModules() {
+        const criticalModules = ['theme', 'sidebar'];
+        const criticalPromises = criticalModules
+            .filter(module => this.moduleStatus.get(module) === 'initialized')
+            .map(module => this.modules[module].ready);
+
+        await Promise.allSettled(criticalPromises);
+    }
+
+    setupGlobalEvents() {
+        // Eventos globales del documento
+        document.addEventListener('keydown', this.handleGlobalKeys.bind(this));
+
+        // Botones en el HTML para abrir popups
+        this.setupPopupTriggers();
+
+        // Exponer módulos globalmente para debugging
+        window.app = this;
+    }
+
+    setupPopupTriggers() {
+        // Botón de accesibilidad
+        const accessibilityBtn = document.getElementById('accessibility-btn');
+        if (accessibilityBtn && this.modules.popups) {
+            accessibilityBtn.addEventListener('click', () => {
+                this.modules.popups.showAccessibilityPopup();
+            });
+        }
+
+        // Botón de contacto
+        const contactBtn = document.getElementById('contact-btn');
+        if (contactBtn && this.modules.popups) {
+            contactBtn.addEventListener('click', () => {
+                this.modules.popups.showContactPopup();
+            });
+        }
+
+        // Botón de descargar CV
+        const downloadBtn = document.getElementById('download-cv-btn');
+        if (downloadBtn && this.modules.popups) {
+            downloadBtn.addEventListener('click', () => {
+                this.modules.popups.showDownloadPopup();
+            });
+        }
+
+        // Botones rápidos del sidebar
+        document.querySelectorAll('[data-action="accessibility"]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (this.modules.popups) {
+                    this.modules.popups.showAccessibilityPopup();
+                }
+            });
+        });
+
+        document.querySelectorAll('[data-action="contact"]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (this.modules.popups) {
+                    this.modules.popups.showContactPopup();
+                }
+            });
+        });
+    }
+
+    handleGlobalKeys(event) {
+        // Atajos globales de teclado
+        if (event.altKey) {
+            switch(event.key) {
+                case 'a': // Alt + A para accesibilidad
+                    event.preventDefault();
+                    if (this.modules.popups) this.modules.popups.showAccessibilityPopup();
+                    break;
+                case 'c': // Alt + C para contacto
+                    event.preventDefault();
+                    if (this.modules.popups) this.modules.popups.showContactPopup();
+                    break;
+                case 'd': // Alt + D para descargar CV
+                    event.preventDefault();
+                    if (this.modules.popups) this.modules.popups.showDownloadPopup();
+                    break;
+            }
+        }
+
+        if (event.ctrlKey && event.altKey) {
+            switch(event.key) {
+                case 'm':
+                    event.preventDefault();
+                    if (this.modules.sidebar) this.modules.sidebar.toggle();
+                    break;
+                case 't':
+                    event.preventDefault();
+                    if (this.modules.theme) this.modules.theme.cycleThemes();
+                    break;
+                case 'l':
+                    event.preventDefault();
+                    if (this.modules.language) this.modules.language.toggle();
+                    break;
+            }
+        }
+    }
+
+    // Métodos utilitarios
+    getModule(name) {
+        return this.modules[name];
+    }
+
+    isModuleLoaded(name) {
+        return this.moduleStatus.get(name) === 'initialized';
+    }
+
+    getLoadedModules() {
+        return Array.from(this.moduleStatus.entries())
+            .filter(([_, status]) => status === 'initialized')
+            .map(([name]) => name);
+    }
+
+    async loadModule(moduleName) {
+        if (this.moduleStatus.get(moduleName) === 'initialized') {
+            return this.modules[moduleName];
+        }
+
+        // Aquí podrías implementar carga dinámica de módulos
+        console.warn(`Carga dinámica no implementada para: ${moduleName}`);
+        return null;
+    }
+
+    destroy() {
+        // Cleanup de todos los módulos
+        Object.values(this.modules).forEach(module => {
+            if (module && typeof module.destroy === 'function') {
+                module.destroy();
+            }
+        });
+
+        this.modules = {};
+        this.moduleStatus.clear();
+    }
+}
+
+// Inicialización automática
+window.appController = new AppController();
