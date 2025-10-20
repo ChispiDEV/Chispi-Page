@@ -16,7 +16,7 @@
   --color-text-light: #999999;
 
   // Espaciado aumentado para lectura
-  --font-size-base: 1.125rem; // 18px
+  --font-size-base: 1.125rem;
   --line-height-base: 1.8;
 
   // Estilos específicos para dislexia
@@ -59,12 +59,12 @@
   // Navegación mejorada
   .nav__link {
     padding: 0.75rem 1rem;
-    border-radius: $border-radius;
+    border-radius: var(--border-radius);
     font-weight: 600;
 
     &:focus {
-      background-color: rgba($color-primary, 0.1);
-      outline: 3px solid $color-primary;
+      background-color: rgba(var(--color-primary-rgb), 0.1);
+      outline: 3px solid var(--color-primary);
     }
   }
 
@@ -75,7 +75,7 @@
     padding: 0.875rem 1.75rem;
 
     &:focus {
-      outline: 3px solid $color-primary;
+      outline: 3px solid var(--color-primary);
       outline-offset: 2px;
     }
   }
@@ -93,9 +93,9 @@
     border: 2px solid var(--color-border);
 
     &:focus {
-      border-color: $color-primary;
+      border-color: var(--color-primary);
       outline: none;
-      box-shadow: 0 0 0 3px rgba($color-primary, 0.1);
+      box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.1);
     }
   }
 

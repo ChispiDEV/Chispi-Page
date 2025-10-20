@@ -4,8 +4,8 @@
 
 [data-theme="high-contrast"] {
   // Colores de alto contraste
-  --color-primary: #00ff00;   // Verde puro
-  --color-secondary: #0000ff; // Azul puro
+  --color-primary: #00ff00;
+  --color-secondary: #0000ff;
   --color-success: #00ff00;
   --color-danger: #ff0000;
   --color-warning: #ffff00;
@@ -35,8 +35,7 @@
 
   // Fuentes más legibles
   --font-family-base: 'Arial', sans-serif;
-  --font-weight-normal: 700; // Texto más grueso
-}
+  --font-weight-normal: 700;
 
   // Estilos específicos para alto contraste
   * {

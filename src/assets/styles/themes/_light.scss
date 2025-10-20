@@ -4,21 +4,21 @@
 
 [data-theme="light"] {
   // Asegura que el tema claro use siempre los valores por defecto
-  --color-primary: #{vars.$color-primary};
-  --color-secondary: #{vars.$color-secondary};
-  --color-success: #{vars.$color-success};
-  --color-danger: #{vars.$color-danger};
-  --color-warning: #{vars.$color-warning};
-  --color-info: #{vars.$color-info};
+  --color-primary: #3cc88f;
+  --color-secondary: #335b9a;
+  --color-success: #28a97b;
+  --color-danger: #e36565;
+  --color-warning: #f5c56b;
+  --color-info: #57c4dc;
 
-  --color-bg: #{vars.$color-bg};
-  --color-bg-alt: #{vars.$color-bg-alt};
-  --color-bg-card: #{vars.$color-bg-card};
-  --color-text: #{vars.$color-text};
-  --color-text-muted: #{vars.$color-text-muted};
-  --color-text-light: #{vars.$color-text-light};
-  --color-border: #{vars.$color-border};
-  --color-border-light: #{vars.$color-border-light};
+  --color-bg: #f9fafb;
+  --color-bg-alt: #e9ecef;
+  --color-bg-card: #ffffff;
+  --color-text: #212529;
+  --color-text-muted: #8a8d91;
+  --color-text-light: #ced4da;
+  --color-border: #dee2e6;
+  --color-border-light: #e9ecef;
 
   // Sombras más definidas en modo claro
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);

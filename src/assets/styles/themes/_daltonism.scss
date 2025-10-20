@@ -4,12 +4,12 @@
 
 [data-theme="daltonism"] {
   // Paleta optimizada para daltonismo
-  --color-primary: #0066cc;    // Azul fácil de distinguir
-  --color-secondary: #cc6600;  // Naranja contrastante
-  --color-success: #00aa55;    // Verde azulado
-  --color-danger: #cc0000;     // Rojo oscuro
-  --color-warning: #ffaa00;    // Amarillo anaranjado
-  --color-info: #0099cc;       // Azul claro
+  --color-primary: #0066cc;
+  --color-secondary: #cc6600;
+  --color-success: #00aa55;
+  --color-danger: #cc0000;
+  --color-warning: #ffaa00;
+  --color-info: #0099cc;
 
   // Mantener fondos y texto estándar
   --color-bg: #ffffff;
@@ -23,7 +23,6 @@
 
   // Estilos específicos para daltonismo
   .color-indicator {
-    // Agregar patrones o íconos además del color
     position: relative;
 
     &::after {
@@ -71,9 +70,15 @@
   .chart-bar {
     border: 1px solid currentColor;
 
-    &--primary { background: repeating-linear-gradient(45deg, var(--color-primary), var(--color-primary) 4px, transparent 4px, transparent 8px); }
-    &--secondary { background: repeating-linear-gradient(-45deg, var(--color-secondary), var(--color-secondary) 4px, transparent 4px, transparent 8px); }
-    &--success { background: repeating-linear-gradient(0deg, var(--color-success), var(--color-success) 2px, transparent 2px, transparent 4px); }
+    &--primary {
+      background: repeating-linear-gradient(45deg, var(--color-primary), var(--color-primary) 4px, transparent 4px, transparent 8px);
+    }
+    &--secondary {
+      background: repeating-linear-gradient(-45deg, var(--color-secondary), var(--color-secondary) 4px, transparent 4px, transparent 8px);
+    }
+    &--success {
+      background: repeating-linear-gradient(0deg, var(--color-success), var(--color-success) 2px, transparent 2px, transparent 4px);
+    }
   }
 
   // Formularios con mejor feedback
@@ -96,19 +101,16 @@
 
 // Variantes específicas de daltonismo
 [data-daltonism-type="protanopia"] {
-  // Optimizado para protanopia
   --color-primary: #0055aa;
   --color-danger: #aa0000;
 }
 
 [data-daltonism-type="deuteranopia"] {
-  // Optimizado para deuteranopia
   --color-primary: #0044aa;
   --color-success: #008855;
 }
 
 [data-daltonism-type="tritanopia"] {
-  // Optimizado para tritanopia
   --color-primary: #aa5500;
   --color-info: #55aa00;
 }

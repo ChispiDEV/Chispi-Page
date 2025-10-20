@@ -2,6 +2,9 @@
    COMPONENTE TAGS
    ============================ */
 
+@use '../base/variables' as vars;
+@use '../base/mixins' as mix;
+
 .tags {
   display: flex;
   flex-wrap: wrap;
@@ -24,30 +27,47 @@
   background-color: var(--color-bg-alt);
   color: var(--color-text-muted);
   border-radius: 1rem;
-  font-size: $font-size-sm;
+  font-size: var(--font-size-sm);
   font-weight: 500;
   text-decoration: none;
-  transition: all $transition-speed ease;
+  transition: all var(--transition-speed) var(--ease-in-out);
   line-height: 1;
+  border: none;
+  cursor: pointer;
 
   &:hover {
-    background-color: $color-primary;
+    background-color: var(--color-primary);
     color: white;
     transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  &:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
   }
 
   &__remove {
-    @include button-reset;
+    background: none;
+    border: none;
     width: 16px;
     height: 16px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color $transition-speed ease;
+    transition: background-color var(--transition-speed) var(--ease-in-out);
+    cursor: pointer;
+    padding: 0;
+    color: inherit;
 
     &:hover {
       background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    &:focus {
+      outline: 2px solid currentColor;
+      outline-offset: 1px;
     }
 
     svg {
@@ -58,61 +78,61 @@
 
   // Variantes de color
   &--primary {
-    background-color: rgba($color-primary, 0.1);
-    color: $color-primary;
+    background-color: rgba(var(--color-primary-rgb), 0.1);
+    color: var(--color-primary);
 
     &:hover {
-      background-color: $color-primary;
+      background-color: var(--color-primary);
       color: white;
     }
   }
 
   &--secondary {
-    background-color: rgba($color-secondary, 0.1);
-    color: $color-secondary;
+    background-color: rgba(var(--color-secondary-rgb), 0.1);
+    color: var(--color-secondary);
 
     &:hover {
-      background-color: $color-secondary;
+      background-color: var(--color-secondary);
       color: white;
     }
   }
 
   &--success {
-    background-color: rgba($color-success, 0.1);
-    color: $color-success;
+    background-color: rgba(var(--color-success-rgb), 0.1);
+    color: var(--color-success);
 
     &:hover {
-      background-color: $color-success;
+      background-color: var(--color-success);
       color: white;
     }
   }
 
   &--danger {
-    background-color: rgba($color-danger, 0.1);
-    color: $color-danger;
+    background-color: rgba(var(--color-danger-rgb), 0.1);
+    color: var(--color-danger);
 
     &:hover {
-      background-color: $color-danger;
+      background-color: var(--color-danger);
       color: white;
     }
   }
 
   &--warning {
-    background-color: rgba($color-warning, 0.1);
-    color: $color-warning;
+    background-color: rgba(var(--color-warning-rgb), 0.1);
+    color: var(--color-warning);
 
     &:hover {
-      background-color: $color-warning;
+      background-color: var(--color-warning);
       color: white;
     }
   }
 
   &--info {
-    background-color: rgba($color-info, 0.1);
-    color: $color-info;
+    background-color: rgba(var(--color-info-rgb), 0.1);
+    color: var(--color-info);
 
     &:hover {
-      background-color: $color-info;
+      background-color: var(--color-info);
       color: white;
     }
   }
@@ -120,22 +140,51 @@
   // Variantes de tamaño
   &--sm {
     padding: 0.25rem 0.5rem;
-    font-size: 0.75rem;
+    font-size: var(--font-size-xs);
   }
 
   &--lg {
     padding: 0.5rem 1rem;
-    font-size: $font-size-base;
+    font-size: var(--font-size-base);
   }
 
   // Variantes de forma
   &--square {
-    border-radius: $border-radius;
+    border-radius: var(--border-radius);
   }
 
   &--outline {
     background-color: transparent;
     border: 1px solid currentColor;
+
+    &:hover {
+      background-color: currentColor;
+      color: white;
+    }
+  }
+
+  &--pill {
+    border-radius: 2rem;
+  }
+
+  // Estados
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:hover {
+      transform: none;
+      background-color: var(--color-bg-alt);
+      color: var(--color-text-muted);
+    }
+  }
+
+  &--clickable {
+    cursor: pointer;
+
+    &:active {
+      transform: translateY(0);
+    }
   }
 }
 
@@ -146,14 +195,15 @@
   gap: 0.5rem;
   padding: 0.5rem;
   border: 1px solid var(--color-border);
-  border-radius: $border-radius;
+  border-radius: var(--border-radius);
   background-color: var(--color-bg-card);
   min-height: 44px;
   align-items: center;
+  transition: all var(--transition-speed) var(--ease-in-out);
 
   &:focus-within {
-    border-color: $color-primary;
-    box-shadow: 0 0 0 3px rgba($color-primary, 0.1);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.1);
   }
 
   &__input {
@@ -163,19 +213,150 @@
     background: none;
     outline: none;
     color: var(--color-text);
-    font-size: $font-size-sm;
+    font-size: var(--font-size-sm);
+    font-family: inherit;
 
     &::placeholder {
       color: var(--color-text-muted);
+    }
+
+    &:focus {
+      outline: none;
     }
   }
 
   &--disabled {
     background-color: var(--color-bg-alt);
     cursor: not-allowed;
+    opacity: 0.6;
 
     .tags-input__input {
       cursor: not-allowed;
+    }
+  }
+
+  &--error {
+    border-color: var(--color-danger);
+
+    &:focus-within {
+      border-color: var(--color-danger);
+      box-shadow: 0 0 0 3px rgba(var(--color-danger-rgb), 0.1);
+    }
+  }
+
+  &--success {
+    border-color: var(--color-success);
+
+    &:focus-within {
+      border-color: var(--color-success);
+      box-shadow: 0 0 0 3px rgba(var(--color-success-rgb), 0.1);
+    }
+  }
+}
+
+// Grupo de tags con contador
+.tags-group {
+  &__header {
+    display: flex;
+    justify-content: between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  &__title {
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  &__count {
+    background-color: var(--color-bg-alt);
+    color: var(--color-text-muted);
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--border-radius-sm);
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}
+
+// Tags cloud
+.tags-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  align-items: center;
+
+  .tag {
+    transition: all var(--transition-speed) var(--ease-in-out);
+
+    // Tamaños basados en frecuencia (para nube de tags)
+    &--frequency-1 { font-size: var(--font-size-xs); }
+    &--frequency-2 { font-size: var(--font-size-sm); }
+    &--frequency-3 { font-size: var(--font-size-base); }
+    &--frequency-4 { font-size: var(--font-size-lg); }
+    &--frequency-5 { font-size: var(--font-size-xl); }
+  }
+}
+
+// Responsive
+@include mix.mobile {
+  .tags {
+    gap: 0.375rem;
+  }
+
+  .tag {
+    padding: 0.25rem 0.5rem;
+    font-size: var(--font-size-xs);
+
+    &--lg {
+      padding: 0.375rem 0.75rem;
+      font-size: var(--font-size-sm);
+    }
+  }
+
+  .tags-input {
+    min-height: 40px;
+
+    &__input {
+      min-width: 100px;
+    }
+  }
+}
+
+// Temas específicos
+[data-theme="dark"] {
+  .tag {
+    &__remove {
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
+}
+
+[data-theme="high-contrast"] {
+  .tag {
+    border: 1px solid currentColor;
+
+    &:focus {
+      outline: 3px solid var(--color-primary);
+      outline-offset: 1px;
+    }
+  }
+
+  .tags-input {
+    border-width: 2px;
+
+    &:focus-within {
+      outline: 3px solid var(--color-primary);
+      outline-offset: 1px;
     }
   }
 }

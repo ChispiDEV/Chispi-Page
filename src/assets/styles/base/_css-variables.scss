@@ -6,31 +6,50 @@
 @use 'variables' as vars;
 
 :root {
-  // Colores base (modo claro por defecto)
+  // ========== COLORES PRIMARIOS ==========
   --color-primary: #{vars.$color-primary};
+  --color-primary-rgb: #{vars.$color-primary-rgb};
   --color-secondary: #{vars.$color-secondary};
+  --color-secondary-rgb: #{vars.$color-secondary-rgb};
   --color-success: #{vars.$color-success};
+  --color-success-rgb: #{vars.$color-success-rgb};
   --color-danger: #{vars.$color-danger};
+  --color-danger-rgb: #{vars.$color-danger-rgb};
   --color-warning: #{vars.$color-warning};
+  --color-warning-rgb: #{vars.$color-warning-rgb};
   --color-info: #{vars.$color-info};
+  --color-info-rgb: #{vars.$color-info-rgb};
 
+  // ========== COLORES DEL SISTEMA ==========
   --color-bg: #{vars.$color-bg};
+  --color-bg-rgb: #{vars.$color-bg-rgb};
   --color-bg-alt: #{vars.$color-bg-alt};
+  --color-bg-alt-rgb: #{vars.$color-bg-alt-rgb};
   --color-bg-card: #{vars.$color-bg-card};
+  --color-bg-card-rgb: #{vars.$color-bg-card-rgb};
   --color-text: #{vars.$color-text};
+  --color-text-rgb: #{vars.$color-text-rgb};
   --color-text-muted: #{vars.$color-text-muted};
+  --color-text-muted-rgb: #{vars.$color-text-muted-rgb};
   --color-text-light: #{vars.$color-text-light};
-  --color-border: #{vars.$color-border};
-  --color-border-light: #{vars.$color-border-light};
-  --color-overlay: #{vars.$color-overlay-dark};
+  --color-text-light-rgb: #{vars.$color-text-light-rgb};
 
-  // Tipografía
+  // ========== BORDES ==========
+  --color-border: #{vars.$color-border};
+  --color-border-rgb: #{vars.$color-border-rgb};
+  --color-border-light: #{vars.$color-border-light};
+  --color-border-light-rgb: #{vars.$color-border-light-rgb};
+  --color-border-dark: #{vars.$color-border-dark};
+  --color-border-dark-rgb: #{vars.$color-border-dark-rgb};
+
+  // ========== TIPOGRAFÍA ==========
   --font-family-base: #{vars.$font-family-base};
   --font-family-heading: #{vars.$font-family-heading};
   --font-family-mono: #{vars.$font-family-mono};
 
-  --font-size-base: #{vars.$font-size-base};
+  --font-size-xs: #{vars.$font-size-xs};
   --font-size-sm: #{vars.$font-size-sm};
+  --font-size-base: #{vars.$font-size-base};
   --font-size-lg: #{vars.$font-size-lg};
   --font-size-xl: #{vars.$font-size-xl};
   --font-size-2xl: #{vars.$font-size-2xl};
@@ -47,7 +66,7 @@
   --line-height-base: #{vars.$line-height-base};
   --line-height-loose: #{vars.$line-height-loose};
 
-  // Espaciado
+  // ========== ESPACIADO ==========
   --spacing-1: #{vars.$spacing-1};
   --spacing-2: #{vars.$spacing-2};
   --spacing-3: #{vars.$spacing-3};
@@ -59,14 +78,27 @@
   --spacing-9: #{vars.$spacing-9};
   --spacing-10: #{vars.$spacing-10};
 
-  // Border radius
+  // ========== BORDES Y RADIUS ==========
   --border-radius: #{vars.$border-radius};
   --border-radius-sm: #{vars.$border-radius-sm};
   --border-radius-lg: #{vars.$border-radius-lg};
   --border-radius-xl: #{vars.$border-radius-xl};
   --border-radius-2xl: #{vars.$border-radius-2xl};
 
-  // Transiciones
+  --border-width: #{vars.$border-width};
+  --border-width-2: #{vars.$border-width-2};
+  --border-width-3: #{vars.$border-width-3};
+
+  // ========== SOMBRAS ==========
+  --shadow-sm: #{vars.$shadow-sm};
+  --shadow: #{vars.$shadow};
+  --shadow-md: #{vars.$shadow-md};
+  --shadow-lg: #{vars.$shadow-lg};
+  --shadow-xl: #{vars.$shadow-xl};
+  --shadow-2xl: #{vars.$shadow-2xl};
+  --shadow-inner: #{vars.$shadow-inner};
+
+  // ========== TRANSICIONES ==========
   --transition-speed: #{vars.$transition-speed};
   --transition-speed-fast: #{vars.$transition-speed-fast};
   --transition-speed-slow: #{vars.$transition-speed-slow};
@@ -75,28 +107,41 @@
   --ease-out: #{vars.$ease-out};
   --ease-in: #{vars.$ease-in};
 
-  // Sombras
-  --shadow-sm: #{vars.$shadow-sm};
-  --shadow-md: #{vars.$shadow};
-  --shadow-lg: #{vars.$shadow-lg};
-  --shadow-xl: #{vars.$shadow-xl};
-  --shadow-2xl: #{vars.$shadow-2xl};
-  --shadow-inner: #{vars.$shadow-inner};
-
-  // Layout
-  --header-height: #{vars.$header-height};
-  --footer-height: #{vars.$footer-height};
-  --sidebar-width: #{vars.$sidebar-width};
+  // ========== LAYOUT ==========
+  --container-xs: #{vars.$container-xs};
+  --container-sm: #{vars.$container-sm};
+  --container-md: #{vars.$container-md};
   --container-lg: #{vars.$container-lg};
   --container-xl: #{vars.$container-xl};
+  --container-2xl: #{vars.$container-2xl};
 
-  // Z-index
-  --z-index-dropdown: #{vars.$z-index-dropdown};
-  --z-index-sticky: #{vars.$z-index-sticky};
-  --z-index-fixed: #{vars.$z-index-fixed};
-  --z-index-modal: #{vars.$z-index-modal};
-  --z-index-popover: #{vars.$z-index-popover};
-  --z-index-tooltip: #{vars.$z-index-tooltip};
-  --z-index-toast: #{vars.$z-index-toast};
-  --z-index-sidebar: #{vars.$z-index-sidebar};
+  --header-height: #{vars.$header-height};
+  --footer-height: #{vars.$footer-height};
+
+  // ========== COMPONENTES ==========
+  --navbar-height: #{vars.$navbar-height};
+  --sidebar-width: #{vars.$sidebar-width};
+
+  --btn-padding-y: #{vars.$btn-padding-y};
+  --btn-padding-x: #{vars.$btn-padding-x};
+  --btn-border-radius: #{vars.$btn-border-radius};
+
+  --card-padding: #{vars.$card-padding};
+  --card-border-radius: #{vars.$card-border-radius};
+
+  --input-padding-y: #{vars.$input-padding-y};
+  --input-padding-x: #{vars.$input-padding-x};
+  --input-border-radius: #{vars.$input-border-radius};
+
+  // ========== UTILIDADES ==========
+  --opacity-0: #{vars.$opacity-0};
+  --opacity-25: #{vars.$opacity-25};
+  --opacity-50: #{vars.$opacity-50};
+  --opacity-75: #{vars.$opacity-75};
+  --opacity-100: #{vars.$opacity-100};
+
+  --blur-sm: #{vars.$blur-sm};
+  --blur: #{vars.$blur};
+  --blur-lg: #{vars.$blur-lg};
+  --blur-xl: #{vars.$blur-xl};
 }

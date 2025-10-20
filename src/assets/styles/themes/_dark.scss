@@ -2,17 +2,14 @@
    TEMA OSCURO
    ============================ */
 
-@use 'sass:color';
-@use '../base/variables' as vars;
-
 [data-theme="dark"] {
   // Colores vibrantes para modo oscuro
-  --color-primary: #{color.adjust(vars.$color-primary, $lightness: 10%)};
-  --color-secondary: #{color.adjust(vars.$color-secondary, $lightness: 15%)};
-  --color-success: #{vars.$color-success};
-  --color-danger: #{color.adjust(vars.$color-danger, $lightness: 5%)};
-  --color-warning: #{color.adjust(vars.$color-warning, $lightness: 5%)};
-  --color-info: #{color.adjust(vars.$color-info, $lightness: 10%)};
+  --color-primary: #4ad89f;
+  --color-secondary: #3a6bb0;
+  --color-success: #28a97b;
+  --color-danger: #e86f6f;
+  --color-warning: #f7cf7b;
+  --color-info: #67d4ec;
 
   // Backgrounds
   --color-bg: #1a1a1a;
@@ -34,15 +31,15 @@
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
 }
 
-// Auto-detection del sistema - SIN @extend
+// Auto-detection del sistema
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --color-primary: #{color.adjust(vars.$color-primary, $lightness: 10%)};
-    --color-secondary: #{color.adjust(vars.$color-secondary, $lightness: 15%)};
-    --color-success: #{vars.$color-success};
-    --color-danger: #{color.adjust(vars.$color-danger, $lightness: 5%)};
-    --color-warning: #{color.adjust(vars.$color-warning, $lightness: 5%)};
-    --color-info: #{color.adjust(vars.$color-info, $lightness: 10%)};
+    --color-primary: #4ad89f;
+    --color-secondary: #3a6bb0;
+    --color-success: #28a97b;
+    --color-danger: #e86f6f;
+    --color-warning: #f7cf7b;
+    --color-info: #67d4ec;
 
     --color-bg: #1a1a1a;
     --color-bg-alt: #2d2d2d;

@@ -403,6 +403,15 @@ class ChispiBuilder {
                 logger.fix('Variable SCSS no definida detectada',
                     'Verificar que las variables se importen correctamente con @use');
             }
+            
+            if (error.message.includes('Undefined mixin')) {
+                const mixinMatch = error.message.match(/@include\s+([^\s\{]+)/);
+                if (mixinMatch) {
+                    const mixinName = mixinMatch[1];
+                    logger.fix(`Mixin no definido: ${mixinName}`,
+                        `Verificar imports en el archivo SCSS. Solución temporal: usar media query directa.`);
+                }
+            }
 
             // Log detallado del error SCSS
             if (error.span) {

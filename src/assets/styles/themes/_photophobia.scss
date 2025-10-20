@@ -41,13 +41,13 @@
     filter: brightness(0.8);
     transition: background-color 0.5s ease, color 0.5s ease !important;
   }
-  
+
   .bright-content {
     filter: brightness(0.7) !important;
   }
-  
+
   // Reducir brillo en imágenes y videos
-  img, video,iframe {
+  img, video, iframe {
     filter: brightness(0.6) contrast(1.1);
     opacity: 0.8;
   }
@@ -59,7 +59,7 @@
 
     &:hover {
       filter: brightness(1.1);
-      background-color: lighten(#2a6e4f, 5%);
+      background-color: #557a83;
     }
   }
 
@@ -85,6 +85,10 @@
 @media (prefers-color-scheme: light) {
   [data-theme="photophobia"] {
     // Forzar modo oscuro incluso si el sistema prefiere claro
-    @extend [data-theme="photophobia"];
+    --color-bg: #0a0a0a;
+    --color-bg-alt: #1a1a1a;
+    --color-bg-card: #1a1a1a;
+    --color-text: #e0e0e0;
+    --color-text-muted: #b0b0b0;
   }
 }

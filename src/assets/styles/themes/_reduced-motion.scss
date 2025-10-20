@@ -3,13 +3,11 @@
    ============================ */
 
 [data-theme="reduced-motion"] {
-  // Estilos para usuarios que prefieren movimiento reducido
-
   // Variables para transiciones instantáneas
   --transition-speed: 0.01s;
   --transition-speed-fast: 0.01s;
   --transition-speed-slow: 0.01s;
-  
+
   // Remover o reemplazar animaciones
   *,
   *::before,
@@ -26,6 +24,7 @@
   .card {
     transition: opacity 0.1s ease, background-color 0.1s ease !important;
   }
+
   // Animaciones y transiciones
   .animated,
   [class*="animate-"],
@@ -33,11 +32,10 @@
     animation: none !important;
     transition: none !important;
   }
-  
+
   // Slideshows y carousels estáticos
   .carousel,
   .slider {
-    // Mostrar todos los slides en carruseles
     overflow: visible !important;
 
     .carousel-item,
@@ -51,7 +49,6 @@
       }
     }
 
-    // Navegación por botones en lugar de auto-play
     .carousel-nav,
     .slider-dots {
       display: flex;

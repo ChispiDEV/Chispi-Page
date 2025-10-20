@@ -2,20 +2,28 @@
    PÁGINA SOBRE MÍ
    ============================ */
 
+@use '../base/variables' as vars;
+@use '../base/mixins' as mix;
+
 .about-page {
   &__hero {
     padding: 6rem 0 4rem;
     background: linear-gradient(135deg,
-            rgba($color-primary, 0.05) 0%,
-            rgba($color-secondary, 0.05) 100%);
+            rgba(var(--color-primary-rgb), 0.05) 0%,
+            rgba(var(--color-secondary-rgb), 0.05) 100%);
     text-align: center;
+
+    @include mix.mobile {
+      padding: 4rem 0 3rem;
+    }
 
     &-title {
       font-size: 3rem;
       margin-bottom: 1rem;
       color: var(--color-text);
+      font-weight: 700;
 
-      @include mobile {
+      @include mix.mobile {
         font-size: 2.5rem;
       }
     }
@@ -25,11 +33,16 @@
       color: var(--color-text-muted);
       max-width: 600px;
       margin: 0 auto;
+      line-height: 1.6;
     }
   }
 
   &__content {
     padding: 4rem 0;
+
+    @include mix.mobile {
+      padding: 3rem 0;
+    }
   }
 
   &__mission {
@@ -42,21 +55,34 @@
       line-height: 1.7;
       color: var(--color-text-muted);
       font-style: italic;
+      margin-bottom: 0;
     }
   }
 
   &__values {
     padding: 4rem 0;
     background-color: var(--color-bg-alt);
+
+    @include mix.mobile {
+      padding: 3rem 0;
+    }
   }
 
   &__timeline {
     padding: 4rem 0;
+
+    @include mix.mobile {
+      padding: 3rem 0;
+    }
   }
 
   &__team {
     padding: 4rem 0;
     background-color: var(--color-bg-alt);
+
+    @include mix.mobile {
+      padding: 3rem 0;
+    }
   }
 }
 
@@ -75,7 +101,7 @@
     background-color: var(--color-border);
     transform: translateX(-50%);
 
-    @include mobile {
+    @include mix.mobile {
       left: 20px;
     }
   }
@@ -88,11 +114,11 @@
       margin-bottom: 0;
     }
 
-    @include mobile {
+    @include mix.mobile {
       padding-left: 3rem;
     }
 
-    @include desktop {
+    @include mix.desktop {
       width: 50%;
 
       &:nth-child(odd) {
@@ -113,16 +139,17 @@
     left: 50%;
     width: 16px;
     height: 16px;
-    background-color: $color-primary;
+    background-color: var(--color-primary);
     border-radius: 50%;
     transform: translateX(-50%);
     z-index: 1;
+    border: 3px solid var(--color-bg-card);
 
-    @include mobile {
+    @include mix.mobile {
       left: 20px;
     }
 
-    @include desktop {
+    @include mix.desktop {
       .timeline__item:nth-child(odd) & {
         left: 100%;
       }
@@ -136,10 +163,17 @@
   &__content {
     background-color: var(--color-bg-card);
     padding: 1.5rem;
-    border-radius: $border-radius;
+    border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-border-light);
+    transition: all var(--transition-speed) var(--ease-in-out);
 
-    @include desktop {
+    &:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    @include mix.desktop {
       .timeline__item:nth-child(odd) & {
         text-align: right;
       }
@@ -147,8 +181,8 @@
   }
 
   &__period {
-    font-size: $font-size-sm;
-    color: $color-primary;
+    font-size: var(--font-size-sm);
+    color: var(--color-primary);
     font-weight: 600;
     margin-bottom: 0.5rem;
   }
@@ -161,7 +195,7 @@
   }
 
   &__subtitle {
-    font-size: $font-size-sm;
+    font-size: var(--font-size-sm);
     color: var(--color-text-muted);
     margin-bottom: 1rem;
     font-weight: 500;
@@ -170,16 +204,32 @@
   &__description {
     color: var(--color-text-muted);
     line-height: 1.6;
+    margin-bottom: 0;
   }
 }
 
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
+
+  @include mix.mobile {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 
   &__item {
     text-align: center;
+    background-color: var(--color-bg-card);
+    padding: 2rem;
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--color-border-light);
+    transition: all var(--transition-speed) var(--ease-in-out);
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
   }
 
   &__avatar {
@@ -200,15 +250,17 @@
   }
 
   &__role {
-    color: $color-primary;
+    color: var(--color-primary);
     font-weight: 500;
     margin-bottom: 1rem;
+    font-size: var(--font-size-sm);
   }
 
   &__bio {
     color: var(--color-text-muted);
     line-height: 1.6;
     margin-bottom: 1.5rem;
+    font-size: var(--font-size-sm);
   }
 
   &__social {
@@ -227,12 +279,17 @@
     border-radius: 50%;
     color: var(--color-text);
     text-decoration: none;
-    transition: all $transition-speed ease;
+    transition: all var(--transition-speed) var(--ease-in-out);
 
     &:hover {
-      background-color: $color-primary;
+      background-color: var(--color-primary);
       color: white;
       transform: translateY(-2px);
+    }
+
+    &:focus {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
     }
   }
 }

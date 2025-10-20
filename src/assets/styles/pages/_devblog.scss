@@ -2,6 +2,9 @@
    PÁGINA DEV BLOG (Plantilla)
    ============================ */
 
+@use '../base/variables' as vars;
+@use '../base/mixins' as mix;
+
 .devblog-page {
   // Layout específico para blog de desarrollo
   &__header {
@@ -10,16 +13,17 @@
     padding: 4rem 0;
     text-align: center;
 
-    .container {
-      @include container;
+    @include mix.mobile {
+      padding: 3rem 0;
     }
   }
 
   &__title {
     font-size: 3rem;
     margin-bottom: 1rem;
+    font-weight: 700;
 
-    @include mobile {
+    @include mix.mobile {
       font-size: 2.25rem;
     }
   }
@@ -29,26 +33,24 @@
     opacity: 0.9;
     max-width: 600px;
     margin: 0 auto;
+    line-height: 1.6;
   }
 
   &__filters {
     background: var(--color-bg-alt);
     padding: 2rem 0;
     border-bottom: 1px solid var(--color-border);
+
+    @include mix.mobile {
+      padding: 1.5rem 0;
+    }
   }
 
   &__content {
     padding: 4rem 0;
 
-    .container {
-      @include container;
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 4rem;
-
-      @include tablet {
-        grid-template-columns: 1fr;
-      }
+    @include mix.mobile {
+      padding: 3rem 0;
     }
   }
 
@@ -58,6 +60,13 @@
 
   &__sidebar {
     // Los estilos de sidebar ya cubren esto
+    position: sticky;
+    top: 2rem;
+
+    @include mix.tablet {
+      position: static;
+      margin-top: 3rem;
+    }
   }
 
   // Estados específicos del devblog
@@ -66,22 +75,168 @@
     gap: 1rem;
     margin-bottom: 1rem;
     flex-wrap: wrap;
+    align-items: center;
   }
 
   &__tech-tag {
-    background: rgba($color-primary, 0.1);
-    color: $color-primary;
+    background: rgba(var(--color-primary-rgb), 0.1);
+    color: var(--color-primary);
     padding: 0.25rem 0.75rem;
     border-radius: 1rem;
-    font-size: $font-size-sm;
+    font-size: var(--font-size-sm);
     font-weight: 500;
+    border: 1px solid rgba(var(--color-primary-rgb), 0.2);
   }
 
   &__read-time {
     color: var(--color-text-muted);
-    font-size: $font-size-sm;
+    font-size: var(--font-size-sm);
     display: flex;
     align-items: center;
     gap: 0.25rem;
+
+    &::before {
+      content: '⏱️';
+      font-size: 0.875em;
+    }
+  }
+
+  &__difficulty {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+
+    &--beginner {
+      background: rgba(var(--color-success-rgb), 0.1);
+      color: var(--color-success);
+      border: 1px solid rgba(var(--color-success-rgb), 0.2);
+    }
+
+    &--intermediate {
+      background: rgba(var(--color-warning-rgb), 0.1);
+      color: var(--color-warning);
+      border: 1px solid rgba(var(--color-warning-rgb), 0.2);
+    }
+
+    &--advanced {
+      background: rgba(var(--color-danger-rgb), 0.1);
+      color: var(--color-danger);
+      border: 1px solid rgba(var(--color-danger-rgb), 0.2);
+    }
+  }
+
+  &__code-block {
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    font-family: var(--font-family-mono);
+    font-size: 0.9em;
+    line-height: 1.5;
+  }
+
+  &__toc {
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+
+    &-title {
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--color-text);
+      font-size: 1.125rem;
+    }
+
+    &-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        margin-bottom: 0.5rem;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      a {
+        color: var(--color-text-muted);
+        text-decoration: none;
+        transition: color var(--transition-speed) var(--ease-in-out);
+
+        &:hover {
+          color: var(--color-primary);
+        }
+      }
+    }
+  }
+}
+
+// Layout grid para devblog
+.devblog-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 4rem;
+
+  @include mix.tablet {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  @include mix.mobile {
+    gap: 2rem;
+  }
+}
+
+// Responsive adjustments
+@include mix.mobile {
+  .devblog-page {
+    &__post-meta {
+      gap: 0.5rem;
+    }
+
+    &__tech-tag,
+    &__read-time,
+    &__difficulty {
+      font-size: var(--font-size-xs);
+    }
+  }
+}
+
+// Dark mode optimizations
+[data-theme="dark"] {
+  .devblog-page {
+    &__code-block {
+      background: var(--color-bg);
+      border-color: var(--color-border);
+    }
+
+    &__toc {
+      background: var(--color-bg);
+      border-color: var(--color-border);
+    }
+  }
+}
+
+// High contrast mode
+[data-theme="high-contrast"] {
+  .devblog-page {
+    &__tech-tag,
+    &__difficulty {
+      border-width: 2px;
+    }
+
+    &__code-block {
+      border-width: 2px;
+    }
   }
 }
