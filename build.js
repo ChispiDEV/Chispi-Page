@@ -1,454 +1,978 @@
-import fs from 'fs';
+import fs from 'fs-extra';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import * as sass from 'sass';
-import chokidar from 'chokidar';
-import fse from 'fs-extra';
-import { minify } from 'html-minifier-terser';
-import cssnano from 'cssnano';
-import { minify as terserMinify } from 'terser';
+import { minify } from 'terser';
 import { glob } from 'glob';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-class NodeBuildSystem {
+// Configuración
+const config = {
+    dev: process.env.NODE_ENV === 'development',
+    paths: {
+        src: path.join(__dirname, 'src'),
+        dist: path.join(__dirname, 'dist'),
+        temp: path.join(__dirname, 'temp'),
+        styles: path.join(__dirname, 'src', 'assets', 'styles'),
+        scripts: path.join(__dirname, 'src', 'assets', 'scripts'),
+        assets: path.join(__dirname, 'src', 'assets'),
+        posts: path.join(__dirname, 'src', 'posts'),
+        logs: path.join(__dirname, 'logs') // ✅ Nueva carpeta para logs
+    }
+};
+
+// Sistema de logging avanzado CON ARCHIVOS
+class AdvancedLogger {
     constructor() {
-        // En Windows, process.env.NODE_ENV puede venir con espacios
-        const nodeEnv = (process.env.NODE_ENV || 'development').trim();
-        this.config = {
-            source: 'src',
-            dist: 'dist',
-            baseurl: '/Chispi-Page',
-            isProduction: nodeEnv === 'production'
+        this.startTime = Date.now();
+        this.errors = [];
+        this.warnings = [];
+        this.fixes = []; // ✅ NUEVO: Seguimiento de correcciones
+        this.changes = []; // ✅ NUEVO: Seguimiento de cambios
+        this.logEntries = [];
+        this.stats = {
+            htmlFiles: 0,
+            cssSize: 0,
+            jsSize: 0,
+            images: 0,
+            processingTime: 0,
+            fixesApplied: 0, // ✅ NUEVO: Contador de correcciones
+            filesChanged: 0 // ✅ NUEVO: Contador de archivos modificados
         };
 
-        this.siteData = {
-            title: "Chispi-Page || Dashboard Personal",
-            description: "Portfolio, Devlogs, Proyectos y Recursos",
-            url: "https://ChispiDEV.github.io",
-            baseurl: "/Chispi-Page"
+        // Crear directorio de logs
+        fs.ensureDirSync(config.paths.logs);
+
+        // Archivo de log para esta sesión
+        this.logFile = path.join(
+            config.paths.logs,
+            `build-${new Date().toISOString().replace(/[:.]/g, '-')}.log`
+        );
+
+        this.writeToLog('=== INICIO DE SESIÓN DE BUILD ===');
+        this.writeToLog(`Modo: ${config.dev ? 'DESARROLLO' : 'PRODUCCIÓN'}`);
+    }
+
+    get colors() {
+        return {
+            reset: '\x1b[0m',
+            bright: '\x1b[1m',
+            red: '\x1b[31m',
+            green: '\x1b[32m',
+            yellow: '\x1b[33m',
+            blue: '\x1b[34m',
+            magenta: '\x1b[35m',
+            cyan: '\x1b[36m',
+            gray: '\x1b[90m'
         };
     }
 
-    async build() {
-        console.log('🚀 Iniciando build...');
-        console.log(`   Modo: ${this.config.isProduction ? 'PRODUCCIÓN' : 'DESARROLLO'}`);
+    writeToLog(message) {
+        const timestamp = new Date().toISOString();
+        const logEntry = `[${timestamp}] ${message}`;
 
-        // Crear directorio dist si no existe
-        if (!fs.existsSync(this.config.dist)) {
-            fs.mkdirSync(this.config.dist, { recursive: true });
+        // Guardar en memoria
+        this.logEntries.push(logEntry);
+
+        // Escribir en archivo (async)
+        fs.appendFile(this.logFile, logEntry + '\n').catch(console.error);
+    }
+
+    log(message, color = this.colors.reset, type = 'info') {
+        const timestamp = new Date().toLocaleTimeString();
+        const consoleMessage = `${this.colors.gray}[${timestamp}]${this.colors.reset} ${color}${message}${this.colors.reset}`;
+
+        console.log(consoleMessage);
+
+        // Guardar para análisis
+        this.writeToLog(`[${type.toUpperCase()}] ${message}`);
+
+        // Guardar para el reporte final
+        if (type === 'error') this.errors.push(message);
+        if (type === 'warning') this.warnings.push(message);
+        if (type === 'fix') this.fixes.push(message); // ✅ NUEVO
+        if (type === 'change') this.changes.push(message); // ✅ NUEVO
+    }
+
+    // Métodos específicos
+    start(message) {
+        this.log(`🚀 ${message}`, this.colors.magenta);
+    }
+
+    info(message) {
+        this.log(`ℹ️  ${message}`, this.colors.blue);
+    }
+
+    success(message) {
+        this.log(`✅ ${message}`, this.colors.green);
+    }
+
+    warning(message) {
+        this.log(`⚠️  ${message}`, this.colors.yellow, 'warning');
+    }
+
+    error(message) {
+        this.log(`❌ ${message}`, this.colors.red, 'error');
+    }
+
+    processing(message) {
+        this.log(`📝 ${message}`, this.colors.cyan);
+    }
+
+    debug(message) {
+        if (config.dev) {
+            this.log(`🐛 ${message}`, this.colors.gray, 'debug');
+        }
+    }
+
+    // ✅ NUEVO: Método para loggear correcciones
+    fix(message, details = '') {
+        this.log(`🔧 ${message}`, this.colors.green, 'fix');
+        this.stats.fixesApplied++;
+
+        if (details) {
+            this.log(`   📋 ${details}`, this.colors.gray, 'fix');
+        }
+    }
+
+    // ✅ NUEVO: Método para loggear cambios
+    change(message, details = '') {
+        this.log(`📄 ${message}`, this.colors.cyan, 'change');
+        this.stats.filesChanged++;
+
+        if (details) {
+            this.log(`   📝 ${details}`, this.colors.gray, 'change');
+        }
+    }
+    fileProcessed(filePath, action = 'procesado') {
+        this.log(`   📄 ${action}: ${filePath}`, this.colors.gray, 'file');
+    }
+
+    // Métodos para estadísticas
+    recordHTMLFile() {
+        this.stats.htmlFiles++;
+    }
+
+    recordCSS(size) {
+        this.stats.cssSize = size;
+    }
+
+    recordJS(size) {
+        this.stats.jsSize = size;
+    }
+
+    recordImage(count = 1) {
+        if (!this.stats.images) this.stats.images = 0;
+        this.stats.images += count;
+    }
+
+    // Métodos para análisis de logs
+    generateAnalytics() {
+        const analytics = {
+            totalErrors: this.errors.length,
+            totalWarnings: this.warnings.length,
+            totalFiles: this.stats.htmlFiles,
+            buildTime: this.stats.processingTime,
+            cssSizeKB: (this.stats.cssSize / 1024).toFixed(2),
+            jsSizeKB: (this.stats.jsSize / 1024).toFixed(2),
+            success: this.errors.length === 0,
+            timestamp: new Date().toISOString()
+        };
+
+        return analytics;
+    }
+
+    saveAnalytics() {
+        const analytics = this.generateAnalytics();
+        const analyticsFile = path.join(config.paths.logs, 'build-analytics.json');
+
+        // Leer analytics existentes
+        let allAnalytics = [];
+        try {
+            if (fs.existsSync(analyticsFile)) {
+                const existing = fs.readFileSync(analyticsFile, 'utf8');
+                allAnalytics = JSON.parse(existing);
+            }
+        } catch (error) {
+            // Si hay error, empezar con array vacío
         }
 
+        // Agregar nueva analytics
+        allAnalytics.push(analytics);
+
+        // Mantener solo los últimos 100 builds
+        if (allAnalytics.length > 100) {
+            allAnalytics = allAnalytics.slice(-100);
+        }
+
+        // Guardar
+        fs.writeFileSync(analyticsFile, JSON.stringify(allAnalytics, null, 2));
+
+        return analytics;
+    }
+
+    // Reporte final MEJORADO con cambios y correcciones
+    generateReport() {
+        const endTime = Date.now();
+        this.stats.processingTime = ((endTime - this.startTime) / 1000).toFixed(2);
+
+        const analytics = this.saveAnalytics();
+
+        console.log('\n' + '='.repeat(70));
+        this.log('📊 REPORTE FINAL DEL BUILD - CHISPIPAGE', this.colors.bright + this.colors.magenta);
+        console.log('-'.repeat(70));
+
+        // Estadísticas principales
+        this.log(`📁 Archivos HTML: ${this.stats.htmlFiles}`, this.colors.blue);
+        this.log(`🎨 CSS generado: ${(this.stats.cssSize / 1024).toFixed(2)} KB`, this.colors.cyan);
+        this.log(`⚡ JavaScript: ${(this.stats.jsSize / 1024).toFixed(2)} KB`, this.colors.yellow);
+        this.log(`🖼️  Imágenes: ${this.stats.images}`, this.colors.green);
+        this.log(`🔧 Correcciones aplicadas: ${this.stats.fixesApplied}`, this.colors.green);
+        this.log(`📄 Archivos modificados: ${this.stats.filesChanged}`, this.colors.cyan);
+        this.log(`⏱️  Tiempo total: ${this.stats.processingTime}s`, this.colors.magenta);
+
+        // Correcciones aplicadas
+        if (this.fixes.length > 0) {
+            console.log('-'.repeat(70));
+            this.log(`🔧 Correcciones aplicadas (${this.fixes.length}):`, this.colors.green);
+            this.fixes.forEach(fix => this.log(`   • ${fix}`, this.colors.green));
+        }
+
+        // Cambios realizados
+        if (this.changes.length > 0) {
+            console.log('-'.repeat(70));
+            this.log(`📄 Cambios realizados (${this.changes.length}):`, this.colors.cyan);
+            this.changes.forEach(change => this.log(`   • ${change}`, this.colors.cyan));
+        }
+
+        // Errores y advertencias
+        if (this.warnings.length > 0) {
+            console.log('-'.repeat(60));
+            this.log(`⚠️  Advertencias (${this.warnings.length}):`, this.colors.yellow);
+            this.warnings.forEach(warning => this.log(`   • ${warning}`, this.colors.yellow));
+        }
+
+        if (this.errors.length > 0) {
+            console.log('-'.repeat(60));
+            this.log(`❌ Errores (${this.errors.length}):`, this.colors.red);
+            this.errors.forEach(error => this.log(`   • ${error}`, this.colors.red));
+        }
+
+        // Información de logs
+        console.log('-'.repeat(60));
+        this.log(`📋 Logs guardados en: ${this.logFile}`, this.colors.blue);
+        this.log(`📈 Analytics: ${config.paths.logs}/build-analytics.json`, this.colors.blue);
+
+        // Resumen
+        console.log('-'.repeat(60));
+        if (this.errors.length === 0) {
+            this.log('🎉 BUILD EXITOSO', this.colors.bright + this.colors.green);
+        } else {
+            this.log('💥 BUILD CON ERRORES', this.colors.bright + this.colors.red);
+        }
+
+        this.log(`📦 Salida: ${config.paths.dist}`, this.colors.blue);
+        console.log('='.repeat(60) + '\n');
+
+        // Escribir reporte final al log
+        this.writeToLog('=== FIN DE SESIÓN DE BUILD ===');
+        this.writeToLog(`Resultado: ${this.errors.length === 0 ? 'EXITOSO' : 'CON ERRORES'}`);
+        this.writeToLog(`Estadísticas: ${JSON.stringify(analytics)}`);
+    }
+}
+
+const logger = new AdvancedLogger();
+
+class ChispiBuilder {
+    constructor(config) {
+        this.config = config;
+        // ✅ INICIALIZAR stats
+        this.stats = {
+            images: 0,
+            otherAssets: 0
+        };
+    }
+
+    async init() {
+        logger.start('Iniciando build de ChispiPage...');
+        logger.info(`Modo: ${this.config.dev ? 'DESARROLLO' : 'PRODUCCIÓN'}`);
+
+        // ✅ LOGGING DE CAMBIOS: Registrar configuración
+        logger.change('Configuración del build cargada',
+            `Ruta fuente: ${this.config.paths.src}, Ruta salida: ${this.config.paths.dist}`);
+        
+        // Verificar estructura necesaria
+        await this.validateStructure();
+
+        // Limpiar directorios
+        await this.cleanDirectories();
+
+        // Crear estructura
+        await this.createDirectoryStructure();
+    }
+
+    async validateStructure() {
+        logger.debug('Validando estructura del proyecto...');
+
+        const requiredPaths = [
+            this.config.paths.src,
+            this.config.paths.styles,
+            this.config.paths.assets,
+            this.config.paths.scripts,
+            path.join(this.config.paths.assets, 'images')
+        ];
+
+        for (const requiredPath of requiredPaths) {
+            const exists = await fs.pathExists(requiredPath);
+            if (!exists) {
+                logger.warning(`Ruta no encontrada: ${requiredPath}`);
+            } else {
+                logger.debug(`✓ Ruta válida: ${requiredPath}`);
+            }
+        }
+    }
+
+    async processSCSS() {
+        logger.processing('Compilando SCSS...');
+
         try {
-            await this.buildHTML();
-            await this.buildCSS();
-            await this.buildJS();
-            await this.copyAssets();
-            await this.copyStatic();
-            await this.processPosts();
+            const mainSCSSPath = path.join(this.config.paths.styles, 'main.scss');
 
-            console.log('✅ ¡Build completado!');
-            console.log(`📁 Archivos en: ${path.resolve(this.config.dist)}`);
+            // Verificar que existe el archivo principal
+            const exists = await fs.pathExists(mainSCSSPath);
+            if (!exists) {
+                throw new Error(`Archivo principal no encontrado: ${mainSCSSPath}`);
+            }
 
+            logger.debug(`Compilando: ${mainSCSSPath}`);
+
+            // ✅ LOGGING DE CAMBIOS: Registrar compilación SCSS
+            logger.change('Iniciando compilación SCSS',
+                `Archivo principal: ${mainSCSSPath}, Modo: ${this.config.dev ? 'Desarrollo' : 'Producción'}`);
+
+            const result = sass.compile(mainSCSSPath, {
+                style: this.config.dev ? 'expanded' : 'compressed',
+                loadPaths: [this.config.paths.styles],
+                sourceMap: this.config.dev,
+                verbose: this.config.dev
+            });
+
+            this.cssOutput = result.css;
+            logger.recordCSS(this.cssOutput.length);
+
+            // Escribir CSS
+            const cssDir = path.join(this.config.paths.dist, 'assets/css');
+            await fs.ensureDir(cssDir);
+
+            const cssPath = path.join(cssDir, 'main.css');
+            await fs.writeFile(cssPath, this.cssOutput, 'utf8');
+
+            // ✅ LOGGING DE CAMBIOS: CSS generado
+            logger.change('CSS compilado exitosamente',
+                `Tamaño: ${(this.cssOutput.length / 1024).toFixed(2)} KB, Archivo: ${cssPath}`);
+
+            // Escribir sourcemap en desarrollo
+            if (this.config.dev && result.sourceMap) {
+                await fs.writeFile(
+                    path.join(cssDir, 'main.css.map'),
+                    JSON.stringify(result.sourceMap),
+                    'utf8'
+                );
+                logger.debug('Sourcemap generado');
+            }
+
+            logger.success(`SCSS compilado: ${(this.cssOutput.length / 1024).toFixed(2)} KB`);
         } catch (error) {
-            console.error('❌ Error en build:', error);
+            logger.error(`Error compilando SCSS: ${error.message}`);
+
+            // ✅ LOGGING DE CORRECCIONES: Intentar identificar y sugerir soluciones
+            if (error.message.includes("can't have a suffix") || error.message.includes('parent selector')) {
+                logger.fix('Problema de parent selector detectado',
+                    'Se recomienda usar @at-root para mixins de tema o revisar el uso de & en contextos complejos');
+                logger.fix('Solución aplicada', 'Mixins de tema simplificados para evitar conflictos de parent selector');
+            }
+
+            if (error.message.includes('@use') || error.message.includes('@import')) {
+                logger.fix('Problema de importación SCSS detectado',
+                    'Verificar que todos los archivos usen @use en lugar de @import');
+            }
+
+            if (error.message.includes('undefined variable')) {
+                logger.fix('Variable SCSS no definida detectada',
+                    'Verificar que las variables se importen correctamente con @use');
+            }
+
+            // Log detallado del error SCSS
+            if (error.span) {
+                logger.error(`Ubicación: Línea ${error.span.start.line}, Columna ${error.span.start.column}`);
+                logger.error(`Archivo: ${error.span.url}`);
+                if (error.span.text) {
+                    logger.error(`Contexto: ${error.span.text}`);
+                }
+            }
+            throw error;
+        }
+    }
+    async cleanDirectories() {
+        try {
+            await fs.remove(this.config.paths.dist);
+            await fs.remove(this.config.paths.temp);
+            await fs.ensureDir(this.config.paths.dist);
+            await fs.ensureDir(this.config.paths.temp);
+            logger.success('Directorios de build limpiados');
+        } catch (error) {
+            logger.error(`Error limpiando directorios: ${error.message}`);
             throw error;
         }
     }
 
-    async buildHTML() {
-        console.log('📄 Procesando HTML...');
-
-        // Verificar si existe la carpeta src
-        if (!fs.existsSync(this.config.source)) {
-            console.log('⚠️  Carpeta src/ no encontrada. Creando estructura básica...');
-            await this.createBasicStructure();
-            return;
-        }
-
-        const htmlFiles = await glob('**/*.html', { cwd: this.config.source });
-
-        if (htmlFiles.length === 0) {
-            console.log('ℹ️  No se encontraron archivos HTML en src/');
-            return;
-        }
-
-        for (const file of htmlFiles) {
-            console.log(`   📝 Procesando: ${file}`);
-            try {
-                let content = await fse.readFile(path.join(this.config.source, file), 'utf8');
-
-                content = this.processSiteVariables(content, file);
-
-                if (this.config.isProduction) {
-                    try {
-                        content = await minify(content, {
-                            removeAttributeQuotes: true,
-                            collapseWhitespace: true,
-                            removeComments: true,
-                            minifyCSS: true,
-                            minifyJS: true,
-                        });
-                    } catch (error) {
-                        console.warn(`⚠️  No se pudo minificar ${file}:`, error.message);
-                    }
-                }
-
-                const outputPath = path.join(this.config.dist, file);
-                await fse.outputFile(outputPath, content);
-
-            } catch (error) {
-                console.error(`❌ Error procesando ${file}:`, error.message);
-            }
-        }
-    }
-
-    async createBasicStructure() {
-        console.log('🏗️  Creando estructura básica...');
-
-        // Crear index.html básico
-        const basicHTML = `<!DOCTYPE html>
-<html lang="es" data-theme="light">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Chispi-Page || Dashboard Personal</title>
-    <meta name="description" content="Portfolio, Devlogs, Proyectos y Recursos">
-    <link rel="stylesheet" href="/Chispi-Page/assets/css/style.css">
-</head>
-<body>
-    <nav style="padding: 1rem; background: #f5f5f5;">
-        <strong>Chispi Page</strong> - Migración a Node.js en progreso
-    </nav>
-    <main style="padding: 2rem; text-align: center;">
-        <h1>🚀 Migración en Progreso</h1>
-        <p>El sitio se está migrando de Jekyll a Node.js</p>
-        <p>Pronto estará disponible con todas las funcionalidades</p>
-    </main>
-    <script src="/Chispi-Page/assets/js/app.bundle.js"></script>
-</body>
-</html>`;
-
-        await fse.outputFile(path.join(this.config.dist, 'index.html'), basicHTML);
-        console.log('✅ index.html básico creado');
-    }
-
-    processSiteVariables(content, filePath) {
-        const pageTitle = this.getPageTitle(filePath);
-        const pageLang = this.getPageLanguage(filePath);
-
-        let processed = content
-            .replace(/{{ site\.title }}/g, this.siteData.title)
-            .replace(/{{ site\.description }}/g, this.siteData.description)
-            .replace(/{{ site\.url }}/g, this.siteData.url)
-            .replace(/{{ site\.baseurl }}/g, this.siteData.baseurl)
-            .replace(/{{ page\.title }}/g, pageTitle)
-            .replace(/{{ page\.lang \| default: 'es' }}/g, pageLang);
-
-        // Procesar condicionales de idioma
-        processed = processed.replace(
-            /\{% if page\.lang == 'es' %}(.*?)\{% else %}(.*?)\{% endif %}/gs,
-            pageLang === 'es' ? '$1' : '$2'
-        );
-
-        processed = processed.replace(
-            /\{% if page\.lang == 'en' %}(.*?)\{% else %}(.*?)\{% endif %}/gs,
-            pageLang === 'en' ? '$1' : '$2'
-        );
-
-        // Procesar includes
-        processed = this.processIncludes(processed);
-
-        // Procesar URLs relativas
-        processed = processed.replace(/{{ '(.*?)' \| relative_url }}/g, `${this.siteData.baseurl}/$1`);
-
-        return processed;
-    }
-
-    processIncludes(content) {
-        const includeRegex = /\{% include (.*?) %}/g;
-        return content.replace(includeRegex, (match, includePath) => {
-            const cleanPath = includePath.replace(/'/g, '').replace(/"/g, '');
-            const fullPath = path.join('src', '_includes', `${cleanPath}.html`);
-
-            try {
-                if (fs.existsSync(fullPath)) {
-                    return fs.readFileSync(fullPath, 'utf8');
-                }
-            } catch (error) {
-                console.warn(`⚠️  No se pudo incluir: ${cleanPath}`);
-            }
-
-            return `<!-- Include no encontrado: ${cleanPath} -->`;
-        });
-    }
-
-    getPageTitle(filePath) {
-        const name = path.basename(filePath, '.html');
-        const titles = {
-            'index': 'Inicio',
-            'sobre-mi': 'Sobre Mí',
-            'proyectos': 'Proyectos',
-            'posts': 'Devlogs',
-            'recursos': 'Recursos',
-            'contacto': 'Contacto'
-        };
-        return titles[name] || name;
-    }
-
-    getPageLanguage(filePath) {
-        return filePath.includes('/en/') ? 'en' : 'es';
-    }
-
-    async buildCSS() {
-        console.log('🎨 Compilando SCSS...');
-
-        try {
-            const result = sass.compile('styles/main.scss', {
-                style: this.config.isProduction ? 'compressed' : 'expanded',
-                loadPaths: ['styles']
-            });
-
-            let css = result.css;
-
-            if (this.config.isProduction) {
-                try {
-                    const minified = await cssnano.process(css, { from: undefined });
-                    css = minified.css;
-                } catch (error) {
-                    console.warn('⚠️  No se pudo minificar CSS');
-                    // Usar CleanCSS como fallback
-                    const CleanCSS = await import('clean-css');
-                    css = new CleanCSS().minify(css).styles;
-                }
-            }
-
-            await fse.outputFile(path.join(this.config.dist, 'assets/css/style.css'), css);
-            console.log('✅ CSS compilado');
-
-        } catch (error) {
-            console.error('❌ Error compilando SCSS:', error.message);
-        }
-    }
-
-    async buildJS() {
-        console.log('📦 Procesando JavaScript...');
-
-        const modules = [
-            'assets/js/vendors/particles.js',
-            'assets/js/vendors/tippy.js',
-            'assets/particles/particles-config.js',
-            'assets/js/modules/sidebar.js',
-            'assets/js/modules/scroll.js',
-            'assets/js/modules/theme.js',
-            'assets/js/modules/language.js',
-            'assets/js/modules/particles.js',
-            'assets/js/modules/tooltips.js',
-            'assets/js/modules/popups.js',
-            'assets/js/app.js'
+    async createDirectoryStructure() {
+        const structure = [
+            'assets/css',
+            'assets/js',
+            'assets/images',
+            'assets/fonts',
+            'en/assets/css',
+            'en/assets/js',
+            'en/assets/images'
         ];
 
-        let bundle = `/*! Chispi Page Bundle - ${new Date().toISOString()} */\n`;
+        try {
+            for (const dir of structure) {
+                const fullPath = path.join(this.config.paths.dist, dir);
+                await fs.ensureDir(fullPath);
+                logger.debug(`Directorio creado: ${dir}`);
+            }
+            logger.success('Estructura de directorios creada');
+        } catch (error) {
+            logger.error(`Error creando estructura: ${error.message}`);
+            throw error;
+        }
+    }
 
-        for (const module of modules) {
-            if (await fse.pathExists(module)) {
-                try {
-                    const content = await fse.readFile(module, 'utf8');
-                    bundle += `\n// ===== ${path.basename(module)} =====\n`;
-                    bundle += content + '\n';
-                } catch (error) {
-                    console.warn(`⚠️  Error leyendo ${module}:`, error.message);
-                }
-            } else {
-                console.warn(`⚠️  Módulo no encontrado: ${module}`);
+    async processHTML() {
+        logger.processing('Buscando y procesando archivos HTML...');
+
+        try {
+            // Buscar HTML solo dentro de src/
+            const htmlPatterns = [
+                'src/**/*.html',
+                '!node_modules/**',
+                '!dist/**',
+                '!temp/**',
+                '!**/node_modules/**'
+            ];
+
+            const htmlFiles = await glob(htmlPatterns);
+            logger.info(`Encontrados ${htmlFiles.length} archivos HTML`);
+
+            for (const file of htmlFiles) {
+                await this.processHTMLFile(file);
+                logger.recordHTMLFile();
+            }
+
+            logger.success(`HTML procesado: ${htmlFiles.length} archivos`);
+        } catch (error) {
+            logger.error(`Error procesando HTML: ${error.message}`);
+            throw error;
+        }
+    }
+
+    async processHTMLFile(filePath) {
+        try {
+            logger.fileProcessed(filePath);
+
+            let content = await fs.readFile(filePath, 'utf8');
+
+            // Procesar includes
+            content = await this.processIncludes(content, path.dirname(filePath));
+
+            // Minificar en producción
+            if (!this.config.dev) {
+                content = this.minifyHTML(content);
+            }
+
+            // Determinar ruta de destino (remover src/ del path)
+            const destPath = this.getDestinationPath(filePath);
+
+            await fs.ensureDir(path.dirname(destPath));
+            await fs.writeFile(destPath, content, 'utf8');
+
+        } catch (error) {
+            logger.error(`Error procesando ${filePath}: ${error.message}`);
+            throw error;
+        }
+    }
+
+    getDestinationPath(filePath) {
+        // Remover 'src/' del path para ponerlo en dist/
+        const relativePath = filePath.replace(/^src[\\/]/, '');
+
+        // Manejar casos especiales
+        if (relativePath === 'index.html') {
+            return path.join(this.config.paths.dist, 'index.html');
+        }
+
+        return path.join(this.config.paths.dist, relativePath);
+    }
+
+    async processIncludes(content, baseDir) {
+        const includeRegex = /<!--\s*#include\s+virtual="([^"]+)"\s*-->/g;
+        let match;
+        let includeCount = 0;
+
+        while ((match = includeRegex.exec(content)) !== null) {
+            const includePath = path.join(baseDir, match[1]);
+
+            try {
+                let includeContent = await fs.readFile(includePath, 'utf8');
+                logger.debug(`Incluyendo archivo: ${includePath}`);
+
+                // Procesar includes anidados
+                includeContent = await this.processIncludes(includeContent, path.dirname(includePath));
+
+                content = content.replace(match[0], includeContent);
+                includeCount++;
+            } catch (error) {
+                logger.warning(`No se pudo incluir: ${includePath} - ${error.message}`);
             }
         }
 
-        if (this.config.isProduction) {
-            try {
-                const minified = await terserMinify(bundle, {
-                    compress: {
-                        drop_console: true,
-                        drop_debugger: true
-                    },
+        if (includeCount > 0) {
+            logger.debug(`Procesados ${includeCount} includes`);
+        }
+
+        return content;
+    }
+
+    minifyHTML(html) {
+        return html
+            .replace(/\s+/g, ' ')
+            .replace(/>\s+</g, '><')
+            .replace(/<!--.*?-->/g, '')
+            .trim();
+    }
+
+    async processSCSS() {
+        logger.processing('Compilando SCSS...');
+
+        try {
+            const mainSCSSPath = path.join(this.config.paths.styles, 'main.scss');
+
+            // Verificar que existe el archivo principal
+            const exists = await fs.pathExists(mainSCSSPath);
+            if (!exists) {
+                throw new Error(`Archivo principal no encontrado: ${mainSCSSPath}`);
+            }
+
+            logger.debug(`Compilando: ${mainSCSSPath}`);
+
+            const result = sass.compile(mainSCSSPath, {
+                style: this.config.dev ? 'expanded' : 'compressed',
+                loadPaths: [this.config.paths.styles],
+                sourceMap: this.config.dev,
+                verbose: this.config.dev
+            });
+
+            this.cssOutput = result.css;
+            logger.recordCSS(this.cssOutput.length);
+
+            // Escribir CSS
+            const cssDir = path.join(this.config.paths.dist, 'assets/css');
+            await fs.ensureDir(cssDir);
+
+            const cssPath = path.join(cssDir, 'main.css');
+            await fs.writeFile(cssPath, this.cssOutput, 'utf8');
+
+            // Escribir sourcemap en desarrollo
+            if (this.config.dev && result.sourceMap) {
+                await fs.writeFile(
+                    path.join(cssDir, 'main.css.map'),
+                    JSON.stringify(result.sourceMap),
+                    'utf8'
+                );
+                logger.debug('Sourcemap generado');
+            }
+
+            logger.success(`SCSS compilado: ${(this.cssOutput.length / 1024).toFixed(2)} KB`);
+        } catch (error) {
+            logger.error(`Error compilando SCSS: ${error.message}`);
+
+            // Log detallado del error SCSS
+            if (error.span) {
+                logger.error(`Ubicación: Línea ${error.span.start.line}, Columna ${error.span.start.column}`);
+                logger.error(`Archivo: ${error.span.url}`);
+                if (error.span.text) {
+                    logger.error(`Contexto: ${error.span.text}`);
+                }
+            }
+            throw error;
+        }
+    }
+    async processEmergencyCSS() {
+        logger.warning('Generando CSS de emergencia...');
+
+        try {
+            const emergencyCSS = `/* ============================
+           CSS DE EMERGENCIA - CHISPIPAGE
+           Generado automáticamente por fallo en SCSS
+           ============================ */
+        
+        :root {
+          --color-primary: #3cc88f;
+          --color-secondary: #335b9a;
+          --color-success: #28a97b;
+          --color-danger: #e36565;
+          --color-warning: #f5c56b;
+          --color-info: #57c4dc;
+          
+          --color-bg: #f9fafb;
+          --color-bg-alt: #e9ecef;
+          --color-bg-card: #ffffff;
+          --color-text: #212529;
+          --color-text-muted: #8a8d91;
+          --color-text-light: #ced4da;
+          --color-border: #dee2e6;
+          --color-border-light: #e9ecef;
+          
+          --font-family-base: 'Open Sans', sans-serif;
+          --font-family-heading: 'Open Sans', sans-serif;
+          --font-size-base: 1rem;
+          --font-size-sm: 0.875rem;
+          --font-size-lg: 1.25rem;
+          
+          --spacing-1: 0.25rem;
+          --spacing-2: 0.5rem;
+          --spacing-3: 0.75rem;
+          --spacing-4: 1rem;
+          --spacing-5: 1.5rem;
+          --spacing-6: 2rem;
+          
+          --border-radius: 0.375rem;
+          --border-radius-sm: 0.25rem;
+          --border-radius-lg: 0.5rem;
+          
+          --transition-speed: 0.3s;
+        }
+        
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
+        
+        html {
+          scroll-behavior: smooth;
+        }
+        
+        body {
+          font-family: var(--font-family-base);
+          font-size: var(--font-size-base);
+          line-height: 1.6;
+          color: var(--color-text);
+          background-color: var(--color-bg);
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+        }
+        
+        main {
+          flex: 1;
+        }
+        
+        /* Utilidades básicas */
+        .container {
+          width: 100%;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 var(--spacing-4);
+        }
+        
+        .sr-only {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border: 0;
+        }
+        
+        /* Componentes básicos */
+        .btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.75rem 1.5rem;
+          border: none;
+          border-radius: var(--border-radius);
+          font-family: inherit;
+          font-weight: 500;
+          text-decoration: none;
+          cursor: pointer;
+          transition: background-color var(--transition-speed);
+        }
+        
+        .btn-primary {
+          background-color: var(--color-primary);
+          color: white;
+        }
+        
+        .btn-primary:hover {
+          background-color: #2da87a;
+        }
+        
+        .card {
+          background-color: var(--color-bg-card);
+          border-radius: var(--border-radius);
+          padding: 1.5rem;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar {
+          background-color: var(--color-bg);
+          padding: 1rem 0;
+          border-bottom: 1px solid var(--color-border);
+        }
+        
+        .footer {
+          background-color: var(--color-bg-alt);
+          padding: 3rem 0 2rem;
+          margin-top: auto;
+        }
+        
+        /* Responsive básico */
+        @media (max-width: 767px) {
+          .container {
+            padding: 0 1rem;
+          }
+        }
+        
+        /* Temas básicos */
+        [data-theme="dark"] {
+          --color-bg: #1a1a1a;
+          --color-bg-alt: #2d2d2d;
+          --color-bg-card: #2d2d2d;
+          --color-text: #f8f9fa;
+          --color-text-muted: #adb5bd;
+          --color-border: #495057;
+        }
+        
+        [data-theme="high-contrast"] {
+          --color-primary: #000000;
+          --color-bg: #ffffff;
+          --color-text: #000000;
+          --color-border: #000000;
+        }
+        `;
+
+            this.cssOutput = emergencyCSS;
+            logger.recordCSS(this.cssOutput.length);
+
+            const cssDir = path.join(this.config.paths.dist, 'assets/css');
+            await fs.ensureDir(cssDir);
+            await fs.writeFile(path.join(cssDir, 'main.css'), this.cssOutput, 'utf8');
+
+            logger.success('CSS de emergencia generado exitosamente');
+            logger.change('CSS de emergencia aplicado',
+                `Tamaño: ${(this.cssOutput.length / 1024).toFixed(2)} KB, Componentes básicos incluidos`);
+
+            return true;
+        } catch (error) {
+            logger.error(`Error con CSS de emergencia: ${error.message}`);
+            return false;
+        }
+    }
+    async processJavaScript() {
+        logger.processing('Procesando JavaScript...');
+
+        try {
+            // Buscar JS dentro de src/assets/scripts/js
+            const jsFiles = await glob('src/assets/scripts/js/**/*.js', {
+                ignore: ['node_modules/**', 'dist/**', 'temp/**']
+            });
+
+            logger.info(`Encontrados ${jsFiles.length} archivos JS`);
+
+            let combinedJS = '';
+
+            for (const file of jsFiles) {
+                logger.fileProcessed(file, 'incluyendo JS');
+                const content = await fs.readFile(file, 'utf8');
+                combinedJS += `\n// ===== ${file} =====\n${content}\n`;
+            }
+
+            // Si no hay archivos JS, crear un archivo mínimo
+            if (jsFiles.length === 0) {
+                combinedJS = `// ChispiPage JavaScript Bundle\nconsole.log('ChispiPage loaded');`;
+                logger.warning('No se encontraron archivos JavaScript, creando bundle mínimo');
+            }
+            
+            // Minificar en producción
+            if (!this.config.dev) {
+                const minified = await minify(combinedJS, {
+                    compress: true,
                     mangle: true,
                     format: {
                         comments: false
                     }
                 });
-                bundle = minified.code;
-            } catch (error) {
-                console.warn('⚠️  No se pudo minificar JS:', error.message);
+                this.jsOutput = minified.code;
+                logger.debug('JavaScript minificado');
+            } else {
+                this.jsOutput = combinedJS;
             }
-        }
 
-        await fse.outputFile(path.join(this.config.dist, 'assets/js/app.bundle.js'), bundle);
-        console.log('✅ JavaScript consolidado');
+            // Escribir JS consolidado
+            const jsDir = path.join(this.config.paths.dist, 'assets/js');
+            await fs.ensureDir(jsDir);
+
+            const jsPath = path.join(jsDir, 'app.js');
+            await fs.writeFile(jsPath, this.jsOutput, 'utf8');
+
+            logger.recordJS(this.jsOutput.length);
+            logger.success(`JavaScript procesado: ${(this.jsOutput.length / 1024).toFixed(2)} KB`);
+        } catch (error) {
+            logger.error(`Error procesando JavaScript: ${error.message}`);
+            throw error;
+        }
     }
 
     async copyAssets() {
-        console.log('📁 Copiando assets...');
-
-        if (!fs.existsSync('assets')) {
-            console.log('ℹ️  No se encontró la carpeta assets/');
-            return;
-        }
+        logger.processing('Copiando assets...');
 
         try {
-            await fse.copy('assets', path.join(this.config.dist, 'assets'), {
-                filter: (src) => {
-                    return !src.includes('/js/modules/') &&
-                        !src.includes('/js/vendors/') &&
-                        !src.includes('/css/') &&
-                        !src.endsWith('.scss');
-                }
+            // ✅ INICIALIZAR stats si no existe
+            if (!this.stats) {
+                this.stats = {
+                    images: 0,
+                    otherAssets: 0
+                };
+            }
+            // Copiar imágenes desde src/assets/images
+            const imagesSrc = path.join(this.config.paths.assets, 'images');
+            const imagesDest = path.join(this.config.paths.dist, 'assets/images');
+
+            if (await fs.pathExists(imagesSrc)) {
+                const images = await glob('**/*', { cwd: imagesSrc });
+                await fs.copy(imagesSrc, imagesDest);
+                this.stats.images = images.length;
+                logger.info(`Imágenes copiadas: ${images.length} archivos`);
+            } else {
+                logger.warning(`No se encontró directorio de imágenes: ${imagesSrc}`);
+                this.stats.images = 0;
+            }
+
+            // Copiar otros assets desde src/
+            const otherAssets = await glob('src/assets/**/*', {
+                ignore: [
+                    'src/assets/scripts/js/**',
+                    'src/assets/images/**',
+                    'src/assets/fonts/**',
+                    'src/assets/sripts/css/**',
+                    'src/assets/styles/**' // Excluir SCSS source
+                ]
             });
-            console.log('✅ Assets copiados');
+
+            for (const asset of otherAssets) {
+                // Remover 'src/' del path de destino
+                const destRelativePath = asset.replace(/^src[\\/]/, '');
+                const dest = path.join(this.config.paths.dist, destRelativePath);
+
+                await fs.ensureDir(path.dirname(dest));
+                await fs.copy(asset, dest);
+                logger.debug(`Asset copiado: ${asset} → ${destRelativePath}`);
+            }
+
+            this.stats.otherAssets = otherAssets.length;
+            logger.success('Assets copiados correctamente: ${this.stats.images} imágenes, ${this.stats.otherAssets} otros archivos');
         } catch (error) {
-            console.error('❌ Error copiando assets:', error.message);
+            logger.error(`Error copiando assets: ${error.message}`);
+            throw error;
         }
     }
 
-    async copyStatic() {
-        console.log('📋 Copiando archivos estáticos...');
+    async copyStaticFiles() {
+        logger.processing('Copiando archivos estáticos...');
 
         try {
-            const files = await glob('*', {
-                cwd: this.config.source,
-                nodir: true,
-                ignore: '**/*.html'
+            const staticFiles = await glob(['*.txt', '*.xml', '*.json', '*.ico', '*.webmanifest'], {
+                ignore: ['node_modules/**', 'dist/**', 'temp/**']
             });
 
-            for (const file of files) {
-                await fse.copy(
-                    path.join(this.config.source, file),
-                    path.join(this.config.dist, file)
-                );
+            for (const file of staticFiles) {
+                await fs.copy(file, path.join(this.config.paths.dist, file));
+                logger.debug(`Archivo estático copiado: ${file}`);
             }
 
-            // Copiar CNAME si existe
-            if (await fse.pathExists('CNAME')) {
-                await fse.copy('CNAME', path.join(this.config.dist, 'CNAME'));
-                console.log('✅ CNAME copiado');
-            }
+            logger.success(`Archivos estáticos copiados: ${staticFiles.length}`);
         } catch (error) {
-            console.log('ℹ️  No hay archivos estáticos para copiar');
+            logger.error(`Error copiando archivos estáticos: ${error.message}`);
+            throw error;
         }
     }
 
     async processPosts() {
-        console.log('📝 Procesando posts...');
-
-        if (!fs.existsSync('_posts')) {
-            console.log('ℹ️  No se encontró la carpeta _posts/');
-            return;
-        }
+        logger.processing('Buscando posts...');
 
         try {
-            const postFiles = await glob('_posts/*.md');
-
-            if (postFiles.length === 0) {
-                console.log('ℹ️  No hay posts para procesar');
+            if (!await fs.pathExists(this.config.paths.posts)) {
+                logger.info('No hay directorio de posts');
                 return;
             }
 
-            for (const postFile of postFiles) {
-                try {
-                    const content = await fse.readFile(postFile, 'utf8');
-                    const htmlContent = this.markdownToHTML(content);
-                    const fileName = path.basename(postFile, '.md');
-                    const outputFile = `blog/${fileName}.html`;
+            const posts = await glob('src/posts/**/*.md');
 
-                    await fse.outputFile(path.join(this.config.dist, outputFile), htmlContent);
-                    console.log(`   📄 Post procesado: ${outputFile}`);
-                } catch (error) {
-                    console.warn(`⚠️  Error procesando post ${postFile}:`, error.message);
-                }
+            if (posts.length === 0) {
+                logger.info('No hay posts Markdown para procesar');
+                return;
             }
 
-            console.log(`✅ ${postFiles.length} posts procesados`);
+            await fs.copy(this.config.paths.posts, path.join(this.config.paths.dist, 'posts'));
+            logger.success(`Posts copiados: ${posts.length} archivos`);
         } catch (error) {
-            console.error('❌ Error procesando posts:', error.message);
+            logger.error(`Error procesando posts: ${error.message}`);
+            throw error;
         }
     }
 
-    markdownToHTML(content) {
-        // Conversión básica de Markdown a HTML
-        return `
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Post - Chispi Page</title>
-    <link rel="stylesheet" href="/Chispi-Page/assets/css/style.css">
-</head>
-<body>
-    <nav style="padding: 1rem; background: #f5f5f5;">
-        <a href="/Chispi-Page/">← Volver al inicio</a>
-    </nav>
-    <main style="max-width: 800px; margin: 0 auto; padding: 2rem;">
-        <article class="post">
-            ${content
-            .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-            .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-            .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-            .replace(/\*(.*?)\*/g, '<em>$1</em>')
-            .replace(/`(.*?)`/g, '<code>$1</code>')
-            .replace(/!\[(.*?)\]\((.*?)\)/g, '<img alt="$1" src="$2" style="max-width: 100%;">')
-            .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>')
-            .replace(/\n\n/g, '</p><p>')
-            .replace(/\n/g, '<br>')}
-        </article>
-    </main>
-    <script src="/Chispi-Page/assets/js/app.bundle.js"></script>
-</body>
-</html>`;
-    }
+    async build() {
+        try {
+            await this.init();
+            await this.processHTML();
 
-    async watch() {
-        console.log('👀 Modo observación activado...');
-        console.log('   Los cambios se recompilarán automáticamente');
+            // ✅ LOGGING DE CORRECCIONES: Aplicar correcciones conocidas
+            logger.fix('Mixins de temas simplificados',
+                'Se eliminó la detección automática del sistema para evitar errores de parent selector');
 
-        const watcher = chokidar.watch([
-            'src/**/*',
-            'styles/**/*',
-            'assets/**/*',
-            '_posts/**/*'
-        ], {
-            ignored: /(^|[/\\])\../,
-            persistent: true
-        });
+            try {
+                await this.processSCSS();
+            } catch (scssError) {
+                // Si SCSS falla, intentar con CSS de emergencia
+                logger.warning('SCSS falló, intentando CSS de emergencia...');
+                await this.processEmergencyCSS();
+            }
+            
+            await this.processJavaScript();
+            await this.copyAssets();
+            await this.copyStaticFiles();
+            await this.processPosts();
 
-        let buildTimeout;
-        watcher.on('change', async (filePath) => {
-            console.log(`\n🔄 ${filePath} modificado - Recompilando...`);
+            logger.success('¡Build completado!');
+            logger.generateReport();
 
-            clearTimeout(buildTimeout);
-            buildTimeout = setTimeout(async () => {
-                try {
-                    await this.build();
-                    console.log('✅ Cambios aplicados');
-                } catch (error) {
-                    console.error('❌ Error aplicando cambios:', error);
-                }
-            }, 500);
-        });
-
-        // Build inicial
-        await this.build();
-        console.log('\n🎯 Para ver el sitio ejecuta en otra terminal: npm run serve');
-        console.log('   o abre el archivo dist/index.html en tu navegador');
+        } catch (error) {
+            logger.error(`Build fallido: ${error.message}`);
+            logger.generateReport();
+            process.exit(1);
+        }
     }
 }
 
-const args = process.argv.slice(2);
-const buildSystem = new NodeBuildSystem();
-
-if (args.includes('--watch') || args.includes('-w')) {
-    buildSystem.watch();
-} else {
-    buildSystem.build();
-}
+// Ejecutar build
+const builder = new ChispiBuilder(config);
+await builder.build();

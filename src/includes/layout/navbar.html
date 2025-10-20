@@ -1,0 +1,115 @@
+<nav id="navbar" class="navbar fixed-top" style="z-index: 9999;">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+
+    <!-- Branding con bandera al lado -->
+    <div class="d-flex align-items-center gap-2">
+      <a class="navbar-brand" href="{{ '/' | relative_url }}">Chispi Page</a>
+
+      {% if page.lang == 'es' %}
+      <img src="{{ '/assets/icons/es-variant.svg' | relative_url }}"
+           alt="Español"
+           style="width: 20px; height: 20px; border-radius: 50%;">
+      {% else %}
+      <img src="{{ '/assets/icons/gb.svg' | relative_url }}"
+           alt="English"
+           style="width: 20px; height: 20px; border-radius: 50%;">
+      {% endif %}
+    </div>
+
+    <!-- Botones: Idioma, Tema, Menú -->
+    <div class="d-flex align-items-center gap-2">
+
+      <!-- Menú desplegable de idiomas -->
+      <div class="dropdown" id="language-dropdown">
+        <button class="icon-button dropdown-toggle"
+                id="language-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                aria-label="Cambiar idioma"
+                title="Cambiar idioma">
+        </button>
+
+        {% comment %}
+        Creamos una versión "base" del URL actual sin el prefijo '/en' (si lo tiene)
+        Esto permite generar el path correcto en español que va en la raíz
+        {% endcomment %}
+        {% assign base_url = page.url | remove_first: '/en' %}
+
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="language-toggle">
+          <li>
+            <a href="{{ base_url | relative_url }}" class="dropdown-item {% if page.lang == 'es' %}active{% endif %}">
+              <img src="{{ '/assets/icons/es-variant.svg' | relative_url }}" alt="Español" class="flag-icon me-2" style="width:16px; height:16px;"> Español
+            </a>
+          </li>
+          <li>
+            <a href="{{ '/en' | append: base_url | relative_url }}" class="dropdown-item {% if page.lang == 'en' %}active{% endif %}">
+              <img src="{{ '/assets/icons/gb.svg' | relative_url }}" alt="English" class="flag-icon me-2" style="width:16px; height:16px;"> English
+            </a>
+          </li>
+        </ul>
+      </div>
+      
+      <!-- Menú desplegable de temas -->
+      <div class="dropdown" id="theme-dropdown">
+        <button class="icon-button dropdown-toggle"
+                id="theme-toggle"
+                type="button"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-label="{% if page.lang == 'es' %}Cambiar tema{% else %}Change theme{% endif %}"
+                title="{% if page.lang == 'es' %}Cambiar tema{% else %}Change theme{% endif %}">
+        </button>
+
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="theme-toggle">
+          <li>
+            <button class="dropdown-item icon-theme-light" data-theme-choice="light">
+              {% if page.lang == 'es' %}Claro{% else %}Light{% endif %}
+            </button>
+          </li>
+          <li>
+            <button class="dropdown-item icon-theme-dark" data-theme-choice="dark">
+              {% if page.lang == 'es' %}Oscuro{% else %}Dark{% endif %}
+            </button>
+          </li>
+          <li>
+            <button class="dropdown-item icon-theme-colorblind" data-theme-choice="colorblind">
+              {% if page.lang == 'es' %}Daltónico{% else %}Colorblind{% endif %}
+            </button>
+          </li>
+          <li>
+            <button class="dropdown-item icon-theme-colorblind-dark" data-theme-choice="colorblind-dark">
+              {% if page.lang == 'es' %}Daltónico Oscuro{% else %}Colorblind Dark{% endif %}
+            </button>
+          </li>
+        </ul>
+      </div>
+
+
+      <button class="icon-button" id="menu-toggle" aria-label="Abrir menú" title="Menú"></button>
+    </div>
+  </div>
+</nav>
+
+<!-- Menú lateral -->
+<div id="sidebar-wrapper" tabindex="-1" class="sidebar" aria-hidden="true" role="menu">
+  <button class="icon-button" id="close-menu-toggle" aria-label="Cerrar menú" title="Cerrar"></button>
+
+  <ul class="sidebar-nav list-unstyled">
+    {% if page.lang == "es" %}
+    <li><a href="{{ '/' | relative_url }}">Inicio</a></li>
+    <li><a href="{{ '/sobre-mi.html' | relative_url }}">Sobre mí</a></li>
+    <li><a href="{{ '/posts.html' | relative_url }}">Devlogs</a></li>
+    <li><a href="{{ '/proyectos.html' | relative_url }}">Proyectos</a></li>
+    <li><a href="{{ '/recursos.html' | relative_url }}">Recursos</a></li>
+    <li><a href="{{ '/contacto.html' | relative_url }}">Contacto</a></li>
+    {% else %}
+    <li><a href="{{ '/en' | relative_url }}">Home</a></li>
+    <li><a href="{{ '/en/sobre-mi.html' | relative_url }}">About Me</a></li>
+    <li><a href="{{ '/en/posts.html' | relative_url }}">Devlogs</a></li>
+    <li><a href="{{ '/en/proyectos.html' | relative_url }}">Projects</a></li>
+    <li><a href="{{ '/en/recursos.html' | relative_url }}">Resources</a></li>
+    <li><a href="{{ '/en/contacto.html' | relative_url }}">Contact</a></li>
+    {% endif %}
+  </ul>
+</div>

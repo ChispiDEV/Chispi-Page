@@ -1,0 +1,155 @@
+/* ============================
+   COMPONENTE FOOTER
+   ============================ */
+
+@use 'sass:color';
+@use '../base/variables' as vars;
+@use '../base/mixins' as mix;
+
+.footer {
+  background-color: var(--color-bg-alt);
+  color: var(--color-text);
+  padding: vars.$spacing-8 0 vars.$spacing-6;
+  margin-top: auto;
+
+  &__container {
+    @include mix.container;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: vars.$spacing-8;
+    margin-bottom: vars.$spacing-8;
+  }
+
+  &__section {
+    h3 {
+      font-size: vars.$font-size-lg;
+      margin-bottom: vars.$spacing-4;
+      color: var(--color-text);
+    }
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    gap: vars.$spacing-2;
+  }
+
+  &__link {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    @include mix.transition(color);
+
+    &:hover {
+      color: var(--color-primary);
+    }
+  }
+
+  &__social {
+    display: flex;
+    gap: vars.$spacing-4;
+    margin-top: vars.$spacing-4;
+  }
+
+  &__social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: var(--color-bg-card);
+    border-radius: vars.$border-radius;
+    color: var(--color-text);
+    text-decoration: none;
+    @include mix.transition(all);
+
+    &:hover {
+      background-color: var(--color-primary);
+      color: white;
+      transform: translateY(-2px);
+    }
+  }
+
+  &__bottom {
+    border-top: 1px solid var(--color-border);
+    padding-top: vars.$spacing-6;
+    display: flex;
+    flex-direction: column;
+    gap: vars.$spacing-4;
+    align-items: center;
+    text-align: center;
+
+    @include mix.desktop {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+  }
+
+  &__copyright {
+    color: var(--color-text-muted);
+    font-size: vars.$font-size-sm;
+  }
+
+  &__legal {
+    display: flex;
+    gap: vars.$spacing-6;
+
+    a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-size: vars.$font-size-sm;
+
+      &:hover {
+        color: var(--color-primary);
+      }
+    }
+  }
+
+  // Variantes
+  &--simple {
+    padding: vars.$spacing-6 0;
+
+    .footer__content {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: vars.$spacing-4;
+    }
+  }
+}
+
+// Temas para footer
+.footer {
+  background-color: var(--color-bg-alt);
+  padding: 3rem 0 2rem;
+  margin-top: auto;
+
+  &__social-link {
+    color: var(--color-text);
+    transition: color var(--transition-speed);
+
+    [data-theme="dark"] & {
+      color: var(--color-text-light);
+
+      &:hover {
+        color: var(--color-primary);
+      }
+    }
+
+    // Para light mode (si es necesario)
+    [data-theme="light"] & {
+      color: var(--color-text);
+
+      &:hover {
+        color: var(--color-primary);
+      }
+    }
+  }
+
+
+    &__bottom {
+      border-top-color: var(--color-border);
+    }
+}

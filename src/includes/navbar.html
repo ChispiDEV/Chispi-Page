@@ -1,0 +1,93 @@
+<nav id="navbar" class="navbar">
+    <div class="navbar__container">
+        <div class="navbar__brand">
+            <a class="navbar__logo" href="{{ '/' | relative_url }}">Chispi Page</a>
+            {% if page.lang == 'es' %}
+            <img src="{{ '/assets/icons/es-variant.svg' | relative_url }}" alt="Español" class="navbar__flag">
+            {% else %}
+            <img src="{{ '/assets/icons/gb.svg' | relative_url }}" alt="English" class="navbar__flag">
+            {% endif %}
+        </div>
+
+        <ul class="navbar__nav">
+            {% if page.lang == "es" %}
+            <li><a href="{{ '/' | relative_url }}" class="navbar__link">Inicio</a></li>
+            <li><a href="{{ '/sobre-mi.html' | relative_url }}" class="navbar__link">Sobre mí</a></li>
+            <li><a href="{{ '/posts.html' | relative_url }}" class="navbar__link">Devlogs</a></li>
+            <li><a href="{{ '/proyectos.html' | relative_url }}" class="navbar__link">Proyectos</a></li>
+            <li><a href="{{ '/recursos.html' | relative_url }}" class="navbar__link">Recursos</a></li>
+            <li><a href="{{ '/contacto.html' | relative_url }}" class="navbar__link">Contacto</a></li>
+            {% else %}
+            <li><a href="{{ '/en' | relative_url }}" class="navbar__link">Home</a></li>
+            <li><a href="{{ '/en/sobre-mi.html' | relative_url }}" class="navbar__link">About Me</a></li>
+            <li><a href="{{ '/en/posts.html' | relative_url }}" class="navbar__link">Devlogs</a></li>
+            <li><a href="{{ '/en/proyectos.html' | relative_url }}" class="navbar__link">Projects</a></li>
+            <li><a href="{{ '/en/recursos.html' | relative_url }}" class="navbar__link">Resources</a></li>
+            <li><a href="{{ '/en/contacto.html' | relative_url }}" class="navbar__link">Contact</a></li>
+            {% endif %}
+        </ul>
+
+        <div class="navbar__actions">
+            <button id="accessibility-btn" class="btn btn--ghost navbar__action-btn"
+                    data-tippy-content="Accesibilidad (Alt+A)">
+                <span class="navbar__action-icon">♿</span>
+            </button>
+
+            <button id="contact-btn" class="btn btn--ghost navbar__action-btn"
+                    data-tippy-content="Contacto (Alt+C)">
+                <span class="navbar__action-icon">💬</span>
+            </button>
+
+            <button id="download-cv-btn" class="btn btn--primary navbar__action-btn"
+                    data-tippy-content="Descargar CV (Alt+D)">
+                <span class="navbar__action-icon">📄</span>
+                <span class="navbar__action-text">CV</span>
+            </button>
+
+            <div class="navbar__language">
+                {% if page.lang == 'es' %}
+                <a href="{{ '/en/index.html' | relative_url }}" class="navbar__language-btn"
+                   data-tippy-content="Switch to English">
+                    <img src="{{ '/assets/icons/gb.svg' | relative_url }}" alt="English" class="navbar__flag">
+                </a>
+                {% else %}
+                <a href="{{ '/index.html' | relative_url }}" class="navbar__language-btn"
+                   data-tippy-content="Cambiar a Español">
+                    <img src="{{ '/assets/icons/es-variant.svg' | relative_url }}" alt="Español" class="navbar__flag">
+                </a>
+                {% endif %}
+            </div>
+
+            <button class="navbar__mobile-toggle" id="menu-toggle">
+                <span class="navbar__toggle-icon"></span>
+                <span class="navbar__toggle-icon"></span>
+                <span class="navbar__toggle-icon"></span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Sidebar -->
+<div id="sidebar-wrapper" class="sidebar">
+    <button class="sidebar__close" id="close-menu-toggle" aria-label="Cerrar menú">
+        <span class="sidebar__close-icon">×</span>
+    </button>
+
+    <ul class="sidebar__nav">
+        {% if page.lang == "es" %}
+        <li><a href="{{ '/' | relative_url }}" class="sidebar__link">Inicio</a></li>
+        <li><a href="{{ '/sobre-mi.html' | relative_url }}" class="sidebar__link">Sobre mí</a></li>
+        <li><a href="{{ '/posts.html' | relative_url }}" class="sidebar__link">Devlogs</a></li>
+        <li><a href="{{ '/proyectos.html' | relative_url }}" class="sidebar__link">Proyectos</a></li>
+        <li><a href="{{ '/recursos.html' | relative_url }}" class="sidebar__link">Recursos</a></li>
+        <li><a href="{{ '/contacto.html' | relative_url }}" class="sidebar__link">Contacto</a></li>
+        {% else %}
+        <li><a href="{{ '/en/index.html' | relative_url }}" class="sidebar__link">Home</a></li>
+        <li><a href="{{ '/en/sobre-mi.html' | relative_url }}" class="sidebar__link">About Me</a></li>
+        <li><a href="{{ '/en/posts.html' | relative_url }}" class="sidebar__link">Devlogs</a></li>
+        <li><a href="{{ '/en/proyectos.html' | relative_url }}" class="sidebar__link">Projects</a></li>
+        <li><a href="{{ '/en/recursos.html' | relative_url }}" class="sidebar__link">Resources</a></li>
+        <li><a href="{{ '/en/contacto.html' | relative_url }}" class="sidebar__link">Contact</a></li>
+        {% endif %}
+    </ul>
+</div>

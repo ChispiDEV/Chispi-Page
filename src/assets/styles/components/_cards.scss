@@ -1,0 +1,143 @@
+/* ============================
+   COMPONENTE CARDS
+   ============================ */
+
+@use 'sass:color';
+@use '../base/variables' as vars;
+@use '../base/mixins' as mix;
+
+.card {
+  background-color: var(--color-bg-card);
+  border-radius: vars.$border-radius;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  @include mix.transition(all);
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  &__image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+
+    &--contain {
+      object-fit: contain;
+      padding: vars.$spacing-4;
+      background-color: var(--color-bg-alt);
+    }
+  }
+
+  &__content {
+    padding: vars.$spacing-6;
+  }
+
+  &__header {
+    margin-bottom: vars.$spacing-4;
+  }
+
+  &__title {
+    font-size: vars.$font-size-xl;
+    font-weight: vars.$font-weight-semibold;
+    margin-bottom: vars.$spacing-2;
+    color: var(--color-text);
+  }
+
+  &__subtitle {
+    font-size: vars.$font-size-sm;
+    color: var(--color-text-muted);
+    margin-bottom: vars.$spacing-2;
+  }
+
+  &__body {
+    color: var(--color-text);
+    line-height: vars.$line-height-base;
+
+    p:not(:last-child) {
+      margin-bottom: vars.$spacing-4;
+    }
+  }
+
+  &__footer {
+    padding: vars.$spacing-4 vars.$spacing-6;
+    background-color: var(--color-bg-alt);
+    border-top: 1px solid var(--color-border-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: vars.$spacing-4;
+  }
+
+  &__meta {
+    display: flex;
+    gap: vars.$spacing-4;
+    font-size: vars.$font-size-sm;
+    color: var(--color-text-muted);
+  }
+
+  // Variantes
+  &--bordered {
+    border: 1px solid var(--color-border);
+    box-shadow: none;
+  }
+
+  &--interactive {
+    cursor: pointer;
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  &--horizontal {
+    display: flex;
+
+    @include mix.mobile {
+      flex-direction: column;
+    }
+
+    .card__image {
+      width: 200px;
+      height: auto;
+
+      @include mix.mobile {
+        width: 100%;
+        height: 200px;
+      }
+    }
+  }
+}
+
+// Card grid
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: vars.$spacing-6;
+
+  &--2 {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  &--4 {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+// Temas para cards
+.card {
+  @include mix.dark-mode {
+    background-color: var(--color-bg-card);
+    border-color: var(--color-border);
+
+    .card__footer {
+      background-color: var(--color-bg-alt);
+      border-top-color: var(--color-border);
+    }
+
+    .card__image--contain {
+      background-color: var(--color-bg-alt);
+    }
+  }
+}

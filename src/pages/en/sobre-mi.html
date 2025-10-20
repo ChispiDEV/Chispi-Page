@@ -1,0 +1,114 @@
+---
+layout: default
+title: About Me
+lang: en
+hero_image_dark: "/assets/img/sobre-mi-bg-dark.jpg"
+hero_image_light: "/assets/img/sobre-mi-bg-light.jpg"
+subtitle: "Developer | Designer | Data Analyst"
+---
+
+<section id="about-me" class="py-16">
+  <div class="container max-w-3xl mx-auto px-4">
+
+    <!-- Profile -->
+    <div class="flex flex-col items-center text-center mb-12">
+      <img src="{{ '/assets/img/foto-perfil.jpg' | relative_url }}" alt="Cristina's profile photo"
+           class="rounded-circle shadow-lg border border-4 border-verde-1 mb-3 mx-auto d-block"
+           style="width: 130px; height: 130px; object-fit: cover;">
+      <h2 class="text-4xl font-bold mb-2">🧑‍💻 About Me</h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300 mt-2">
+        👋 I'm Cristina — my friends call me Chispi. Welcome to my site!
+      </p>
+    </div>
+
+    <!-- Content Blocks -->
+    <div class="row g-4 text-left text-lg leading-relaxed">
+
+      <div class="col-12 col-md-6">
+        <div class="box box-sol">
+          <p>👩‍🔬 Former <strong>biology teacher</strong> turned <strong>data analyst</strong> with a passion for tech, education, and creative problem solving. My focus areas include:</p>
+          <ul class="list-disc list-inside mt-3 pl-2">
+            <li>📊 <strong>Data Analysis:</strong> Python, Pandas, SQL</li>
+            <li>📄 <strong>Document Automation:</strong> LaTeX, Pandoc</li>
+            <li>📈 <strong>Visualization:</strong> Matplotlib, Seaborn, Power BI</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <div class="box box-fuego">
+          <p>🍀 I recently completed a <strong>Data Analytics Bootcamp at IMMUNE Institute</strong> with hands-on projects in:</p>
+          <ul class="list-disc list-inside mt-3 pl-2">
+            <li>Machine Learning</li>
+            <li>Data Visualization</li>
+            <li>Advanced Analytics</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="box box-coral">
+          <p>👀 My background in <strong>biochemistry and education</strong> gives me a unique perspective that blends logic, clarity, and creativity.</p>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="box box-hoja">
+          <h3 class="text-2xl font-semibold mb-4">🔧 Skills</h3>
+
+          <!-- Grid de secciones: 1 columna móvil, 2 en tablet, 3 en escritorio -->
+          <div class="row g-4">
+            {% for section in site.data.skills-en %}
+            <div class="col-12 col-md-6 col-lg-4">
+              {% include skills/section.html section=section %}
+            </div>
+            {% endfor %}
+          </div>
+          
+        </div>
+      </div>
+
+
+      <div class="col-12 col-md-6">
+        <div class="box box-mar">
+          <h3 class="text-2xl font-semibold mb-4">🖥️ Main Technologies</h3>
+          
+          <div class="d-flex flex-wrap gap-2">
+            {% for item in site.data.skills-tech-main %}
+            {% include skills/item.html
+            name=item.name
+            logo=item.logo
+            color=item.color
+            tooltip=item.tooltip %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+        
+      <div class="col-12 col-md-6">
+        <div class="box box-cielo">
+          <h3 class="text-2xl font-semibold mb-4">🔥 What I'm Working On</h3>
+          <ul class="list-disc list-inside mt-3 pl-2">
+            <li>💻 Building interactive dashboards and refining data models.</li>
+            <li>📖 Exploring social network analysis with <strong>NetworkX</strong>.</li>
+            <li>🤝 Open to data and automation-related collaborations.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="box box-uva">
+          <h3 class="text-2xl font-semibold mb-4">🎉 Fun Facts</h3>
+          <ul class="list-disc list-inside mt-3 pl-2">
+            <li>🎮 500+ hours playing Stardew Valley</li>
+            <li>✈️ Former support specialist at Riot Games</li>
+            <li>🐶 Proud dog mom to <strong>Riven</strong> and <strong>Haru</strong></li>
+            <li>🎨 Nail artist and knitting enthusiast</li>
+            <li>🌍 Learning Japanese to one day visit <strong>Kumamoto</strong> — home of the One Piece statues!</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

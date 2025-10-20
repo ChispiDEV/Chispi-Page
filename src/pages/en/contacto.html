@@ -1,0 +1,68 @@
+---
+layout: default
+title: Contact me
+lang: en
+hero_image_dark: "/assets/img/contacto-bg-dark.jpg"
+hero_image_light: "/assets/img/contacto-bg-light.jpg"
+---
+
+<section id="contacto" class="py-5" aria-labelledby="contacto-heading">
+  <div class="container">
+    <h2 id="contacto-heading" class="text-center mb-4">Contact me</h2>
+    <p class="lead text-center">Do you want to reach to me? Fill the form below.</p>
+
+    <form action="https://formspree.io/f/mrbqbklp" method="POST" class="mt-4" novalidate>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="name">Name</label>
+          <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  class="form-control"
+                  placeholder="Your name"
+                  required
+                  minlength="2"
+                  maxlength="100"
+          >
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="email">Email</label>
+          <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  class="form-control"
+                  placeholder="Your email"
+                  required
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+          >
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="message">Mensaje</label>
+        <textarea
+                name="message"
+                id="message"
+                rows="5"
+                class="form-control"
+                placeholder="Write your message here..."
+                required
+                minlength="10"
+        ></textarea>
+      </div>
+
+      <!-- Campo anti-spam -->
+      <input type="text" name="_gotcha" style="display:none">
+
+      <!-- Redirección opcional -->
+      <input type="hidden" name="_redirect" value="{{ '/gracias.html' | relative_url }}">
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-outline-verde-1 btn-lg" aria-label="Enviar formulario" title="Enviar formulario">Send message</button>
+      </div>
+    </form>
+  </div>
+</section>

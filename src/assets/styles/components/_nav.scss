@@ -1,0 +1,517 @@
+/* ============================
+   COMPONENTE NAVEGACIÓN
+   ============================ */
+
+@use 'sass:color';
+@use '../base/variables' as vars;
+@use '../base/mixins' as mix;
+
+/* ============================
+   NAVEGACIÓN PRINCIPAL
+   ============================ */
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: vars.$spacing-6;
+
+  &--vertical {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: vars.$spacing-2;
+  }
+
+  &--pills {
+    .nav__link {
+      padding: vars.$spacing-2 vars.$spacing-4;
+      border-radius: vars.$border-radius;
+
+      &.active {
+        background-color: var(--color-primary);
+        color: white;
+      }
+    }
+  }
+}
+
+.nav__link {
+  color: var(--color-text);
+  text-decoration: none;
+  padding: vars.$spacing-2 0;
+  transition: color vars.$transition-speed vars.$ease-in-out;
+  position: relative;
+  font-weight: vars.$font-weight-medium;
+
+  &:hover,
+  &:focus {
+    color: var(--color-primary);
+  }
+
+  &.active {
+    color: var(--color-primary);
+    font-weight: vars.$font-weight-bold;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: var(--color-primary);
+    }
+  }
+}
+
+/* ============================
+   NAVBAR PRINCIPAL
+   ============================ */
+
+#navbar {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  border-bottom: 2px solid var(--color-secondary);
+  transition: all vars.$transition-speed vars.$ease-in-out;
+  position: sticky;
+  top: 0;
+  z-index: vars.$z-index-sticky;
+  padding: vars.$spacing-3 vars.$spacing-6;
+  backdrop-filter: blur(10px);
+
+  @include mix.respond-to('mobile') {
+    padding: vars.$spacing-2 vars.$spacing-4;
+  }
+}
+
+.navbar-container {
+  @include mix.container;
+  @include mix.flex-between;
+}
+
+.navbar-brand {
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: vars.$font-weight-bold;
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  transition: color vars.$transition-speed vars.$ease-in-out;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-primary);
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+    text-decoration: underline;
+    border-radius: vars.$border-radius-sm;
+  }
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: vars.$spacing-6;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  @include mix.respond-to('mobile') {
+    display: none;
+  }
+}
+
+/* ============================
+   NAVEGACIÓN MÓVIL
+   ============================ */
+
+.nav-mobile {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 300px;
+  height: 100vh;
+  background-color: var(--color-bg);
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  transition: right vars.$transition-speed vars.$ease-in-out;
+  z-index: vars.$z-index-sidebar;
+  padding: vars.$spacing-8 vars.$spacing-6;
+
+  &.active {
+    right: 0;
+  }
+
+  &__close {
+    position: absolute;
+    top: vars.$spacing-4;
+    right: vars.$spacing-4;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--color-text);
+    @include mix.focus-visible;
+
+    &:hover {
+      color: var(--color-primary);
+    }
+  }
+}
+
+.mobile-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    margin: vars.$spacing-4 0;
+  }
+
+  a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: vars.$font-weight-medium;
+    padding: vars.$spacing-2 vars.$spacing-3;
+    border-radius: vars.$border-radius;
+    display: block;
+    transition: all vars.$transition-speed vars.$ease-in-out;
+
+    &:hover,
+    &.active {
+      background-color: var(--color-bg-alt);
+      color: var(--color-primary);
+    }
+  }
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: vars.$spacing-2;
+  color: var(--color-text);
+  @include mix.focus-visible;
+
+  @include mix.respond-to('mobile') {
+    display: block;
+  }
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}
+
+/* ============================
+   SIDEBAR
+   ============================ */
+
+#sidebar-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: vars.$sidebar-width;
+  height: 100%;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  padding: vars.$spacing-6;
+  transition: transform vars.$transition-speed vars.$ease-in-out;
+  z-index: vars.$z-index-sidebar;
+  box-shadow: var(--shadow-lg);
+  overflow-y: auto;
+  transform: translateX(100%);
+  outline: none;
+
+  &.active {
+    transform: translateX(0);
+  }
+
+  // Scroll accesible
+  @include mix.custom-scrollbar;
+}
+
+.sidebar-nav {
+  list-style: none;
+  margin-top: vars.$spacing-8;
+  padding: 0;
+
+  li {
+    margin: vars.$spacing-4 0;
+  }
+
+  a {
+    color: var(--color-text);
+    font-weight: vars.$font-weight-semibold;
+    text-decoration: none;
+    transition: all vars.$transition-speed-fast vars.$ease-in-out;
+    display: inline-block;
+    outline-offset: 3px;
+    border-radius: vars.$border-radius-sm;
+    padding: vars.$spacing-1 vars.$spacing-2;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-primary);
+      background-color: var(--color-overlay-primary);
+      outline: 2px solid var(--color-primary);
+    }
+  }
+}
+
+#close-menu-toggle {
+  background-color: var(--color-danger);
+  color: white;
+  position: absolute;
+  top: vars.$spacing-4;
+  right: vars.$spacing-4;
+  z-index: calc(vars.$z-index-sidebar + 1);
+  width: 40px;
+  height: 40px;
+  font-size: 1.125rem;
+  border-radius: 50%;
+  display: none;
+  transition: all vars.$transition-speed vars.$ease-in-out;
+  box-shadow: var(--shadow);
+  @include mix.flex-center;
+  @include mix.focus-visible;
+
+  &:hover,
+  &:focus-visible {
+    background-color: color.adjust(vars.$color-danger, $lightness: -10%);
+    outline: 2px solid white;
+    outline-offset: 2px;
+  }
+}
+
+#sidebar-wrapper.active #close-menu-toggle {
+  display: inline-flex;
+}
+
+/* ============================
+   DROPDOWN
+   ============================ */
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  @include mix.focus-visible;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  min-width: 180px;
+  z-index: vars.$z-index-dropdown;
+  padding: vars.$spacing-2 0;
+  border-radius: vars.$border-radius;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity vars.$transition-speed vars.$ease-in-out;
+}
+
+.dropdown-menu.show {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: vars.$spacing-2 vars.$spacing-4;
+  text-decoration: none;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  transition: all vars.$transition-speed-fast vars.$ease-in-out;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-info);
+    color: white;
+    outline: none;
+  }
+
+  &.active {
+    font-weight: vars.$font-weight-bold;
+    background-color: var(--color-primary);
+    color: white;
+  }
+}
+
+/* ============================
+   BREADCRUMB
+   ============================ */
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: vars.$spacing-2;
+  font-size: vars.$font-size-sm;
+  color: var(--color-text-muted);
+  margin: vars.$spacing-4 0;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: vars.$spacing-2;
+
+    &:not(:last-child)::after {
+      content: '/';
+      color: var(--color-border);
+    }
+
+    &:last-child {
+      color: var(--color-text);
+      font-weight: vars.$font-weight-medium;
+    }
+  }
+
+  &__link {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      color: var(--color-primary);
+    }
+  }
+}
+
+/* ============================
+   RESPONSIVE
+   ============================ */
+
+@include mix.respond-to('mobile') {
+  .navbar-nav {
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+    padding: vars.$spacing-4;
+    gap: vars.$spacing-3;
+    box-shadow: var(--shadow-lg);
+    display: none;
+
+    &.mobile-active {
+      display: flex;
+    }
+  }
+
+  .nav--pills .nav__link {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ============================
+   TEMAS
+   ============================ */
+
+// Dark mode styles
+#navbar {
+  @include mix.dark-mode {
+    background-color: rgba(26, 26, 26, 0.9);
+
+    .navbar-brand {
+      color: var(--color-text);
+    }
+
+    .nav__link {
+      color: var(--color-text-muted);
+
+      &:hover {
+        color: var(--color-primary);
+      }
+
+      &.active {
+        color: var(--color-primary);
+      }
+    }
+  }
+}
+
+.nav-mobile {
+  @include mix.dark-mode {
+    background-color: var(--color-bg-card);
+
+    a {
+      color: var(--color-text);
+
+      &:hover,
+      &.active {
+        color: var(--color-primary);
+        background-color: var(--color-bg-alt);
+      }
+    }
+  }
+}
+
+#sidebar-wrapper {
+  @include mix.dark-mode {
+    background-color: var(--color-bg-card);
+
+    a {
+      color: var(--color-text);
+
+      &:hover,
+      &:focus-visible {
+        color: var(--color-primary);
+        background-color: var(--color-overlay-primary);
+      }
+    }
+  }
+}
+
+// High contrast mode styles
+.nav__link {
+  @include mix.high-contrast {
+    border: 1px solid var(--color-text);
+    padding: vars.$spacing-2 vars.$spacing-3;
+    border-radius: vars.$border-radius-sm;
+
+    &.active {
+      border-width: 2px;
+      background-color: var(--color-primary);
+      color: white;
+    }
+  }
+}
+
+.dropdown-item {
+  @include mix.high-contrast {
+    border: 1px solid var(--color-text);
+    margin: 1px;
+
+    &.active {
+      border-width: 2px;
+    }
+
+    &:hover,
+    &:focus-visible {
+      border-width: 2px;
+    }
+  }
+}
+
+// Light mode explícito (opcional)
+#navbar {
+  @include mix.light-mode {
+    // Estilos específicos para cuando el tema claro está explícitamente activado
+    background-color: var(--color-bg);
+    border-bottom-color: var(--color-secondary);
+  }
+}
