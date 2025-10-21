@@ -1,21 +1,44 @@
 {
-  "sections": [
-    {
-      "section": "Data Analysis",
-      "items": [
-        {"name": "Python", "logo": "python", "color": "3776AB", "tooltip": "Python programming"},
-        {"name": "Pandas", "logo": "pandas", "color": "150458", "tooltip": "Data manipulation library"},
-        {"name": "SQL", "logo": "mysql", "color": "4479A1", "tooltip": "Structured Query Language"},
-        {"name": "Power BI", "logo": "powerbi", "color": "F2C811", "tooltip": "Business analytics tool"}
-      ]
-    },
-    {
-      "section": "Web Development",
-      "items": [
-        {"name": "HTML5", "logo": "html5", "color": "E34F26", "tooltip": "HyperText Markup Language"},
-        {"name": "CSS3", "logo": "css3", "color": "1572B6", "tooltip": "Cascading Style Sheets"},
-        {"name": "JavaScript", "logo": "javascript", "color": "F7DF1E", "tooltip": "JavaScript programming"}
-      ]
-    }
-  ]
+  "languages": {
+    "es": "Lenguajes de programación",
+    "en": "Programming Languages",
+    "items": [
+      {
+        "name": "Python",
+        "logo": "python",
+        "color": "3776AB",
+        "tooltip": {
+          "es": "Lenguaje versátil, ideal para ciencia de datos, automatización y más",
+          "en": "High-level programming language ideal for data analysis and scripting"
+        }
+      },
+      {
+        "name": "SQL",
+        "logo": "postgresql",
+        "color": "FF6F00",
+        "tooltip": {
+          "es": "Lenguaje para gestionar y consultar bases de datos relacionales",
+          "en": "Language used to manage and query relational databases"
+        }
+      }
+      // ... más items (simplificado para el ejemplo)
+    ]
+  },
+  "frameworks": {
+    "es": "Frameworks y librerías",
+    "en": "Frameworks and Libraries",
+    "items": [
+      {
+        "name": "Pandas",
+        "logo": "pandas",
+        "color": "150458",
+        "tooltip": {
+          "es": "Librería para análisis y manipulación de datos",
+          "en": "Library for data manipulation and analysis in Python"
+        }
+      }
+      // ... más items
+    ]
+  }
+  // ... más categorías
 }
