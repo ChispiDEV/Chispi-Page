@@ -1,0 +1,21 @@
+{
+  "sections": [
+    {
+      "section": "Data Analysis",
+      "items": [
+        {"name": "Python", "logo": "python", "color": "3776AB", "tooltip": "Python programming"},
+        {"name": "Pandas", "logo": "pandas", "color": "150458", "tooltip": "Data manipulation library"},
+        {"name": "SQL", "logo": "mysql", "color": "4479A1", "tooltip": "Structured Query Language"},
+        {"name": "Power BI", "logo": "powerbi", "color": "F2C811", "tooltip": "Business analytics tool"}
+      ]
+    },
+    {
+      "section": "Web Development",
+      "items": [
+        {"name": "HTML5", "logo": "html5", "color": "E34F26", "tooltip": "HyperText Markup Language"},
+        {"name": "CSS3", "logo": "css3", "color": "1572B6", "tooltip": "Cascading Style Sheets"},
+        {"name": "JavaScript", "logo": "javascript", "color": "F7DF1E", "tooltip": "JavaScript programming"}
+      ]
+    }
+  ]
+}

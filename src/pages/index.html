@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ site.title }} | {{ page.title }}</title>
-    <meta name="description" content="{{ site.description }}">
+    <title>Chispi Page | Inicio</title>
+    <meta name="description" content="Portfolio y espacio creativo de Chispi - Desarrolladora, Data Analyst y Content Creator">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
-    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-    <link rel="icon" href="{{ '/assets/icons/favicon.ico' | relative_url }}">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="icon" href="/assets/icons/favicon.ico">
 </head>
 <body>
-{% include navbar.html %}
+<!--# include file="../includes/components/navigation/navbar.html" -->
 
-{% include hero-header.html %}
+<!--# include file="../includes/components/hero/hero.html" -->
 
 <main class="main-content">
     <section class="container">
@@ -21,17 +21,17 @@
         <p>Explora mis proyectos, devlogs y recursos.</p>
 
         <div class="grid" style="--cols: 1; --gap: 2rem;">
-            <a href="{{ '/sobre-mi.html' | relative_url }}" class="card">
+            <a href="/about.html" class="card">
                 <h3>Sobre Mí</h3>
                 <p>Conoce más sobre mi trayectoria</p>
             </a>
 
-            <a href="{{ '/proyectos.html' | relative_url }}" class="card">
+            <a href="/projects.html" class="card">
                 <h3>Proyectos</h3>
                 <p>Mis trabajos y desarrollos</p>
             </a>
 
-            <a href="{{ '/posts.html' | relative_url }}" class="card">
+            <a href="/blog.html" class="card">
                 <h3>Devlogs</h3>
                 <p>Blog sobre desarrollo y más</p>
             </a>
@@ -39,8 +39,8 @@
     </section>
 </main>
 
-{% include footer.html %}
+<!--# include file="../includes/global/footer.html" -->
 
-<script src="{{ '/assets/js/app.bundle.js' | relative_url }}"></script>
+<script src="/assets/js/app.bundle.js"></script>
 </body>
 </html>

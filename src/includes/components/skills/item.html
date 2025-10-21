@@ -1,0 +1,18 @@
+<!-- src/includes/components/skills/item.html -->
+<a href="#"
+   tabindex="0"
+   class="skill-item"
+   style="background-color: #{{ include.color }};"
+   {% if include.tooltip %}
+   data-tippy-content="{{ include.tooltip }}"
+   aria-label="{{ include.tooltip }}"
+   {% else %}
+   aria-label="{{ include.name }}"
+   {% endif %}>
+
+    {% if include.logo %}
+    <i class="devicon-{{ include.logo | downcase }}-plain"></i>
+    {% endif %}
+
+    <span>{{ include.name }}</span>
+</a>
