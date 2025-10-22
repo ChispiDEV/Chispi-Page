@@ -541,257 +541,6 @@ if (typeof module !== 'undefined' && module.exports) {
     window.ParticlesConfig = ParticlesConfig;
 }
 
-// src\assets\scripts\core\theme.js
-
-
-// src\assets\scripts\core\router.js
-
-
-// src\assets\scripts\core\app.js
-// ============================
-// APP CONTROLLER - CON CARGA AUTOMÁTICA
-// ============================
-
-class AppController {
-    constructor() {
-        this.modules = {};
-        this.BASE_URL = '{{ site.baseurl }}';
-        this.moduleStatus = new Map();
-        this.init();
-    }
-
-    async init() {
-        try {
-            // Esperar a que el DOM esté listo
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', () => this.startApp());
-            } else {
-                this.startApp();
-            }
-        } catch (error) {
-            console.error('❌ Error inicializando la app:', error);
-        }
-    }
-
-    async startApp() {
-        // Registrar módulos disponibles
-        this.registerModules();
-
-        // Inicializar módulos en orden
-        await this.initModules();
-
-        // Configurar eventos globales
-        this.setupGlobalEvents();
-
-        console.log('✅ App inicializada correctamente');
-    }
-
-    registerModules() {
-        // Módulos core (siempre presentes)
-        this.availableModules = {
-            'sidebar': 'SidebarController',
-            'scroll': 'ScrollController',
-            'theme': 'ThemeController',
-            'language': 'LanguageController',
-            'particles': 'ParticlesController',
-            'tooltips': 'TooltipsController',
-            'popups': 'PopupsController'
-        };
-
-        // Verificar qué módulos están realmente cargados
-        this.detectLoadedModules();
-    }
-
-    detectLoadedModules() {
-        Object.keys(this.availableModules).forEach(moduleName => {
-            const className = this.availableModules[moduleName];
-            if (window[className]) {
-                this.moduleStatus.set(moduleName, 'available');
-            } else {
-                this.moduleStatus.set(moduleName, 'missing');
-                console.warn(`⚠️ Módulo ${moduleName} no encontrado`);
-            }
-        });
-    }
-
-    async initModules() {
-        const initQueue = [];
-
-        // Crear instancias solo de módulos disponibles
-        for (const [moduleName, status] of this.moduleStatus) {
-            if (status === 'available') {
-                const className = this.availableModules[moduleName];
-                initQueue.push(this.createModuleInstance(moduleName, className));
-            }
-        }
-
-        // Inicializar módulos en paralelo
-        await Promise.allSettled(initQueue);
-
-        // Esperar a módulos críticos
-        await this.waitForCriticalModules();
-    }
-
-    async createModuleInstance(moduleName, className) {
-        try {
-            const ModuleClass = window[className];
-            this.modules[moduleName] = new ModuleClass();
-
-            // Si el módulo tiene una promesa ready, esperarla
-            if (this.modules[moduleName].ready) {
-                await this.modules[moduleName].ready;
-            }
-
-            this.moduleStatus.set(moduleName, 'initialized');
-            console.log(`✅ Módulo ${moduleName} inicializado`);
-
-        } catch (error) {
-            console.error(`❌ Error inicializando módulo ${moduleName}:`, error);
-            this.moduleStatus.set(moduleName, 'error');
-        }
-    }
-
-    async waitForCriticalModules() {
-        const criticalModules = ['theme', 'sidebar'];
-        const criticalPromises = criticalModules
-            .filter(module => this.moduleStatus.get(module) === 'initialized')
-            .map(module => this.modules[module].ready);
-
-        await Promise.allSettled(criticalPromises);
-    }
-
-    setupGlobalEvents() {
-        // Eventos globales del documento
-        document.addEventListener('keydown', this.handleGlobalKeys.bind(this));
-
-        // Botones en el HTML para abrir popups
-        this.setupPopupTriggers();
-
-        // Exponer módulos globalmente para debugging
-        window.app = this;
-    }
-
-    setupPopupTriggers() {
-        // Botón de accesibilidad
-        const accessibilityBtn = document.getElementById('accessibility-btn');
-        if (accessibilityBtn && this.modules.popups) {
-            accessibilityBtn.addEventListener('click', () => {
-                this.modules.popups.showAccessibilityPopup();
-            });
-        }
-
-        // Botón de contacto
-        const contactBtn = document.getElementById('contact-btn');
-        if (contactBtn && this.modules.popups) {
-            contactBtn.addEventListener('click', () => {
-                this.modules.popups.showContactPopup();
-            });
-        }
-
-        // Botón de descargar CV
-        const downloadBtn = document.getElementById('download-cv-btn');
-        if (downloadBtn && this.modules.popups) {
-            downloadBtn.addEventListener('click', () => {
-                this.modules.popups.showDownloadPopup();
-            });
-        }
-
-        // Botones rápidos del sidebar
-        document.querySelectorAll('[data-action="accessibility"]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                if (this.modules.popups) {
-                    this.modules.popups.showAccessibilityPopup();
-                }
-            });
-        });
-
-        document.querySelectorAll('[data-action="contact"]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                if (this.modules.popups) {
-                    this.modules.popups.showContactPopup();
-                }
-            });
-        });
-    }
-
-    handleGlobalKeys(event) {
-        // Atajos globales de teclado
-        if (event.altKey) {
-            switch(event.key) {
-                case 'a': // Alt + A para accesibilidad
-                    event.preventDefault();
-                    if (this.modules.popups) this.modules.popups.showAccessibilityPopup();
-                    break;
-                case 'c': // Alt + C para contacto
-                    event.preventDefault();
-                    if (this.modules.popups) this.modules.popups.showContactPopup();
-                    break;
-                case 'd': // Alt + D para descargar CV
-                    event.preventDefault();
-                    if (this.modules.popups) this.modules.popups.showDownloadPopup();
-                    break;
-            }
-        }
-
-        if (event.ctrlKey && event.altKey) {
-            switch(event.key) {
-                case 'm':
-                    event.preventDefault();
-                    if (this.modules.sidebar) this.modules.sidebar.toggle();
-                    break;
-                case 't':
-                    event.preventDefault();
-                    if (this.modules.theme) this.modules.theme.cycleThemes();
-                    break;
-                case 'l':
-                    event.preventDefault();
-                    if (this.modules.language) this.modules.language.toggle();
-                    break;
-            }
-        }
-    }
-
-    // Métodos utilitarios
-    getModule(name) {
-        return this.modules[name];
-    }
-
-    isModuleLoaded(name) {
-        return this.moduleStatus.get(name) === 'initialized';
-    }
-
-    getLoadedModules() {
-        return Array.from(this.moduleStatus.entries())
-            .filter(([_, status]) => status === 'initialized')
-            .map(([name]) => name);
-    }
-
-    async loadModule(moduleName) {
-        if (this.moduleStatus.get(moduleName) === 'initialized') {
-            return this.modules[moduleName];
-        }
-
-        // Aquí podrías implementar carga dinámica de módulos
-        console.warn(`Carga dinámica no implementada para: ${moduleName}`);
-        return null;
-    }
-
-    destroy() {
-        // Cleanup de todos los módulos
-        Object.values(this.modules).forEach(module => {
-            if (module && typeof module.destroy === 'function') {
-                module.destroy();
-            }
-        });
-
-        this.modules = {};
-        this.moduleStatus.clear();
-    }
-}
-
-// Inicialización automática
-window.appController = new AppController();
-
 // src\assets\scripts\modules\tooltips.js
 // ============================
 // TOOLTIPS CONTROLLER
@@ -2643,3 +2392,549 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export default LanguageController;
+
+// src\assets\scripts\modules\accessibility-widget.js
+// accessibility-widget.js
+class AccessibilityWidget {
+    constructor() {
+        this.widget = document.getElementById('accessibility-widget');
+        this.toggleBtn = this.widget.querySelector('.accessibility-toggle');
+        this.panel = this.widget.querySelector('.accessibility-panel');
+        this.closeBtn = this.widget.querySelector('.accessibility-close');
+        this.themeSelector = document.getElementById('theme-selector');
+        this.motionCheckbox = document.getElementById('motion-reduced');
+        this.readingCheckbox = document.getElementById('reading-mode');
+
+        this.init();
+    }
+
+    init() {
+        this.loadSavedPreferences();
+        this.setupEventListeners();
+        this.setupQuickActions();
+    }
+
+    setupEventListeners() {
+        // Toggle panel
+        this.toggleBtn.addEventListener('click', () => this.togglePanel());
+
+        // Cerrar panel
+        this.closeBtn.addEventListener('click', () => this.closePanel());
+
+        // Cerrar al hacer click fuera
+        document.addEventListener('click', (e) => {
+            if (!this.widget.contains(e.target)) {
+                this.closePanel();
+            }
+        });
+
+        // Cambio de tema
+        this.themeSelector.addEventListener('change', (e) => {
+            this.applyTheme(e.target.value);
+        });
+
+        // Modificadores
+        this.motionCheckbox.addEventListener('change', (e) => {
+            this.toggleModifier('reduced-motion', e.target.checked);
+        });
+
+        this.readingCheckbox.addEventListener('change', (e) => {
+            this.toggleModifier('reading-mode', e.target.checked);
+        });
+    }
+
+    setupQuickActions() {
+        // Acciones rápidas
+        document.querySelectorAll('.accessibility-action').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const action = e.currentTarget.dataset.action;
+                this.handleQuickAction(action);
+            });
+        });
+    }
+
+    togglePanel() {
+        this.widget.classList.toggle('active');
+    }
+
+    closePanel() {
+        this.widget.classList.remove('active');
+    }
+
+    applyTheme(theme) {
+        // Remover todos los temas
+        document.documentElement.removeAttribute('data-theme');
+
+        // Aplicar nuevo tema (excepto light que es por defecto)
+        if (theme !== 'light') {
+            document.documentElement.setAttribute('data-theme', theme);
+        }
+
+        this.savePreference('theme', theme);
+    }
+
+    toggleModifier(modifier, enabled) {
+        if (enabled) {
+            document.documentElement.setAttribute('data-modifier', modifier);
+        } else {
+            document.documentElement.removeAttribute('data-modifier');
+        }
+
+        this.savePreference(`modifier-${modifier}`, enabled);
+    }
+
+    handleQuickAction(action) {
+        switch (action) {
+            case 'increase-text':
+                this.increaseTextSize();
+                break;
+            case 'decrease-text':
+                this.decreaseTextSize();
+                break;
+            case 'reset-all':
+                this.resetAll();
+                break;
+        }
+    }
+
+    increaseTextSize() {
+        const currentSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+        document.documentElement.style.fontSize = (currentSize * 1.1) + 'px';
+        this.savePreference('textSize', 'large');
+    }
+
+    decreaseTextSize() {
+        document.documentElement.style.fontSize = '';
+        this.savePreference('textSize', 'normal');
+    }
+
+    resetAll() {
+        // Reset tema
+        document.documentElement.removeAttribute('data-theme');
+        document.documentElement.removeAttribute('data-modifier');
+        document.documentElement.style.fontSize = '';
+
+        // Reset controles
+        this.themeSelector.value = 'light';
+        this.motionCheckbox.checked = false;
+        this.readingCheckbox.checked = false;
+
+        // Limpiar almacenamiento
+        localStorage.removeItem('accessibility-theme');
+        localStorage.removeItem('accessibility-modifier-reduced-motion');
+        localStorage.removeItem('accessibility-modifier-reading-mode');
+        localStorage.removeItem('accessibility-textSize');
+    }
+
+    savePreference(key, value) {
+        localStorage.setItem(`accessibility-${key}`, value);
+    }
+
+    loadSavedPreferences() {
+        // Cargar tema
+        const savedTheme = localStorage.getItem('accessibility-theme') || 'light';
+        this.themeSelector.value = savedTheme;
+        this.applyTheme(savedTheme);
+
+        // Cargar modificadores
+        const motionEnabled = localStorage.getItem('accessibility-modifier-reduced-motion') === 'true';
+        const readingEnabled = localStorage.getItem('accessibility-modifier-reading-mode') === 'true';
+
+        this.motionCheckbox.checked = motionEnabled;
+        this.readingCheckbox.checked = readingEnabled;
+
+        if (motionEnabled) this.toggleModifier('reduced-motion', true);
+        if (readingEnabled) this.toggleModifier('reading-mode', true);
+
+        // Cargar tamaño de texto
+        const textSize = localStorage.getItem('accessibility-textSize');
+        if (textSize === 'large') {
+            this.increaseTextSize();
+        }
+    }
+}
+
+// Inicializar cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => {
+    new AccessibilityWidget();
+});
+
+// src\assets\scripts\core\theme.js
+class ThemeManager {
+    constructor() {
+        this.availableThemes = [
+            'light', 'dark', 'high-contrast', 'daltonism',
+            'dyslexia', 'grayscale', 'photophobia',
+            'reading', 'sepia', 'reduced-motion'
+        ];
+
+        this.availableModifiers = [
+            'high-contrast',
+            'reduced-motion',
+            'reading-mode'
+        ];
+
+        this.currentTheme = localStorage.getItem('theme') || 'light';
+        this.currentModifiers = JSON.parse(localStorage.getItem('themeModifiers')) || [];
+        this.init();
+    }
+
+    applyTheme(theme) {
+        // Remover todos los temas primero
+        this.availableThemes.forEach(t => {
+            document.documentElement.removeAttribute(`data-theme`);
+        });
+
+        // Aplicar nuevo tema
+        if (theme !== 'light') { // light es el tema por defecto
+            document.documentElement.setAttribute('data-theme', theme);
+        }
+        localStorage.setItem('theme', theme);
+        this.currentTheme = theme;
+    }
+
+    applyModifiers(modifiers) {
+        // Remover todos los modificadores
+        this.availableModifiers.forEach(m => {
+            document.documentElement.removeAttribute(`data-modifier`);
+        });
+
+        // Aplicar nuevos modificadores
+        modifiers.forEach(modifier => {
+            document.documentElement.setAttribute('data-modifier', modifier);
+        });
+
+        localStorage.setItem('themeModifiers', JSON.stringify(modifiers));
+        this.currentModifiers = modifiers;
+    }
+
+    // Interfaz para múltiples modificadores
+    createAdvancedSelector() {
+        return `
+      <div class="theme-selector-advanced">
+        <h4>Tema Principal</h4>
+        <select id="main-theme">
+          ${this.availableThemes.map(theme =>
+            `<option value="${theme}" ${theme === this.currentTheme ? 'selected' : ''}>
+              ${this.formatName(theme)}
+            </option>`
+        ).join('')}
+        </select>
+        
+        <h4>Modificadores</h4>
+        ${this.availableModifiers.map(modifier => `
+          <label>
+            <input type="checkbox" value="${modifier}" 
+                   ${this.currentModifiers.includes(modifier) ? 'checked' : ''}>
+            ${this.formatName(modifier)}
+          </label>
+        `).join('')}
+      </div>
+    `;
+    }
+}
+
+// src\assets\scripts\core\router.js
+// Router simple para SPA (si es necesario)
+class Router {
+    constructor() {
+        this.routes = {};
+        this.currentRoute = '';
+        this.init();
+    }
+
+    init() {
+        // Navegación para enlaces internos
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a[href^="/"]');
+            if (link && !link.target) {
+                e.preventDefault();
+                this.navigate(link.getAttribute('href'));
+            }
+        });
+
+        // Manejar botones atrás/adelante
+        window.addEventListener('popstate', () => {
+            this.handleRoute(window.location.pathname);
+        });
+
+        // Ruta inicial
+        this.handleRoute(window.location.pathname);
+    }
+
+    addRoute(path, callback) {
+        this.routes[path] = callback;
+    }
+
+    navigate(path) {
+        window.history.pushState({}, '', path);
+        this.handleRoute(path);
+    }
+
+    handleRoute(path) {
+        this.currentRoute = path;
+
+        // Emitir evento de cambio de ruta
+        document.dispatchEvent(new CustomEvent('routeChanged', {
+            detail: { path }
+        }));
+
+        // Ejecutar callback si existe
+        if (this.routes[path]) {
+            this.routes[path]();
+        }
+    }
+
+    getCurrentRoute() {
+        return this.currentRoute;
+    }
+}
+
+// Inicializar
+const router = new Router();
+window.router = router;
+
+// src\assets\scripts\core\app.js
+// ============================
+// APP CONTROLLER - CON CARGA AUTOMÁTICA
+// ============================
+
+class AppController {
+    constructor() {
+        this.modules = {};
+        this.BASE_URL = '{{ site.baseurl }}';
+        this.moduleStatus = new Map();
+        this.init();
+    }
+
+    async init() {
+        try {
+            // Esperar a que el DOM esté listo
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => this.startApp());
+            } else {
+                this.startApp();
+            }
+        } catch (error) {
+            console.error('❌ Error inicializando la app:', error);
+        }
+    }
+
+    async startApp() {
+        // Registrar módulos disponibles
+        this.registerModules();
+
+        // Inicializar módulos en orden
+        await this.initModules();
+
+        // Configurar eventos globales
+        this.setupGlobalEvents();
+
+        console.log('✅ App inicializada correctamente');
+    }
+
+    registerModules() {
+        // Módulos core (siempre presentes)
+        this.availableModules = {
+            'sidebar': 'SidebarController',
+            'scroll': 'ScrollController',
+            'theme': 'ThemeController',
+            'language': 'LanguageController',
+            'particles': 'ParticlesController',
+            'tooltips': 'TooltipsController',
+            'popups': 'PopupsController'
+        };
+
+        // Verificar qué módulos están realmente cargados
+        this.detectLoadedModules();
+    }
+
+    detectLoadedModules() {
+        Object.keys(this.availableModules).forEach(moduleName => {
+            const className = this.availableModules[moduleName];
+            if (window[className]) {
+                this.moduleStatus.set(moduleName, 'available');
+            } else {
+                this.moduleStatus.set(moduleName, 'missing');
+                console.warn(`⚠️ Módulo ${moduleName} no encontrado`);
+            }
+        });
+    }
+
+    async initModules() {
+        const initQueue = [];
+
+        // Crear instancias solo de módulos disponibles
+        for (const [moduleName, status] of this.moduleStatus) {
+            if (status === 'available') {
+                const className = this.availableModules[moduleName];
+                initQueue.push(this.createModuleInstance(moduleName, className));
+            }
+        }
+
+        // Inicializar módulos en paralelo
+        await Promise.allSettled(initQueue);
+
+        // Esperar a módulos críticos
+        await this.waitForCriticalModules();
+    }
+
+    async createModuleInstance(moduleName, className) {
+        try {
+            const ModuleClass = window[className];
+            this.modules[moduleName] = new ModuleClass();
+
+            // Si el módulo tiene una promesa ready, esperarla
+            if (this.modules[moduleName].ready) {
+                await this.modules[moduleName].ready;
+            }
+
+            this.moduleStatus.set(moduleName, 'initialized');
+            console.log(`✅ Módulo ${moduleName} inicializado`);
+
+        } catch (error) {
+            console.error(`❌ Error inicializando módulo ${moduleName}:`, error);
+            this.moduleStatus.set(moduleName, 'error');
+        }
+    }
+
+    async waitForCriticalModules() {
+        const criticalModules = ['theme', 'sidebar'];
+        const criticalPromises = criticalModules
+            .filter(module => this.moduleStatus.get(module) === 'initialized')
+            .map(module => this.modules[module].ready);
+
+        await Promise.allSettled(criticalPromises);
+    }
+
+    setupGlobalEvents() {
+        // Eventos globales del documento
+        document.addEventListener('keydown', this.handleGlobalKeys.bind(this));
+
+        // Botones en el HTML para abrir popups
+        this.setupPopupTriggers();
+
+        // Exponer módulos globalmente para debugging
+        window.app = this;
+    }
+
+    setupPopupTriggers() {
+        // Botón de accesibilidad
+        const accessibilityBtn = document.getElementById('accessibility-btn');
+        if (accessibilityBtn && this.modules.popups) {
+            accessibilityBtn.addEventListener('click', () => {
+                this.modules.popups.showAccessibilityPopup();
+            });
+        }
+
+        // Botón de contacto
+        const contactBtn = document.getElementById('contact-btn');
+        if (contactBtn && this.modules.popups) {
+            contactBtn.addEventListener('click', () => {
+                this.modules.popups.showContactPopup();
+            });
+        }
+
+        // Botón de descargar CV
+        const downloadBtn = document.getElementById('download-cv-btn');
+        if (downloadBtn && this.modules.popups) {
+            downloadBtn.addEventListener('click', () => {
+                this.modules.popups.showDownloadPopup();
+            });
+        }
+
+        // Botones rápidos del sidebar
+        document.querySelectorAll('[data-action="accessibility"]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (this.modules.popups) {
+                    this.modules.popups.showAccessibilityPopup();
+                }
+            });
+        });
+
+        document.querySelectorAll('[data-action="contact"]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (this.modules.popups) {
+                    this.modules.popups.showContactPopup();
+                }
+            });
+        });
+    }
+
+    handleGlobalKeys(event) {
+        // Atajos globales de teclado
+        if (event.altKey) {
+            switch(event.key) {
+                case 'a': // Alt + A para accesibilidad
+                    event.preventDefault();
+                    if (this.modules.popups) this.modules.popups.showAccessibilityPopup();
+                    break;
+                case 'c': // Alt + C para contacto
+                    event.preventDefault();
+                    if (this.modules.popups) this.modules.popups.showContactPopup();
+                    break;
+                case 'd': // Alt + D para descargar CV
+                    event.preventDefault();
+                    if (this.modules.popups) this.modules.popups.showDownloadPopup();
+                    break;
+            }
+        }
+
+        if (event.ctrlKey && event.altKey) {
+            switch(event.key) {
+                case 'm':
+                    event.preventDefault();
+                    if (this.modules.sidebar) this.modules.sidebar.toggle();
+                    break;
+                case 't':
+                    event.preventDefault();
+                    if (this.modules.theme) this.modules.theme.cycleThemes();
+                    break;
+                case 'l':
+                    event.preventDefault();
+                    if (this.modules.language) this.modules.language.toggle();
+                    break;
+            }
+        }
+    }
+
+    // Métodos utilitarios
+    getModule(name) {
+        return this.modules[name];
+    }
+
+    isModuleLoaded(name) {
+        return this.moduleStatus.get(name) === 'initialized';
+    }
+
+    getLoadedModules() {
+        return Array.from(this.moduleStatus.entries())
+            .filter(([_, status]) => status === 'initialized')
+            .map(([name]) => name);
+    }
+
+    async loadModule(moduleName) {
+        if (this.moduleStatus.get(moduleName) === 'initialized') {
+            return this.modules[moduleName];
+        }
+
+        // Aquí podrías implementar carga dinámica de módulos
+        console.warn(`Carga dinámica no implementada para: ${moduleName}`);
+        return null;
+    }
+
+    destroy() {
+        // Cleanup de todos los módulos
+        Object.values(this.modules).forEach(module => {
+            if (module && typeof module.destroy === 'function') {
+                module.destroy();
+            }
+        });
+
+        this.modules = {};
+        this.moduleStatus.clear();
+    }
+}
+
+// Inicialización automática
+window.appController = new AppController();

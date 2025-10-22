@@ -26,6 +26,7 @@
 @use 'components/cards';
 @use 'components/forms';
 @use 'components/tags';
+@use 'components/accessibility-widget';
 
 // 5. PÁGINAS
 @use 'pages/home';
@@ -43,6 +44,7 @@
 @use 'themes/reading';
 @use 'themes/reduced-motion';
 @use 'themes/sepia';
+@use 'themes/combinations';
 
 /* ============================
    ESTILOS GLOBALES

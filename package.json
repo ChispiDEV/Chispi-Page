@@ -5,7 +5,7 @@
     "./*": "./*"
   },
   "scripts": {
-    "dev": "npm run build:dev && npx serve dist",
+    "dev": "npm run build:dev && npx serve dist/pages",
     "build": "npm run build:template && node scripts/build/adaptive-build.js",
     "build:dev": "npm run build:template && node scripts/build/adaptive-build.js",
     "build:prod": "npm run build:template && set NODE_ENV=production&& node scripts/build/adaptive-build.js",
