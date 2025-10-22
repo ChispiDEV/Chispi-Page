@@ -131,27 +131,108 @@ class ContentProcessor {
         if (!category) return '';
 
         let html = `
-            <div class="skills-section card pastel-${Object.keys(skills).indexOf(categoryKey) + 1}">
-                <h4 class="skill-category-title">${category[lang]}</h4>
-                <div class="skill-items">
-        `;
+        <div class="skills-section card pastel-${Object.keys(skills).indexOf(categoryKey) + 1}">
+            <h4 class="skill-category-title">${category[lang]}</h4>
+    `;
 
-        category.items.forEach(item => {
-            const tooltip = item.tooltip?.[lang] || item.name;
+        // Manejar categorías normales
+        if (category.items) {
+            html += '<div class="skill-items">';
+
+            category.items.forEach(item => {
+                const tooltip = item.tooltip?.[lang] || item.name;
+                const displayName = typeof item.name === 'object' ? item.name[lang] : item.name;
+
+                html += `
+                    <a href="#" class="skill-item" style="background-color: #${item.color};" 
+                       aria-label="${tooltip}">
+                        ${item.logo ? `<i class="devicon-${item.logo}-plain"></i>` : ''}
+                        <span>${displayName}</span>
+                    </a>
+                `;
+            });
+
+            html += '</div>';
+        }
+
+        // Manejar categorías con subsections (como want-to-learn)
+        if (category.subsections) {
+            html += '<div class="subsections-grid">';
+
+            Object.values(category.subsections).forEach(subsection => {
+                html += `
+                    <div class="subsection">
+                        <h5 class="subsection-title">${subsection[lang]}</h5>
+                        <div class="skill-items">
+                `;
+
+                subsection.items.forEach(item => {
+                    const tooltip = item.tooltip?.[lang] || item.name;
+                    html += `
+                        <a href="#" class="skill-item" style="background-color: #${item.color};" 
+                           aria-label="${tooltip}">
+                            ${item.logo ? `<i class="devicon-${item.logo}-plain"></i>` : ''}
+                            <span>${item.name}</span>
+                        </a>
+                    `;
+                });
+
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += '</div>';
+        }
+
+        html += '</div>';
+        return html;
+    }
+
+    generateAllSkills(lang) {
+        const skillsCategories = [
+            'languages',
+            'frameworks',
+            'data-visualization',
+            'development-tools',
+            'databases',
+            'ides',
+            'work-style',
+            'want-to-learn'
+        ];
+
+        let html = '<div class="skills-grid">';
+
+        skillsCategories.forEach(category => {
+            const categoryHTML = this.generateSkillsCategory(category, lang);
+            if (categoryHTML) {
+                html += categoryHTML;
+            }
+        });
+
+        html += '</div>';
+        return html;
+    }
+
+    generateFeaturedTech(lang) {
+        const featured = this.loadJSON('featured-tech.json');
+
+        if (!featured.featured) return '';
+
+        let html = '<div class="tech-main-grid">';
+
+        featured.featured.forEach(tech => {
+            const tooltip = tech.tooltip?.[lang] || tech.name;
             html += `
-                <a href="#" class="skill-item" style="background-color: #${item.color};" 
-                   aria-label="${tooltip}">
-                    ${item.logo ? `<i class="devicon-${item.logo}-plain"></i>` : ''}
-                    <span>${item.name}</span>
-                </a>
+                <div class="tech-item" title="${tooltip}">
+                    <i class="devicon-${tech.logo}-plain colored"></i>
+                    <span>${tech.name}</span>
+                </div>
             `;
         });
 
-        html += `
-                </div>
-            </div>
-        `;
-
+        html += '</div>';
         return html;
     }
 
@@ -164,21 +245,42 @@ class ContentProcessor {
 
         // Generar para ambos idiomas
         ['es', 'en'].forEach(lang => {
-            // Bio section
+            // 1. Secciones de contenido
             const bioHTML = this.generateBioSection(lang);
             writeFileSync(`${this.includesPath}/bio-${lang}.html`, bioHTML);
 
-            // Current projects
             const projectsHTML = this.generateCurrentProjects(lang);
             writeFileSync(`${this.includesPath}/current-projects-${lang}.html`, projectsHTML);
 
-            // Fun facts
             const funFactsHTML = this.generateFunFacts(lang);
             writeFileSync(`${this.includesPath}/fun-facts-${lang}.html`, funFactsHTML);
 
-            // Skills (ejemplo para una categoría)
-            const skillsHTML = this.generateSkillsCategory('languages', lang);
-            writeFileSync(`${this.includesPath}/skills-languages-${lang}.html`, skillsHTML);
+            // 2. Tecnologías principales
+            const featuredTechHTML = this.generateFeaturedTech(lang);
+            writeFileSync(`${this.includesPath}/featured-tech-${lang}.html`, featuredTechHTML);
+
+            // 3. Todas las categorías de skills
+            const skillsCategories = [
+                'languages',
+                'frameworks',
+                'data-visualization',
+                'development-tools',
+                'databases',
+                'ides',
+                'work-style',
+                'want-to-learn'
+            ];
+
+            skillsCategories.forEach(category => {
+                const skillsHTML = this.generateSkillsCategory(category, lang);
+                if (skillsHTML) {
+                    writeFileSync(`${this.includesPath}/skills-${category}-${lang}.html`, skillsHTML);
+                }
+            });
+
+            // 4. Skills completo (todas las categorías juntas)
+            const allSkillsHTML = this.generateAllSkills(lang);
+            writeFileSync(`${this.includesPath}/all-skills-${lang}.html`, allSkillsHTML);
         });
 
         console.log('✅ Includes generados automáticamente');

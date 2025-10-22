@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Chispi Page | Sobre mí</title>
   <meta name="description" content="Conoce más sobre Cristina (Chispi) - Desarrolladora, Diseñadora y Analista de Datos">
-
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
   <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="icon" href="/assets/icons/favicon.ico">
@@ -13,7 +12,6 @@
 <body>
 <!--# include file="../includes/components/navigation/navbar.html" -->
 
-<!-- Hero Section para About -->
 <section class="about-hero" data-theme-aware
          data-img-dark="/assets/img/sobre-mi-bg-dark.jpg"
          data-img-light="/assets/img/sobre-mi-bg-light.jpg">
@@ -29,336 +27,33 @@
   <section id="sobre-mi" class="section-padding">
     <div class="container max-width-lg">
 
-      <!-- Imagen y saludo -->
-      <div class="profile-header text-center mb-12">
-        <img src="/assets/img/foto-perfil.jpg" alt="Foto de Cristina"
-             class="profile-image">
-        <h2 class="section-title">🧑‍💻 Sobre mí</h2>
-        <p class="profile-greeting">👋 Soy Cristina — o Chispi, como me conocen muchos colegas. ¡Gracias por visitar mi página!</p>
+      <!--# include file="../includes/generated/bio-es.html" -->
+
+      <!-- 🔧 Habilidades COMPLETAS -->
+      <div class="grid-item grid-item-full">
+        <div class="card card-hoja">
+          <h3 class="section-subtitle">🔧 Habilidades</h3>
+          <!--# include file="../includes/generated/all-skills-es.html" -->
+        </div>
       </div>
 
-      <!-- Biografía y bootcamp -->
-      <div class="about-grid">
-
-        <div class="grid-item">
-          <div class="card card-sol">
-            <p>👩‍🔬 <strong>Bióloga y exprofesora</strong> especializada en <strong>análisis de datos</strong>. Algunas de mis herramientas favoritas:</p>
-            <ul class="skill-list">
-              <li>📊 <strong>Python, Pandas, SQL</strong></li>
-              <li>📄 <strong>LaTeX, Pandoc</strong></li>
-              <li>📈 <strong>Matplotlib, Seaborn, Power BI</strong></li>
-            </ul>
-          </div>
+      <!-- 🖥️ Tecnologías principales -->
+      <div class="grid-item">
+        <div class="card card-mar">
+          <h3 class="section-subtitle">🖥️ Tecnologías principales</h3>
+          <!--# include file="../includes/generated/featured-tech-es.html" -->
         </div>
-
-        <div class="grid-item">
-          <div class="card card-fuego">
-            <p>🍀 Recientemente completé un bootcamp de <strong>Análisis de Datos en IMMUNE Institute</strong>, trabajando en proyectos reales sobre:</p>
-            <ul class="skill-list">
-              <li>Machine Learning</li>
-              <li>Visualización de Datos</li>
-              <li>Análisis Avanzado</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="grid-item grid-item-full">
-          <div class="card card-coral">
-            <p>👀 Gracias a mi formación en <strong>bioquímica y educación</strong>, combino el razonamiento científico con la creatividad para resolver problemas complejos.</p>
-          </div>
-        </div>
-
-        <!-- 🔧 Habilidades -->
-        <div class="grid-item grid-item-full">
-          <div class="card card-hoja">
-            <h3 class="section-subtitle">🔧 Habilidades</h3>
-
-            <div class="skills-grid">
-
-              <!-- Lenguajes de programación -->
-              <div class="skills-section card pastel-1">
-                <h4 class="skill-category-title">Lenguajes de programación</h4>
-                <div class="skill-items">
-                  <a href="#" class="skill-item" style="background-color: #3776AB;" aria-label="Python - Lenguaje versátil, ideal para ciencia de datos, automatización y más">
-                    <i class="devicon-python-plain"></i>
-                    <span>Python</span>
-                  </a>
-                  <a href="#" class="skill-item" style="background-color: #FF6F00;" aria-label="SQL - Lenguaje para gestionar y consultar bases de datos relacionales">
-                    <i class="devicon-postgresql-plain"></i>
-                    <span>SQL</span>
-                  </a>
-                  <a href="#" class="skill-item" style="background-color: #E44D26;" aria-label="HTML - Estructura el contenido de las páginas web">
-                    <i class="devicon-html5-plain"></i>
-                    <span>HTML</span>
-                  </a>
-                  <a href="#" class="skill-item" style="background-color: #1572B6;" aria-label="CSS - Aplica estilos visuales a sitios web">
-                    <i class="devicon-css3-plain"></i>
-                    <span>CSS</span>
-                  </a>
-                  <a href="#" class="skill-item" style="background-color: #276DC3;" aria-label="R - Lenguaje usado en análisis estadístico y visualización de datos">
-                    <i class="devicon-r-plain"></i>
-                    <span>R</span>
-                  </a>
-                </div>
-              </div>
-
-              <!-- Frameworks y librerías -->
-              <div class="skills-section card pastel-2">
-                <h4 class="skill-category-title">Frameworks y librerías</h4>
-                <div class="skill-items">
-                  <a href="#" class="skill-item" style="background-color: #150458;" aria-label="Pandas - Librería para análisis y manipulación de datos">
-                    <i class="devicon-pandas-plain"></i>
-                    <span>Pandas</span>
-                  </a>
-                  <a href="#" class="skill-item" style="background-color: #013243;" aria-label="NumPy - Soporte para arrays y operaciones numéricas en Python">
-                    <i class="devicon-numpy-plain"></i>
-                    <span>NumPy</span>
-                  </a>
-                  <a href="#" class="skill-item" style="background-color: #8CAAE6;" aria-label="SciPy - Herramientas científicas y técnicas para Python">
-                    <i class="devicon-scipy-plain"></i>
-                    <span>SciPy</span>
-                  </a>
-                  <a href="#" class="skill-item" style="background-color: #11557C;" aria-label="Matplotlib - Librería para crear gráficos en 2D">
-                    <i class="devicon-matplotlib-plain"></i>
-                    <span>Matplotlib</span>
-                  </a>
-                  <a href="#" class="skill-item" style="background-color: #43BCCD;" aria-label="Seaborn - Visualización estadística basada en Matplotlib">
-                    <i class="devicon-python-plain"></i>
-                    <span>Seaborn</span>
-                  </a>
-                  <a href="#" class="skill-item" style="background-color: #F7931E;" aria-label="scikit-learn - Librería para machine learning en Python">
-                    <i class="devicon-scikit-learn-plain"></i>
-                    <span>scikit-learn</span>
-                  </a>
-                  <a href="#" class="skill-item" style="background-color: #0A9EDC;" aria-label="Pytest - Framework para testing automatizado en Python">
-                    <i class="devicon-python-plain"></i>
-                    <span>Pytest</span>
-                  </a>
-                </div>
-              </div>
-
-              <!-- Visualización de datos -->
-              <div class="skills-section card pastel-3">
-                <h4 class="skill-category-title">Visualización de datos</h4>
-                <div class="skill-items">
-                  <a href="#" class="skill-item" style="background-color: #F2C811;" aria-label="Power BI - Herramienta de Microsoft para dashboards y análisis visual">
-                    <i class="devicon-powerbi-plain"></i>
-                    <span>Power BI</span>
-                  </a>
-                  <a href="#" class="skill-item" style="background-color: #E97627;" aria-label="Tableau - Software potente para visualización interactiva de datos">
-                    <i class="devicon-tableau-plain"></i>
-                    <span>Tableau</span>
-                  </a>
-                </div>
-              </div>
-
-              <!-- Herramientas de desarrollo -->
-              <div class="skills-section card pastel-4">
-                <h4 class="skill-category-title">Herramientas de desarrollo</h4>
-                <div class="skill-items">
-                  <a href="#" class="skill-item" style="background-color: #F37626;" aria-label="Jupyter Notebook - Entorno interactivo para notebooks de datos y código">
-                    <i class="devicon-jupyter-plain"></i>
-                    <span>Jupyter Notebook</span>
-                  </a>
-                  <a href="#" class="skill-item" style="background-color: #F9AB00;" aria-label="Google Colab - Jupyter notebooks en la nube con soporte para GPU">
-                    <i class="devicon-googlecolab-plain"></i>
-                    <span>Google Colab</span>
-                  </a>
-                  <a href="#" class="skill-item" style="background-color: #F05032;" aria-label="Git - Sistema de control de versiones distribuido">
-                    <i class="devicon-git-plain"></i>
-                    <span>Git</span>
-                  </a>
-                  <a href="#" class="skill-item" style="background-color: #44A833;" aria-label="Anaconda - Distribución de Python orientada a ciencia de datos">
-                    <i class="devicon-anaconda-plain"></i>
-                    <span>Anaconda</span>
-                  </a>
-                  <a href="#" class="skill-item" style="background-color: #008080;" aria-label="LaTeX - Sistema de tipografía para documentos técnicos">
-                    <i class="devicon-latex-plain"></i>
-                    <span>LaTeX</span>
-                  </a>
-                  <a href="#" class="skill-item" style="background-color: #025B99;" aria-label="Pandoc - Conversor universal de formatos de documentos">
-                    <i class="devicon-pandoc-plain"></i>
-                    <span>Pandoc</span>
-                  </a>
-                  <a href="#" class="skill-item" style="background-color: #000000;" aria-label="JetBrains Rider - IDE potente para desarrollo multiplataforma .NET">
-                    <i class="devicon-jetbrains-plain"></i>
-                    <span>JetBrains Rider</span>
-                  </a>
-                </div>
-              </div>
-
-              <!-- Bases de datos -->
-              <div class="skills-section card pastel-5">
-                <h4 class="skill-category-title">Bases de datos</h4>
-                <div class="skill-items">
-                  <a href="#" class="skill-item" style="background-color: #4479A1;" aria-label="MySQL - Sistema de base de datos relacional popular y de código abierto">
-                    <i class="devicon-mysql-plain"></i>
-                    <span>MySQL</span>
-                  </a>
-                  <a href="#" class="skill-item" style="background-color: #F80000;" aria-label="OracleSQL - Sistema de bases de datos empresarial de Oracle">
-                    <i class="devicon-oracle-plain"></i>
-                    <span>OracleSQL</span>
-                  </a>
-                </div>
-              </div>
-
-              <!-- IDE favoritos -->
-              <div class="skills-section card pastel-6">
-                <h4 class="skill-category-title">IDE favoritos</h4>
-                <div class="skill-items">
-                  <a href="#" class="skill-item" style="background-color: #007ACC;" aria-label="VS Code - Editor de código moderno y personalizable">
-                    <i class="devicon-visualstudiocode-plain"></i>
-                    <span>VS Code</span>
-                  </a>
-                  <a href="#" class="skill-item" style="background-color: #F37626;" aria-label="JupyterLab - Interfaz de desarrollo extensible basada en notebooks">
-                    <i class="devicon-jupyter-plain"></i>
-                    <span>JupyterLab</span>
-                  </a>
-                  <a href="#" class="skill-item" style="background-color: #75AADB;" aria-label="RStudio - IDE dedicado para desarrollo en R">
-                    <i class="devicon-rstudio-plain"></i>
-                    <span>RStudio</span>
-                  </a>
-                  <a href="#" class="skill-item" style="background-color: #000000;" aria-label="JetBrains Rider - IDE para .NET, desarrollo web y multiplataforma">
-                    <i class="devicon-jetbrains-plain"></i>
-                    <span>JetBrains Rider</span>
-                  </a>
-                </div>
-              </div>
-
-              <!-- Estilo de trabajo -->
-              <div class="skills-section card pastel-7">
-                <h4 class="skill-category-title">Estilo de trabajo</h4>
-                <div class="skill-items">
-                  <a href="#" class="skill-item" style="background-color: #4CAF50;" aria-label="Documentación clara - Escribir código bien documentado facilita el trabajo en equipo">
-                    <span>📚 Documentación clara</span>
-                  </a>
-                  <a href="#" class="skill-item" style="background-color: #F7761F;" aria-label="Visual Thinking - Usar esquemas e ilustraciones para organizar ideas">
-                    <span>🎨 Visual Thinking</span>
-                  </a>
-                  <a href="#" class="skill-item" style="background-color: #00BFA6;" aria-label="Colaboración abierta - Participar activamente con otros en el desarrollo">
-                    <span>🤝 Colaboración abierta</span>
-                  </a>
-                </div>
-              </div>
-
-              <!-- Deseo aprender -->
-              <div class="skills-section card pastel-8">
-                <h4 class="skill-category-title">Deseo aprender</h4>
-
-                <div class="subsections-grid">
-                  <!-- Lenguajes -->
-                  <div class="subsection">
-                    <h5 class="subsection-title">Lenguajes</h5>
-                    <div class="skill-items">
-                      <a href="#" class="skill-item" style="background-color: #F7DF1E;" aria-label="JavaScript - Lenguaje esencial para desarrollo web frontend">
-                        <i class="devicon-javascript-plain"></i>
-                        <span>JavaScript</span>
-                      </a>
-                      <a href="#" class="skill-item" style="background-color: #3178C6;" aria-label="TypeScript - JavaScript con tipado estático opcional">
-                        <i class="devicon-typescript-plain"></i>
-                        <span>TypeScript</span>
-                      </a>
-                    </div>
-                  </div>
-
-                  <!-- Cloud Computing -->
-                  <div class="subsection">
-                    <h5 class="subsection-title">Cloud Computing</h5>
-                    <div class="skill-items">
-                      <a href="#" class="skill-item" style="background-color: #FF9900;" aria-label="AWS - Servicios de computación en la nube de Amazon">
-                        <i class="devicon-amazonwebservices-plain"></i>
-                        <span>AWS</span>
-                      </a>
-                      <a href="#" class="skill-item" style="background-color: #4285F4;" aria-label="Google Cloud - Infraestructura en la nube de Google">
-                        <i class="devicon-googlecloud-plain"></i>
-                        <span>Google Cloud</span>
-                      </a>
-                    </div>
-                  </div>
-
-                  <!-- Frameworks y herramientas -->
-                  <div class="subsection">
-                    <h5 class="subsection-title">Frameworks y herramientas</h5>
-                    <div class="skill-items">
-                      <a href="#" class="skill-item" style="background-color: #4B8BBE;" aria-label="NetworkX - Librería para análisis de grafos en Python">
-                        <i class="devicon-python-plain"></i>
-                        <span>NetworkX</span>
-                      </a>
-                      <a href="#" class="skill-item" style="background-color: #61DAFB;" aria-label="React - Librería para construir interfaces de usuario">
-                        <i class="devicon-react-plain"></i>
-                        <span>React</span>
-                      </a>
-                      <a href="#" class="skill-item" style="background-color: #38B2AC;" aria-label="Tailwind CSS - Framework CSS de utilidad para diseño rápido">
-                        <i class="devicon-tailwindcss-plain"></i>
-                        <span>Tailwind CSS</span>
-                      </a>
-                      <a href="#" class="skill-item" style="background-color: #646CFF;" aria-label="Vite - Bundler ultrarrápido para desarrollo frontend moderno">
-                        <i class="devicon-vite-plain"></i>
-                        <span>Vite</span>
-                      </a>
-                      <a href="#" class="skill-item" style="background-color: #000000;" aria-label="Next.js - Framework React para aplicaciones web estáticas y dinámicas">
-                        <i class="devicon-nextjs-plain"></i>
-                        <span>Next.js</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        <!-- 🖥️ Tecnologías principales -->
-        <div class="grid-item">
-          <div class="card card-mar">
-            <h3 class="section-subtitle">🖥️ Tecnologías principales</h3>
-            <div class="tech-main-grid">
-              <div class="tech-item" title="Python - Lenguaje de programación versátil para ciencia de datos y automatización">
-                <i class="devicon-python-plain colored"></i>
-                <span>Python</span>
-              </div>
-              <div class="tech-item" title="LaTeX - Sistema de tipografía para documentos científicos y técnicos">
-                <i class="devicon-latex-plain colored"></i>
-                <span>LaTeX</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 🔥 Qué estoy haciendo -->
-        <div class="grid-item">
-          <div class="card card-cielo">
-            <h3 class="section-subtitle">🔥 ¿Qué estoy haciendo ahora?</h3>
-            <ul class="skill-list">
-              <li>💻 Mejorando habilidades en dashboards interactivos y modelado de datos.</li>
-              <li>📖 Explorando análisis de redes sociales con <strong>NetworkX</strong>.</li>
-              <li>🤝 Abierta a colaborar en proyectos de datos o automatización.</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- 🎉 Curiosidades -->
-        <div class="grid-item grid-item-full">
-          <div class="card card-uva">
-            <h3 class="section-subtitle">🎉 Curiosidades</h3>
-            <ul class="skill-list">
-              <li>🎮 Más de 500 horas en Stardew Valley</li>
-              <li>✈️ Soporte técnico en Riot Games</li>
-              <li>🐶 Mamá perruna de <strong>Riven</strong> y <strong>Haru</strong></li>
-              <li>🎨 Apasionada del tejido y el nail art</li>
-              <li>🌍 Estudiando japonés para visitar <strong>Kumamoto</strong> (¡hogar de las estatuas de One Piece!)</li>
-            </ul>
-          </div>
-        </div>
-
       </div>
+
+      <!--# include file="../includes/generated/current-projects-es.html" -->
+
+      <!--# include file="../includes/generated/fun-facts-es.html" -->
+
     </div>
   </section>
 </main>
 
 <!--# include file="../includes/global/footer.html" -->
-
 <script src="/assets/js/app.bundle.js"></script>
 </body>
 </html>
