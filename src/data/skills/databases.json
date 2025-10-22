@@ -1,0 +1,24 @@
+{
+  "es": "Bases de datos",
+  "en": "Databases",
+  "items": [
+    {
+      "name": "MySQL",
+      "logo": "mysql",
+      "color": "4479A1",
+      "tooltip": {
+        "es": "Sistema de base de datos relacional popular y de código abierto",
+        "en": "Popular open-source relational database system"
+      }
+    },
+    {
+      "name": "OracleSQL",
+      "logo": "oracle",
+      "color": "F80000",
+      "tooltip": {
+        "es": "Sistema de bases de datos empresarial de Oracle",
+        "en": "Proprietary relational database management system by Oracle"
+      }
+    }
+  ]
+}

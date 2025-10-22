@@ -1,0 +1,105 @@
+{
+  "es": "Deseo aprender",
+  "en": "Want to Learn",
+  "subsections": {
+    "languages": {
+      "es": "Lenguajes",
+      "en": "Languages",
+      "items": [
+        {
+          "name": "JavaScript",
+          "logo": "javascript",
+          "color": "F7DF1E",
+          "tooltip": {
+            "es": "Lenguaje esencial para desarrollo web frontend",
+            "en": "Versatile scripting language for web development"
+          }
+        },
+        {
+          "name": "TypeScript",
+          "logo": "typescript",
+          "color": "3178C6",
+          "tooltip": {
+            "es": "JavaScript con tipado estático opcional",
+            "en": "Typed superset of JavaScript that compiles to plain JavaScript"
+          }
+        }
+      ]
+    },
+    "cloud": {
+      "es": "Cloud Computing",
+      "en": "Cloud Computing",
+      "items": [
+        {
+          "name": "AWS",
+          "logo": "amazonaws",
+          "color": "FF9900",
+          "tooltip": {
+            "es": "Servicios de computación en la nube de Amazon",
+            "en": "Amazon's cloud computing platform"
+          }
+        },
+        {
+          "name": "Google Cloud",
+          "logo": "googlecloud",
+          "color": "4285F4",
+          "tooltip": {
+            "es": "Infraestructura en la nube de Google",
+            "en": "Google's suite of cloud computing services"
+          }
+        }
+      ]
+    },
+    "frameworks": {
+      "es": "Frameworks y herramientas",
+      "en": "Frameworks and Tools",
+      "items": [
+        {
+          "name": "NetworkX",
+          "logo": "python",
+          "color": "4B8BBE",
+          "tooltip": {
+            "es": "Librería para análisis de grafos en Python",
+            "en": "Python library for graph-based data analysis"
+          }
+        },
+        {
+          "name": "React",
+          "logo": "react",
+          "color": "61DAFB",
+          "tooltip": {
+            "es": "Librería para construir interfaces de usuario",
+            "en": "JavaScript library for building user interfaces"
+          }
+        },
+        {
+          "name": "Tailwind CSS",
+          "logo": "tailwindcss",
+          "color": "38B2AC",
+          "tooltip": {
+            "es": "Framework CSS de utilidad para diseño rápido",
+            "en": "Utility-first CSS framework for rapid UI development"
+          }
+        },
+        {
+          "name": "Vite",
+          "logo": "vite",
+          "color": "646CFF",
+          "tooltip": {
+            "es": "Bundler ultrarrápido para desarrollo frontend moderno",
+            "en": "Lightning-fast frontend build tool"
+          }
+        },
+        {
+          "name": "Next.js",
+          "logo": "nextdotjs",
+          "color": "000000",
+          "tooltip": {
+            "es": "Framework React para aplicaciones web estáticas y dinámicas",
+            "en": "React framework for building fast and SEO-friendly web apps"
+          }
+        }
+      ]
+    }
+  }
+}

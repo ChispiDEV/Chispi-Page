@@ -1,0 +1,69 @@
+{
+  "es": "Herramientas de desarrollo",
+  "en": "Development Tools",
+  "items": [
+    {
+      "name": "Jupyter Notebook",
+      "logo": "jupyter",
+      "color": "F37626",
+      "tooltip": {
+        "es": "Entorno interactivo para notebooks de datos y código",
+        "en": "Web-based tool for interactive code, visualizations, and narrative text"
+      }
+    },
+    {
+      "name": "Google Colab",
+      "logo": "googlecolab",
+      "color": "F9AB00",
+      "tooltip": {
+        "es": "Jupyter notebooks en la nube con soporte para GPU",
+        "en": "Cloud-based Jupyter environment with free GPU support"
+      }
+    },
+    {
+      "name": "Git",
+      "logo": "git",
+      "color": "F05032",
+      "tooltip": {
+        "es": "Sistema de control de versiones distribuido",
+        "en": "Version control system for tracking code changes"
+      }
+    },
+    {
+      "name": "Anaconda",
+      "logo": "anaconda",
+      "color": "44A833",
+      "tooltip": {
+        "es": "Distribución de Python orientada a ciencia de datos",
+        "en": "Python distribution for scientific computing and machine learning"
+      }
+    },
+    {
+      "name": "LaTeX",
+      "logo": "latex",
+      "color": "008080",
+      "tooltip": {
+        "es": "Sistema de tipografía para documentos técnicos",
+        "en": "Typesetting system for producing scientific documents"
+      }
+    },
+    {
+      "name": "Pandoc",
+      "logo": "pandoc",
+      "color": "025B99",
+      "tooltip": {
+        "es": "Conversor universal de formatos de documentos",
+        "en": "Tool to convert between document formats (Markdown, LaTeX, HTML, etc.)"
+      }
+    },
+    {
+      "name": "JetBrains Rider",
+      "logo": "jetbrains",
+      "color": "000000",
+      "tooltip": {
+        "es": "IDE potente para desarrollo multiplataforma .NET",
+        "en": "Cross-platform .NET IDE developed by JetBrains"
+      }
+    }
+  ]
+}

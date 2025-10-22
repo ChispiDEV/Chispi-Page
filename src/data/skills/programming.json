@@ -1,0 +1,51 @@
+{
+  "es": "Lenguajes de programación",
+  "en": "Programming Languages",
+  "items": [
+    {
+      "name": "Python",
+      "logo": "python",
+      "color": "3776AB",
+      "tooltip": {
+        "es": "Lenguaje versátil, ideal para ciencia de datos, automatización y más",
+        "en": "High-level programming language ideal for data analysis and scripting"
+      }
+    },
+    {
+      "name": "SQL",
+      "logo": "postgresql",
+      "color": "FF6F00",
+      "tooltip": {
+        "es": "Lenguaje para gestionar y consultar bases de datos relacionales",
+        "en": "Language used to manage and query relational databases"
+      }
+    },
+    {
+      "name": "HTML",
+      "logo": "html5",
+      "color": "E44D26",
+      "tooltip": {
+        "es": "Estructura el contenido de las páginas web",
+        "en": "Standard language for creating web pages"
+      }
+    },
+    {
+      "name": "CSS",
+      "logo": "css3",
+      "color": "1572B6",
+      "tooltip": {
+        "es": "Aplica estilos visuales a sitios web",
+        "en": "Stylesheet language used to design the appearance of web content"
+      }
+    },
+    {
+      "name": "R",
+      "logo": "r",
+      "color": "276DC3",
+      "tooltip": {
+        "es": "Lenguaje usado en análisis estadístico y visualización de datos",
+        "en": "Statistical computing language used for data analysis and visualization"
+      }
+    }
+  ]
+}

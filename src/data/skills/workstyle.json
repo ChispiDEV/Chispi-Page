@@ -1,0 +1,39 @@
+{
+  "es": "Estilo de trabajo",
+  "en": "Work Style",
+  "items": [
+    {
+      "name": {
+        "es": "📚 Documentación clara",
+        "en": "📚 Clear Documentation"
+      },
+      "color": "4CAF50",
+      "tooltip": {
+        "es": "Escribir código bien documentado facilita el trabajo en equipo",
+        "en": "Writing concise and understandable technical documentation"
+      }
+    },
+    {
+      "name": {
+        "es": "🎨 Visual Thinking",
+        "en": "🎨 Visual Thinking"
+      },
+      "color": "F7761F",
+      "tooltip": {
+        "es": "Usar esquemas e ilustraciones para organizar ideas",
+        "en": "Using diagrams and visual tools to conceptualize problems and solutions"
+      }
+    },
+    {
+      "name": {
+        "es": "🤝 Colaboración abierta",
+        "en": "🤝 Open Collaboration"
+      },
+      "color": "00BFA6",
+      "tooltip": {
+        "es": "Participar activamente con otros en el desarrollo",
+        "en": "Working in transparent, inclusive, and communicative environments"
+      }
+    }
+  ]
+}

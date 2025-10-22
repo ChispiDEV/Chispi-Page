@@ -1,5 +1,5 @@
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
-import { dirname } from 'path';
+import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'fs';
+import { join } from 'path';
 
 class ContentProcessor {
     constructor() {
@@ -7,32 +7,89 @@ class ContentProcessor {
         this.includesPath = 'src/includes/generated';
     }
 
-    loadJSON(file) {
+    loadJSON(filePath) {
         try {
-            const content = readFileSync(`${this.dataPath}/${file}`, 'utf8');
+            const content = readFileSync(filePath, 'utf8');
             return JSON.parse(content);
         } catch (error) {
-            console.error(`❌ Error cargando ${file}:`, error.message);
+            console.error(`❌ Error cargando ${filePath}:`, error.message);
+            return null;
+        }
+    }
+
+    loadAllSkills() {
+        const skillsPath = join(this.dataPath, 'skills');
+        const skills = {};
+
+        try {
+            const files = readdirSync(skillsPath);
+
+            files.forEach(file => {
+                if (file.endsWith('.json')) {
+                    const category = file.replace('.json', '');
+                    const filePath = join(skillsPath, file);
+                    const data = this.loadJSON(filePath);
+
+                    if (data) {
+                        skills[category] = data;
+                    }
+                }
+            });
+
+            console.log(`✅ Cargadas ${Object.keys(skills).length} categorías de skills`);
+            return skills;
+
+        } catch (error) {
+            console.error('❌ Error cargando skills:', error.message);
+            return {};
+        }
+    }
+
+    loadContent() {
+        const contentPath = join(this.dataPath, 'content');
+        const content = {};
+
+        try {
+            const files = readdirSync(contentPath);
+
+            files.forEach(file => {
+                if (file.endsWith('.json')) {
+                    const section = file.replace('.json', '').replace('-content', '');
+                    const filePath = join(contentPath, file);
+                    const data = this.loadJSON(filePath);
+
+                    if (data) {
+                        content[section] = data;
+                    }
+                }
+            });
+
+            console.log(`✅ Cargadas ${Object.keys(content).length} secciones de contenido`);
+            return content;
+
+        } catch (error) {
+            console.error('❌ Error cargando contenido:', error.message);
             return {};
         }
     }
 
     generateBioSection(lang) {
-        const content = this.loadJSON('content.json');
-        const bio = content.about?.[lang]?.bio;
+        const content = this.loadContent();
+        const about = content.about;
 
-        if (!bio) return '';
+        if (!about?.[lang]?.bio) {
+            console.log(`⚠️  No hay datos de bio para ${lang}`);
+            return '<!-- Bio section no disponible -->';
+        }
+
+        const bio = about[lang].bio;
 
         let html = `
-            <!-- Imagen y saludo -->
             <div class="profile-header text-center mb-12">
-                <img src="/assets/img/foto-perfil.jpg" alt="${lang === 'es' ? 'Foto de Cristina' : 'Photo of Cristina'}"
-                     class="profile-image">
+                <img src="/assets/img/foto-perfil.jpg" alt="${lang === 'es' ? 'Foto de Cristina' : 'Photo of Cristina'}" class="profile-image">
                 <h2 class="section-title">🧑‍💻 ${bio.title}</h2>
                 <p class="profile-greeting">${bio.greeting}</p>
             </div>
-
-            <!-- Biografía -->
             <div class="about-grid">
         `;
 
@@ -56,7 +113,6 @@ class ContentProcessor {
             `;
         });
 
-        // Sección combinada
         html += `
                 <div class="grid-item grid-item-full">
                     <div class="card card-coral">
@@ -73,10 +129,13 @@ class ContentProcessor {
     }
 
     generateCurrentProjects(lang) {
-        const content = this.loadJSON('content.json');
-        const projects = content.about?.[lang]?.currentProjects;
+        const content = this.loadContent();
+        const projects = content.projects?.[lang];
 
-        if (!projects) return '';
+        if (!projects) {
+            console.log(`⚠️  No hay datos de proyectos para ${lang}`);
+            return '<!-- Projects section no disponible -->';
+        }
 
         let html = `
             <div class="grid-item">
@@ -99,10 +158,13 @@ class ContentProcessor {
     }
 
     generateFunFacts(lang) {
-        const content = this.loadJSON('content.json');
-        const funFacts = content.about?.[lang]?.funFacts;
+        const content = this.loadContent();
+        const funFacts = content.funfacts?.[lang];
 
-        if (!funFacts) return '';
+        if (!funFacts) {
+            console.log(`⚠️  No hay datos de curiosidades para ${lang}`);
+            return '<!-- Fun facts section no disponible -->';
+        }
 
         let html = `
             <div class="grid-item grid-item-full">
@@ -125,15 +187,18 @@ class ContentProcessor {
     }
 
     generateSkillsCategory(categoryKey, lang) {
-        const skills = this.loadJSON('skills.json');
+        const skills = this.loadAllSkills();
         const category = skills[categoryKey];
 
-        if (!category) return '';
+        if (!category) {
+            console.log(`⚠️  No hay datos para categoría ${categoryKey}`);
+            return '';
+        }
 
         let html = `
-        <div class="skills-section card pastel-${Object.keys(skills).indexOf(categoryKey) + 1}">
-            <h4 class="skill-category-title">${category[lang]}</h4>
-    `;
+            <div class="skills-section card pastel-${Object.keys(skills).indexOf(categoryKey) + 1}">
+                <h4 class="skill-category-title">${category[lang]}</h4>
+        `;
 
         // Manejar categorías normales
         if (category.items) {
@@ -155,7 +220,7 @@ class ContentProcessor {
             html += '</div>';
         }
 
-        // Manejar categorías con subsections (como want-to-learn)
+        // Manejar categorías con subsections
         if (category.subsections) {
             html += '<div class="subsections-grid">';
 
@@ -192,14 +257,8 @@ class ContentProcessor {
 
     generateAllSkills(lang) {
         const skillsCategories = [
-            'languages',
-            'frameworks',
-            'data-visualization',
-            'development-tools',
-            'databases',
-            'ides',
-            'work-style',
-            'want-to-learn'
+            'programming', 'frameworks', 'visualization',
+            'tools', 'databases', 'ides', 'workstyle', 'learning'
         ];
 
         let html = '<div class="skills-grid">';
@@ -216,9 +275,12 @@ class ContentProcessor {
     }
 
     generateFeaturedTech(lang) {
-        const featured = this.loadJSON('featured-tech.json');
+        const featured = this.loadJSON(join(this.dataPath, 'featured-tech.json'));
 
-        if (!featured.featured) return '';
+        if (!featured?.featured) {
+            console.log('⚠️  No hay tecnologías destacadas');
+            return '<!-- Featured tech no disponible -->';
+        }
 
         let html = '<div class="tech-main-grid">';
 
@@ -238,59 +300,68 @@ class ContentProcessor {
 
     // Generar todos los includes
     generateAllIncludes() {
-        // Crear directorio si no existe
+        // Crear directorios si no existen
         if (!existsSync(this.includesPath)) {
             mkdirSync(this.includesPath, { recursive: true });
         }
+        if (!existsSync(join(this.dataPath, 'content'))) {
+            mkdirSync(join(this.dataPath, 'content'), { recursive: true });
+        }
+        if (!existsSync(join(this.dataPath, 'skills'))) {
+            mkdirSync(join(this.dataPath, 'skills'), { recursive: true });
+        }
+
+        console.log('🚀 Generando includes...');
 
         // Generar para ambos idiomas
         ['es', 'en'].forEach(lang => {
-            // 1. Secciones de contenido
-            const bioHTML = this.generateBioSection(lang);
-            writeFileSync(`${this.includesPath}/bio-${lang}.html`, bioHTML);
+            console.log(`🌐 Procesando idioma: ${lang}`);
 
-            const projectsHTML = this.generateCurrentProjects(lang);
-            writeFileSync(`${this.includesPath}/current-projects-${lang}.html`, projectsHTML);
+            try {
+                // 1. Secciones de contenido
+                const bioHTML = this.generateBioSection(lang);
+                writeFileSync(`${this.includesPath}/bio-${lang}.html`, bioHTML);
+                console.log(`   ✅ bio-${lang}.html generado`);
 
-            const funFactsHTML = this.generateFunFacts(lang);
-            writeFileSync(`${this.includesPath}/fun-facts-${lang}.html`, funFactsHTML);
+                const projectsHTML = this.generateCurrentProjects(lang);
+                writeFileSync(`${this.includesPath}/current-projects-${lang}.html`, projectsHTML);
+                console.log(`   ✅ current-projects-${lang}.html generado`);
 
-            // 2. Tecnologías principales
-            const featuredTechHTML = this.generateFeaturedTech(lang);
-            writeFileSync(`${this.includesPath}/featured-tech-${lang}.html`, featuredTechHTML);
+                const funFactsHTML = this.generateFunFacts(lang);
+                writeFileSync(`${this.includesPath}/fun-facts-${lang}.html`, funFactsHTML);
+                console.log(`   ✅ fun-facts-${lang}.html generado`);
 
-            // 3. Todas las categorías de skills
-            const skillsCategories = [
-                'languages',
-                'frameworks',
-                'data-visualization',
-                'development-tools',
-                'databases',
-                'ides',
-                'work-style',
-                'want-to-learn'
-            ];
+                // 2. Tecnologías principales
+                const featuredTechHTML = this.generateFeaturedTech(lang);
+                writeFileSync(`${this.includesPath}/featured-tech-${lang}.html`, featuredTechHTML);
+                console.log(`   ✅ featured-tech-${lang}.html generado`);
 
-            skillsCategories.forEach(category => {
-                const skillsHTML = this.generateSkillsCategory(category, lang);
-                if (skillsHTML) {
-                    writeFileSync(`${this.includesPath}/skills-${category}-${lang}.html`, skillsHTML);
-                }
-            });
+                // 3. Skills individuales
+                const skillsCategories = ['programming', 'frameworks', 'visualization', 'tools', 'databases', 'ides', 'workstyle', 'learning'];
 
-            // 4. Skills completo (todas las categorías juntas)
-            const allSkillsHTML = this.generateAllSkills(lang);
-            writeFileSync(`${this.includesPath}/all-skills-${lang}.html`, allSkillsHTML);
+                skillsCategories.forEach(category => {
+                    const skillsHTML = this.generateSkillsCategory(category, lang);
+                    if (skillsHTML) {
+                        writeFileSync(`${this.includesPath}/skills-${category}-${lang}.html`, skillsHTML);
+                        console.log(`   ✅ skills-${category}-${lang}.html generado`);
+                    }
+                });
+
+                // 4. Skills completo
+                const allSkillsHTML = this.generateAllSkills(lang);
+                writeFileSync(`${this.includesPath}/all-skills-${lang}.html`, allSkillsHTML);
+                console.log(`   ✅ all-skills-${lang}.html generado`);
+
+            } catch (error) {
+                console.error(`❌ Error procesando ${lang}:`, error.message);
+            }
         });
 
-        console.log('✅ Includes generados automáticamente');
+        console.log('🎉 Includes generados automáticamente');
+        console.log('📍 Ubicación:', this.includesPath);
     }
 }
 
-// Ejecutar si es llamado directamente
-if (import.meta.url === `file://${process.argv[1]}`) {
-    const processor = new ContentProcessor();
-    processor.generateAllIncludes();
-}
-
-export default ContentProcessor;
+// Ejecutar
+const processor = new ContentProcessor();
+processor.generateAllIncludes();

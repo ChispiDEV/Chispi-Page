@@ -1,0 +1,42 @@
+{
+  "es": "IDE favoritos",
+  "en": "Favorite IDEs",
+  "items": [
+    {
+      "name": "VS Code",
+      "logo": "visualstudiocode",
+      "color": "007ACC",
+      "tooltip": {
+        "es": "Editor de código moderno y personalizable",
+        "en": "Lightweight code editor with powerful extensions and Git integration"
+      }
+    },
+    {
+      "name": "JupyterLab",
+      "logo": "jupyter",
+      "color": "F37626",
+      "tooltip": {
+        "es": "Interfaz de desarrollo extensible basada en notebooks",
+        "en": "Next-generation interface for Jupyter Notebooks"
+      }
+    },
+    {
+      "name": "RStudio",
+      "logo": "rstudio",
+      "color": "75AADB",
+      "tooltip": {
+        "es": "IDE dedicado para desarrollo en R",
+        "en": "IDE for R and Python focused on data science workflows"
+      }
+    },
+    {
+      "name": "JetBrains Rider",
+      "logo": "jetbrains",
+      "color": "000000",
+      "tooltip": {
+        "es": "IDE para .NET, desarrollo web y multiplataforma",
+        "en": "Advanced IDE for .NET development"
+      }
+    }
+  ]
+}
