@@ -5,9 +5,6 @@
     "./*": "./*"
   },
   "scripts": {
-    "organize": "node scripts/organize-scripts.js",
-    "cleanup": "node scripts/cleanup-organization.js",
-
     "dev": "npm run build:dev && npx serve dist",
     "build": "npm run build:template && node scripts/build/adaptive-build.js",
     "build:dev": "npm run build:template && node scripts/build/adaptive-build.js",
@@ -20,21 +17,21 @@
     "check-debug": "node scripts/utils/check-structure-debug.js",
     "verify": "node scripts/utils/verify-functionality.js",
     "diagnose": "node scripts/utils/diagnose.js",
-    "full-check": "npm run check-structure && npm run verify",
+    "debug-paths": "node scripts/utils/debug-paths.js",
 
     "audit": "node scripts/audit/auditor-cli.js",
     "audit:fix": "node scripts/audit/fixers/auto-fixer.js",
     "audit:html": "node scripts/audit/analyzers/html-analyzer.js",
     "audit:css": "node scripts/audit/analyzers/css-analyzer.js",
     "audit:js": "node scripts/audit/analyzers/js-analyzer.js",
-    "audit:report": "node scripts/audit/core/report-generator.js",
 
     "test": "node scripts/test/test-runner.js",
-    "test:build": "npm run build:dev && npm run test",
+    "test:quick": "node scripts/test/quick-check.js",
+    "test:html": "node scripts/test/html-validator.js",
 
-    "deploy": "node scripts/deploy/deploy.js",
+    "deploy": "node scripts/utils/deploy.js",
     "clean": "rm -rf dist logs",
-    "analyze": "node scripts/analyze/analyze-build.js"
+    "organize": "node scripts/utils/smart-organize.js"
   },
   "dependencies": {
     "fs-extra": "^11.3.2",

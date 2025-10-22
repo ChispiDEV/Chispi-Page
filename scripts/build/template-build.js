@@ -1,5 +1,5 @@
 // scripts/build/template-build.js
-import TemplateProcessor from '../templates/template-processor.js';
+import TemplateProcessor from './template-processor.js';
 import { readdirSync, existsSync, mkdirSync } from 'fs';
 import { join, dirname } from 'path';
 

@@ -1,13 +1,26 @@
 /* ============================
-   TEMA DISLEXIA (Lectura fácil)
+   TEMA DISLEXIA (Lectura fácil) - OPTIMIZADO
    ============================ */
 
 [data-theme="dyslexia"] {
-  // Fuentes específicas para dislexia
+  // ========== FUENTES Y TIPOGRAFÍA ==========
   --font-family-base: 'OpenDyslexic', 'Comic Sans MS', sans-serif;
   --font-family-heading: 'OpenDyslexic', 'Comic Sans MS', sans-serif;
 
-  // Colores suaves
+  // ========== COLORES BASE SUAVES ==========
+  --color-primary: #4a6572;
+  --color-primary-rgb: 74, 101, 114;
+  --color-secondary: #556b78;
+  --color-secondary-rgb: 85, 107, 120;
+  --color-success: #2d5a4d;
+  --color-success-rgb: 45, 90, 77;
+  --color-danger: #6d4c5a;
+  --color-danger-rgb: 109, 76, 90;
+  --color-warning: #756a4c;
+  --color-warning-rgb: 117, 106, 76;
+  --color-info: #3a5a6d;
+  --color-info-rgb: 58, 90, 109;
+
   --color-bg: #fefefe;
   --color-bg-alt: #f6f6f6;
   --color-bg-card: #ffffff;
@@ -15,11 +28,104 @@
   --color-text-muted: #666666;
   --color-text-light: #999999;
 
-  // Espaciado aumentado para lectura
+  // ========== ESPACIADO Y TIPOGRAFÍA ==========
   --font-size-base: 1.125rem;
   --line-height-base: 1.8;
+  --letter-spacing: 0.05em;
+  --spacing-4: 1.25rem;
+  --spacing-5: 1.75rem;
 
-  // Estilos específicos para dislexia
+  // ========== CAJAS TEMÁTICAS (DISLEXIA) ==========
+  // Colores suaves pero distinguibles
+  --box-info-bg: #e8f1f5;
+  --box-info-text: #2d4a5a;
+  --box-info-border: #b8d1e0;
+
+  --box-success-bg: #e8f5ec;
+  --box-success-text: #2d5a3d;
+  --box-success-border: #b8e0c8;
+
+  // Cajas Temáticas con buen contraste
+  --box-sol-bg: #fcf8e8;
+  --box-sol-text: #5a4a2d;
+  --box-sol-border: #e8d8b8;
+
+  --box-mar-bg: #e8f0f5;
+  --box-mar-text: #2d4a5a;
+  --box-mar-border: #b8d0e0;
+
+  --box-flor-bg: #f8e8f0;
+  --box-flor-text: #5a2d4a;
+  --box-flor-border: #e0b8d0;
+
+  --box-hoja-bg: #e8f5e8;
+  --box-hoja-text: #2d5a2d;
+  --box-hoja-border: #b8e0b8;
+
+  --box-cielo-bg: #e8e8f5;
+  --box-cielo-text: #2d2d5a;
+  --box-cielo-border: #b8b8e0;
+
+  --box-uva-bg: #f0e8f5;
+  --box-uva-text: #4a2d5a;
+  --box-uva-border: #d0b8e0;
+
+  --box-coral-bg: #f5e8e8;
+  --box-coral-text: #5a2d2d;
+  --box-coral-border: #e0b8b8;
+
+  --box-fuego-bg: #f5f0e8;
+  --box-fuego-text: #5a4a2d;
+  --box-fuego-border: #e0d0b8;
+
+  // ========== COLORES PASTEL (DISLEXIA) ==========
+  // Pasteles con buen contraste para lectura
+  --pastel-1-bg: #f8e8e8;
+  --pastel-1-border: #e0c0c0;
+  --pastel-1-text: #5a3d3d;
+
+  --pastel-2-bg: #f8f0e8;
+  --pastel-2-border: #e0d0c0;
+  --pastel-2-text: #5a4a3d;
+
+  --pastel-3-bg: #f8e8f0;
+  --pastel-3-border: #e0c0d0;
+  --pastel-3-text: #5a3d4a;
+
+  --pastel-4-bg: #f0e8e8;
+  --pastel-4-border: #d8c0c0;
+  --pastel-4-text: #4a3d3d;
+
+  --pastel-5-bg: #f0f0e8;
+  --pastel-5-border: #d8d8c0;
+  --pastel-5-text: #4a4a3d;
+
+  --pastel-6-bg: #f8e8e0;
+  --pastel-6-border: #e0c0b0;
+  --pastel-6-text: #5a3d2d;
+
+  --pastel-7-bg: #f8e8f8;
+  --pastel-7-border: #e0c0e0;
+  --pastel-7-text: #5a3d5a;
+
+  --pastel-8-bg: #e8e8f8;
+  --pastel-8-border: #c0c0e0;
+  --pastel-8-text: #3d3d5a;
+
+  --pastel-9-bg: #f8f8e8;
+  --pastel-9-border: #e0e0c0;
+  --pastel-9-text: #5a5a3d;
+
+  --pastel-10-bg: #f0e8e0;
+  --pastel-10-border: #d8c0b0;
+  --pastel-10-text: #4a3d2d;
+
+  // Pastel por defecto
+  --pastel-box-bg: #f5f5f5;
+  --pastel-box-border: #d8d8d8;
+  --pastel-box-text: #333333;
+
+  // ========== ESTILOS ESPECÍFICOS DISLEXIA ==========
   body {
     font-family: var(--font-family-base);
     font-size: var(--font-size-base);
@@ -41,56 +147,26 @@
     font-weight: 600;
   }
 
-  // Espaciado entre letras y palabras
-  .dyslexia-friendly {
-    letter-spacing: 0.75px;
-    word-spacing: 1.5px;
-
-    p {
-      margin-bottom: 2rem;
-    }
-  }
-
-  // Fondos de texto para mejorar contraste
-  .text-highlight {
-    background: linear-gradient(transparent 60%, rgba(255, 255, 0, 0.3) 60%);
-  }
-
-  // Navegación mejorada
-  .nav__link {
-    padding: 0.75rem 1rem;
-    border-radius: var(--border-radius);
-    font-weight: 600;
-
-    &:focus {
-      background-color: rgba(var(--color-primary-rgb), 0.1);
-      outline: 3px solid var(--color-primary);
-    }
-  }
-
   // Botones con mejor legibilidad
   .btn {
     font-weight: 600;
     letter-spacing: 0.5px;
     padding: 0.875rem 1.75rem;
+    border: 2px solid transparent;
 
     &:focus {
       outline: 3px solid var(--color-primary);
       outline-offset: 2px;
+      border-color: var(--color-primary);
     }
   }
 
   // Formularios optimizados
-  .form__label {
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-    display: block;
-  }
-
   .form__control {
     font-size: 1.125rem;
     padding: 0.875rem 1rem;
     border: 2px solid var(--color-border);
+    background: var(--color-bg-card);
 
     &:focus {
       border-color: var(--color-primary);
@@ -99,55 +175,19 @@
     }
   }
 
-  // Tablas legibles
-  table {
-    border-collapse: collapse;
-    width: 100%;
+  // Skill items con mejor contraste
+  .skill-item {
+    font-weight: 600;
+    border: 2px solid transparent;
 
-    th, td {
-      padding: 1rem;
-      border: 2px solid var(--color-border);
-      text-align: left;
-    }
-
-    th {
-      background-color: var(--color-bg-alt);
-      font-weight: 600;
-    }
-  }
-
-  // Listas con mejor espaciado
-  ul, ol {
-    padding-left: 2rem;
-
-    li {
-      margin-bottom: 0.75rem;
+    &:focus {
+      outline: 3px solid var(--color-primary);
+      border-color: var(--color-primary);
     }
   }
 
   // Remover efectos que distraen
-  .blink, .marquee {
+  .blink, .marquee, .pulse {
     display: none;
   }
-
-  // Modo lectura profunda
-  .reading-mode {
-    max-width: 65ch;
-    margin: 0 auto;
-    font-size: 1.25rem;
-    line-height: 2;
-
-    p {
-      margin-bottom: 2.5rem;
-    }
-  }
-}
-
-// Cargar fuente OpenDyslexic si está disponible
-@font-face {
-  font-family: 'OpenDyslexic';
-  src: url('/fonts/OpenDyslexic-Regular.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
 }

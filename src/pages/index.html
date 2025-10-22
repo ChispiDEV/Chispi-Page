@@ -1,46 +1,108 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Chispi Page | Inicio</title>
-    <meta name="description" content="Portfolio y espacio creativo de Chispi - Desarrolladora, Data Analyst y Content Creator">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chispi Page - Bienvenida</title>
     <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="icon" href="/assets/icons/favicon.ico">
+    <style>
+        .language-selection {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .language-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .language-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .language-buttons {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .language-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem 2.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .language-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .flag {
+            font-size: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .language-title {
+                font-size: 2rem;
+            }
+
+            .language-subtitle {
+                font-size: 1.25rem;
+            }
+
+            .language-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .language-btn {
+                padding: 1.25rem 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-<!--# include file="../includes/components/navigation/navbar.html" -->
+<main class="language-selection">
+    <h1 class="language-title">¡Hola! Soy Chispi 👋</h1>
+    <p class="language-subtitle">Selecciona tu idioma / Choose your language</p>
 
-<!--# include file="../includes/components/hero/hero.html" -->
+    <div class="language-buttons">
+        <a href="/es/index.html" class="language-btn">
+            <span class="flag">🇪🇸</span>
+            <span>Español</span>
+        </a>
 
-<main class="main-content">
-    <section class="container">
-        <h2>Bienvenida a mi espacio creativo</h2>
-        <p>Explora mis proyectos, devlogs y recursos.</p>
+        <a href="/en/index.html" class="language-btn">
+            <span class="flag">🇬🇧</span>
+            <span>English</span>
+        </a>
+    </div>
 
-        <div class="grid" style="--cols: 1; --gap: 2rem;">
-            <a href="/about.html" class="card">
-                <h3>Sobre Mí</h3>
-                <p>Conoce más sobre mi trayectoria</p>
-            </a>
-
-            <a href="/projects.html" class="card">
-                <h3>Proyectos</h3>
-                <p>Mis trabajos y desarrollos</p>
-            </a>
-
-            <a href="/blog.html" class="card">
-                <h3>Devlogs</h3>
-                <p>Blog sobre desarrollo y más</p>
-            </a>
-        </div>
-    </section>
+    <div style="margin-top: 3rem; opacity: 0.7;">
+        <p>Developer | Data Analyst | Content Creator</p>
+    </div>
 </main>
-
-<!--# include file="../includes/global/footer.html" -->
-
-<script src="/assets/js/app.bundle.js"></script>
 </body>
 </html>

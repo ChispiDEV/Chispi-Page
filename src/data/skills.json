@@ -1,0 +1,41 @@
+{
+  "programming": {
+    "es": "Lenguajes de programación",
+    "en": "Programming Languages",
+    "items": [
+      {
+        "name": "Python",
+        "logo": "python",
+        "color": "3776AB",
+        "tooltip": {
+          "es": "Lenguaje versátil",
+          "en": "Versatile language"
+        }
+      },
+      {
+        "name": "SQL",
+        "logo": "postgresql",
+        "color": "FF6F00",
+        "tooltip": {
+          "es": "Bases de datos",
+          "en": "Databases"
+        }
+      }
+    ]
+  },
+  "frameworks": {
+    "es": "Frameworks y librerías",
+    "en": "Frameworks and Libraries",
+    "items": [
+      {
+        "name": "Pandas",
+        "logo": "pandas",
+        "color": "150458",
+        "tooltip": {
+          "es": "Análisis de datos",
+          "en": "Data analysis"
+        }
+      }
+    ]
+  }
+}

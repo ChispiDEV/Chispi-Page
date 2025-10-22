@@ -18,11 +18,11 @@
 @use 'layout/containers';
 
 // 4. COMPONENTES
+@use 'components/about-components' as about-comp;
 @use 'components/buttons';
 @use 'components/nav';
 @use 'components/header';
 @use 'components/footer';
-@use 'components/about';
 @use 'components/cards';
 @use 'components/forms';
 @use 'components/tags';
@@ -30,12 +30,19 @@
 // 5. PÁGINAS
 @use 'pages/home';
 @use 'pages/projects';
-@use 'pages/about';
+@use 'pages/about-page' as about-pg;
 
 // 6. TEMAS
 @use 'themes/light';
 @use 'themes/dark';
 @use 'themes/high-contrast';
+@use 'themes/daltonism';
+@use 'themes/dyslexia';
+@use 'themes/grayscale';
+@use 'themes/photophobia';
+@use 'themes/reading';
+@use 'themes/reduced-motion';
+@use 'themes/sepia';
 
 /* ============================
    ESTILOS GLOBALES

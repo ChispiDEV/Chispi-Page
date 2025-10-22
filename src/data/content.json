@@ -1,0 +1,70 @@
+{
+  "about": {
+    "es": {
+      "bio": {
+        "title": "Sobre mí",
+        "greeting": "👋 Soy Cristina — o Chispi, como me conocen muchos colegas. ¡Gracias por visitar mi página!",
+        "sections": [
+          {
+            "icon": "👩‍🔬",
+            "content": "<strong>Bióloga y exprofesora</strong> especializada en <strong>análisis de datos</strong>.",
+            "items": [
+              "📊 Python, Pandas, SQL",
+              "📄 LaTeX, Pandoc",
+              "📈 Matplotlib, Seaborn, Power BI"
+            ]
+          }
+        ]
+      },
+      "currentProjects": {
+        "title": "🔥 ¿Qué estoy haciendo ahora?",
+        "items": [
+          "💻 Mejorando habilidades",
+          "📖 Explorando análisis",
+          "🤝 Abierta a colaborar"
+        ]
+      },
+      "funFacts": {
+        "title": "🎉 Curiosidades",
+        "items": [
+          "🎮 Stardew Valley",
+          "✈️ Riot Games",
+          "🐶 Riven y Haru"
+        ]
+      }
+    },
+    "en": {
+      "bio": {
+        "title": "About Me",
+        "greeting": "👋 I'm Cristina — or Chispi, as many colleagues know me. Thanks for visiting my page!",
+        "sections": [
+          {
+            "icon": "👩‍🔬",
+            "content": "<strong>Biologist and former teacher</strong> specialized in <strong>data analysis</strong>.",
+            "items": [
+              "📊 Python, Pandas, SQL",
+              "📄 LaTeX, Pandoc",
+              "📈 Matplotlib, Seaborn, Power BI"
+            ]
+          }
+        ]
+      },
+      "currentProjects": {
+        "title": "🔥 What I'm doing now",
+        "items": [
+          "💻 Improving skills",
+          "📖 Exploring analysis",
+          "🤝 Open to collaborate"
+        ]
+      },
+      "funFacts": {
+        "title": "🎉 Fun Facts",
+        "items": [
+          "🎮 Stardew Valley",
+          "✈️ Riot Games",
+          "🐶 Riven and Haru"
+        ]
+      }
+    }
+  }
+}

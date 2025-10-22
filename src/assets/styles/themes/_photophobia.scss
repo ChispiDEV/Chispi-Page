@@ -1,90 +1,199 @@
 /* ============================
-   TEMA FOTOFOBIA (Sensibilidad a la luz)
+   TEMA FOTOFOBIA (Sensibilidad a la luz) - OPTIMIZADO
    ============================ */
 
 [data-theme="photophobia"] {
-  // Colores suaves y contrastados pero no brillantes
+  // ========== COLORES BASE OSCUROS SUAVES ==========
   --color-primary: #4a6572;
-  --color-secondary: #344955;
-  --color-success: #2d5a4d;
-  --color-danger: #6d4c5a;
-  --color-warning: #756a4c;
-  --color-info: #3a5a6d;
+  --color-primary-rgb: 74, 101, 114;
+  --color-secondary: #556b78;
+  --color-secondary-rgb: 85, 107, 120;
+  --color-success: #3d6d5a;
+  --color-success-rgb: 61, 109, 90;
+  --color-danger: #6d5a5a;
+  --color-danger-rgb: 109, 90, 90;
+  --color-warning: #6d6a5a;
+  --color-warning-rgb: 109, 106, 90;
+  --color-info: #4a6d7d;
+  --color-info-rgb: 74, 109, 125;
 
   // Fondos oscuros pero no puros
   --color-bg: #0a0a0a;
+  --color-bg-rgb: 10, 10, 10;
   --color-bg-alt: #1a1a1a;
+  --color-bg-alt-rgb: 26, 26, 26;
   --color-bg-card: #1a1a1a;
+  --color-bg-card-rgb: 26, 26, 26;
 
   // Texto con contraste pero no blanco puro
   --color-text: #e0e0e0;
+  --color-text-rgb: 224, 224, 224;
   --color-text-muted: #b0b0b0;
+  --color-text-muted-rgb: 176, 176, 176;
   --color-text-light: #808080;
+  --color-text-light-rgb: 128, 128, 128;
 
   // Bordes sutiles
   --color-border: #333333;
+  --color-border-rgb: 51, 51, 51;
   --color-border-light: #262626;
+  --color-border-light-rgb: 38, 38, 38;
 
-  // Sombras muy sutiles o eliminadas
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 1px 4px rgba(0, 0, 0, 0.1);
+  // ========== CAJAS TEMÁTICAS (FOTOFOBIA) ==========
+  // Colores oscuros con contraste controlado
+  --box-info-bg: #1a2a33;
+  --box-info-text: #a8c8d5;
+  --box-info-border: #2a3a43;
 
-  // Overlays oscuros
-  --color-overlay: rgba(0, 0, 0, 0.8);
+  --box-success-bg: #1a332a;
+  --box-success-text: #a8d5c8;
+  --box-success-border: #2a433a;
 
-  // Reducir brillo máximo
-  --max-brightness: 80%;
+  // Cajas Temáticas en tonos oscuros
+  --box-sol-bg: #332a1a;
+  --box-sol-text: #d5c8a8;
+  --box-sol-border: #433a2a;
 
-  // Estilos específicos para fotofobia
+  --box-mar-bg: #1a2a33;
+  --box-mar-text: #a8c8d5;
+  --box-mar-border: #2a3a43;
+
+  --box-flor-bg: #331a2a;
+  --box-flor-text: #d5a8c8;
+  --box-flor-border: #432a3a;
+
+  --box-hoja-bg: #1a331a;
+  --box-hoja-text: #a8d5a8;
+  --box-hoja-border: #2a432a;
+
+  --box-cielo-bg: #1a1a33;
+  --box-cielo-text: #a8a8d5;
+  --box-cielo-border: #2a2a43;
+
+  --box-uva-bg: #2a1a33;
+  --box-uva-text: #c8a8d5;
+  --box-uva-border: #3a2a43;
+
+  --box-coral-bg: #331a1a;
+  --box-coral-text: #d5a8a8;
+  --box-coral-border: #432a2a;
+
+  --box-fuego-bg: #332a1a;
+  --box-fuego-text: #d5c8a8;
+  --box-fuego-border: #433a2a;
+
+  // ========== COLORES PASTEL (FOTOFOBIA) ==========
+  // Pasteles oscuros con brillo reducido
+  --pastel-1-bg: #331a1a;
+  --pastel-1-border: #432a2a;
+  --pastel-1-text: #d5a8a8;
+
+  --pastel-2-bg: #332a1a;
+  --pastel-2-border: #433a2a;
+  --pastel-2-text: #d5c8a8;
+
+  --pastel-3-bg: #331a2a;
+  --pastel-3-border: #432a3a;
+  --pastel-3-text: #d5a8c8;
+
+  --pastel-4-bg: #2a1a1a;
+  --pastel-4-border: #3a2a2a;
+  --pastel-4-text: #c8a8a8;
+
+  --pastel-5-bg: #2a2a1a;
+  --pastel-5-border: #3a3a2a;
+  --pastel-5-text: #c8c8a8;
+
+  --pastel-6-bg: #33221a;
+  --pastel-6-border: #43322a;
+  --pastel-6-text: #d5b8a8;
+
+  --pastel-7-bg: #331a33;
+  --pastel-7-border: #432a43;
+  --pastel-7-text: #d5a8d5;
+
+  --pastel-8-bg: #2a1a33;
+  --pastel-8-border: #3a2a43;
+  --pastel-8-text: #c8a8d5;
+
+  --pastel-9-bg: #332a00;
+  --pastel-9-border: #433a10;
+  --pastel-9-text: #d5c800;
+
+  --pastel-10-bg: #2a221a;
+  --pastel-10-border: #3a322a;
+  --pastel-10-text: #c8b8a8;
+
+  // Pastel por defecto
+  --pastel-box-bg: #2a2a2a;
+  --pastel-box-border: #3a3a3a;
+  --pastel-box-text: #d0d0d0;
+
+  // ========== ESTILOS ESPECÍFICOS FOTOFOBIA ==========
+  // Reducir brillo general
   * {
     filter: brightness(0.8);
-    transition: background-color 0.5s ease, color 0.5s ease !important;
   }
 
-  .bright-content {
-    filter: brightness(0.7) !important;
+  // Transiciones muy suaves
+  * {
+    transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease !important;
   }
 
-  // Reducir brillo en imágenes y videos
-  img, video, iframe {
+  // Reducir brillo en medios
+  img, video, iframe, canvas {
     filter: brightness(0.6) contrast(1.1);
     opacity: 0.8;
   }
 
-  // Botones con menos contraste brillante
-  .btn-primary {
-    background-color: var(--color-primary);
-    border-color: var(--color-primary);
+  // Sombras muy sutiles
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 1px 4px rgba(0, 0, 0, 0.1);
+  --shadow-xl: none;
+  --shadow-2xl: none;
+
+  // Botones con brillo controlado
+  .btn {
+    filter: brightness(0.9);
 
     &:hover {
       filter: brightness(1.1);
-      background-color: #557a83;
+    }
+
+    &:focus {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 1px;
+      filter: brightness(1);
+    }
+  }
+
+  // Skill items con brillo reducido
+  .skill-item {
+    filter: brightness(0.9);
+
+    &:hover {
+      filter: brightness(1.1);
+      transform: none; // Eliminar transformaciones brillantes
     }
   }
 
   // Remover animaciones brillantes
   .loading-spinner,
-  .pulse-animation {
+  .pulse-animation,
+  .blink {
     opacity: 0.7;
+    animation-duration: 2s !important; // Ralentizar animaciones
   }
 
-  // Modo lectura mejorado
-  .reading-mode {
-    background-color: #1a1a1a !important;
-    color: #d0d0d0 !important;
-
-    p, li {
-      line-height: 1.8;
-      font-size: 1.1em;
-    }
-  }
+  // Overlays oscuros
+  --color-overlay-dark: rgba(0, 0, 0, 0.9);
+  --color-overlay-light: rgba(255, 255, 255, 0.05);
 }
 
-// Detección de preferencias del sistema
+// Forzar modo oscuro incluso si el sistema prefiere claro
 @media (prefers-color-scheme: light) {
   [data-theme="photophobia"] {
-    // Forzar modo oscuro incluso si el sistema prefiere claro
     --color-bg: #0a0a0a;
     --color-bg-alt: #1a1a1a;
     --color-bg-card: #1a1a1a;

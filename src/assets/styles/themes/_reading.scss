@@ -1,8 +1,22 @@
 /* ============================
-   TEMA LECTURA (Enfoque en contenido)
+   TEMA LECTURA (Enfoque en contenido) - OPTIMIZADO
    ============================ */
 
 [data-theme="reading"] {
+  // ========== COLORES BASE LECTURA ==========
+  --color-primary: #8b6b3d;
+  --color-primary-rgb: 139, 107, 61;
+  --color-secondary: #6d4c2d;
+  --color-secondary-rgb: 109, 76, 45;
+  --color-success: #5d7a4a;
+  --color-success-rgb: 93, 122, 74;
+  --color-danger: #a85c5c;
+  --color-danger-rgb: 168, 92, 92;
+  --color-warning: #b08d4a;
+  --color-warning-rgb: 176, 141, 74;
+  --color-info: #6d8b9d;
+  --color-info-rgb: 109, 139, 157;
+
   // Colores optimizados para lectura prolongada
   --color-bg: #f8f5f0;
   --color-bg-alt: #f0ebe0;
@@ -13,13 +27,102 @@
   --color-border: #e0d9cc;
   --color-border-light: #f0ebe0;
 
-  // Tipografía de lectura
+  // ========== TIPOGRAFÍA LECTURA ==========
   --font-family-base: 'Merriweather', 'Georgia', serif;
   --font-family-heading: 'Merriweather', 'Georgia', serif;
   --font-size-base: 1.125rem;
   --line-height-base: 1.8;
 
-  // Estilos específicos para modo lectura
+  // ========== CAJAS TEMÁTICAS (LECTURA) ==========
+  // Colores suaves para lectura prolongada
+  --box-info-bg: #f0f4f8;
+  --box-info-text: #2d4a5a;
+  --box-info-border: #d0e0e8;
+
+  --box-success-bg: #f0f8f4;
+  --box-success-text: #2d5a3d;
+  --box-success-border: #d0e8d8;
+
+  // Cajas Temáticas en tonos lectura
+  --box-sol-bg: #f8f4e8;
+  --box-sol-text: #5a4a2d;
+  --box-sol-border: #e8e0d0;
+
+  --box-mar-bg: #f0f4f8;
+  --box-mar-text: #2d4a5a;
+  --box-mar-border: #d0e0e8;
+
+  --box-flor-bg: #f8f0f4;
+  --box-flor-text: #5a2d4a;
+  --box-flor-border: #e8d0e0;
+
+  --box-hoja-bg: #f0f8f0;
+  --box-hoja-text: #2d5a2d;
+  --box-hoja-border: #d0e8d0;
+
+  --box-cielo-bg: #f0f0f8;
+  --box-cielo-text: #2d2d5a;
+  --box-cielo-border: #d0d0e8;
+
+  --box-uva-bg: #f4f0f8;
+  --box-uva-text: #4a2d5a;
+  --box-uva-border: #e0d0e8;
+
+  --box-coral-bg: #f8f0f0;
+  --box-coral-text: #5a2d2d;
+  --box-coral-border: #e8d0d0;
+
+  --box-fuego-bg: #f8f4f0;
+  --box-fuego-text: #5a4a2d;
+  --box-fuego-border: #e8e0d0;
+
+  // ========== COLORES PASTEL (LECTURA) ==========
+  --pastel-1-bg: #f8f0f0;
+  --pastel-1-border: #e8d8d8;
+  --pastel-1-text: #5a3d3d;
+
+  --pastel-2-bg: #f8f4f0;
+  --pastel-2-border: #e8e0d8;
+  --pastel-2-text: #5a4a3d;
+
+  --pastel-3-bg: #f8f0f4;
+  --pastel-3-border: #e8d8e0;
+  --pastel-3-text: #5a3d4a;
+
+  --pastel-4-bg: #f0f0f0;
+  --pastel-4-border: #e0e0e0;
+  --pastel-4-text: #4a3d3d;
+
+  --pastel-5-bg: #f4f4f0;
+  --pastel-5-border: #e0e0d8;
+  --pastel-5-text: #4a4a3d;
+
+  --pastel-6-bg: #f8f0e8;
+  --pastel-6-border: #e8d8d0;
+  --pastel-6-text: #5a3d2d;
+
+  --pastel-7-bg: #f8f0f8;
+  --pastel-7-border: #e8d8e8;
+  --pastel-7-text: #5a3d5a;
+
+  --pastel-8-bg: #f0f0f8;
+  --pastel-8-border: #e0e0e8;
+  --pastel-8-text: #3d3d5a;
+
+  --pastel-9-bg: #f8f8f0;
+  --pastel-9-border: #e8e8d8;
+  --pastel-9-text: #5a5a3d;
+
+  --pastel-10-bg: #f0f0e8;
+  --pastel-10-border: #e0e0d8;
+  --pastel-10-text: #4a4a3d;
+
+  // Pastel por defecto
+  --pastel-box-bg: #f5f5f0;
+  --pastel-box-border: #e0e0d8;
+  --pastel-box-text: #333333;
+
+  // ========== ESTILOS ESPECÍFICOS LECTURA ==========
   body {
     font-family: var(--font-family-base);
     font-size: var(--font-size-base);
@@ -40,14 +143,6 @@
     margin-bottom: 1.75rem;
     text-align: justify;
     hyphens: auto;
-
-    &:first-child {
-      margin-top: 0;
-    }
-
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 
   // Encabezados optimizados
@@ -56,190 +151,36 @@
     line-height: 1.4;
     margin: 3rem 0 1.5rem 0;
     font-weight: 600;
+  }
+
+  // Botones suaves para lectura
+  .btn {
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
     color: var(--color-text);
 
-    &:first-child {
-      margin-top: 0;
+    &:hover {
+      background: var(--color-bg-card);
+      transform: none; // Sin animaciones en modo lectura
     }
   }
 
-  h1 {
-    font-size: 2.5rem;
-    text-align: center;
-    border-bottom: 2px solid var(--color-border);
-    padding-bottom: 1rem;
-  }
+  // Skill items discretos
+  .skill-item {
+    background: var(--pastel-box-bg);
+    border: 1px solid var(--pastel-box-border);
+    color: var(--pastel-box-text);
 
-  h2 {
-    font-size: 2rem;
-    border-bottom: 1px solid var(--color-border);
-    padding-bottom: 0.5rem;
-  }
-
-  // Listas legibles
-  ul, ol {
-    margin: 2rem 0;
-    padding-left: 2.5rem;
-
-    li {
-      margin-bottom: 1rem;
-      line-height: var(--line-height-base);
-    }
-
-    ul, ol {
-      margin: 1rem 0;
-    }
-  }
-
-  // Citas y blockquotes
-  blockquote {
-    border-left: 4px solid var(--color-primary);
-    padding-left: 2rem;
-    margin: 2.5rem 0;
-    font-style: italic;
-    background-color: var(--color-bg-alt);
-    padding: 2rem;
-    border-radius: var(--border-radius);
-
-    p {
-      margin-bottom: 1rem;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-
-    cite {
-      display: block;
-      margin-top: 1rem;
-      font-style: normal;
-      font-weight: 600;
-      text-align: right;
-
-      &::before {
-        content: "— ";
-      }
-    }
-  }
-
-  // Código y preformateado
-  code {
-    background-color: var(--color-bg-alt);
-    padding: 0.2em 0.4em;
-    border-radius: var(--border-radius-sm);
-    font-family: var(--font-family-mono);
-    font-size: 0.9em;
-  }
-
-  pre {
-    background-color: var(--color-bg-alt);
-    padding: 1.5rem;
-    border-radius: var(--border-radius);
-    overflow-x: auto;
-    margin: 2rem 0;
-    border: 1px solid var(--color-border);
-
-    code {
-      background: none;
-      padding: 0;
-    }
-  }
-
-  // Tablas legibles
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 2rem 0;
-    font-size: 0.95em;
-
-    th, td {
-      padding: 1rem;
-      border: 1px solid var(--color-border);
-      text-align: left;
-    }
-
-    th {
-      background-color: var(--color-bg-alt);
-      font-weight: 600;
-    }
-
-    tr:nth-child(even) {
-      background-color: var(--color-bg-alt);
-    }
-  }
-
-  // Navegación mínima para lectura
-  .reading-nav {
-    position: fixed;
-    top: 50%;
-    left: 1rem;
-    transform: translateY(-50%);
-    z-index: 100;
-
-    &__btn {
-      background-color: var(--color-bg-card);
-      border: 1px solid var(--color-border);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1rem;
-      transition: all var(--transition-speed) ease;
-
-      &:hover {
-        background-color: var(--color-primary);
-        color: white;
-      }
-    }
-  }
-
-  // Control de tipografía
-  .reading-controls {
-    position: fixed;
-    top: 2rem;
-    right: 2rem;
-    background-color: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius);
-    padding: 1rem;
-    z-index: 100;
-
-    &__group {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-
-    &__label {
-      font-size: var(--font-size-sm);
-      font-weight: 600;
-    }
-
-    &__btn {
-      border: 1px solid var(--color-border);
-      border-radius: var(--border-radius);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      &.active {
-        background-color: var(--color-primary);
-        color: white;
-        border-color: var(--color-primary);
-      }
+    &:hover {
+      background: var(--color-bg-alt);
+      transform: none;
     }
   }
 
   // Ocultar elementos distractores
   .advertisement,
   .social-share,
-  .comments-section,
-  .related-posts {
+  .complex-animations {
     display: none;
   }
 }

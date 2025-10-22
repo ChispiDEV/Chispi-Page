@@ -1,9 +1,12 @@
 /* ============================
-   TEMA MOVIMIENTO REDUCIDO
+   TEMA MOVIMIENTO REDUCIDO - OPTIMIZADO
    ============================ */
 
 [data-theme="reduced-motion"] {
-  // Variables para transiciones instantáneas
+  // ========== COLORES BASE (MANTENER ORIGINALES) ==========
+  // No modificamos colores, solo animaciones
+
+  // ========== CONTROL DE ANIMACIONES ==========
   --transition-speed: 0.01s;
   --transition-speed-fast: 0.01s;
   --transition-speed-slow: 0.01s;
@@ -18,68 +21,50 @@
     scroll-behavior: auto !important;
   }
 
-  // Transiciones suaves alternativas
-  .btn,
-  .nav__link,
-  .card {
-    transition: opacity 0.1s ease, background-color 0.1s ease !important;
-  }
+  // ========== COMPONENTES ESPECÍFICOS ==========
 
-  // Animaciones y transiciones
-  .animated,
-  [class*="animate-"],
-  [class*="transition-"]{
-    animation: none !important;
-    transition: none !important;
-  }
+  // Botones sin transiciones
+  .btn {
+    transition: opacity 0.1s ease !important;
 
-  // Slideshows y carousels estáticos
-  .carousel,
-  .slider {
-    overflow: visible !important;
-
-    .carousel-item,
-    .slide {
-      opacity: 1 !important;
+    &:hover {
       transform: none !important;
-      display: none !important;
-
-      &.active {
-        display: block !important;
-      }
     }
+  }
 
-    .carousel-nav,
-    .slider-dots {
-      display: flex;
+  // Skill items sin animaciones
+  .skill-item {
+    transition: none !important;
+
+    &:hover {
+      transform: none !important;
+      box-shadow: var(--shadow-sm) !important;
+    }
+  }
+
+  // Cards sin efectos
+  .card {
+    transition: none !important;
+
+    &:hover {
+      transform: none !important;
     }
   }
 
   // Loading states simplificados
-  .loading {
-    opacity: 0.7;
+  .loading-spinner {
+    animation: none !important;
 
     &::after {
-      content: 'Cargando...';
-      display: block;
-      text-align: center;
-      padding: 1rem;
+      content: '●';
+      animation: none !important;
     }
   }
 
-  .loading-spinner {
-    display: none;
-  }
-
-  // Tooltips y popovers inmediatos
-  .tooltip,
-  .popover {
+  // Tooltips inmediatos
+  .tooltip {
     transition: none !important;
     opacity: 1 !important;
-
-    &.hidden {
-      display: none;
-    }
   }
 
   // Modals sin animaciones
@@ -90,92 +75,16 @@
     }
   }
 
-  // Scroll suave desactivado
-  html {
-    scroll-behavior: auto;
-  }
-
-  // Efectos de hover simplificados
-  .hover-effect {
-    &:hover {
-      transform: none !important;
-      box-shadow: var(--shadow-sm) !important;
-    }
-  }
-
-  // Imágenes con lazy loading inmediato
-  img[loading="lazy"] {
-    loading: eager;
-  }
-
-  // Videos sin autoplay
-  video {
-    autoplay: false;
-    muted: false;
-
-    &[autoplay] {
-      display: none;
-    }
-  }
-
-  // Canvas y WebGL desactivados si son animados
-  canvas[data-animated="true"] {
-    display: none;
-  }
-
-  // Notificaciones sin desvanecimiento
-  .notification,
-  .toast {
-    animation: none !important;
-    transition: none !important;
-  }
-
   // Progress bars estáticas
   .progress-bar {
     animation: none !important;
+  }
 
-    &::after {
-      content: attr(data-progress);
-      display: block;
-      text-align: center;
-      font-weight: 600;
+  // Eliminar transformaciones hover
+  .hover-lift,
+  .hover-scale {
+    &:hover {
+      transform: none !important;
     }
-  }
-
-  // Charts y gráficos estáticos
-  .chart {
-    svg {
-      animation: none !important;
-
-      * {
-        animation: none !important;
-        transition: none !important;
-      }
-    }
-  }
-
-  // Counters inmediatos
-  .counter {
-    animation: none !important;
-
-    &::after {
-      content: attr(data-final-value);
-    }
-  }
-}
-
-// Preferencia del sistema
-@media (prefers-reduced-motion: reduce) {
-  :root:not([data-theme="motion"]) {
-    --transition-speed: 0.01s;
-    --transition-speed-fast: 0.01s;
-    --transition-speed-slow: 0.01s;
-  }
-
-  :root:not([data-theme="motion"]) * {
-    animation-duration: 0.01s !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01s !important;
-    scroll-behavior: auto !important;
   }
 }

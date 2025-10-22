@@ -68,6 +68,99 @@ $color-overlay-dark: rgba($black, 0.6) !default;
 $color-overlay-light: rgba($white, 0.2) !default;
 $color-overlay-primary: rgba($color-primary, 0.1) !default;
 
+// ========== CAJAS TEMÁTICAS ==========
+// Cajas Verde/Azul (Informática/color de la marca)
+$box-info-bg: #e8f4fd !default;
+$box-info-text: #0b5394 !default;
+$box-info-border: #9fc5e8 !default;
+
+$box-success-bg: #e8f5e8 !default;
+$box-success-text: #2d6a2d !default;
+$box-success-border: #a8d5a8 !default;
+
+// Cajas Temáticas
+$box-sol-bg: #fff8e0 !default;
+$box-sol-text: #5f4e00 !default;
+$box-sol-border: #f0dca5 !default;
+
+$box-mar-bg: #e3f1f7 !default;
+$box-mar-text: #005065 !default;
+$box-mar-border: #afd8e5 !default;
+
+$box-flor-bg: #ffeef5 !default;
+$box-flor-text: #a03d66 !default;
+$box-flor-border: #f3c1d5 !default;
+
+$box-hoja-bg: #ecf5e8 !default;
+$box-hoja-text: #426b2d !default;
+$box-hoja-border: #cce3b2 !default;
+
+$box-cielo-bg: #eef4ff !default;
+$box-cielo-text: #375aa6 !default;
+$box-cielo-border: #bfd4f0 !default;
+
+$box-uva-bg: #f5eefc !default;
+$box-uva-text: #5e2e8d !default;
+$box-uva-border: #d7c2eb !default;
+
+$box-coral-bg: #fff0ec !default;
+$box-coral-text: #c0503d !default;
+$box-coral-border: #efb4a0 !default;
+
+$box-fuego-bg: #fff3e8 !default;
+$box-fuego-text: #a3451c !default;
+$box-fuego-border: #e8c2a6 !default;
+
+// ========== COLORES PASTEL ==========
+$pastel-1-bg: #fcecec !default;
+$pastel-1-border: #f5c9c9 !default;
+$pastel-1-text: #914040 !default;
+
+$pastel-2-bg: #faeee5 !default;
+$pastel-2-border: #edd1bd !default;
+$pastel-2-text: #865132 !default;
+
+$pastel-3-bg: #fbe9f2 !default;
+$pastel-3-border: #eac6da !default;
+$pastel-3-text: #a15077 !default;
+
+$pastel-4-bg: #f3e9e3 !default;
+$pastel-4-border: #dec7b9 !default;
+$pastel-4-text: #754e3d !default;
+
+$pastel-5-bg: #f7f1ec !default;
+$pastel-5-border: #e4d9ce !default;
+$pastel-5-text: #6f5447 !default;
+
+$pastel-6-bg: #fff0ef !default;
+$pastel-6-border: #f5c7c2 !default;
+$pastel-6-text: #9a3d30 !default;
+
+$pastel-7-bg: #fce9f7 !default;
+$pastel-7-border: #e5c8dc !default;
+$pastel-7-text: #843d75 !default;
+
+$pastel-8-bg: #f5f1fa !default;
+$pastel-8-border: #d6c5e8 !default;
+$pastel-8-text: #6b3d8f !default;
+
+$pastel-9-bg: #fff7ea !default;
+$pastel-9-border: #f3e1c8 !default;
+$pastel-9-text: #8f7139 !default;
+
+$pastel-10-bg: #f9f3ef !default;
+$pastel-10-border: #e5dad2 !default;
+$pastel-10-text: #5c4b40 !default;
+
+// Pastel por defecto
+$pastel-box-bg: #f3f3f3 !default;
+$pastel-box-border: #bca8a8 !default;
+$pastel-box-text: #352d2d !default;
+
+// ========== VARIABLES DINÁMICAS ==========
+$tag-hue: 180 !default;
+$skill-hue: 200 !default;
+
 // Tipografía
 $font-family-base: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !default;
 $font-family-heading: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !default;

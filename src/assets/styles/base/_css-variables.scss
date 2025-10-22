@@ -42,6 +42,99 @@
   --color-border-dark: #{vars.$color-border-dark};
   --color-border-dark-rgb: #{vars.$color-border-dark-rgb};
 
+  // ========== CAJAS TEMÁTICAS ==========
+  // Cajas Verde/Azul (Informática/color de la marca)
+  --box-info-bg: #{vars.$box-info-bg};
+  --box-info-text: #{vars.$box-info-text};
+  --box-info-border: #{vars.$box-info-border};
+
+  --box-success-bg: #{vars.$box-success-bg};
+  --box-success-text: #{vars.$box-success-text};
+  --box-success-border: #{vars.$box-success-border};
+
+  // Cajas Temáticas
+  --box-sol-bg: #{vars.$box-sol-bg};
+  --box-sol-text: #{vars.$box-sol-text};
+  --box-sol-border: #{vars.$box-sol-border};
+
+  --box-mar-bg: #{vars.$box-mar-bg};
+  --box-mar-text: #{vars.$box-mar-text};
+  --box-mar-border: #{vars.$box-mar-border};
+
+  --box-flor-bg: #{vars.$box-flor-bg};
+  --box-flor-text: #{vars.$box-flor-text};
+  --box-flor-border: #{vars.$box-flor-border};
+
+  --box-hoja-bg: #{vars.$box-hoja-bg};
+  --box-hoja-text: #{vars.$box-hoja-text};
+  --box-hoja-border: #{vars.$box-hoja-border};
+
+  --box-cielo-bg: #{vars.$box-cielo-bg};
+  --box-cielo-text: #{vars.$box-cielo-text};
+  --box-cielo-border: #{vars.$box-cielo-border};
+
+  --box-uva-bg: #{vars.$box-uva-bg};
+  --box-uva-text: #{vars.$box-uva-text};
+  --box-uva-border: #{vars.$box-uva-border};
+
+  --box-coral-bg: #{vars.$box-coral-bg};
+  --box-coral-text: #{vars.$box-coral-text};
+  --box-coral-border: #{vars.$box-coral-border};
+
+  --box-fuego-bg: #{vars.$box-fuego-bg};
+  --box-fuego-text: #{vars.$box-fuego-text};
+  --box-fuego-border: #{vars.$box-fuego-border};
+
+  // ========== COLORES PASTEL ==========
+  --pastel-1-bg: #{vars.$pastel-1-bg};
+  --pastel-1-border: #{vars.$pastel-1-border};
+  --pastel-1-text: #{vars.$pastel-1-text};
+
+  --pastel-2-bg: #{vars.$pastel-2-bg};
+  --pastel-2-border: #{vars.$pastel-2-border};
+  --pastel-2-text: #{vars.$pastel-2-text};
+
+  --pastel-3-bg: #{vars.$pastel-3-bg};
+  --pastel-3-border: #{vars.$pastel-3-border};
+  --pastel-3-text: #{vars.$pastel-3-text};
+
+  --pastel-4-bg: #{vars.$pastel-4-bg};
+  --pastel-4-border: #{vars.$pastel-4-border};
+  --pastel-4-text: #{vars.$pastel-4-text};
+
+  --pastel-5-bg: #{vars.$pastel-5-bg};
+  --pastel-5-border: #{vars.$pastel-5-border};
+  --pastel-5-text: #{vars.$pastel-5-text};
+
+  --pastel-6-bg: #{vars.$pastel-6-bg};
+  --pastel-6-border: #{vars.$pastel-6-border};
+  --pastel-6-text: #{vars.$pastel-6-text};
+
+  --pastel-7-bg: #{vars.$pastel-7-bg};
+  --pastel-7-border: #{vars.$pastel-7-border};
+  --pastel-7-text: #{vars.$pastel-7-text};
+
+  --pastel-8-bg: #{vars.$pastel-8-bg};
+  --pastel-8-border: #{vars.$pastel-8-border};
+  --pastel-8-text: #{vars.$pastel-8-text};
+
+  --pastel-9-bg: #{vars.$pastel-9-bg};
+  --pastel-9-border: #{vars.$pastel-9-border};
+  --pastel-9-text: #{vars.$pastel-9-text};
+
+  --pastel-10-bg: #{vars.$pastel-10-bg};
+  --pastel-10-border: #{vars.$pastel-10-border};
+  --pastel-10-text: #{vars.$pastel-10-text};
+
+  // Pastel por defecto
+  --pastel-box-bg: #{vars.$pastel-box-bg};
+  --pastel-box-border: #{vars.$pastel-box-border};
+  --pastel-box-text: #{vars.$pastel-box-text};
+
+  // ========== VARIABLES DINÁMICAS ==========
+  --tag-hue: #{vars.$tag-hue};
+  --skill-hue: #{vars.$skill-hue};
+
   // ========== TIPOGRAFÍA ==========
   --font-family-base: #{vars.$font-family-base};
   --font-family-heading: #{vars.$font-family-heading};
@@ -144,4 +237,8 @@
   --blur: #{vars.$blur};
   --blur-lg: #{vars.$blur-lg};
   --blur-xl: #{vars.$blur-xl};
+
+  // ========== GRADIENTES ==========
+  --gradient-primary: #{vars.$gradient-primary};
+  --gradient-overlay: #{vars.$gradient-overlay};
 }
