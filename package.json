@@ -18,6 +18,11 @@
     "verify": "node scripts/utils/verify-functionality.js",
     "diagnose": "node scripts/utils/diagnose.js",
     "debug-paths": "node scripts/utils/debug-paths.js",
+    
+    "build:portfolio": "npm run build:prod",
+    "deploy:gh-pages": "npm run build:portfolio && node scripts/deploy/gh-pages.js",
+    "analyze:perf": "node scripts/audit/analyzers/performance-analyzer.js",
+    "preview": "npx serve dist/pages -p 3000",
 
     "audit": "node scripts/audit/auditor-cli.js",
     "audit:fix": "node scripts/audit/fixers/auto-fixer.js",
