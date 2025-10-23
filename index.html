@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cristina Fuentes - Desarrolladora Frontend & Especialista en Accesibilidad</title>
+    <meta name="description" content="Portfolio de Cristina Fuentes - Desarrolladora Frontend especializada en accesibilidad web y análisis de datos">
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<!-- Navegación -->
+<nav class="nav" aria-label="Navegación principal">
+    <div class="nav-container">
+        <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+        <div class="nav-brand">
+            <h1>Cristina Fuentes</h1>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="index.html" aria-current="page">Inicio</a></li>
+            <li><a href="about.html">Sobre mí</a></li>
+            <li><a href="projects.html">Proyectos</a></li>
+            <li><a href="devlog.html">Devlog</a></li>
+            <li><a href="contact.html">Contacto</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Contenido principal -->
+<main id="main-content">
+    <!-- Hero Section -->
+    <section class="hero" aria-labelledby="hero-title">
+        <div class="container">
+            <h1 id="hero-title" class="hero-title">
+                <span class="title-line">Desarrolladora Frontend</span>
+                <span class="title-line">Especialista en Accesibilidad</span>
+            </h1>
+            <p class="hero-subtitle">Transformando datos en experiencias digitales accesibles e inclusivas</p>
+
+            <div class="hero-actions">
+                <a href="projects.html" class="btn btn-primary">Ver Proyectos</a>
+                <a href="about.html" class="btn btn-secondary">Conóceme</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de introducción -->
+    <section class="intro" aria-labelledby="intro-title">
+        <div class="container">
+            <h2 id="intro-title" class="section-title">Hola, soy Cristina 👋</h2>
+            <div class="intro-content">
+                <p><strong>Analista de Datos Junior</strong> con formación en STEM y experiencia en desarrollo frontend accesible.</p>
+                <p>Combino análisis técnico con diseño centrado en el usuario para crear soluciones digitales inclusivas.</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="footer" role="contentinfo">
+    <div class="container">
+        <p>&copy; 2024 Cristina Fuentes. Todos los derechos reservados.</p>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/cristina-fg/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://github.com/ChispiDEV" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="mailto:cristinafg.it@gmail.com">Email</a>
+        </div>
+    </div>
+</footer>
+
+<!-- Partículas (accesibles) -->
+<div class="particles-container" aria-hidden="true">
+    <canvas id="particles-canvas"></canvas>
+</div>
+
+<!-- JavaScript -->
+<script src="assets/js/particles.js"></script>
+</body>
+</html>

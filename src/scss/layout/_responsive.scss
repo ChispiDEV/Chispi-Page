@@ -1,0 +1,34 @@
+// src/scss/layout/_responsive.scss
+@use '../abstracts/variables' as v;
+
+// ===== RESPONSIVE =====
+@media (max-width: v.$breakpoint-md) {
+  .nav-menu {
+    gap: v.$spacing-4;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-title {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+  }
+}
+
+@media (max-width: v.$breakpoint-sm) {
+  .nav-container {
+    flex-direction: column;
+    gap: v.$spacing-3;
+  }
+
+  .nav-menu {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero {
+    padding: 100px 0 60px;
+  }
+}

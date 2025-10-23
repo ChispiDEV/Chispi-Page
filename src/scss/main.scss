@@ -1,0 +1,31 @@
+// src/scss/main.scss
+// ============================
+// 🎯 ARCHIVO PRINCIPAL SCSS
+// ============================
+
+// 1. ABSTRACTOS
+@use 'abstracts/variables';
+
+// 2. TEMAS (Importa directamente los archivos necesarios)
+@use 'themes/particles/base-particles';
+@use 'themes/particles/light-particles';
+@use 'themes/particles/dark-particles';
+@use 'themes/particles/sepia-particles';
+@use 'themes/particles/high-contrast-particles';
+
+// 3. BASE
+@use 'base/reset';
+
+// 4. LAYOUT
+@use 'layout/grid';
+
+// 5. COMPONENTES
+@use 'components/navigation';
+@use 'components/buttons';
+@use 'components/particles';
+
+// 6. PÁGINAS
+@use 'pages/home';
+
+// 7. UTILITIES
+@use 'layout/responsive';

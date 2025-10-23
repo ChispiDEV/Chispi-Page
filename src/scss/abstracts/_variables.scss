@@ -1,0 +1,241 @@
+// src/scss/abstracts/_variables.scss
+// ============================
+// 🎨 VARIABLES GLOBALES SASS
+// ============================
+
+// ===== IMPORTACIÓN DE MÓDULOS SASS =====
+@use 'sass:map';
+@use 'sass:list';
+
+// ===== VARIABLES DE COLOR =====
+
+// Colores primarios de la marca
+$color-primary:   #3cc88f !default;
+$color-primary-rgb: 60, 200, 143 !default;
+$color-secondary: #335b9a !default;
+$color-secondary-rgb: 51, 91, 154 !default;
+$color-success:   #28a97b !default;
+$color-success-rgb: 40, 169, 123 !default;
+$color-danger:    #e36565 !default;
+$color-danger-rgb: 227, 101, 101 !default;
+$color-warning:   #f5c56b !default;
+$color-warning-rgb: 245, 197, 107 !default;
+$color-info:      #57c4dc !default;
+$color-info-rgb: 87, 196, 220 !default;
+
+// Escala de grises
+$gray-100: #f9fafb !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #8a8d91 !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+
+// Colores del sistema
+$white: #ffffff !default;
+$black: #000000 !default;
+
+// Colores semánticos para temas
+$color-bg: $gray-100 !default;
+$color-bg-alt: $gray-200 !default;
+$color-bg-card: $white !default;
+$color-text: $gray-900 !default;
+$color-text-muted: $gray-600 !default;
+$color-text-light: $gray-400 !default;
+
+// Bordes
+$color-border: $gray-300 !default;
+$color-border-light: $gray-200 !default;
+$color-border-dark: $gray-400 !default;
+
+// ===== TIPOGRAFÍA =====
+
+$font-family-base: 'Segoe UI', system-ui, -apple-system, sans-serif !default;
+$font-family-heading: 'Segoe UI', system-ui, -apple-system, sans-serif !default;
+$font-family-mono: 'Consolas', 'Monaco', monospace !default;
+
+// Tamaños de fuente
+$font-size-xs: 0.75rem !default;
+$font-size-sm: 0.875rem !default;
+$font-size-base: 1rem !default;
+$font-size-lg: 1.125rem !default;
+$font-size-xl: 1.25rem !default;
+$font-size-2xl: 1.5rem !default;
+$font-size-3xl: 1.875rem !default;
+$font-size-4xl: 2.25rem !default;
+
+// Pesos de fuente
+$font-weight-light: 300 !default;
+$font-weight-normal: 400 !default;
+$font-weight-medium: 500 !default;
+$font-weight-semibold: 600 !default;
+$font-weight-bold: 700 !default;
+
+// ===== ESPACIADO =====
+
+$spacing-1: 0.25rem !default;
+$spacing-2: 0.5rem !default;
+$spacing-3: 0.75rem !default;
+$spacing-4: 1rem !default;
+$spacing-5: 1.5rem !default;
+$spacing-6: 2rem !default;
+$spacing-7: 2.5rem !default;
+$spacing-8: 3rem !default;
+$spacing-9: 4rem !default;
+$spacing-10: 5rem !default;
+
+// ===== BORDER RADIUS =====
+
+$border-radius: 0.375rem !default;
+$border-radius-sm: 0.25rem !default;
+$border-radius-lg: 0.5rem !default;
+$border-radius-xl: 0.75rem !default;
+$border-radius-2xl: 1rem !default;
+
+// ===== BREAKPOINTS =====
+
+$breakpoint-xs: 480px !default;
+$breakpoint-sm: 640px !default;
+$breakpoint-md: 768px !default;
+$breakpoint-lg: 1024px !default;
+$breakpoint-xl: 1280px !default;
+$breakpoint-2xl: 1536px !default;
+
+// ===== SOMBRAS =====
+
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !default;
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !default;
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !default;
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !default;
+
+// ===== Z-INDEX =====
+
+$z-index-dropdown: 1000 !default;
+$z-index-sticky: 1020 !default;
+$z-index-fixed: 1030 !default;
+$z-index-modal: 1050 !default;
+$z-index-popover: 1070 !default;
+$z-index-tooltip: 1080 !default;
+$z-index-toast: 1090 !default;
+
+// ===== VARIABLES DE PARTÍCULAS =====
+
+// Configuración base de partículas
+$particles-colors-base: (
+        $color-primary,
+        $color-secondary,
+        $color-info,
+        $color-success,
+        $white,
+        rgba(200, 220, 255, 1)
+) !default;
+
+// Configuración de partículas por tema
+$particles-config: (
+        light: (
+                colors: (
+                        rgba(60, 200, 143, 0.15),
+                        rgba(51, 91, 154, 0.12),
+                        rgba(87, 196, 220, 0.1),
+                        rgba(40, 169, 123, 0.12),
+                        rgba(255, 255, 255, 0.08),
+                        rgba(200, 220, 255, 0.1)
+                ),
+                opacity: 0.6,
+                size-min: 1,
+                size-max: 2.5,
+                speed: 0.6,
+                count: 80,
+                line-linked: false
+        ),
+        dark: (
+                colors: (
+                        rgba(60, 200, 143, 0.2),
+                        rgba(51, 91, 154, 0.18),
+                        rgba(87, 196, 220, 0.15),
+                        rgba(40, 169, 123, 0.18),
+                        rgba(255, 255, 255, 0.12),
+                        rgba(200, 220, 255, 0.15)
+                ),
+                opacity: 0.7,
+                size-min: 1,
+                size-max: 3,
+                speed: 0.7,
+                count: 100,
+                line-linked: true
+        )
+) !default;
+
+// ===== FUNCIONES DE UTILIDAD PARA PARTÍCULAS =====
+
+@function particles-theme($theme: 'light', $property: null) {
+  $theme-config: map.get($particles-config, $theme);
+
+  @if $property {
+    @return map.get($theme-config, $property);
+  }
+
+  @return $theme-config;
+}
+
+@function particles-color($theme: 'light', $index: 1) {
+  $colors: map.get(map.get($particles-config, $theme), 'colors');
+  @return list.nth($colors, $index);
+}
+
+// ===== VARIABLES CSS PARA JAVASCRIPT =====
+
+:root {
+  // Variables base de partículas (tema claro por defecto)
+  --particles-opacity: #{particles-theme('light', 'opacity')};
+  --particles-size-min: #{particles-theme('light', 'size-min')};
+  --particles-size-max: #{particles-theme('light', 'size-max')};
+  --particles-speed: #{particles-theme('light', 'speed')};
+  --particles-count: #{particles-theme('light', 'count')};
+
+  // Colores de partículas como variables CSS
+  @for $i from 1 through 6 {
+    --particles-color-#{$i}: #{particles-color('light', $i)};
+  }
+}
+
+[data-theme="dark"] {
+  --particles-opacity: #{particles-theme('dark', 'opacity')};
+  --particles-size-min: #{particles-theme('dark', 'size-min')};
+  --particles-size-max: #{particles-theme('dark', 'size-max')};
+  --particles-speed: #{particles-theme('dark', 'speed')};
+  --particles-count: #{particles-theme('dark', 'count')};
+
+  @for $i from 1 through 6 {
+    --particles-color-#{$i}: #{particles-color('dark', $i)};
+  }
+}
+
+// ===== UTILIDADES =====
+
+$focus-ring: 0 0 0 3px rgba($color-primary, 0.5) !default;
+$transition-base: all 0.2s ease-in-out !default;
+$transition-slow: all 0.3s ease-in-out !default;
+
+// ===== MIXINS PARA TEMAS =====
+
+@mixin light-theme {
+  --color-bg: #{$color-bg};
+  --color-bg-alt: #{$color-bg-alt};
+  --color-bg-card: #{$color-bg-card};
+  --color-text: #{$color-text};
+  --color-text-muted: #{$color-text-muted};
+  --color-border: #{$color-border};
+}
+
+@mixin dark-theme {
+  --color-bg: #{$gray-900};
+  --color-bg-alt: #{$gray-800};
+  --color-bg-card: #{$gray-800};
+  --color-text: #{$gray-100};
+  --color-text-muted: #{$gray-400};
+  --color-border: #{$gray-700};
+}

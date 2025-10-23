@@ -1,0 +1,40 @@
+// src/scss/components/_buttons.scss
+@use '../abstracts/variables' as v;
+
+// Botones
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: v.$border-radius-lg;
+  text-decoration: none;
+  font-weight: v.$font-weight-semibold;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+
+  &:focus {
+    outline: none;
+    box-shadow: v.$focus-ring;
+  }
+
+  &-primary {
+    background: v.$white;
+    color: v.$color-primary;
+
+    &:hover {
+      background: v.$gray-100;
+      transform: translateY(-2px);
+    }
+  }
+
+  &-secondary {
+    background: transparent;
+    color: v.$white;
+    border-color: v.$white;
+
+    &:hover {
+      background: v.$white;
+      color: v.$color-primary;
+      transform: translateY(-2px);
+    }
+  }
+}

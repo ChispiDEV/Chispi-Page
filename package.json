@@ -1,47 +1,26 @@
 {
   "name": "chispi-page",
-  "type": "module",
-  "exports": {
-    "./*": "./*"
-  },
+  "version": "1.0.0",
+  "main": "index.js",
   "scripts": {
-    "dev": "npm run build:dev && npx serve dist/pages",
-    "build": "npm run build:template && node scripts/build/adaptive-build.js",
-    "build:dev": "npm run build:template && node scripts/build/adaptive-build.js",
-    "build:prod": "npm run build:template && set NODE_ENV=production&& node scripts/build/adaptive-build.js",
-    "build:template": "npm run content:generate && node scripts/build/template-build.js",
-    "content:generate": "node scripts/build/content-processor.js",
-
-    "check": "npm run check-structure && npm run verify",
-    "check-structure": "node scripts/utils/check-structure.js",
-    "check-debug": "node scripts/utils/check-structure-debug.js",
-    "verify": "node scripts/utils/verify-functionality.js",
-    "diagnose": "node scripts/utils/diagnose.js",
-    "debug-paths": "node scripts/utils/debug-paths.js",
-    
-    "build:portfolio": "npm run build:prod",
-    "deploy:gh-pages": "npm run build:portfolio && node scripts/deploy/gh-pages.js",
-    "analyze:perf": "node scripts/audit/analyzers/performance-analyzer.js",
-    "preview": "npx serve dist/pages -p 3000",
-
-    "audit": "node scripts/audit/auditor-cli.js",
-    "audit:fix": "node scripts/audit/fixers/auto-fixer.js",
-    "audit:html": "node scripts/audit/analyzers/html-analyzer.js",
-    "audit:css": "node scripts/audit/analyzers/css-analyzer.js",
-    "audit:js": "node scripts/audit/analyzers/js-analyzer.js",
-
-    "test": "node scripts/test/test-runner.js",
-    "test:quick": "node scripts/test/quick-check.js",
-    "test:html": "node scripts/test/html-validator.js",
-
-    "deploy": "node scripts/utils/deploy.js",
-    "clean": "rm -rf dist logs",
-    "organize": "node scripts/utils/smart-organize.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "fs-extra": "^11.3.2",
-    "glob": "^11.0.3",
-    "sass": "^1.93.2",
-    "terser": "^5.44.0"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChispiDEV/Chispi-Page.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ChispiDEV/Chispi-Page/issues"
+  },
+  "homepage": "https://github.com/ChispiDEV/Chispi-Page#readme",
+  "description": "",
+  "devDependencies": {
+    "gulp": "^5.0.1",
+    "gulp-sass": "^6.0.1",
+    "sass": "^1.93.2"
   }
 }

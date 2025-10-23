@@ -1,0 +1,81 @@
+// src/scss/pages/_home.scss
+@use '../abstracts/variables' as v;
+
+// Hero Section
+.hero {
+  background: linear-gradient(135deg, v.$color-secondary 0%, v.$color-primary 100%);
+  color: v.$white;
+  padding: 120px 0 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  &-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: v.$font-weight-bold;
+    margin-bottom: v.$spacing-5;
+
+    .title-line {
+      display: block;
+    }
+  }
+
+  &-subtitle {
+    font-size: v.$font-size-xl;
+    margin-bottom: v.$spacing-8;
+    opacity: 0.9;
+  }
+
+  &-actions {
+    display: flex;
+    gap: v.$spacing-4;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+// Secciones
+.section-title {
+  font-size: v.$font-size-3xl;
+  color: v.$color-secondary;
+  margin-bottom: v.$spacing-5;
+  text-align: center;
+}
+
+.intro {
+  padding: v.$spacing-8 0;
+  background: v.$white;
+
+  &-content {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+
+    p {
+      margin-bottom: v.$spacing-4;
+      font-size: v.$font-size-lg;
+    }
+  }
+}
+
+// Footer
+.footer {
+  background: v.$color-secondary;
+  color: v.$white;
+  padding: v.$spacing-6 0;
+  text-align: center;
+
+  .social-links {
+    margin-top: v.$spacing-4;
+
+    a {
+      color: v.$white;
+      text-decoration: none;
+      margin: 0 v.$spacing-3;
+
+      &:hover {
+        color: rgba(v.$color-primary, 0.8);
+      }
+    }
+  }
+}
