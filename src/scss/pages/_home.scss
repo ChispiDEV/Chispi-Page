@@ -1,10 +1,12 @@
 // src/scss/pages/_home.scss
 @use '../abstracts/variables' as v;
 
-// Hero Section
+// ===== PÁGINA HOME =====
+
+// Hero Section - USAR VARIABLES CSS
 .hero {
-  background: linear-gradient(135deg, v.$color-secondary 0%, v.$color-primary 100%);
-  color: v.$white;
+  background: linear-gradient(135deg, var(--accent-secondary, v.$color-secondary) 0%, var(--accent-primary, v.$color-primary) 100%);
+  color: var(--text-inverse, v.$white);
   padding: 120px 0 80px;
   text-align: center;
   position: relative;
@@ -14,6 +16,7 @@
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: v.$font-weight-bold;
     margin-bottom: v.$spacing-5;
+    color: var(--text-inverse, v.$white);
 
     .title-line {
       display: block;
@@ -24,6 +27,7 @@
     font-size: v.$font-size-xl;
     margin-bottom: v.$spacing-8;
     opacity: 0.9;
+    color: var(--text-inverse, v.$white);
   }
 
   &-actions {
@@ -37,14 +41,15 @@
 // Secciones
 .section-title {
   font-size: v.$font-size-3xl;
-  color: v.$color-secondary;
+  color: var(--accent-secondary, v.$color-secondary);
   margin-bottom: v.$spacing-5;
   text-align: center;
 }
 
 .intro {
   padding: v.$spacing-8 0;
-  background: v.$white;
+  background: var(--bg-primary, v.$white);
+  color: var(--text-primary, v.$gray-900);
 
   &-content {
     max-width: 600px;
@@ -54,14 +59,15 @@
     p {
       margin-bottom: v.$spacing-4;
       font-size: v.$font-size-lg;
+      color: var(--text-secondary, v.$gray-600);
     }
   }
 }
 
-// Footer
+// Footer - USAR VARIABLES CSS
 .footer {
-  background: v.$color-secondary;
-  color: v.$white;
+  background: var(--accent-secondary, v.$color-secondary);
+  color: var(--text-inverse, v.$white);
   padding: v.$spacing-6 0;
   text-align: center;
 
@@ -69,12 +75,13 @@
     margin-top: v.$spacing-4;
 
     a {
-      color: v.$white;
+      color: var(--text-inverse, v.$white);
       text-decoration: none;
       margin: 0 v.$spacing-3;
+      transition: color 0.3s ease;
 
       &:hover {
-        color: rgba(v.$color-primary, 0.8);
+        color: rgba(var(--accent-primary, v.$color-primary), 0.8);
       }
     }
   }

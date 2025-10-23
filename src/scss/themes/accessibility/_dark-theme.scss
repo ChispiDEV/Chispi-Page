@@ -1,0 +1,47 @@
+// src/scss/themes/accessibility/_dark-theme.scss
+[data-theme="dark"] {
+  // Colores
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --bg-tertiary: #404040;
+  --bg-inverse: #ffffff;
+  
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --text-muted: #8a8d91;
+  --text-inverse: #1a1a1a;
+  --text-on-accent: #ffffff;
+
+  --accent-primary: #3cc88f;
+  --accent-secondary: #4a7bc9;
+  --accent-success: #28a97b;
+  --accent-danger: #e36565;
+  --accent-warning: #f5c56b;
+  --accent-info: #57c4dc;
+
+  --border-color: #404040;
+  --border-light: #4d4d4d;
+  --border-dark: #333333;
+  
+  --focus-ring: 0 0 0 3px rgba(60, 200, 143, 0.5);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+  
+  // Componentes
+  --navbar-bg: #1a1a1a;
+  --card-bg: #2d2d2d;
+  --button-bg: #3cc88f;
+  --button-text: #ffffff;
+  --button-hover-bg: #2fa778;
+  --input-bg: #2d2d2d;
+  --input-border: #404040;
+
+
+  // Estados
+  --focus-ring: 0 0 0 3px rgba(60, 200, 143, 0.5);
+
+  // Efectos para photophobia
+  --particles-opacity: 0.4;
+  --image-opacity: 0.9;
+}

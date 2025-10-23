@@ -1,6 +1,6 @@
 // src/scss/abstracts/_variables.scss
 // ============================
-// 🎨 VARIABLES GLOBALES SASS
+// 🎨 VARIABLES GLOBALES SASS (SOLO SASS)
 // ============================
 
 // ===== IMPORTACIÓN DE MÓDULOS SASS =====
@@ -37,19 +37,6 @@ $gray-900: #212529 !default;
 // Colores del sistema
 $white: #ffffff !default;
 $black: #000000 !default;
-
-// Colores semánticos para temas
-$color-bg: $gray-100 !default;
-$color-bg-alt: $gray-200 !default;
-$color-bg-card: $white !default;
-$color-text: $gray-900 !default;
-$color-text-muted: $gray-600 !default;
-$color-text-light: $gray-400 !default;
-
-// Bordes
-$color-border: $gray-300 !default;
-$color-border-light: $gray-200 !default;
-$color-border-dark: $gray-400 !default;
 
 // ===== TIPOGRAFÍA =====
 
@@ -121,7 +108,7 @@ $z-index-popover: 1070 !default;
 $z-index-tooltip: 1080 !default;
 $z-index-toast: 1090 !default;
 
-// ===== VARIABLES DE PARTÍCULAS =====
+// ===== VARIABLES DE PARTÍCULAS (SASS) =====
 
 // Configuración base de partículas
 $particles-colors-base: (
@@ -133,7 +120,7 @@ $particles-colors-base: (
         rgba(200, 220, 255, 1)
 ) !default;
 
-// Configuración de partículas por tema
+// Configuración de partículas por tema (SASS)
 $particles-config: (
         light: (
                 colors: (
@@ -166,6 +153,38 @@ $particles-config: (
                 speed: 0.7,
                 count: 100,
                 line-linked: true
+        ),
+        sepia: (
+                colors: (
+                        rgba(139, 109, 66, 0.2),
+                        rgba(174, 136, 82, 0.18),
+                        rgba(205, 170, 125, 0.15),
+                        rgba(160, 120, 70, 0.16),
+                        rgba(240, 220, 180, 0.12),
+                        rgba(210, 180, 140, 0.14)
+                ),
+                opacity: 0.5,
+                size-min: 1,
+                size-max: 2.5,
+                speed: 0.5,
+                count: 60,
+                line-linked: false
+        ),
+        high-contrast: (
+                colors: (
+                        rgba(255, 255, 255, 0.1),
+                        rgba(255, 255, 255, 0.08),
+                        rgba(255, 255, 255, 0.06),
+                        rgba(255, 255, 255, 0.08),
+                        rgba(255, 255, 255, 0.05),
+                        rgba(255, 255, 255, 0.07)
+                ),
+                opacity: 0.15,
+                size-min: 1,
+                size-max: 2,
+                speed: 0.4,
+                count: 40,
+                line-linked: false
         )
 ) !default;
 
@@ -186,56 +205,23 @@ $particles-config: (
   @return list.nth($colors, $index);
 }
 
-// ===== VARIABLES CSS PARA JAVASCRIPT =====
-
-:root {
-  // Variables base de partículas (tema claro por defecto)
-  --particles-opacity: #{particles-theme('light', 'opacity')};
-  --particles-size-min: #{particles-theme('light', 'size-min')};
-  --particles-size-max: #{particles-theme('light', 'size-max')};
-  --particles-speed: #{particles-theme('light', 'speed')};
-  --particles-count: #{particles-theme('light', 'count')};
-
-  // Colores de partículas como variables CSS
-  @for $i from 1 through 6 {
-    --particles-color-#{$i}: #{particles-color('light', $i)};
-  }
-}
-
-[data-theme="dark"] {
-  --particles-opacity: #{particles-theme('dark', 'opacity')};
-  --particles-size-min: #{particles-theme('dark', 'size-min')};
-  --particles-size-max: #{particles-theme('dark', 'size-max')};
-  --particles-speed: #{particles-theme('dark', 'speed')};
-  --particles-count: #{particles-theme('dark', 'count')};
-
-  @for $i from 1 through 6 {
-    --particles-color-#{$i}: #{particles-color('dark', $i)};
-  }
-}
-
-// ===== UTILIDADES =====
+// ===== UTILIDADES SASS =====
 
 $focus-ring: 0 0 0 3px rgba($color-primary, 0.5) !default;
 $transition-base: all 0.2s ease-in-out !default;
 $transition-slow: all 0.3s ease-in-out !default;
 
-// ===== MIXINS PARA TEMAS =====
+// ===== MIXINS PARA COMPATIBILIDAD =====
+
+// Mixins deprecated - usar variables CSS en su lugar
+// Mantenidos solo para compatibilidad con código existente
 
 @mixin light-theme {
-  --color-bg: #{$color-bg};
-  --color-bg-alt: #{$color-bg-alt};
-  --color-bg-card: #{$color-bg-card};
-  --color-text: #{$color-text};
-  --color-text-muted: #{$color-text-muted};
-  --color-border: #{$color-border};
+  background-color: $gray-100;
+  color: $gray-900;
 }
 
 @mixin dark-theme {
-  --color-bg: #{$gray-900};
-  --color-bg-alt: #{$gray-800};
-  --color-bg-card: #{$gray-800};
-  --color-text: #{$gray-100};
-  --color-text-muted: #{$gray-400};
-  --color-border: #{$gray-700};
+  background-color: $gray-900;
+  color: $gray-100;
 }

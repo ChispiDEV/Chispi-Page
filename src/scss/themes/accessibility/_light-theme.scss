@@ -1,0 +1,18 @@
+// src/scss/themes/accessibility/_light-theme.scss
+[data-theme="light"] {
+  // Colores
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --accent-color: #3cc88f;
+  --border-color: #dee2e6;
+
+  // Componentes
+  --navbar-bg: #ffffff;
+  --card-bg: #ffffff;
+  --button-bg: #3cc88f;
+
+  // Estados
+  --focus-ring: 0 0 0 3px rgba(60, 200, 143, 0.25);
+}

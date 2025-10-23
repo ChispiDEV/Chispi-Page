@@ -8,13 +8,20 @@
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
-<!-- Navegación -->
-<nav class="nav" aria-label="Navegación principal">
+<!-- Navegación Mejorada -->
+<nav class="navbar" aria-label="Navegación principal" style="z-index: 1000;">
     <div class="nav-container">
         <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+        <!-- Branding con bandera -->
         <div class="nav-brand">
-            <h1>Cristina Fuentes</h1>
+            <a href="index.html" class="brand-link">
+                <h1>Cristina Fuentes</h1>
+                <img src="assets/icons/es-variant.svg" alt="Español" class="language-flag" style="width: 20px; height: 20px; border-radius: 50%;">
+            </a>
         </div>
+
+        <!-- Menú principal -->
         <ul class="nav-menu">
             <li><a href="index.html" aria-current="page">Inicio</a></li>
             <li><a href="about.html">Sobre mí</a></li>
@@ -22,12 +29,110 @@
             <li><a href="devlog.html">Devlog</a></li>
             <li><a href="contact.html">Contacto</a></li>
         </ul>
+
+        <!-- Controles: Idioma, Tema, Menú Hamburguesa -->
+        <div class="nav-controls">
+            <!-- Selector de Idioma -->
+            <div class="dropdown" id="language-dropdown">
+                <button class="nav-button dropdown-toggle"
+                        id="language-toggle"
+                        type="button"
+                        aria-expanded="false"
+                        aria-label="Cambiar idioma"
+                        title="Cambiar idioma">
+                    <span class="button-text">Idioma</span>
+                </button>
+
+                <ul class="dropdown-menu" aria-labelledby="language-toggle">
+                    <li>
+                        <a href="index.html" class="dropdown-item active" data-lang="es">
+                            <img src="assets/icons/es-variant.svg" alt="Español" class="flag-icon">
+                            Español
+                        </a>
+                    </li>
+                    <li>
+                        <a href="en/index.html" class="dropdown-item" data-lang="en">
+                            <img src="assets/icons/gb.svg" alt="English" class="flag-icon">
+                            English
+                        </a>
+                    </li>
+                    <li>
+                        <a href="fr/index.html" class="dropdown-item" data-lang="fr">
+                            <img src="assets/icons/fr.svg" alt="Français" class="flag-icon">
+                            Français
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Selector de Tema -->
+            <div class="dropdown" id="theme-dropdown">
+                <button class="nav-button dropdown-toggle"
+                        id="theme-toggle"
+                        type="button"
+                        aria-expanded="false"
+                        aria-label="Cambiar tema"
+                        title="Cambiar tema visual">
+                    <span class="button-text">Tema</span>
+                </button>
+
+                <ul class="dropdown-menu" aria-labelledby="theme-toggle">
+                    <li><button class="dropdown-item" data-theme="light">🌞 Claro</button></li>
+                    <li><button class="dropdown-item" data-theme="dark">🌙 Oscuro</button></li>
+                    <li><button class="dropdown-item" data-theme="sepia">📜 Sepia</button></li>
+                    <li><button class="dropdown-item" data-theme="high-contrast">⚫ Alto Contraste</button></li>
+                </ul>
+            </div>
+
+            <!-- Menú Hamburguesa -->
+            <button class="nav-button menu-toggle"
+                    id="menu-toggle"
+                    aria-label="Abrir menú"
+                    title="Menú principal"
+                    aria-expanded="false"
+                    aria-controls="mobile-menu">
+                <span class="hamburger-icon"></span>
+            </button>
+        </div>
     </div>
 </nav>
 
+<!-- Menú Móvil -->
+<div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-header">
+        <button class="close-button" id="close-menu-toggle" aria-label="Cerrar menú">
+            <span class="close-icon">×</span>
+        </button>
+    </div>
+
+    <ul class="mobile-nav">
+        <li><a href="index.html" aria-current="page">Inicio</a></li>
+        <li><a href="about.html">Sobre mí</a></li>
+        <li><a href="projects.html">Proyectos</a></li>
+        <li><a href="devlog.html">Devlog</a></li>
+        <li><a href="contact.html">Contacto</a></li>
+
+        <!-- Opciones de accesibilidad en móvil -->
+        <li class="mobile-options">
+            <div class="mobile-theme-selector">
+                <span>Tema:</span>
+                <select id="mobile-theme-selector" aria-label="Seleccionar tema">
+                    <option value="light">Claro</option>
+                    <option value="dark">Oscuro</option>
+                    <option value="sepia">Sepia</option>
+                    <option value="high-contrast">Alto Contraste</option>
+                </select>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<!-- Overlay para menú móvil -->
+<div id="menu-overlay" class="menu-overlay" aria-hidden="true"></div>
+
 <!-- Contenido principal -->
 <main id="main-content">
-    <!-- Hero Section -->
+    <!-- Hero Section (mantener tu contenido actual) -->
     <section class="hero" aria-labelledby="hero-title">
         <div class="container">
             <h1 id="hero-title" class="hero-title">
@@ -38,7 +143,7 @@
 
             <div class="hero-actions">
                 <a href="projects.html" class="btn btn-primary">Ver Proyectos</a>
-                <a href="about.html" class="btn btn-secondary">Conóceme</a>
+                <a href="about.html" class="btn btn-primary">Conóceme</a>
             </div>
         </div>
     </section>
@@ -67,12 +172,14 @@
     </div>
 </footer>
 
-<!-- Partículas (accesibles) -->
+<!-- Partículas -->
 <div class="particles-container" aria-hidden="true">
     <canvas id="particles-canvas"></canvas>
 </div>
 
 <!-- JavaScript -->
+<script src="assets/js/navigation.js"></script>
 <script src="assets/js/particles.js"></script>
+<script src="assets/js/theme-manager.js"></script>
 </body>
 </html>

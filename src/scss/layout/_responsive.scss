@@ -32,3 +32,24 @@
     padding: 100px 0 60px;
   }
 }
+
+// Responsive general para temas
+@media (max-width: v.$breakpoint-md) {
+  .mobile-only {
+    display: block;
+  }
+
+  .desktop-only {
+    display: none;
+  }
+}
+
+@media (min-width: calc(v.$breakpoint-md + 1px)) {
+  .mobile-only {
+    display: none;
+  }
+
+  .desktop-only {
+    display: block;
+  }
+}

@@ -3,38 +3,37 @@
 
 // Botones
 .btn {
-  display: inline-block;
-  padding: 12px 24px;
-  border-radius: v.$border-radius-lg;
+  background-color: var(--button-bg, #3cc88f);
+  color: var(--button-text, #ffffff);
+  border: 1px solid var(--button-bg, #3cc88f);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
   text-decoration: none;
-  font-weight: v.$font-weight-semibold;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
+  display: inline-block;
+  transition: var(--transition-base, all 0.3s ease);
 
+  &:hover,
   &:focus {
-    outline: none;
-    box-shadow: v.$focus-ring;
+    background-color: var(--button-hover-bg, #2fa778);
+    border-color: var(--button-hover-bg, #2fa778);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md, 0 4px 6px -1px rgba(0, 0, 0, 0.1));
   }
 
   &-primary {
-    background: v.$white;
-    color: v.$color-primary;
-
-    &:hover {
-      background: v.$gray-100;
-      transform: translateY(-2px);
-    }
+    background-color: var(--accent-primary, #3cc88f);
+    border-color: var(--accent-primary, #3cc88f);
   }
 
   &-secondary {
-    background: transparent;
-    color: v.$white;
-    border-color: v.$white;
+    background-color: transparent;
+    color: var(--accent-primary, #3cc88f);
+    border-color: var(--accent-primary, #3cc88f);
 
     &:hover {
-      background: v.$white;
-      color: v.$color-primary;
-      transform: translateY(-2px);
+      background-color: var(--accent-primary, #3cc88f);
+      color: var(--button-text, #ffffff);
     }
   }
 }
