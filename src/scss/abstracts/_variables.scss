@@ -42,6 +42,7 @@ $black: #000000 !default;
 
 $font-family-base: 'Segoe UI', system-ui, -apple-system, sans-serif !default;
 $font-family-heading: 'Segoe UI', system-ui, -apple-system, sans-serif !default;
+$font-family-dyslexia: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
 $font-family-mono: 'Consolas', 'Monaco', monospace !default;
 
 // Tamaños de fuente
@@ -73,6 +74,17 @@ $spacing-7: 2.5rem !default;
 $spacing-8: 3rem !default;
 $spacing-9: 4rem !default;
 $spacing-10: 5rem !default;
+
+// Espaciado entre lineas
+
+$line-height-xs: 1.4;
+$line-height-sm: 1.5;
+$line-height-base: 1.6;
+$line-height-lg: 1.7;
+$line-height-xl: 1.8;
+$line-height-2xl: 1.9;
+$line-height-3xl: 2.0;
+$line-height-4xl: 2.1;
 
 // ===== BORDER RADIUS =====
 
@@ -208,8 +220,10 @@ $particles-config: (
 // ===== UTILIDADES SASS =====
 
 $focus-ring: 0 0 0 3px rgba($color-primary, 0.5) !default;
+$transition-fast: 0.15s ease-in-out !default;
 $transition-base: all 0.2s ease-in-out !default;
-$transition-slow: all 0.3s ease-in-out !default;
+$transition-normal: all 0.3s ease-in-out !default;
+$transition-slow: all 0.5s ease-in-out !default;
 
 // ===== MIXINS PARA COMPATIBILIDAD =====
 
@@ -224,4 +238,65 @@ $transition-slow: all 0.3s ease-in-out !default;
 @mixin dark-theme {
   background-color: $gray-900;
   color: $gray-100;
+}
+
+
+// Mixin para transiciones base
+@mixin transition-base {
+  transition: all 0.2s ease-in-out;
+}
+
+// Mixin para transiciones rápidas
+@mixin transition-fast {
+  transition: all 0.15s ease-in-out;
+}
+
+// Mixin para transiciones normales
+@mixin transition-normal {
+  transition: all 0.3s ease-in-out;
+}
+
+// Mixin para transiciones lentas
+@mixin transition-slow {
+  transition: all 0.5s ease-in-out;
+}
+
+// Mixin para focus visible
+@mixin focus-ring {
+  outline: 2px solid rgba($color-primary, 0.5);
+  outline-offset: 2px;
+}
+
+// Mixin para sombras de caja
+@mixin box-shadow($level: 'md') {
+  @if $level == 'sm' {
+    box-shadow: $shadow-sm;
+  } @else if $level == 'md' {
+    box-shadow: $shadow-md;
+  } @else if $level == 'lg' {
+    box-shadow: $shadow-lg;
+  } @else if $level == 'xl' {
+    box-shadow: $shadow-xl;
+  }
+}
+
+// Mixin para texto truncado
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Mixin para flexbox centrado
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Mixin para flexbox entre elementos
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

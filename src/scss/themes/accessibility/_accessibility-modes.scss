@@ -1,0 +1,144 @@
+// src/scss/themes/accessibility/_accessibility-modes.scss
+
+@use '../../abstracts/variables' as v;
+
+// Movimiento Reducido
+[data-reduced-motion="true"] {
+  
+  // Reducir/eliminar animaciones
+  --transition-base: none;
+  --transition-fast: none;
+
+  // Desactivar partículas
+  --particles-opacity: 0;
+  --particles-count: 0;
+
+  // Preferencias del sistema
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+// Modo Dislexia con intensidad
+[data-dyslexia-mode="true"] {
+  font-family: v.$font-family-dyslexia !important;
+  letter-spacing: 0.05em !important;
+
+  &[data-dyslexia-intensity="1"] {
+    line-height: v.$line-height-lg;
+    word-spacing: 0.1em;
+  }
+
+  &[data-dyslexia-intensity="2"] {
+    line-height: v.$line-height-xl;
+    word-spacing: 0.15em;
+    font-weight: v.$font-weight-semibold;
+  }
+
+  &[data-dyslexia-intensity="3"] {
+    line-height: v.$line-height-2xl;
+    word-spacing: 0.2em;
+    font-weight: v.$font-weight-bold;
+  }
+
+  &[data-dyslexia-intensity="4"] {
+    line-height: v.$line-height-3xl;
+    word-spacing: 0.25em;
+    font-weight: v.$font-weight-bold;
+  }
+
+  &[data-dyslexia-intensity="5"] {
+    line-height: v.$line-height-4xl;
+    word-spacing: 0.3em;
+    font-weight: v.$font-weight-bold;
+  }
+}
+
+// Modo Lectura con intensidad
+[data-reading-mode="true"] {
+  &[data-reading-intensity="1"] {
+    max-width: 70ch;
+    margin: 0 auto;
+  }
+
+  &[data-reading-intensity="2"] {
+    max-width: 65ch;
+    margin: 0 auto;
+    line-height: v.$line-height-lg;
+  }
+
+  &[data-reading-intensity="3"] {
+    max-width: 60ch;
+    margin: 0 auto;
+    line-height: v.$line-height-xl;
+    font-size: v.$font-size-lg;
+  }
+
+  &[data-reading-intensity="4"] {
+    max-width: 55ch;
+    margin: 0 auto;
+    line-height: v.$line-height-2xl;
+    font-size: v.$font-size-xl;
+  }
+
+  &[data-reading-intensity="5"] {
+    max-width: 50ch;
+    margin: 0 auto;
+    line-height: v.$line-height-3xl;
+    font-size: v.$font-size-2xl;
+  }
+}
+
+// Modo Fotofobia con intensidad
+[data-photophobia-mode="true"] {
+  background-color: #000000 !important;
+  color: #e0e0e0 !important;
+
+  &[data-photophobia-intensity="1"] {
+    filter: brightness(0.9) contrast(1.1);
+  }
+
+  &[data-photophobia-intensity="2"] {
+    filter: brightness(0.8) contrast(1.2);
+  }
+
+  &[data-photophobia-intensity="3"] {
+    filter: brightness(0.7) contrast(1.3);
+  }
+
+  &[data-photophobia-intensity="4"] {
+    filter: brightness(0.6) contrast(1.4);
+  }
+
+  &[data-photophobia-intensity="5"] {
+    filter: brightness(0.5) contrast(1.5);
+  }
+}
+
+// Tamaño de fuente
+[data-font-size="1"] {
+  font-size: v.$font-size-sm;
+}
+
+[data-font-size="2"] {
+  font-size: v.$font-size-base;
+}
+
+[data-font-size="3"] {
+  font-size: v.$font-size-lg;
+}
+
+[data-font-size="4"] {
+  font-size: v.$font-size-xl;
+}
+
+[data-font-size="5"] {
+  font-size: v.$font-size-2xl;
+}

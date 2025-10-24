@@ -30,19 +30,18 @@
             <li><a href="contact.html">Contacto</a></li>
         </ul>
 
-        <!-- Controles: Idioma, Tema, Menú Hamburguesa -->
+        <!-- Controles: Idioma, Tema, Accesibilidad, Menú Hamburguesa -->
         <div class="nav-controls">
             <!-- Selector de Idioma -->
-            <div class="dropdown" id="language-dropdown">
+            <div class="dropdown language-dropdown">
                 <button class="nav-button dropdown-toggle"
                         id="language-toggle"
                         type="button"
                         aria-expanded="false"
-                        aria-label="Cambiar idioma"
-                        title="Cambiar idioma">
+                        aria-label="Cambiar idioma">
                     <span class="button-text">Idioma</span>
+                    <span class="dropdown-arrow">▼</span>
                 </button>
-
                 <ul class="dropdown-menu" aria-labelledby="language-toggle">
                     <li>
                         <a href="index.html" class="dropdown-item active" data-lang="es">
@@ -65,24 +64,96 @@
                 </ul>
             </div>
 
-            <!-- Selector de Tema CORREGIDO -->
-            <div class="dropdown" id="theme-dropdown">
+            <!-- Selector de Tema (SOLO colores) -->
+            <div class="dropdown theme-dropdown">
                 <button class="nav-button dropdown-toggle"
                         id="theme-toggle"
                         type="button"
                         aria-expanded="false"
-                        aria-label="Cambiar tema"
-                        title="Cambiar tema visual">
+                        aria-label="Cambiar tema de color">
                     <span class="button-text">Tema</span>
+                    <span class="dropdown-arrow">▼</span>
                 </button>
-
                 <ul class="dropdown-menu" aria-labelledby="theme-toggle">
                     <li><button class="dropdown-item" data-theme="light">🌞 Claro</button></li>
                     <li><button class="dropdown-item" data-theme="dark">🌙 Oscuro</button></li>
                     <li><button class="dropdown-item" data-theme="sepia">📜 Sepia</button></li>
-                    <li><button class="dropdown-item" data-theme="gray-scale">⚪ Escala Gris</button></li>
+                    <li><button class="dropdown-item" data-theme="gray-scale">⚪ Escala de Grises</button></li>
                     <li><button class="dropdown-item" data-theme="high-contrast">⚫ Alto Contraste</button></li>
-                    <li><button class="dropdown-item" data-theme="reduced-motion">🎬 Movimiento Reducido</button></li>
+                </ul>
+            </div>
+
+            <!-- Selector de Accesibilidad -->
+            <div class="dropdown accessibility-dropdown">
+                <button class="nav-button dropdown-toggle"
+                        id="accessibility-toggle"
+                        type="button"
+                        aria-expanded="false"
+                        aria-label="Opciones de accesibilidad">
+                    <span class="button-text">Accesibilidad</span>
+                    <span class="dropdown-arrow">▼</span>
+                </button>
+                <ul class="dropdown-menu accessibility-menu" aria-labelledby="accessibility-toggle">
+                    <!-- Movimiento Reducido -->
+                    <li class="accessibility-option">
+                        <label class="option-label">
+                            <input type="checkbox" id="reduced-motion-toggle">
+                            <span class="toggle-slider"></span>
+                            Movimiento Reducido
+                        </label>
+                    </li>
+
+                    <!-- Modo Dislexia -->
+                    <li class="accessibility-option">
+                        <label class="option-label">
+                            <input type="checkbox" id="dyslexia-mode-toggle">
+                            <span class="toggle-slider"></span>
+                            Modo Dislexia
+                        </label>
+                        <div class="intensity-control">
+                            <input type="range" min="1" max="5" value="3" class="intensity-slider" id="dyslexia-intensity">
+                            <span class="intensity-value">3</span>
+                        </div>
+                    </li>
+
+                    <!-- Modo Lectura -->
+                    <li class="accessibility-option">
+                        <label class="option-label">
+                            <input type="checkbox" id="reading-mode-toggle">
+                            <span class="toggle-slider"></span>
+                            Modo Lectura
+                        </label>
+                        <div class="intensity-control">
+                            <input type="range" min="1" max="5" value="3" class="intensity-slider" id="reading-intensity">
+                            <span class="intensity-value">3</span>
+                        </div>
+                    </li>
+
+                    <!-- Modo Fotofobia -->
+                    <li class="accessibility-option">
+                        <label class="option-label">
+                            <input type="checkbox" id="photophobia-mode-toggle">
+                            <span class="toggle-slider"></span>
+                            Modo Fotofobia
+                        </label>
+                        <div class="intensity-control">
+                            <input type="range" min="1" max="5" value="3" class="intensity-slider" id="photophobia-intensity">
+                            <span class="intensity-value">3</span>
+                        </div>
+                    </li>
+
+                    <!-- Tamaño de Fuente -->
+                    <li class="accessibility-option">
+                        <label class="option-label">
+                            <input type="checkbox" id="font-size-toggle">
+                            <span class="toggle-slider"></span>
+                            Tamaño de Fuente
+                        </label>
+                        <div class="intensity-control">
+                            <input type="range" min="1" max="5" value="3" class="intensity-slider" id="font-size">
+                            <span class="intensity-value">3</span>
+                        </div>
+                    </li>
                 </ul>
             </div>
 
@@ -90,7 +161,6 @@
             <button class="nav-button menu-toggle"
                     id="menu-toggle"
                     aria-label="Abrir menú"
-                    title="Menú principal"
                     aria-expanded="false"
                     aria-controls="mobile-menu">
                 <span class="hamburger-icon"></span>
@@ -99,35 +169,19 @@
     </div>
 </nav>
 
-<!-- Menú Móvil CORREGIDO -->
+<!-- Menú Móvil -->
 <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
     <div class="mobile-menu-header">
         <button class="close-button" id="close-menu-toggle" aria-label="Cerrar menú">
             <span class="close-icon">×</span>
         </button>
     </div>
-
     <ul class="mobile-nav">
         <li><a href="index.html" aria-current="page">Inicio</a></li>
         <li><a href="about.html">Sobre mí</a></li>
         <li><a href="projects.html">Proyectos</a></li>
         <li><a href="devlog.html">Devlog</a></li>
         <li><a href="contact.html">Contacto</a></li>
-
-        <!-- Opciones de accesibilidad en móvil CORREGIDAS -->
-        <li class="mobile-options">
-            <div class="mobile-theme-selector">
-                <span>Tema:</span>
-                <select id="mobile-theme-selector" aria-label="Seleccionar tema">
-                    <option value="light">Claro</option>
-                    <option value="dark">Oscuro</option>
-                    <option value="sepia">Sepia</option>
-                    <option value="gray-scale">Escala Gris</option>
-                    <option value="high-contrast">Alto Contraste</option>
-                    <option value="reduced-motion">Movimiento Reducido</option>
-                </select>
-            </div>
-        </li>
     </ul>
 </div>
 
@@ -136,7 +190,7 @@
 
 <!-- Contenido principal -->
 <main id="main-content">
-    <!-- Hero Section (mantener tu contenido actual) -->
+    <!-- Hero Section -->
     <section class="hero" aria-labelledby="hero-title">
         <div class="container">
             <h1 id="hero-title" class="hero-title">
@@ -144,7 +198,6 @@
                 <span class="title-line">Especialista en Accesibilidad</span>
             </h1>
             <p class="hero-subtitle">Transformando datos en experiencias digitales accesibles e inclusivas</p>
-
             <div class="hero-actions">
                 <a href="projects.html" class="btn btn-primary">Ver Proyectos</a>
                 <a href="about.html" class="btn btn-primary">Conóceme</a>
@@ -183,7 +236,9 @@
 
 <!-- JavaScript -->
 <script src="assets/js/navigation.js"></script>
-<script src="assets/js/particles.js"></script>
+<script src="assets/js/dropdowns.js"></script>
 <script src="assets/js/theme-manager.js"></script>
+<script src="assets/js/accessibility.js"></script>
+<script src="assets/js/particles.js"></script>
 </body>
 </html>

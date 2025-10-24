@@ -53,3 +53,20 @@
     display: block;
   }
 }
+
+// Responsive para dropdown
+@media (max-width: v.$breakpoint-md) {
+  .dropdown {
+    .dropdown-menu {
+      position: fixed;
+      top: auto;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      border-radius: v.$border-radius-lg v.$border-radius-lg 0 0;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+  }
+}

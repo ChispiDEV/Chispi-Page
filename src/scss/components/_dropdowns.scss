@@ -1,0 +1,179 @@
+@use '../abstracts/variables' as v;
+
+// Estilos base para dropdowns
+.dropdown {
+  position: relative;
+  display: inline-block;
+
+  .dropdown-toggle {
+    transition: all v.$transition-base;
+    background: transparent;
+    border: 1px solid transparent;
+    color: inherit;
+    cursor: pointer;
+    padding: v.$spacing-2 v.$spacing-3;
+    display: flex;
+    align-items: center;
+    gap: v.$spacing-2;
+    border-radius: v.$border-radius;
+
+    &:hover {
+      background: rgba(v.$color-primary, 0.1);
+      border-color: rgba(v.$color-primary, 0.2);
+    }
+
+    .dropdown-arrow {
+      font-size: 0.7em;
+      transition: transform v.$transition-base;
+    }
+
+    &[aria-expanded="true"] .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: v.$white;
+    border: 1px solid v.$gray-300;
+    border-radius: v.$border-radius;
+    box-shadow: v.$shadow-lg;
+    min-width: 180px;
+    z-index: v.$z-index-dropdown;
+    display: none;
+    padding: v.$spacing-2 0;
+
+    &.show {
+      display: block;
+    }
+
+    .dropdown-item {
+      transition: all v.$transition-fast;
+      display: block;
+      width: 100%;
+      padding: v.$spacing-3 v.$spacing-4;
+      border: none;
+      background: none;
+      text-align: left;
+      cursor: pointer;
+      color: v.$gray-800;
+
+      &:hover {
+        background: v.$gray-100;
+        color: v.$color-primary;
+      }
+
+      &.active {
+        background: v.$color-primary;
+        color: v.$white;
+      }
+    }
+  }
+}
+
+// Menú de accesibilidad específico
+.accessibility-menu {
+  min-width: 260px;
+
+  .accessibility-option {
+    padding: v.$spacing-3 v.$spacing-4;
+    border-bottom: 1px solid v.$gray-200;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .option-label {
+      transition: all v.$transition-base;
+      display: flex;
+      align-items: center;
+      gap: v.$spacing-3;
+      cursor: pointer;
+      font-weight: v.$font-weight-medium;
+      margin-bottom: v.$spacing-2;
+
+      &:hover {
+        color: v.$color-primary;
+      }
+
+      input[type="checkbox"] {
+        display: none;
+      }
+
+      .toggle-slider {
+        position: relative;
+        display: inline-block;
+        width: 44px;
+        height: 24px;
+        background: v.$gray-300;
+        border-radius: 24px;
+        transition: background v.$transition-base;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 2px;
+          left: 2px;
+          width: 20px;
+          height: 20px;
+          background: v.$white;
+          border-radius: 50%;
+          transition: transform v.$transition-base;
+        }
+      }
+
+      input:checked + .toggle-slider {
+        background: v.$color-primary;
+
+        &::before {
+          transform: translateX(20px);
+        }
+      }
+    }
+
+    .intensity-control {
+      display: flex;
+      align-items: center;
+      gap: v.$spacing-3;
+      margin-top: v.$spacing-2;
+
+      .intensity-slider {
+        flex: 1;
+        height: 4px;
+        background: v.$gray-300;
+        border-radius: 2px;
+        outline: none;
+        cursor: pointer;
+
+        &::-webkit-slider-thumb {
+          appearance: none;
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+          background: v.$color-primary;
+          cursor: pointer;
+        }
+
+        &::-moz-range-thumb {
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+          background: v.$color-primary;
+          cursor: pointer;
+          border: none;
+        }
+      }
+
+      .intensity-value {
+        font-size: v.$font-size-sm;
+        color: v.$gray-600;
+        min-width: 20px;
+        text-align: center;
+        font-weight: v.$font-weight-bold;
+      }
+    }
+  }
+}
+
