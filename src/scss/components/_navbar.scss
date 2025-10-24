@@ -346,9 +346,16 @@ $mobile-breakpoint: v.$breakpoint-md !default;
   background: var(--bg-primary);
   border-left: 1px solid var(--border-color);
   box-shadow: var(--shadow-lg);
-  transition: right 0.3s ease;
-  z-index: $navbar-z-index + 20;
   overflow-y: auto;
+
+  // Asegurar que está sobre la navbar
+  z-index: $navbar-z-index + 20;
+  
+  // Asegurar transición suave
+  transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  // Scroll suave
+  -webkit-overflow-scrolling: touch;
 
   &.active {
     right: 0;
@@ -461,6 +468,8 @@ $mobile-breakpoint: v.$breakpoint-md !default;
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
+
+  // Asegurar que el overlay esté debajo del menú pero sobre el contenido
   z-index: $navbar-z-index + 10;
 
   &.active {
@@ -485,5 +494,23 @@ $mobile-breakpoint: v.$breakpoint-md !default;
 
   &:focus {
     top: 6px;
+  }
+}
+
+
+// Corrección para el botón de hamburguesa en móvil
+@media (max-width: 768px) {
+  .menu-toggle {
+    // Asegurar que sea visible
+    display: flex !important;
+    z-index: 10001;
+
+    // Estilos específicos para móvil
+    background: var(--bg-secondary) !important;
+    border: 1px solid var(--border-color) !important;
+
+    &:hover {
+      background: var(--accent-primary) !important;
+    }
   }
 }

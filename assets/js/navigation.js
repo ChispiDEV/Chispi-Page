@@ -1,5 +1,5 @@
-// assets/js/navigation.js - SISTEMA CORREGIDO
-console.log('🔧 Inicializando navegación...');
+// assets/js/navigation.js - VERSIÓN MEJORADA
+console.log('🔧 Inicializando sistema de navegación...');
 
 class AccessibleNavigation {
     constructor() {
@@ -29,8 +29,7 @@ class AccessibleNavigation {
 
         this.setupMobileMenu();
         this.setupDropdowns();
-        this.setupKeyboardNavigation();
-        this.setupFocusManagement();
+        this.setupEventListeners();
         this.isInitialized = true;
 
         console.log('✅ Navegación accesible inicializada');
@@ -42,19 +41,23 @@ class AccessibleNavigation {
             return;
         }
 
+        console.log('📱 Configurando menú móvil...');
+
         // Toggle del menú móvil
         this.menuToggle.addEventListener('click', (e) => {
+            e.preventDefault();
             e.stopPropagation();
-            this.toggleMobileMenu(true);
+            this.toggleMobileMenu(!this.mobileMenu.classList.contains('active'));
         });
 
         this.closeToggle.addEventListener('click', (e) => {
+            e.preventDefault();
             e.stopPropagation();
             this.toggleMobileMenu(false);
         });
 
         this.menuOverlay.addEventListener('click', (e) => {
-            e.stopPropagation();
+            e.preventDefault();
             this.toggleMobileMenu(false);
         });
 
@@ -72,36 +75,31 @@ class AccessibleNavigation {
                 this.menuToggle.focus();
             }
         });
-
-        // Prevenir que el clic en el menú lo cierre
-        this.mobileMenu.addEventListener('click', (e) => {
-            e.stopPropagation();
-        });
     }
 
     toggleMobileMenu(show) {
         console.log('🍔 Toggle menú móvil:', show);
 
-        const isExpanded = show;
-
-        this.mobileMenu.setAttribute('aria-hidden', !show);
-        this.menuToggle.setAttribute('aria-expanded', isExpanded);
-        this.menuOverlay.setAttribute('aria-hidden', !show);
-
         if (show) {
             this.mobileMenu.classList.add('active');
             this.menuOverlay.classList.add('active');
+            this.menuToggle.setAttribute('aria-expanded', 'true');
+            this.mobileMenu.setAttribute('aria-hidden', 'false');
             document.body.style.overflow = 'hidden';
 
-            // Mover foco al primer elemento del menú
+            // Mover foco al botón de cerrar
             setTimeout(() => {
-                const firstFocusable = this.mobileMenu.querySelector('a, button');
-                if (firstFocusable) firstFocusable.focus();
+                this.closeToggle.focus();
             }, 100);
         } else {
             this.mobileMenu.classList.remove('active');
             this.menuOverlay.classList.remove('active');
+            this.menuToggle.setAttribute('aria-expanded', 'false');
+            this.mobileMenu.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = '';
+
+            // Mover foco al botón de menú
+            this.menuToggle.focus();
         }
     }
 
@@ -109,62 +107,76 @@ class AccessibleNavigation {
         // Dropdown de idioma
         if (this.languageDropdown) {
             const languageToggle = this.languageDropdown.querySelector('.dropdown-toggle');
+            const languageMenu = this.languageDropdown.querySelector('.dropdown-menu');
+
             languageToggle.addEventListener('click', (e) => {
+                e.preventDefault();
                 e.stopPropagation();
                 this.toggleDropdown(this.languageDropdown);
+            });
+
+            // Cerrar al hacer clic en items
+            languageMenu.querySelectorAll('.dropdown-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    this.closeAllDropdowns();
+                });
             });
         }
 
         // Dropdown de tema
         if (this.themeDropdown) {
             const themeToggle = this.themeDropdown.querySelector('.dropdown-toggle');
+            const themeMenu = this.themeDropdown.querySelector('.dropdown-menu');
+
             themeToggle.addEventListener('click', (e) => {
+                e.preventDefault();
                 e.stopPropagation();
                 this.toggleDropdown(this.themeDropdown);
             });
 
             // Selección de tema
-            const themeMenu = this.themeDropdown.querySelector('.dropdown-menu');
             themeMenu.querySelectorAll('[data-theme]').forEach(item => {
-                item.addEventListener('click', () => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
                     const theme = item.getAttribute('data-theme');
+                    console.log('🎨 Seleccionado tema:', theme);
                     this.changeTheme(theme);
-                    this.toggleDropdown(this.themeDropdown, false);
+                    this.closeAllDropdowns();
                 });
             });
         }
 
         // Cerrar dropdowns al hacer clic fuera
-        document.addEventListener('click', () => {
-            this.closeAllDropdowns();
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.dropdown')) {
+                this.closeAllDropdowns();
+            }
         });
 
         // Selector de tema móvil
         const mobileThemeSelector = document.getElementById('mobile-theme-selector');
         if (mobileThemeSelector) {
             mobileThemeSelector.addEventListener('change', (e) => {
-                this.changeTheme(e.target.value);
+                const theme = e.target.value;
+                console.log('📱 Tema móvil seleccionado:', theme);
+                this.changeTheme(theme);
             });
+
+            // Sincronizar con el tema actual
+            this.syncMobileThemeSelector();
         }
     }
 
-    toggleDropdown(dropdown, force) {
+    toggleDropdown(dropdown) {
         if (!dropdown) return;
 
         const isOpen = dropdown.classList.contains('open');
-        const shouldOpen = force !== undefined ? force : !isOpen;
 
         this.closeAllDropdowns();
 
-        if (shouldOpen) {
+        if (!isOpen) {
             dropdown.classList.add('open');
             dropdown.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'true');
-
-            // Mover foco al primer elemento
-            setTimeout(() => {
-                const firstItem = dropdown.querySelector('.dropdown-item');
-                if (firstItem) firstItem.focus();
-            }, 50);
         }
     }
 
@@ -178,10 +190,15 @@ class AccessibleNavigation {
 
     changeTheme(theme) {
         console.log('🎨 Cambiando tema a:', theme);
+
+        // Aplicar tema
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('preferred-theme', theme);
 
-        // Notificar a las partículas del cambio de tema
+        // Sincronizar selectores
+        this.syncMobileThemeSelector();
+
+        // Notificar a las partículas
         if (window.particleSystem && typeof window.particleSystem.onThemeChange === 'function') {
             window.particleSystem.onThemeChange(theme);
         }
@@ -191,7 +208,20 @@ class AccessibleNavigation {
         document.dispatchEvent(event);
     }
 
-    setupKeyboardNavigation() {
+    syncMobileThemeSelector() {
+        const mobileThemeSelector = document.getElementById('mobile-theme-selector');
+        if (mobileThemeSelector) {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            mobileThemeSelector.value = currentTheme;
+        }
+    }
+
+    setupEventListeners() {
+        // Escuchar cambios de tema externos
+        document.addEventListener('themechange', (e) => {
+            this.syncMobileThemeSelector();
+        });
+
         // Navegación por teclado en dropdowns
         document.addEventListener('keydown', (e) => {
             const dropdown = e.target.closest('.dropdown');
@@ -217,11 +247,16 @@ class AccessibleNavigation {
                     this.closeAllDropdowns();
                     dropdown.querySelector('.dropdown-toggle').focus();
                     break;
+
+                case 'Tab':
+                    if (!e.shiftKey && currentIndex === items.length - 1) {
+                        e.preventDefault();
+                        this.closeAllDropdowns();
+                    }
+                    break;
             }
         });
-    }
 
-    setupFocusManagement() {
         // Trap focus en menú móvil
         this.mobileMenu.addEventListener('keydown', (e) => {
             if (!this.mobileMenu.classList.contains('active')) return;
@@ -253,7 +288,6 @@ class AccessibleNavigation {
 function initializeNavigation() {
     console.log('🚀 Iniciando sistema de navegación...');
 
-    // Esperar a que el DOM esté listo
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
             window.accessibleNav = new AccessibleNavigation();
@@ -266,7 +300,8 @@ function initializeNavigation() {
 // Iniciar inmediatamente
 initializeNavigation();
 
-// Comandos de debug
+// Debug helpers
 console.log('🔧 Comandos de navegación:');
 console.log('- accessibleNav.toggleMobileMenu(true/false)');
 console.log('- accessibleNav.changeTheme("dark")');
+console.log('- accessibleNav.closeAllDropdowns()');

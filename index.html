@@ -9,7 +9,7 @@
 </head>
 <body>
 <!-- Navegación Mejorada -->
-<nav class="navbar" aria-label="Navegación principal" style="z-index: 1000;">
+<nav class="navbar" aria-label="Navegación principal">
     <div class="nav-container">
         <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
@@ -17,7 +17,7 @@
         <div class="nav-brand">
             <a href="index.html" class="brand-link">
                 <h1>Cristina Fuentes</h1>
-                <img src="assets/icons/es-variant.svg" alt="Español" class="language-flag" style="width: 20px; height: 20px; border-radius: 50%;">
+                <img src="assets/icons/es-variant.svg" alt="Español" class="language-flag">
             </a>
         </div>
 
@@ -65,7 +65,7 @@
                 </ul>
             </div>
 
-            <!-- Selector de Tema -->
+            <!-- Selector de Tema CORREGIDO -->
             <div class="dropdown" id="theme-dropdown">
                 <button class="nav-button dropdown-toggle"
                         id="theme-toggle"
@@ -80,7 +80,9 @@
                     <li><button class="dropdown-item" data-theme="light">🌞 Claro</button></li>
                     <li><button class="dropdown-item" data-theme="dark">🌙 Oscuro</button></li>
                     <li><button class="dropdown-item" data-theme="sepia">📜 Sepia</button></li>
+                    <li><button class="dropdown-item" data-theme="gray-scale">⚪ Escala Gris</button></li>
                     <li><button class="dropdown-item" data-theme="high-contrast">⚫ Alto Contraste</button></li>
+                    <li><button class="dropdown-item" data-theme="reduced-motion">🎬 Movimiento Reducido</button></li>
                 </ul>
             </div>
 
@@ -97,7 +99,7 @@
     </div>
 </nav>
 
-<!-- Menú Móvil -->
+<!-- Menú Móvil CORREGIDO -->
 <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
     <div class="mobile-menu-header">
         <button class="close-button" id="close-menu-toggle" aria-label="Cerrar menú">
@@ -112,7 +114,7 @@
         <li><a href="devlog.html">Devlog</a></li>
         <li><a href="contact.html">Contacto</a></li>
 
-        <!-- Opciones de accesibilidad en móvil -->
+        <!-- Opciones de accesibilidad en móvil CORREGIDAS -->
         <li class="mobile-options">
             <div class="mobile-theme-selector">
                 <span>Tema:</span>
@@ -120,7 +122,9 @@
                     <option value="light">Claro</option>
                     <option value="dark">Oscuro</option>
                     <option value="sepia">Sepia</option>
+                    <option value="gray-scale">Escala Gris</option>
                     <option value="high-contrast">Alto Contraste</option>
+                    <option value="reduced-motion">Movimiento Reducido</option>
                 </select>
             </div>
         </li>
