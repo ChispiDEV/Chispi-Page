@@ -130,9 +130,9 @@ class VisibleParticleSystem {
         });
 
         // Dibujar borde de debug (verde = funcionando)
-        this.ctx.strokeStyle = 'lime';
-        this.ctx.lineWidth = 2;
-        this.ctx.strokeRect(0, 0, this.canvas.width, this.canvas.height);
+        // this.ctx.strokeStyle = 'lime';
+        // this.ctx.lineWidth = 2;
+        // this.ctx.strokeRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
     animate() {
