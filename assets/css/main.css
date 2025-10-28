@@ -1453,14 +1453,16 @@ body {
   font-size: 1.2em;
   flex-shrink: 0;
 }
-.skip-link::after {
-  content: "Saltar al contenido principal";
+.skip-link .skip-text {
   white-space: nowrap;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
-.skip-link:hover::after, .skip-link:focus::after {
+.skip-link:hover .skip-text, .skip-link:focus .skip-text {
   opacity: 1;
+}
+.skip-link:not(:hover):not(:focus) .skip-text {
+  display: none;
 }
 
 @media (max-width: 768px) {
