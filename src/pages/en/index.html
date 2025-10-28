@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cristina Fuentes - Frontend Developer & Accessibility Specialist</title>
+    <meta name="description" content="Cristina Fuentes Portfolio - Frontend Developer specialized in web accessibility and data analysis">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+</head>
+<body>
+<!-- Skip Link -->
+<a href="#main-content" class="skip-link">
+    <span class="skip-icon">⚡</span>
+    Skip to content
+</a>
+
+<!-- Navigation -->
+<nav class="navbar" aria-label="Main navigation">
+    <div class="nav-container">
+        <div class="nav-brand">
+            <a href="index.html" class="brand-link">
+                <h1>Cristina Fuentes</h1>
+                <img src="../../assets/icons/gb.svg" alt="English" class="language-flag">
+            </a>
+        </div>
+
+        <ul class="nav-menu">
+            <li><a href="index.html" aria-current="page">Home</a></li>
+            <li><a href="about.html">About Me</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="devlog.html">Devlog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <div class="nav-controls">
+            <!-- Language Selector -->
+            <div class="dropdown language-dropdown">
+                <button class="nav-button dropdown-toggle"
+                        id="language-toggle"
+                        type="button"
+                        aria-expanded="false"
+                        aria-label="Change language">
+                    <span class="button-text">Language</span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="language-toggle">
+                    <li>
+                        <a href="../es/index.html" class="dropdown-item" data-lang="es">
+                            <img src="../../assets/icons/es-variant.svg" alt="Español" class="flag-icon">
+                            Spanish
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.html" class="dropdown-item active" data-lang="en">
+                            <img src="../../assets/icons/gb.svg" alt="English" class="flag-icon">
+                            English
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../fr/index.html" class="dropdown-item" data-lang="fr">
+                            <img src="../../assets/icons/fr.svg" alt="Français" class="flag-icon">
+                            French
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Theme and Accessibility controls (same structure) -->
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<main id="main-content">
+    <!-- Hero Section with circular photo -->
+    <section class="hero" aria-labelledby="hero-title">
+        <div class="container">
+            <div class="hero-profile">
+                <div class="profile-image-container">
+                    <img src="../../assets/images/foto-perfil.jpg" alt="Cristina Fuentes photo" class="profile-image">
+                </div>
+                <div class="hero-content">
+                    <h1 id="hero-title" class="hero-title">
+                        <span class="title-line">Hello, I'm Cristina</span>
+                        <span class="title-line">Frontend Developer</span>
+                        <span class="title-line">Accessibility Specialist</span>
+                    </h1>
+                    <p class="hero-subtitle">Transforming data into accessible and inclusive digital experiences</p>
+                    <div class="hero-actions">
+                        <a href="projects.html" class="btn btn-primary">View Projects</a>
+                        <a href="about.html" class="btn btn-secondary">About Me</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- English content continues... -->
+</main>
+
+<!-- Footer -->
+<footer class="footer" role="contentinfo">
+    <div class="container">
+        <p>&copy; <span id="current-year">2025</span> Cristina Fuentes. All rights reserved.</p>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/cristina-fg/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://github.com/ChispiDEV" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="mailto:cristinafg.it@gmail.com">Email</a>
+        </div>
+    </div>
+</footer>
+
+<!-- JavaScript -->
+<script src="../../assets/js/navigation.js"></script>
+<script src="../../assets/js/dropdowns.js"></script>
+<script src="../../assets/js/theme-manager.js"></script>
+<script src="../../assets/js/accessibility.js"></script>
+<script src="../../assets/js/footer.js"></script>
+<script src="../../assets/js/particles.js"></script>
+</body>
+</html>

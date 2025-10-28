@@ -8,17 +8,15 @@
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
-<!-- Skip Link mejorado -->
+<!-- Skip Link -->
 <a href="#main-content" class="skip-link">
     <span class="skip-icon">⚡</span>
-    Saltar al contenido principal
+    Saltar al contenido
 </a>
 
-<!-- Navegación Mejorada -->
+<!-- Navegación -->
 <nav class="navbar" aria-label="Navegación principal">
     <div class="nav-container">
-        
-        <!-- Branding con bandera -->
         <div class="nav-brand">
             <a href="index.html" class="brand-link">
                 <h1>Cristina Fuentes</h1>
@@ -26,7 +24,6 @@
             </a>
         </div>
 
-        <!-- Menú principal -->
         <ul class="nav-menu">
             <li><a href="src/pages/es/index.html" aria-current="page">Inicio</a></li>
             <li><a href="src/pages/es/about.html">Sobre mí</a></li>
@@ -35,7 +32,6 @@
             <li><a href="src/pages/es/contact.html">Contacto</a></li>
         </ul>
 
-        <!-- Controles: Idioma, Tema, Accesibilidad, Menú Hamburguesa -->
         <div class="nav-controls">
             <!-- Selector de Idioma -->
             <div class="dropdown language-dropdown">
@@ -54,180 +50,22 @@
                         </a>
                     </li>
                     <li>
-                        <a href="src/pages/en/en-index.html" class="dropdown-item" data-lang="en">
+                        <a href="src/pages/en/index.html" class="dropdown-item" data-lang="en">
                             <img src="assets/icons/gb.svg" alt="English" class="flag-icon">
                             English
                         </a>
                     </li>
                     <li>
-                        <a href="src/pages/fr/fr-index.html" class="dropdown-item" data-lang="fr">
+                        <a href="src/pages/fr/index.html" class="dropdown-item" data-lang="fr">
                             <img src="assets/icons/fr.svg" alt="Français" class="flag-icon">
                             Français
                         </a>
                     </li>
                 </ul>
             </div>
-
-            <!-- Selector de Tema (SOLO colores) -->
-            <div class="dropdown theme-dropdown">
-                <button class="nav-button dropdown-toggle"
-                        id="theme-toggle"
-                        type="button"
-                        aria-expanded="false"
-                        aria-label="Cambiar tema de color">
-                    <span class="button-text">Tema</span>
-                </button>
-                <ul class="dropdown-menu theme-menu" aria-labelledby="theme-toggle">
-                    <li>
-                        <button class="dropdown-item theme-option" data-theme="light">
-                            <span class="theme-preview light-theme" data-theme="light"></span>
-                            🌞 Claro
-                        </button></li>
-                    <li>
-                        <button class="dropdown-item theme-option" data-theme="dark">
-                            <span class="theme-preview dark-theme" data-theme="dark"></span>
-                            🌙 Oscuro
-                        </button></li>
-                    <li>
-                        <button class="dropdown-item theme-option" data-theme="sepia">
-                            <span class="theme-preview sepia-theme" data-theme="sepia"></span>
-                            📜 Sepia
-                        </button></li>
-                    <li>
-                        <button class="dropdown-item theme-option" data-theme="gray-scale">
-                            <span class="theme-preview gray-theme" data-theme="gray-scale"></span>
-                            ⚪ Escala de Grises
-                        </button></li>
-                    <li>
-                        <button class="dropdown-item theme-option" data-theme="high-contrast">
-                            <span class="theme-preview contrast-theme" data-theme="high-contrast"></span>
-                            ⚫ Alto Contraste
-                        </button></li>
-                </ul>
-            </div>
-
-            <!-- Selector de Accesibilidad -->
-            <div class="dropdown accessibility-dropdown">
-                <button class="nav-button dropdown-toggle"
-                        id="accessibility-toggle"
-                        type="button"
-                        aria-expanded="false"
-                        aria-label="Opciones de accesibilidad">
-                    <span class="button-text">Accesibilidad</span>
-                </button>
-                <ul class="dropdown-menu accessibility-menu" aria-labelledby="accessibility-toggle">
-                    <!-- Movimiento Reducido -->
-                    <li class="accessibility-option motion-intensity">
-                        <div class="option-header">
-                            <span class="option-title">Movimiento Reducido</span>
-                            <label class="toggle-switch">
-                                <input type="checkbox" id="reduced-motion-toggle">
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                        <div class="intensity-control" id="motion-intensity-control" style="display: none;">
-                            <span class="intensity-label">Intensidad:</span>
-                            <input type="range" min="1" max="4" value="1" class="intensity-slider" id="motion-intensity">
-                            <span class="intensity-value">1</span>
-                        </div>
-                    </li>
-
-                    <!-- Modo Dislexia -->
-                    <li class="accessibility-option">
-                        <div class="option-header">
-                            <span class="option-title">Modo Dislexia</span>
-                            <label class="toggle-switch">
-                                <input type="checkbox" id="dyslexia-mode-toggle">
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                        <div class="intensity-control" style="display: none;">
-                            <span class="intensity-label">Intensidad:</span>
-                            <input type="range" min="1" max="5" value="3" class="intensity-slider" id="dyslexia-intensity">
-                            <span class="intensity-value">3</span>
-                        </div>
-                    </li>
-
-                    <!-- Modo Lectura -->
-                    <li class="accessibility-option">
-                        <div class="option-header">
-                            <span class="option-title">Modo Lectura</span>
-                            <label class="toggle-switch">
-                                <input type="checkbox" id="reading-mode-toggle">
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                        <div class="intensity-control" style="display: none;">
-                            <span class="intensity-label">Intensidad:</span>
-                            <input type="range" min="1" max="5" value="3" class="intensity-slider" id="reading-intensity">
-                            <span class="intensity-value">3</span>
-                        </div>
-                    </li>
-
-                    <!-- Modo Fotofobia -->
-                    <li class="accessibility-option">
-                        <div class="option-header">
-                            <span class="option-title">Modo Fotofobia</span>
-                            <label class="toggle-switch">
-                                <input type="checkbox" id="photophobia-mode-toggle">
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                        <div class="intensity-control" style="display: none;">
-                            <span class="intensity-label">Intensidad:</span>
-                            <input type="range" min="1" max="5" value="3" class="intensity-slider" id="photophobia-intensity">
-                            <span class="intensity-value">3</span>
-                        </div>
-                    </li>
-
-                    <!-- Tamaño de Fuente -->
-                    <li class="accessibility-option">
-                        <div class="option-header">
-                            <span class="option-title">Tamaño de Fuente</span>
-                            <label class="toggle-switch">
-                                <input type="checkbox" id="font-size-toggle">
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                        <div class="intensity-control" style="display: none;">
-                            <span class="intensity-label">Tamaño:</span>
-                            <input type="range" min="1" max="5" value="3" class="intensity-slider" id="font-size">
-                            <span class="intensity-value">3</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Menú Hamburguesa -->
-            <button class="nav-button menu-toggle"
-                    id="menu-toggle"
-                    aria-label="Abrir menú"
-                    aria-expanded="false"
-                    aria-controls="mobile-menu">
-                <span class="hamburger-icon"></span>
-            </button>
         </div>
     </div>
 </nav>
-
-<!-- Menú Móvil -->
-<div id="mobile-menu" class="mobile-menu" aria-hidden="true">
-    <div class="mobile-menu-header">
-        <button class="close-button" id="close-menu-toggle" aria-label="Cerrar menú">
-            <span class="close-icon">×</span>
-        </button>
-    </div>
-    <ul class="mobile-nav">
-        <li><a href="index.html" aria-current="page">Inicio</a></li>
-        <li><a href="about.html">Sobre mí</a></li>
-        <li><a href="projects.html">Proyectos</a></li>
-        <li><a href="devlog.html">Devlog</a></li>
-        <li><a href="contact.html">Contacto</a></li>
-    </ul>
-</div>
-
-<!-- Overlay para menú móvil -->
-<div id="menu-overlay" class="menu-overlay" aria-hidden="true"></div>
 
 <!-- Contenido principal -->
 <main id="main-content">
@@ -235,24 +73,61 @@
     <section class="hero" aria-labelledby="hero-title">
         <div class="container">
             <h1 id="hero-title" class="hero-title">
-                <span class="title-line">Desarrolladora Frontend</span>
-                <span class="title-line">Especialista en Accesibilidad</span>
+                <span class="title-line">Bienvenido/a a mi Portfolio</span>
+                <span class="title-line">Accesibilidad & Desarrollo Frontend</span>
             </h1>
-            <p class="hero-subtitle">Transformando datos en experiencias digitales accesibles e inclusivas</p>
-            <div class="hero-actions">
-                <a href="projects.html" class="btn btn-primary">Ver Proyectos</a>
-                <a href="about.html" class="btn btn-primary">Conóceme</a>
+            <p class="hero-subtitle">Selecciona tu idioma para comenzar la experiencia</p>
+
+            <div class="language-selection">
+                <div class="language-cards">
+                    <a href="src/pages/es/index.html" class="language-card" data-lang="es">
+                        <div class="language-flag-container">
+                            <img src="assets/icons/es-variant.svg" alt="Español" class="language-flag-large">
+                        </div>
+                        <h3>Español</h3>
+                        <p>Contenido en español</p>
+                    </a>
+
+                    <a href="src/pages/en/index.html" class="language-card" data-lang="en">
+                        <div class="language-flag-container">
+                            <img src="assets/icons/gb.svg" alt="English" class="language-flag-large">
+                        </div>
+                        <h3>English</h3>
+                        <p>Content in English</p>
+                    </a>
+
+                    <a href="src/pages/fr/index.html" class="language-card" data-lang="fr">
+                        <div class="language-flag-container">
+                            <img src="assets/icons/fr.svg" alt="Français" class="language-flag-large">
+                        </div>
+                        <h3>Français</h3>
+                        <p>Contenu en français</p>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Sección de introducción -->
-    <section class="intro" aria-labelledby="intro-title">
+    <!-- Sección de características -->
+    <section class="features" aria-labelledby="features-title">
         <div class="container">
-            <h2 id="intro-title" class="section-title">Hola, soy Cristina 👋</h2>
-            <div class="intro-content">
-                <p><strong>Analista de Datos Junior</strong> con formación en STEM y experiencia en desarrollo frontend accesible.</p>
-                <p>Combino análisis técnico con diseño centrado en el usuario para crear soluciones digitales inclusivas.</p>
+            <h2 id="features-title" class="section-title">Características del Sitio</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">♿</div>
+                    <h3>Totalmente Accesible</h3>
+                    <p>Diseñado siguiendo las pautas WCAG 2.1 AA</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Multilingüe</h3>
+                    <p>Disponible en español, inglés y francés</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Temas Personalizables</h3>
+                    <p>Adapta la apariencia a tus necesidades</p>
+                </div>
             </div>
         </div>
     </section>
@@ -261,26 +136,12 @@
 <!-- Footer -->
 <footer class="footer" role="contentinfo">
     <div class="container">
-        <p>&copy; 2025 Cristina Fuentes. Todos los derechos reservados.</p>
-        <div class="social-links">
-            <a href="https://www.linkedin.com/in/cristina-fg/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="https://github.com/ChispiDEV" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="mailto:cristinafg.it@gmail.com">Email</a>
-        </div>
+        <p>&copy; <span id="current-year">2025</span> Cristina Fuentes. Todos los derechos reservados.</p>
     </div>
 </footer>
 
-<!-- Partículas -->
-<div class="particles-container" aria-hidden="true">
-    <canvas id="particles-canvas"></canvas>
-</div>
-
 <!-- JavaScript -->
 <script src="assets/js/navigation.js"></script>
-<script src="assets/js/dropdowns.js"></script>
-<script src="assets/js/theme-manager.js"></script>
-<script src="assets/js/accessibility.js"></script>
 <script src="assets/js/footer.js"></script>
-<script src="assets/js/particles.js"></script>
 </body>
 </html>
