@@ -1,0 +1,89 @@
+// src/scss/accessibility/_photophobia-controls.scss
+.photophobia-controls {
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  margin-top: 1rem;
+  border: 1px solid var(--border-color);
+
+  .slider-container {
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+      font-size: 0.9rem;
+
+      .slider-value {
+        background: var(--bg-primary);
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        font-weight: bold;
+        min-width: 2rem;
+        text-align: center;
+      }
+    }
+
+    .slider {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--border-color);
+      outline: none;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      &::-webkit-slider-thumb {
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--accent-primary);
+        cursor: pointer;
+      }
+
+      &::-moz-range-thumb {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--accent-primary);
+        cursor: pointer;
+        border: none;
+      }
+    }
+  }
+}
+
+// Estados de accesibilidad
+[data-reduced-motion] {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+[data-low-refresh="true"] {
+  .particles-container {
+    animation: none !important;
+  }
+}
+
+[data-photophobia-mode="true"] {
+  // Estilos específicos para modo fotofobia
+  img, video {
+    opacity: 0.8;
+    filter: brightness(0.9) contrast(1.1);
+  }
+}

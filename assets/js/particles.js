@@ -1,10 +1,7 @@
-// assets/js/particles.js - VERSIÓN CON PARTÍCULAS VISIBLES
-console.log('🔴 particles.js cargado - VERSIÓN VISIBLE');
-
-// ===== SISTEMA DE PARTÍCULAS VISIBLES =====
-class VisibleParticleSystem {
+// assets/js/particles.js
+class EnhancedParticleSystem {
     constructor(canvasId) {
-        console.log('🚀 Creando sistema de partículas VISIBLE...');
+        console.log('🚀 Creando sistema de partículas MEJORADO...');
 
         this.canvas = document.getElementById(canvasId);
         if (!this.canvas) {
@@ -16,27 +13,27 @@ class VisibleParticleSystem {
         this.particles = [];
         this.animationId = null;
         this.isInitialized = false;
+        this.lowRefreshRate = false;
+        this.lastFrameTime = 0;
+        this.frameInterval = 1000 / 60; // 60 FPS por defecto
 
         console.log('✅ Canvas encontrado');
         this.init();
     }
 
     init() {
-        console.log('🎯 Inicializando partículas VISIBLES...');
+        console.log('🎯 Inicializando partículas MEJORADAS...');
 
-        // CONFIGURACIÓN MÁS VISIBLE
+        // Configuración mejorada con valores CSS
         this.config = {
-            count: 80,
-            colors: [
-                'rgba(60, 200, 143, 0.4)',    // Verde más visible
-                'rgba(51, 91, 154, 0.35)',    // Azul más visible
-                'rgba(87, 196, 220, 0.3)',    // Azul claro más visible
-                'rgba(255, 255, 255, 0.25)',  // Blanco más visible
-                'rgba(200, 220, 255, 0.3)'    // Azul claro más visible
-            ],
-            sizeMin: 1.5,
-            sizeMax: 4,
-            speed: 0.8
+            count: this.getCSSVariable('--particles-count', 80),
+            colors: this.getParticleColors(),
+            sizeMin: this.getCSSVariable('--particles-size-min', 1.5),
+            sizeMax: this.getCSSVariable('--particles-size-max', 4),
+            speed: this.getCSSVariable('--particles-speed', 0.8),
+            opacity: this.getCSSVariable('--particles-opacity', 0.6),
+            blur: this.getCSSVariable('--particles-blur', 0),
+            moveSpeed: this.getCSSVariable('--particles-move-speed', 1)
         };
 
         setTimeout(() => {
@@ -45,9 +42,37 @@ class VisibleParticleSystem {
             this.startAnimation();
             this.isInitialized = true;
 
-            console.log('🎉 PARTÍCULAS VISIBLES INICIADAS');
-            console.log('👉 Si no ves nada, prueba en la consola: makeParticlesBrighter()');
+            console.log('🎉 PARTÍCULAS MEJORADAS INICIADAS');
         }, 100);
+    }
+
+    getCSSVariable(name, defaultValue) {
+        const value = getComputedStyle(document.documentElement).getPropertyValue(name);
+        if (value) {
+            return parseFloat(value.trim());
+        }
+        return defaultValue;
+    }
+
+    getParticleColors() {
+        // Intentar obtener colores del array CSS
+        const colorsArray = getComputedStyle(document.documentElement).getPropertyValue('--particles-colors-array');
+        if (colorsArray) {
+            try {
+                return JSON.parse(colorsArray.replace(/'/g, '"'));
+            } catch (e) {
+                console.warn('No se pudo parsear --particles-colors-array, usando colores por defecto');
+            }
+        }
+
+        // Colores por defecto basados en el tema
+        return [
+            'rgba(60, 200, 143, 0.4)',
+            'rgba(51, 91, 154, 0.35)',
+            'rgba(87, 196, 220, 0.3)',
+            'rgba(255, 255, 255, 0.25)',
+            'rgba(200, 220, 255, 0.3)'
+        ];
     }
 
     setupCanvas() {
@@ -58,6 +83,11 @@ class VisibleParticleSystem {
         this.canvas.height = height;
         this.canvas.style.display = 'block';
         this.canvas.style.background = 'transparent';
+        this.canvas.style.position = 'fixed';
+        this.canvas.style.top = '0';
+        this.canvas.style.left = '0';
+        this.canvas.style.zIndex = '-1';
+        this.canvas.style.pointerEvents = 'none';
 
         console.log('📐 Canvas dimensionado a:', width, 'x', height);
     }
@@ -70,15 +100,12 @@ class VisibleParticleSystem {
                 x: Math.random() * this.canvas.width,
                 y: Math.random() * this.canvas.height,
                 size: Math.random() * (this.config.sizeMax - this.config.sizeMin) + this.config.sizeMin,
-                speedX: (Math.random() - 0.5) * this.config.speed,
-                speedY: (Math.random() - 0.5) * this.config.speed,
+                speedX: (Math.random() - 0.5) * this.config.speed * this.config.moveSpeed,
+                speedY: (Math.random() - 0.5) * this.config.speed * this.config.moveSpeed,
                 color: this.config.colors[Math.floor(Math.random() * this.config.colors.length)],
                 originalColor: this.config.colors[Math.floor(Math.random() * this.config.colors.length)]
             });
         }
-
-        console.log('✨ Partículas creadas:', this.particles.length);
-        console.log('🎨 Colores usados:', this.config.colors);
     }
 
     updateParticles() {
@@ -97,9 +124,9 @@ class VisibleParticleSystem {
                 particle.y = Math.max(1, Math.min(this.canvas.height - 1, particle.y));
             }
 
-            // Movimiento orgánico
-            particle.speedX += (Math.random() - 0.5) * 0.02;
-            particle.speedY += (Math.random() - 0.5) * 0.02;
+            // Movimiento orgánico reducido para mejor rendimiento
+            particle.speedX += (Math.random() - 0.5) * 0.01;
+            particle.speedY += (Math.random() - 0.5) * 0.01;
 
             // Limitar velocidad
             const maxSpeed = this.config.speed * 1.5;
@@ -112,73 +139,102 @@ class VisibleParticleSystem {
     }
 
     drawParticles() {
-        // LIMPIAR COMPLETAMENTE - sin fondo oscuro
+        // Limpiar canvas
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        // Dibujar partículas con brillo
-        this.particles.forEach(particle => {
-            // Brillo suave
-            this.ctx.shadowColor = particle.color;
-            this.ctx.shadowBlur = 12;
+        // Aplicar blur si está configurado
+        if (this.config.blur > 0) {
+            this.ctx.shadowBlur = this.config.blur;
+        }
 
+        // Dibujar partículas
+        this.particles.forEach(particle => {
             this.ctx.beginPath();
             this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
             this.ctx.fillStyle = particle.color;
             this.ctx.fill();
-
-            this.ctx.shadowBlur = 0;
         });
 
-        // Dibujar borde de debug (verde = funcionando)
-        // this.ctx.strokeStyle = 'lime';
-        // this.ctx.lineWidth = 2;
-        // this.ctx.strokeRect(0, 0, this.canvas.width, this.canvas.height);
+        // Resetear shadow
+        this.ctx.shadowBlur = 0;
     }
 
-    animate() {
-        this.updateParticles();
-        this.drawParticles();
-        this.animationId = requestAnimationFrame(() => this.animate());
+    animate(currentTime) {
+        if (!this.lastFrameTime) this.lastFrameTime = currentTime;
+
+        const deltaTime = currentTime - this.lastFrameTime;
+
+        if (deltaTime >= this.frameInterval) {
+            this.updateParticles();
+            this.drawParticles();
+            this.lastFrameTime = currentTime - (deltaTime % this.frameInterval);
+        }
+
+        this.animationId = requestAnimationFrame((time) => this.animate(time));
     }
 
     startAnimation() {
         if (this.animationId) {
             cancelAnimationFrame(this.animationId);
         }
-        console.log('▶️ Iniciando animación VISIBLE...');
-        this.animate();
+        this.lastFrameTime = 0;
+        this.animationId = requestAnimationFrame((time) => this.animate(time));
     }
 
-    // Hacer partículas más brillantes
-    makeBrighter() {
-        this.particles.forEach(particle => {
-            const newColor = particle.color.replace(/[\d\.]+\)$/g, '0.6)');
-            particle.color = newColor;
-        });
-        console.log('💡 Partículas hechas más brillantes');
+    stopAnimation() {
+        if (this.animationId) {
+            cancelAnimationFrame(this.animationId);
+            this.animationId = null;
+        }
     }
 
-    // Hacer partículas más grandes
-    makeLarger() {
-        this.particles.forEach(particle => {
-            particle.size *= 1.5;
-        });
-        console.log('🔍 Partículas agrandadas');
+    setLowRefreshRate(enabled) {
+        this.lowRefreshRate = enabled;
+        this.frameInterval = enabled ? 1000 / 30 : 1000 / 60; // 30 FPS o 60 FPS
     }
 
-    // Reinicio
+    onThemeChange(theme) {
+        if (window.particleThemes && window.particleThemes[theme]) {
+            this.config.colors = window.particleThemes[theme].colors;
+            this.restart();
+        }
+    }
+
+    updateFromCSS() {
+        this.config.count = this.getCSSVariable('--particles-count', 80);
+        this.config.opacity = this.getCSSVariable('--particles-opacity', 0.6);
+        this.config.speed = this.getCSSVariable('--particles-speed', 0.8);
+        this.config.moveSpeed = this.getCSSVariable('--particles-move-speed', 1);
+
+        this.restart();
+    }
+
     restart() {
         this.createParticles();
         this.startAnimation();
     }
+
+    // Métodos públicos para debugging
+    makeBrighter() {
+        this.particles.forEach(particle => {
+            const newColor = particle.color.replace(/[\d\.]+\)$/g, '0.8)');
+            particle.color = newColor;
+        });
+    }
+
+    makeLarger() {
+        this.particles.forEach(particle => {
+            particle.size *= 1.5;
+        });
+    }
 }
 
-// ===== INICIALIZACIÓN =====
-function initializeVisibleParticles() {
-    console.log('🌊 INICIANDO PARTÍCULAS VISIBLES...');
+// Inicialización mejorada
+function initializeEnhancedParticles() {
+    console.log('🌊 INICIANDO PARTÍCULAS MEJORADAS...');
 
     setTimeout(() => {
-        window.particleSystem = new VisibleParticleSystem('particles-canvas');
+        window.particleSystem = new EnhancedParticleSystem('particles-canvas');
 
         // Comandos globales para debugging
         window.makeParticlesBrighter = function() {
@@ -193,41 +249,11 @@ function initializeVisibleParticles() {
             }
         };
 
-        window.showParticleDebug = function() {
-            console.log('🔧 DEBUG PARTÍCULAS:');
-            console.log('- makeParticlesBrighter() - Aumenta brillo');
-            console.log('- makeParticlesLarger() - Aumenta tamaño');
-            console.log('- particleSystem.restart() - Reinicia');
-            console.log('- Partículas activas:', window.particleSystem?.particles?.length);
-        };
-
     }, 100);
-}
-
-// ===== DIAGNÓSTICO RÁPIDO =====
-function quickDiagnostic() {
-    const canvas = document.getElementById('particles-canvas');
-    console.log('🔍 DIAGNÓSTICO RÁPIDO:');
-    console.log('- Canvas:', !!canvas);
-    console.log('- Canvas tamaño:', canvas?.width, 'x', canvas?.height);
-    console.log('- Z-index:', getComputedStyle(canvas).zIndex);
-    console.log('- Opacidad:', getComputedStyle(canvas).opacity);
-
-    // Verificar si hay elementos superpuestos
-    const overlapped = document.elementsFromPoint(100, 100);
-    console.log('- Elementos en (100,100):', overlapped[0]?.tagName);
 }
 
 // Iniciar cuando esté listo
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('📄 DOM listo - Iniciando partículas visibles...');
-    quickDiagnostic();
-    initializeVisibleParticles();
+    console.log('📄 DOM listo - Iniciando partículas mejoradas...');
+    initializeEnhancedParticles();
 });
-
-// Comandos iniciales
-console.log('💡 COMANDOS DISPONIBLES:');
-console.log('- makeParticlesBrighter()');
-console.log('- makeParticlesLarger()');
-console.log('- showParticleDebug()');
-console.log('- quickDiagnostic()');

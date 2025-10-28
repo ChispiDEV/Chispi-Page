@@ -1,26 +1,45 @@
 {
   "name": "chispi-page",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "3.1.0",
+  "description": "Página personal con sistema de partículas y accesibilidad mejorada",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "gulp watch",
+    "build": "NODE_ENV=production gulp build",
+    "build:dev": "gulp styles",
+    "deploy": "npm run build",
+    "test": "echo \"No tests specified\" && exit 0",
+    "clean": "rm -rf assets/css/*",
+    "predeploy": "npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ChispiDEV/Chispi-Page.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "portfolio",
+    "accessibility",
+    "particles",
+    "responsive"
+  ],
+  "author": "ChispiDEV",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/ChispiDEV/Chispi-Page/issues"
   },
   "homepage": "https://github.com/ChispiDEV/Chispi-Page#readme",
-  "description": "",
   "devDependencies": {
     "gulp": "^5.0.1",
     "gulp-sass": "^6.0.1",
-    "sass": "^1.93.2"
+    "sass": "^1.93.2",
+    "gulp-postcss": "^9.0.1",
+    "autoprefixer": "^10.4.16",
+    "cssnano": "^6.0.1",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-if": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
   }
 }

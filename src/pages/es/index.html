@@ -165,20 +165,40 @@
                     </li>
 
                     <!-- Modo Fotofobia -->
-                    <li class="accessibility-option">
+                    <li class="accessibility-option photophobia-option">
                         <div class="option-header">
                             <span class="option-title">Modo Fotofobia</span>
                             <label class="toggle-switch">
-                                <input type="checkbox" id="photophobia-mode-toggle">
+                                <input type="checkbox" id="photophobia-mode-toggle" class="toggle-input">
                                 <span class="toggle-slider"></span>
                             </label>
                         </div>
-                        <div class="intensity-control" style="display: none;">
-                            <span class="intensity-label">Intensidad:</span>
-                            <input type="range" min="1" max="5" value="3" class="intensity-slider" id="photophobia-intensity">
-                            <span class="intensity-value">3</span>
+                        
+                        <div id="photophobia-controls" class="photophobia-controls" style="display: none;">
+                            <div class="slider-container">
+                                <label>
+                                    Temperatura de Color
+                                    <span class="slider-value">5</span>
+                                </label>
+                                <input type="range" id="color-temperature" class="slider" min="0" max="10" value="5">
+                            </div>
+
+                            <div class="slider-container">
+                                <label>
+                                    Intensidad de Brillo
+                                    <span class="slider-value">5</span>
+                                </label>
+                                <input type="range" id="brightness" class="slider" min="0" max="10" value="5">
+                            </div>
+
+                            <div class="slider-container">
+                                <label>
+                                    Frecuencia de Refresco
+                                    <span class="slider-value">5</span>
+                                </label>
+                                <input type="range" id="refresh-rate" class="slider" min="0" max="10" value="5">
+                            </div>
                         </div>
-                    </li>
 
                     <!-- Tamaño de Fuente -->
                     <li class="accessibility-option">
