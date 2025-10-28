@@ -1450,7 +1450,7 @@ body {
   background: var(--accent-secondary);
 }
 .skip-link .skip-icon {
-  font-size: 1.2em;
+  font-size: 1.5em;
   flex-shrink: 0;
 }
 .skip-link .skip-text {
