@@ -23,6 +23,22 @@ $color-warning-rgb: 245, 197, 107 !default;
 $color-info:      #57c4dc !default;
 $color-info-rgb: 87, 196, 220 !default;
 
+$bg-primary: #ffffff;
+$bg-secondary: #f8f9fa;
+$bg-tertiary: #e9ecef;
+$bg-inverse: #212529;
+
+$text-primary: #212529;
+$text-secondary: #6c757d;
+$text-muted: #adb5bd;
+$text-inverse: #ffffff;
+$text-on-accent: #ffffff; // Texto sobre fondos de acento
+
+// Estados y bordes
+$border-color: #dee2e6;
+$border-light: #e9ecef;
+$border-dark: #ced4da;
+
 // Escala de grises
 $gray-100: #f9fafb !default;
 $gray-200: #e9ecef !default;

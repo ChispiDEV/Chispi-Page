@@ -11,7 +11,10 @@
 <!-- Navegación Mejorada -->
 <nav class="navbar" aria-label="Navegación principal">
     <div class="nav-container">
-        <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+        <a href="#main-content" class="skip-link">
+            <span class="skip-icon">⚡</span>
+            Saltar al contenido principal
+        </a>
 
         <!-- Branding con bandera -->
         <div class="nav-brand">
@@ -72,12 +75,27 @@
                         aria-label="Cambiar tema de color">
                     <span class="button-text">Tema</span>
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="theme-toggle">
-                    <li><button class="dropdown-item" data-theme="light">🌞 Claro</button></li>
-                    <li><button class="dropdown-item" data-theme="dark">🌙 Oscuro</button></li>
-                    <li><button class="dropdown-item" data-theme="sepia">📜 Sepia</button></li>
-                    <li><button class="dropdown-item" data-theme="gray-scale">⚪ Escala de Grises</button></li>
-                    <li><button class="dropdown-item" data-theme="high-contrast">⚫ Alto Contraste</button></li>
+                <ul class="dropdown-menu theme-menu" aria-labelledby="theme-toggle">
+                    <li><button class="dropdown-item theme-option" data-theme="light">
+                        <span class="theme-preview light-theme"></span>
+                        🌞 Claro
+                    </button></li>
+                    <li><button class="dropdown-item theme-option" data-theme="dark">
+                        <span class="theme-preview dark-theme"></span>
+                        🌙 Oscuro
+                    </button></li>
+                    <li><button class="dropdown-item theme-option" data-theme="sepia">
+                        <span class="theme-preview sepia-theme"></span>
+                        📜 Sepia
+                    </button></li>
+                    <li><button class="dropdown-item theme-option" data-theme="gray-scale">
+                        <span class="theme-preview gray-theme"></span>
+                        ⚪ Escala de Grises
+                    </button></li>
+                    <li><button class="dropdown-item theme-option" data-theme="high-contrast">
+                        <span class="theme-preview contrast-theme"></span>
+                        ⚫ Alto Contraste
+                    </button></li>
                 </ul>
             </div>
 
@@ -89,25 +107,31 @@
                         aria-expanded="false"
                         aria-label="Opciones de accesibilidad">
                     <span class="button-text">Accesibilidad</span>
+                    <span class="dropdown-arrow">▼</span>
                 </button>
                 <ul class="dropdown-menu accessibility-menu" aria-labelledby="accessibility-toggle">
                     <!-- Movimiento Reducido -->
                     <li class="accessibility-option">
-                        <label class="option-label">
-                            <input type="checkbox" id="reduced-motion-toggle">
-                            <span class="toggle-slider"></span>
-                            Movimiento Reducido
-                        </label>
+                        <div class="option-header">
+                            <span class="option-title">Movimiento Reducido</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="reduced-motion-toggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
                     </li>
 
                     <!-- Modo Dislexia -->
                     <li class="accessibility-option">
-                        <label class="option-label">
-                            <input type="checkbox" id="dyslexia-mode-toggle">
-                            <span class="toggle-slider"></span>
-                            Modo Dislexia
-                        </label>
+                        <div class="option-header">
+                            <span class="option-title">Modo Dislexia</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="dyslexia-mode-toggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
                         <div class="intensity-control">
+                            <span class="intensity-label">Intensidad:</span>
                             <input type="range" min="1" max="5" value="3" class="intensity-slider" id="dyslexia-intensity">
                             <span class="intensity-value">3</span>
                         </div>
@@ -115,12 +139,15 @@
 
                     <!-- Modo Lectura -->
                     <li class="accessibility-option">
-                        <label class="option-label">
-                            <input type="checkbox" id="reading-mode-toggle">
-                            <span class="toggle-slider"></span>
-                            Modo Lectura
-                        </label>
+                        <div class="option-header">
+                            <span class="option-title">Modo Lectura</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="reading-mode-toggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
                         <div class="intensity-control">
+                            <span class="intensity-label">Intensidad:</span>
                             <input type="range" min="1" max="5" value="3" class="intensity-slider" id="reading-intensity">
                             <span class="intensity-value">3</span>
                         </div>
@@ -128,12 +155,15 @@
 
                     <!-- Modo Fotofobia -->
                     <li class="accessibility-option">
-                        <label class="option-label">
-                            <input type="checkbox" id="photophobia-mode-toggle">
-                            <span class="toggle-slider"></span>
-                            Modo Fotofobia
-                        </label>
+                        <div class="option-header">
+                            <span class="option-title">Modo Fotofobia</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="photophobia-mode-toggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
                         <div class="intensity-control">
+                            <span class="intensity-label">Intensidad:</span>
                             <input type="range" min="1" max="5" value="3" class="intensity-slider" id="photophobia-intensity">
                             <span class="intensity-value">3</span>
                         </div>
@@ -141,12 +171,15 @@
 
                     <!-- Tamaño de Fuente -->
                     <li class="accessibility-option">
-                        <label class="option-label">
-                            <input type="checkbox" id="font-size-toggle">
-                            <span class="toggle-slider"></span>
-                            Tamaño de Fuente
-                        </label>
+                        <div class="option-header">
+                            <span class="option-title">Tamaño de Fuente</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="font-size-toggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
                         <div class="intensity-control">
+                            <span class="intensity-label">Tamaño:</span>
                             <input type="range" min="1" max="5" value="3" class="intensity-slider" id="font-size">
                             <span class="intensity-value">3</span>
                         </div>

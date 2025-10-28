@@ -480,23 +480,30 @@ $mobile-breakpoint: v.$breakpoint-md !default;
 
 // ===== SKIP LINK =====
 .skip-link {
-  position: absolute;
-  top: -40px;
-  left: 6px;
+  position: fixed;
+  top: v.$spacing-3;
+  left: v.$spacing-3;
   background: var(--accent-primary);
   color: var(--text-on-accent);
-  padding: 8px 12px;
+  padding: v.$spacing-2 v.$spacing-3;
+  border-radius: v.$border-radius;
   text-decoration: none;
-  border-radius: 4px;
-  font-weight: 500;
-  z-index: $navbar-z-index + 30;
-  transition: top 0.2s ease;
+  font-weight: var(--font-weight-medium);
+  z-index: v.$z-index-modal;
+  transform: translateX(-100%);
+  transition: transform var(--transition-base);
+  display: flex;
+  align-items: center;
+  gap: v.$spacing-2;
 
   &:focus {
-    top: 6px;
+    transform: translateX(0);
+  }
+
+  .skip-icon {
+    font-size: 1.2em;
   }
 }
-
 
 // Corrección para el botón de hamburguesa en móvil
 @media (max-width: 768px) {

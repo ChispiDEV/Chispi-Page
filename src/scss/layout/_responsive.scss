@@ -68,5 +68,17 @@
       max-height: 60vh;
       overflow-y: auto;
     }
+
+    .accessibility-menu {
+      min-width: auto;
+      max-width: none;
+    }
+  }
+
+  .skip-link {
+    left: v.$spacing-2;
+    top: v.$spacing-2;
+    font-size: v.$font-size-sm;
+    padding: v.$spacing-2;
   }
 }

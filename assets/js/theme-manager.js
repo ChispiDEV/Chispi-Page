@@ -4,10 +4,9 @@ class ThemeManager {
         this.availableThemes = [
             'light',
             'dark',
-            'high-contrast',
-            'gray-scale',
             'sepia',
-            'reduced-motion'
+            'gray-scale',
+            'high-contrast',
         ];
         this.currentTheme = this.getSavedTheme() || this.getSystemTheme();
         this.particlesEnabled = true;
@@ -17,7 +16,7 @@ class ThemeManager {
 
     init() {
         this.applyTheme(this.currentTheme);
-        this.setupEventListeners();
+        this.setupThemeEventListeners();
         this.setupParticleThemes();
 
         console.log('🎨 Gestor de temas inicializado - Tema actual:', this.currentTheme);
@@ -43,6 +42,9 @@ class ThemeManager {
         // Aplicar configuraciones específicas del tema
         this.applyThemeSpecifics(theme);
 
+        // Actualizar UI
+        this.updateThemeUI(theme);
+        
         // Notificar a otros componentes
         this.notifyThemeChange(theme);
     }
@@ -79,6 +81,22 @@ class ThemeManager {
             document.documentElement.style.setProperty('--reduce-motion', 'reduce');
         } else {
             document.documentElement.style.removeProperty('--reduce-motion');
+        }
+    }
+
+    updateThemeUI(theme) {
+        // Actualizar opciones activas en el dropdown
+        document.querySelectorAll('.theme-option').forEach(option => {
+            option.classList.remove('active');
+            if (option.getAttribute('data-theme') === theme) {
+                option.classList.add('active');
+            }
+        });
+
+        // Actualizar selector móvil si existe
+        const mobileSelector = document.getElementById('mobile-theme-selector');
+        if (mobileSelector) {
+            mobileSelector.value = theme;
         }
     }
 
@@ -143,7 +161,21 @@ class ThemeManager {
         window.particleThemes = particleThemes;
     }
 
-    setupEventListeners() {
+    setupThemeEventListeners() {
+        // Event listeners para opciones de tema
+        document.querySelectorAll('.theme-option').forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.preventDefault();
+                const theme = option.getAttribute('data-theme');
+                this.applyTheme(theme);
+
+                // Cerrar dropdown después de seleccionar
+                if (window.dropdownManager) {
+                    window.dropdownManager.closeAllDropdowns();
+                }
+            });
+        });
+        
         // Escuchar cambios del sistema
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
             if (!this.getSavedTheme()) { // Solo si el usuario no ha elegido manualmente
