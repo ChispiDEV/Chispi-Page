@@ -2,19 +2,118 @@
 
 @use '../../abstracts/variables' as v;
 
-// Movimiento Reducido
-[data-reduced-motion="true"] {
-  
-  // Reducir/eliminar animaciones
-  --transition-base: none;
-  --transition-fast: none;
+// ===== MOVIMIENTO REDUCIDO CON INTENSIDADES =====
 
-  // Desactivar partículas
-  --particles-opacity: 0;
-  --particles-count: 0;
+// Niveles de movimiento reducido
+[data-reduced-motion="1"] {
+  // Reducción leve
+  * {
+    animation-duration: 0.5s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.3s !important;
+  }
 
-  // Preferencias del sistema
-  @media (prefers-reduced-motion: reduce) {
+  .particle {
+    animation-duration: calc(var(--base-duration, 15s) * 0.7) !important;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px) scale(1.02);
+    transition-duration: 0.2s;
+  }
+
+  // Reducir transiciones suaves
+  .nav-menu a,
+  .dropdown-toggle,
+  .social-link {
+    transition-duration: 0.2s !important;
+  }
+}
+
+[data-reduced-motion="2"] {
+  // Reducción media
+  * {
+    animation-duration: 0.2s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.15s !important;
+  }
+
+  .particle {
+    animation-duration: calc(var(--base-duration, 15s) * 0.4) !important;
+    opacity: 0.6;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+    transition-duration: 0.1s;
+  }
+
+  // Eliminar algunas animaciones complejas
+  .skill-card:hover {
+    transform: translateY(-2px);
+    transition-duration: 0.1s;
+  }
+}
+
+[data-reduced-motion="3"] {
+  // Reducción alta
+  * {
+    animation-duration: 0.1s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.05s !important;
+  }
+
+  .particle {
+    animation-duration: calc(var(--base-duration, 15s) * 0.2) !important;
+    opacity: 0.3;
+  }
+
+  [data-hover-effect] {
+    transition: none !important;
+  }
+
+  // Eliminar transformaciones complejas
+  .btn:hover,
+  .skill-card:hover {
+    transform: none;
+  }
+
+  // Reducir partículas
+  .particles-container {
+    opacity: 0.5;
+  }
+}
+
+[data-reduced-motion="4"] {
+  // Sin movimiento
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  .particle {
+    display: none !important;
+  }
+
+  .particles-container {
+    display: none !important;
+  }
+
+  // Eliminar todos los efectos hover
+  .btn:hover,
+  .skill-card:hover,
+  .nav-menu a:hover,
+  .dropdown-toggle:hover,
+  .social-link:hover {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+// Compatibilidad con preferencias del sistema
+@media (prefers-reduced-motion: reduce) {
+  [data-reduced-motion]:not([data-reduced-motion="0"]) {
     *,
     *::before,
     *::after {
@@ -26,7 +125,8 @@
   }
 }
 
-// Modo Dislexia con intensidad
+// ===== MODO DISLEXIA CON INTENSIDAD =====
+
 [data-dyslexia-mode="true"] {
   font-family: v.$font-family-dyslexia !important;
   letter-spacing: 0.05em !important;
@@ -34,111 +134,633 @@
   &[data-dyslexia-intensity="1"] {
     line-height: v.$line-height-lg;
     word-spacing: 0.1em;
+    font-size: calc(v.$font-size-base * 1.05);
   }
 
   &[data-dyslexia-intensity="2"] {
     line-height: v.$line-height-xl;
     word-spacing: 0.15em;
     font-weight: v.$font-weight-semibold;
+    font-size: calc(v.$font-size-base * 1.08);
   }
 
   &[data-dyslexia-intensity="3"] {
     line-height: v.$line-height-2xl;
     word-spacing: 0.2em;
     font-weight: v.$font-weight-bold;
+    font-size: calc(v.$font-size-base * 1.1);
+    letter-spacing: 0.08em;
   }
 
   &[data-dyslexia-intensity="4"] {
     line-height: v.$line-height-3xl;
     word-spacing: 0.25em;
     font-weight: v.$font-weight-bold;
+    font-size: calc(v.$font-size-base * 1.12);
+    letter-spacing: 0.1em;
   }
 
   &[data-dyslexia-intensity="5"] {
     line-height: v.$line-height-4xl;
     word-spacing: 0.3em;
     font-weight: v.$font-weight-bold;
+    font-size: calc(v.$font-size-base * 1.15);
+    letter-spacing: 0.12em;
   }
 }
 
-// Modo Lectura con intensidad
+// Mejoras específicas para modo dislexia
+[data-dyslexia-mode="true"] {
+  // Mejorar contraste de texto
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: v.$font-weight-bold;
+  }
+
+  // Espaciado adicional en listas
+  li {
+    margin-bottom: v.$spacing-2;
+  }
+
+  // Mejorar legibilidad de enlaces
+  a {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+}
+
+// ===== MODO LECTURA ESTÁNDAR CON INTENSIDAD =====
+
 [data-reading-mode="true"] {
+  // Configuración base para modo lectura
+  main {
+    container-type: inline-size;
+  }
+
   &[data-reading-intensity="1"] {
-    max-width: 70ch;
-    margin: 0 auto;
+    .container {
+      max-width: 70ch;
+      margin: 0 auto;
+    }
+
+    p, li {
+      line-height: v.$line-height-lg;
+    }
   }
 
   &[data-reading-intensity="2"] {
-    max-width: 65ch;
-    margin: 0 auto;
-    line-height: v.$line-height-lg;
+    .container {
+      max-width: 65ch;
+      margin: 0 auto;
+    }
+
+    p, li {
+      line-height: v.$line-height-xl;
+      font-size: calc(v.$font-size-base * 1.05);
+    }
+
+    h1, h2, h3 {
+      line-height: v.$line-height-lg;
+    }
   }
 
   &[data-reading-intensity="3"] {
-    max-width: 60ch;
-    margin: 0 auto;
-    line-height: v.$line-height-xl;
-    font-size: v.$font-size-lg;
+    .container {
+      max-width: 60ch;
+      margin: 0 auto;
+    }
+
+    p, li {
+      line-height: v.$line-height-2xl;
+      font-size: calc(v.$font-size-base * 1.08);
+    }
+
+    h1, h2, h3 {
+      line-height: v.$line-height-xl;
+    }
+
+    // Mejorar espaciado
+    .section {
+      margin-bottom: v.$spacing-8;
+    }
   }
 
   &[data-reading-intensity="4"] {
-    max-width: 55ch;
-    margin: 0 auto;
-    line-height: v.$line-height-2xl;
-    font-size: v.$font-size-xl;
+    .container {
+      max-width: 55ch;
+      margin: 0 auto;
+    }
+
+    p, li {
+      line-height: v.$line-height-3xl;
+      font-size: calc(v.$font-size-base * 1.1);
+    }
+
+    h1, h2, h3 {
+      line-height: v.$line-height-2xl;
+    }
+
+    // Espaciado más generoso
+    .section {
+      margin-bottom: v.$spacing-9;
+    }
+
+    p + p {
+      margin-top: v.$spacing-4;
+    }
   }
 
   &[data-reading-intensity="5"] {
-    max-width: 50ch;
-    margin: 0 auto;
-    line-height: v.$line-height-3xl;
-    font-size: v.$font-size-2xl;
+    .container {
+      max-width: 50ch;
+      margin: 0 auto;
+    }
+
+    p, li {
+      line-height: v.$line-height-4xl;
+      font-size: calc(v.$font-size-base * 1.15);
+    }
+
+    h1, h2, h3 {
+      line-height: v.$line-height-3xl;
+      font-size: calc(1em * 1.1);
+    }
+
+    // Máximo espaciado
+    .section {
+      margin-bottom: v.$spacing-10;
+    }
+
+    p + p {
+      margin-top: v.$spacing-5;
+    }
+
+    // Justificar texto para mejor lectura
+    p {
+      text-align: justify;
+      hyphens: auto;
+    }
   }
 }
 
-// Modo Fotofobia con intensidad
+// ===== MODO LECTURA CONTINUA (SUAVE) =====
+
+[data-continuous-reading-mode="true"] {
+  // Configuración óptima para lectura prolongada
+  background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f4 100%) !important;
+  color: #2d3748 !important;
+
+  // Contenedor principal optimizado
+  .container {
+    max-width: 65ch;
+    margin: 0 auto;
+    padding: 0 v.$spacing-6;
+  }
+
+  // Tipografía optimizada para lectura prolongada
+  font-family: 'Georgia', 'Times New Roman', serif !important;
+  font-size: calc(v.$font-size-base * 1.1);
+  line-height: 1.7;
+  font-weight: 400;
+
+  // Encabezados suaves
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Georgia', 'Times New Roman', serif !important;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #1a202c !important;
+    margin-bottom: v.$spacing-4;
+  }
+
+  h1 {
+    font-size: calc(v.$font-size-3xl * 0.9);
+    margin-top: v.$spacing-10;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: calc(v.$font-size-2xl * 0.9);
+    margin-top: v.$spacing-8;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: v.$spacing-2;
+  }
+
+  h3 {
+    font-size: calc(v.$font-size-xl * 0.95);
+    margin-top: v.$spacing-6;
+  }
+
+  // Párrafos optimizados
+  p {
+    margin-bottom: v.$spacing-5;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    font-size: calc(v.$font-size-base * 1.08);
+    line-height: 1.75;
+    color: #4a5568 !important;
+  }
+
+  // Listas legibles
+  ul, ol {
+    margin: v.$spacing-4 0;
+    padding-left: v.$spacing-6;
+
+    li {
+      margin-bottom: v.$spacing-3;
+      line-height: 1.6;
+    }
+  }
+
+  // Enlaces discretos pero accesibles
+  a {
+    color: #2b6cb0 !important;
+    text-decoration: none;
+    border-bottom: 1px solid #bee3f8;
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: #2c5282 !important;
+      border-bottom-color: #2b6cb0;
+      background-color: rgba(66, 153, 225, 0.05);
+    }
+  }
+
+  // Espaciado generoso entre secciones
+  .section {
+    margin-bottom: v.$spacing-12;
+    padding: v.$spacing-6 0;
+  }
+
+  // Reducir elementos distractivos
+  .particles-container {
+    opacity: 0.1;
+  }
+
+  .navbar {
+    background: rgba(248, 249, 250, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .footer {
+    background: rgba(248, 249, 250, 0.95) !important;
+    border-top: 1px solid #e2e8f0;
+    margin-top: v.$spacing-16;
+  }
+
+  // Tarjetas sutiles
+  .skill-card {
+    background: rgba(255, 255, 255, 0.7) !important;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(8px);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.9) !important;
+    }
+  }
+
+  // Botones discretos
+  .btn {
+    background: rgba(66, 153, 225, 0.1) !important;
+    color: #2b6cb0 !important;
+    border: 1px solid rgba(66, 153, 225, 0.2);
+
+    &:hover {
+      background: rgba(66, 153, 225, 0.15) !important;
+      border-color: rgba(66, 153, 225, 0.4);
+      transform: translateY(-1px);
+    }
+  }
+
+  // Mejorar contraste sin ser agresivo
+  .intro-content p {
+    font-size: calc(v.$font-size-base * 1.12);
+    line-height: 1.8;
+    color: #4a5568 !important;
+  }
+
+  // Navegación sutil
+  .nav-menu a {
+    color: #4a5568 !important;
+
+    &:hover {
+      color: #2b6cb0 !important;
+      background: rgba(66, 153, 225, 0.05);
+    }
+  }
+
+  // Dropdowns integrados
+  .dropdown-menu {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(12px);
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  }
+
+  // Scroll suave
+  scroll-behavior: smooth;
+
+  // Mejorar focus para accesibilidad
+  *:focus {
+    outline: 2px solid rgba(66, 153, 225, 0.5);
+    outline-offset: 2px;
+  }
+}
+
+// Intensidades para modo lectura continua
+[data-continuous-reading-mode="true"][data-reading-intensity="1"] {
+  // Intensidad mínima - casi imperceptible
+  background: linear-gradient(135deg, #fafbfc 0%, #f6f8fa 100%) !important;
+  font-size: v.$font-size-base;
+}
+
+[data-continuous-reading-mode="true"][data-reading-intensity="2"] {
+  // Intensidad baja
+  background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f4 100%) !important;
+  font-size: calc(v.$font-size-base * 1.05);
+}
+
+[data-continuous-reading-mode="true"][data-reading-intensity="3"] {
+  // Intensidad media (recomendada)
+  background: linear-gradient(135deg, #f6f7f9 0%, #eef0f3 100%) !important;
+  font-size: calc(v.$font-size-base * 1.1);
+
+  .container {
+    max-width: 60ch;
+  }
+}
+
+[data-continuous-reading-mode="true"][data-reading-intensity="4"] {
+  // Intensidad alta
+  background: linear-gradient(135deg, #f1f3f4 0%, #e8ebed 100%) !important;
+  font-size: calc(v.$font-size-base * 1.15);
+
+  .container {
+    max-width: 55ch;
+  }
+
+  p {
+    line-height: 1.8;
+  }
+}
+
+[data-continuous-reading-mode="true"][data-reading-intensity="5"] {
+  // Intensidad máxima - máximo confort
+  background: linear-gradient(135deg, #edf0f2 0%, #e3e6e8 100%) !important;
+  font-size: calc(v.$font-size-base * 1.18);
+
+  .container {
+    max-width: 50ch;
+  }
+
+  p {
+    line-height: 1.85;
+    font-size: calc(v.$font-size-base * 1.12);
+  }
+
+  // Reducir aún más las distracciones
+  .particles-container {
+    display: none;
+  }
+
+  .skill-card {
+    background: rgba(255, 255, 255, 0.85) !important;
+  }
+}
+
+// ===== MODO FOTOFOBIA CON INTENSIDAD =====
+
 [data-photophobia-mode="true"] {
   background-color: #000000 !important;
   color: #e0e0e0 !important;
 
+  // Asegurar que todos los fondos sean oscuros
+  .navbar,
+  .footer,
+  .skill-card,
+  .dropdown-menu {
+    background-color: #1a1a1a !important;
+    color: #e0e0e0 !important;
+    border-color: #333 !important;
+  }
+
+  // Mejorar contraste de texto
+  h1, h2, h3, h4, h5, h6 {
+    color: #ffffff !important;
+  }
+
+  // Reducir brillo de partículas
+  .particles-container {
+    opacity: 0.1;
+  }
+
   &[data-photophobia-intensity="1"] {
-    filter: brightness(0.9) contrast(1.1);
+    filter: brightness(0.9) contrast(1.1) saturate(0.9);
+
+    // Reducir ligeramente elementos brillantes
+    .btn-primary {
+      opacity: 0.9;
+    }
   }
 
   &[data-photophobia-intensity="2"] {
-    filter: brightness(0.8) contrast(1.2);
+    filter: brightness(0.8) contrast(1.2) saturate(0.8);
+
+    .btn-primary {
+      opacity: 0.8;
+    }
+
+    .particles-container {
+      opacity: 0.05;
+    }
   }
 
   &[data-photophobia-intensity="3"] {
-    filter: brightness(0.7) contrast(1.3);
+    filter: brightness(0.7) contrast(1.3) saturate(0.7);
+
+    .btn-primary {
+      opacity: 0.7;
+    }
+
+    // Reducir más elementos visuales
+    .skill-card {
+      box-shadow: 0 1px 3px rgba(255, 255, 255, 0.1);
+    }
   }
 
   &[data-photophobia-intensity="4"] {
-    filter: brightness(0.6) contrast(1.4);
+    filter: brightness(0.6) contrast(1.4) saturate(0.6);
+
+    .btn-primary {
+      opacity: 0.6;
+    }
+
+    .skill-card {
+      box-shadow: none;
+      border: 1px solid #333;
+    }
+
+    .particles-container {
+      display: none;
+    }
   }
 
   &[data-photophobia-intensity="5"] {
-    filter: brightness(0.5) contrast(1.5);
+    filter: brightness(0.5) contrast(1.5) saturate(0.5);
+
+    .btn-primary {
+      opacity: 0.5;
+    }
+
+    // Mínimo de elementos visuales
+    .skill-card {
+      background: #111 !important;
+      border: 1px solid #222;
+    }
+
+    // Eliminar todas las animaciones
+    * {
+      animation: none !important;
+      transition: none !important;
+    }
   }
 }
 
-// Tamaño de fuente
+// ===== TAMAÑO DE FUENTE =====
+
 [data-font-size="1"] {
   font-size: v.$font-size-sm;
+
+  h1 { font-size: v.$font-size-2xl; }
+  h2 { font-size: v.$font-size-xl; }
+  h3 { font-size: v.$font-size-lg; }
 }
 
 [data-font-size="2"] {
   font-size: v.$font-size-base;
+
+  h1 { font-size: v.$font-size-3xl; }
+  h2 { font-size: v.$font-size-2xl; }
+  h3 { font-size: v.$font-size-xl; }
 }
 
 [data-font-size="3"] {
   font-size: v.$font-size-lg;
+
+  h1 { font-size: v.$font-size-4xl; }
+  h2 { font-size: v.$font-size-3xl; }
+  h3 { font-size: v.$font-size-2xl; }
 }
 
 [data-font-size="4"] {
-  font-size: v.$font-size-xl;
+  font-size: calc(v.$font-size-lg * 1.1);
+
+  h1 { font-size: calc(v.$font-size-4xl * 1.1); }
+  h2 { font-size: calc(v.$font-size-3xl * 1.1); }
+  h3 { font-size: calc(v.$font-size-2xl * 1.1); }
 }
 
 [data-font-size="5"] {
-  font-size: v.$font-size-2xl;
+  font-size: v.$font-size-xl;
+
+  h1 { font-size: calc(v.$font-size-4xl * 1.2); }
+  h2 { font-size: calc(v.$font-size-3xl * 1.2); }
+  h3 { font-size: calc(v.$font-size-2xl * 1.2); }
+}
+
+// Ajustes de layout para tamaños de fuente grandes
+[data-font-size="4"],
+[data-font-size="5"] {
+  .container {
+    max-width: 90%;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: v.$spacing-5;
+  }
+
+  .skill-card {
+    padding: v.$spacing-5;
+  }
+}
+
+// ===== COMPATIBILIDAD ENTRE MODOS =====
+
+// Cuando modo lectura y dislexia están activos
+[data-reading-mode="true"][data-dyslexia-mode="true"] {
+  .container {
+    max-width: 55ch; // Un poco más estrecho para mejor legibilidad
+  }
+
+  p, li {
+    line-height: calc(var(--current-line-height) * 1.1); // Incrementar line-height
+  }
+}
+
+// Cuando modo fotofobia y tamaño de fuente grande están activos
+[data-photophobia-mode="true"][data-font-size="4"],
+[data-photophobia-mode="true"][data-font-size="5"] {
+  .container {
+    max-width: 95%; // Más ancho para compensar el filtro oscuro
+  }
+
+  .skill-card {
+    background: #0a0a0a !important; // Fondo más oscuro
+  }
+}
+
+// Cuando modo lectura continua está activo con otros modos
+[data-continuous-reading-mode="true"][data-dyslexia-mode="true"] {
+  font-family: v.$font-family-dyslexia !important;
+  .container {
+    max-width: 60ch;
+  }
+}
+
+[data-continuous-reading-mode="true"][data-photophobia-mode="true"] {
+  background: #000000 !important;
+  color: #e0e0e0 !important;
+
+  .container {
+    max-width: 70ch; // Más ancho para compensar el fondo oscuro
+  }
+}
+
+// Reset para cuando no hay movimiento reducido
+[data-reduced-motion="0"] {
+  // Restaurar valores por defecto
+  * {
+    animation-duration: initial !important;
+    animation-iteration-count: initial !important;
+    transition-duration: initial !important;
+  }
+
+  .particle {
+    animation-duration: var(--base-duration, 15s) !important;
+    opacity: initial !important;
+  }
+
+  .particles-container {
+    opacity: initial !important;
+    display: block !important;
+  }
+}
+
+// Reset para modo lectura continua
+[data-continuous-reading-mode="false"] {
+  // Restaurar valores por defecto cuando el modo se desactiva
+  background: initial !important;
+  font-family: initial !important;
+  font-size: initial !important;
+  line-height: initial !important;
+
+  .container {
+    max-width: initial !important;
+    margin: initial !important;
+    padding: initial !important;
+  }
 }

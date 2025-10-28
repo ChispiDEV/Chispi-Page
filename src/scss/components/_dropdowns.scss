@@ -80,36 +80,113 @@
     align-items: center;
     gap: v.$spacing-3;
     padding: v.$spacing-3 v.$spacing-4;
+    position: relative;
 
     .theme-preview {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      border: 2px solid v.$gray-300;
+      width: 24px;
+      height: 24px;
+      border-radius: v.$border-radius;
+      border: 2px solid var(--border-color);
+      transition: all var(--transition-base);
+      position: relative;
+      overflow: hidden;
 
+      // Estados de los temas usando variables CSS
       &.light-theme {
-        background: linear-gradient(45deg, #ffffff, #e9ecef);
+        background: var(--theme-light-bg, linear-gradient(135deg, #ffffff 0%, #e9ecef 100%));
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: var(--theme-light-accent, v.$color-primary);
+          opacity: 0;
+          transition: opacity v.$transition-base;
+        }
       }
 
       &.dark-theme {
-        background: linear-gradient(45deg, #1a1a1a, #343a40);
+        background: var(--theme-dark-bg, linear-gradient(135deg, #1a1a1a 0%, #343a40 100%));
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: var(--theme-dark-accent, #4a6572);
+          opacity: 0;
+          transition: opacity v.$transition-base;
+        }
       }
 
       &.sepia-theme {
-        background: linear-gradient(45deg, #f4ecd8, #e6d7b8);
+        background: var(--theme-sepia-bg, linear-gradient(135deg, #f4ecd8 0%, #e6d7b8 100%));
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: var(--theme-sepia-accent, #a86c3d);
+          opacity: 0;
+          transition: opacity v.$transition-base;
+        }
       }
 
       &.gray-theme {
-        background: linear-gradient(45deg, #8a8d91, #495057);
+        background: var(--theme-gray-bg, linear-gradient(135deg, #8a8d91 0%, #495057 100%));
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: var(--theme-gray-accent, #6c757d);
+          opacity: 0;
+          transition: opacity v.$transition-base;
+        }
       }
 
       &.contrast-theme {
-        background: linear-gradient(45deg, #000000, #ffffff);
+        background: var(--theme-contrast-bg, linear-gradient(135deg, #000000 0%, #ffffff 100%));
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: var(--theme-contrast-accent, #ffff00);
+          opacity: 0;
+          transition: opacity v.$transition-base;
+        }
       }
     }
 
-    &:hover .theme-preview {
-      border-color: v.$color-primary;
+    // Estado activo
+    &.active .theme-preview {
+      border-color: var(--accent-color, v.$color-primary);
+      box-shadow: 0 0 0 2px var(--accent-color, v.$color-primary);
+
+      &::before {
+        opacity: 0.3;
+      }
+    }
+
+    // Hover state - muestra versión accent
+    &:hover .theme-preview::before {
+      opacity: 0.6;
+    }
+
+    // Focus state
+    &:focus .theme-preview {
+      outline: 2px solid var(--text-on-accent), var(--accent-secondary);
+      outline-offset: 2px;
     }
   }
 }
@@ -236,6 +313,23 @@
         background: v.$gray-100;
         padding: v.$spacing-1 v.$spacing-2;
         border-radius: v.$border-radius-sm;
+      }
+    }
+    
+    // Control de intensidad de movimiento específico
+    &.motion-intensity {
+      .intensity-labels {
+        display: flex;
+        justify-content: space-between;
+        margin-top: v.$spacing-1;
+
+        .intensity-label {
+          font-size: v.$font-size-xs;
+          color: v.$gray-500;
+
+          &.min { text-align: left; }
+          &.max { text-align: right; }
+        }
       }
     }
   }

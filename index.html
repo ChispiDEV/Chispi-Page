@@ -8,14 +8,16 @@
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
+<!-- Skip Link mejorado -->
+<a href="#main-content" class="skip-link">
+    <span class="skip-icon">⚡</span>
+    Saltar al contenido principal
+</a>
+
 <!-- Navegación Mejorada -->
 <nav class="navbar" aria-label="Navegación principal">
     <div class="nav-container">
-        <a href="#main-content" class="skip-link">
-            <span class="skip-icon">⚡</span>
-            Saltar al contenido principal
-        </a>
-
+        
         <!-- Branding con bandera -->
         <div class="nav-brand">
             <a href="index.html" class="brand-link">
@@ -76,26 +78,31 @@
                     <span class="button-text">Tema</span>
                 </button>
                 <ul class="dropdown-menu theme-menu" aria-labelledby="theme-toggle">
-                    <li><button class="dropdown-item theme-option" data-theme="light">
-                        <span class="theme-preview light-theme"></span>
-                        🌞 Claro
-                    </button></li>
-                    <li><button class="dropdown-item theme-option" data-theme="dark">
-                        <span class="theme-preview dark-theme"></span>
-                        🌙 Oscuro
-                    </button></li>
-                    <li><button class="dropdown-item theme-option" data-theme="sepia">
-                        <span class="theme-preview sepia-theme"></span>
-                        📜 Sepia
-                    </button></li>
-                    <li><button class="dropdown-item theme-option" data-theme="gray-scale">
-                        <span class="theme-preview gray-theme"></span>
-                        ⚪ Escala de Grises
-                    </button></li>
-                    <li><button class="dropdown-item theme-option" data-theme="high-contrast">
-                        <span class="theme-preview contrast-theme"></span>
-                        ⚫ Alto Contraste
-                    </button></li>
+                    <li>
+                        <button class="dropdown-item theme-option" data-theme="light">
+                            <span class="theme-preview light-theme" data-theme="light"></span>
+                            🌞 Claro
+                        </button></li>
+                    <li>
+                        <button class="dropdown-item theme-option" data-theme="dark">
+                            <span class="theme-preview dark-theme" data-theme="dark"></span>
+                            🌙 Oscuro
+                        </button></li>
+                    <li>
+                        <button class="dropdown-item theme-option" data-theme="sepia">
+                            <span class="theme-preview sepia-theme" data-theme="sepia"></span>
+                            📜 Sepia
+                        </button></li>
+                    <li>
+                        <button class="dropdown-item theme-option" data-theme="gray-scale">
+                            <span class="theme-preview gray-theme" data-theme="gray-scale"></span>
+                            ⚪ Escala de Grises
+                        </button></li>
+                    <li>
+                        <button class="dropdown-item theme-option" data-theme="high-contrast">
+                            <span class="theme-preview contrast-theme" data-theme="high-contrast"></span>
+                            ⚫ Alto Contraste
+                        </button></li>
                 </ul>
             </div>
 
@@ -110,13 +117,22 @@
                 </button>
                 <ul class="dropdown-menu accessibility-menu" aria-labelledby="accessibility-toggle">
                     <!-- Movimiento Reducido -->
-                    <li class="accessibility-option">
+                    <li class="accessibility-option motion-intensity">
                         <div class="option-header">
                             <span class="option-title">Movimiento Reducido</span>
                             <label class="toggle-switch">
                                 <input type="checkbox" id="reduced-motion-toggle">
                                 <span class="toggle-slider"></span>
                             </label>
+                        </div>
+                        <div class="intensity-control">
+                            <span class="intensity-label">Intensidad:</span>
+                            <input type="range" min="0" max="4" value="0" class="intensity-slider" id="motion-intensity">
+                            <span class="intensity-value">0</span>
+                        </div>
+                        <div class="intensity-labels">
+                            <span class="intensity-label min">Normal</span>
+                            <span class="intensity-label max">Máximo</span>
                         </div>
                     </li>
 
