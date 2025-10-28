@@ -510,17 +510,20 @@ $mobile-breakpoint: v.$breakpoint-md !default;
     flex-shrink: 0;
   }
 
-  // Texto que se expande al hover
-  &::after {
-    content: 'Saltar al contenido principal';
+  .skip-text {
     white-space: nowrap;
     opacity: 0;
     transition: opacity 0.3s ease;
   }
 
-  &:hover::after,
-  &:focus::after {
+  &:hover .skip-text,
+  &:focus .skip-text {
     opacity: 1;
+  }
+
+  // Estado inicial - solo icono
+  &:not(:hover):not(:focus) .skip-text {
+    display: none;
   }
 }
 

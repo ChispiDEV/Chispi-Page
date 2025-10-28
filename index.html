@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
-<!-- Skip Link -->
+<!-- Skip Link corregido -->
 <a href="#main-content" class="skip-link">
     <span class="skip-icon">⚡</span>
-    Saltar al contenido
+    <span class="skip-text">Saltar al contenido</span>
 </a>
 
-<!-- Navegación -->
+<!-- Navegación simplificada para landing -->
 <nav class="navbar" aria-label="Navegación principal">
     <div class="nav-container">
         <div class="nav-brand">
@@ -32,40 +32,39 @@
             <li><a href="src/pages/es/contact.html">Contacto</a></li>
         </ul>
 
+        <!-- SOLO menú hamburguesa en landing -->
         <div class="nav-controls">
-            <!-- Selector de Idioma -->
-            <div class="dropdown language-dropdown">
-                <button class="nav-button dropdown-toggle"
-                        id="language-toggle"
-                        type="button"
-                        aria-expanded="false"
-                        aria-label="Cambiar idioma">
-                    <span class="button-text">Idioma</span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="language-toggle">
-                    <li>
-                        <a href="src/pages/es/index.html" class="dropdown-item active" data-lang="es">
-                            <img src="assets/icons/es-variant.svg" alt="Español" class="flag-icon">
-                            Español
-                        </a>
-                    </li>
-                    <li>
-                        <a href="src/pages/en/index.html" class="dropdown-item" data-lang="en">
-                            <img src="assets/icons/gb.svg" alt="English" class="flag-icon">
-                            English
-                        </a>
-                    </li>
-                    <li>
-                        <a href="src/pages/fr/index.html" class="dropdown-item" data-lang="fr">
-                            <img src="assets/icons/fr.svg" alt="Français" class="flag-icon">
-                            Français
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            <button class="nav-button menu-toggle"
+                    id="menu-toggle"
+                    aria-label="Abrir menú"
+                    aria-expanded="false"
+                    aria-controls="mobile-menu">
+                <span class="hamburger-icon"></span>
+            </button>
         </div>
     </div>
 </nav>
+
+<!-- Menú Móvil simplificado -->
+<div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-header">
+        <button class="close-button" id="close-menu-toggle" aria-label="Cerrar menú">
+            <span class="close-icon">×</span>
+        </button>
+    </div>
+    <ul class="mobile-nav">
+        <li><a href="src/pages/es/index.html" aria-current="page">Inicio Español</a></li>
+        <li><a href="src/pages/en/index.html">Inicio Inglés</a></li>
+        <li><a href="src/pages/fr/index.html">Inicio Francés</a></li>
+        <li><a href="src/pages/es/about.html">Sobre mí</a></li>
+        <li><a href="src/pages/es/projects.html">Proyectos</a></li>
+        <li><a href="src/pages/es/devlog.html">Devlog</a></li>
+        <li><a href="src/pages/es/contact.html">Contacto</a></li>
+    </ul>
+</div>
+
+<!-- Overlay para menú móvil -->
+<div id="menu-overlay" class="menu-overlay" aria-hidden="true"></div>
 
 <!-- Contenido principal -->
 <main id="main-content">
@@ -140,8 +139,8 @@
     </div>
 </footer>
 
-<!-- JavaScript -->
-<script src="assets/js/navigation.js"></script>
+<!-- JavaScript específico para landing -->
+<script src="assets/js/landing-navigation.js"></script>
 <script src="assets/js/footer.js"></script>
 </body>
 </html>
