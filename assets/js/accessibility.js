@@ -1,45 +1,10 @@
-// Gestión simple de accesibilidad
+// Gestión mejorada de accesibilidad
 class AccessibilityManager {
     constructor() {
         this.settings = this.loadSettings();
-        this.motionLevels = this.getMotionLevels();
         this.init();
     }
-    
-    getMotionLevels() {
-        return {
-            0: { // Normal
-                animations: 'normal',
-                transitions: 'normal',
-                particleSpeed: 1,
-                hoverEffects: 'normal'
-            },
-            1: { // Reducción leve
-                animations: 'reduced',
-                transitions: '0.3s',
-                particleSpeed: 0.7,
-                hoverEffects: 'reduced'
-            },
-            2: { // Reducción media
-                animations: 'minimal',
-                transitions: '0.15s',
-                particleSpeed: 0.4,
-                hoverEffects: 'minimal'
-            },
-            3: { // Reducción alta
-                animations: 'essential',
-                transitions: '0.05s',
-                particleSpeed: 0.2,
-                hoverEffects: 'none'
-            },
-            4: { // Sin movimiento
-                animations: 'none',
-                transitions: 'none',
-                particleSpeed: 0,
-                hoverEffects: 'none'
-            }
-        };
-    }
+
     loadSettings() {
         return JSON.parse(localStorage.getItem('accessibilitySettings')) || {
             reducedMotion: false,
@@ -50,7 +15,8 @@ class AccessibilityManager {
             readingIntensity: 3,
             photophobiaMode: false,
             photophobiaIntensity: 3,
-            fontSize: 3
+            fontSize: 3,
+            fontSizeEnabled: false
         };
     }
 
@@ -61,53 +27,32 @@ class AccessibilityManager {
     init() {
         this.setupEventListeners();
         this.applyAllSettings();
+        this.updateUI();
+        console.log('♿ AccessibilityManager inicializado');
     }
 
     setupEventListeners() {
-        // Movimiento reducido con intensidad
-        this.setupMotionControls();
+        // Configurar todos los controles
+        this.setupToggle('reduced-motion-toggle', 'reducedMotion', () => {
+            this.toggleIntensityControl('motion-intensity-control', this.settings.reducedMotion);
+            this.applyMotionSettings();
+        });
 
-        // Configurar otros controles
         this.setupToggleWithIntensity('dyslexia-mode-toggle', 'dyslexia-intensity', 'dyslexiaMode', 'dyslexiaIntensity');
         this.setupToggleWithIntensity('reading-mode-toggle', 'reading-intensity', 'readingMode', 'readingIntensity');
         this.setupToggleWithIntensity('photophobia-mode-toggle', 'photophobia-intensity', 'photophobiaMode', 'photophobiaIntensity');
         this.setupToggleWithIntensity('font-size-toggle', 'font-size', 'fontSizeEnabled', 'fontSize');
     }
 
-
-    setupMotionControls() {
-        const toggle = document.getElementById('reduced-motion-toggle');
-        const slider = document.getElementById('motion-intensity');
-        const valueDisplay = slider?.nextElementSibling;
-
-        if (toggle && slider && valueDisplay) {
-            toggle.checked = this.settings.reducedMotion;
-            slider.value = this.settings.motionIntensity;
-            valueDisplay.textContent = this.settings.motionIntensity;
-
-            // Habilitar/deshabilitar slider según el toggle
-            slider.disabled = !this.settings.reducedMotion;
-
+    setupToggle(toggleId, settingKey, onChange) {
+        const toggle = document.getElementById(toggleId);
+        if (toggle) {
+            toggle.checked = this.settings[settingKey];
             toggle.addEventListener('change', (e) => {
-                this.settings.reducedMotion = e.target.checked;
-                slider.disabled = !e.target.checked;
-
-                // Si se desactiva el movimiento reducido, resetear intensidad
-                if (!e.target.checked) {
-                    this.settings.motionIntensity = 0;
-                    slider.value = 0;
-                    valueDisplay.textContent = '0';
-                }
-
-                this.applyMotionSettings();
+                this.settings[settingKey] = e.target.checked;
+                if (onChange) onChange();
                 this.saveSettings();
-            });
-
-            slider.addEventListener('input', (e) => {
-                this.settings.motionIntensity = parseInt(e.target.value);
-                valueDisplay.textContent = e.target.value;
-                this.applyMotionSettings();
-                this.saveSettings();
+                this.updateUI();
             });
         }
     }
@@ -116,17 +61,22 @@ class AccessibilityManager {
         const toggle = document.getElementById(toggleId);
         const slider = document.getElementById(sliderId);
         const valueDisplay = slider?.nextElementSibling;
+        const intensityControl = slider?.closest('.intensity-control');
 
-        if (toggle && slider && valueDisplay) {
+        if (toggle && slider && valueDisplay && intensityControl) {
+            // Ocultar control de intensidad inicialmente
+            intensityControl.style.display = 'none';
+
             toggle.checked = this.settings[toggleKey];
             slider.value = this.settings[sliderKey];
             valueDisplay.textContent = this.settings[sliderKey];
 
-            // Habilitar/deshabilitar slider según el toggle
-            slider.disabled = !this.settings[toggleKey];
-
             toggle.addEventListener('change', (e) => {
                 this.settings[toggleKey] = e.target.checked;
+
+                // Mostrar/ocultar control de intensidad
+                this.toggleIntensityControl(intensityControl, e.target.checked);
+
                 this.applySetting(toggleKey);
                 this.saveSettings();
             });
@@ -140,8 +90,15 @@ class AccessibilityManager {
         }
     }
 
+    toggleIntensityControl(controlElement, show) {
+        if (controlElement) {
+            controlElement.style.display = show ? 'flex' : 'none';
+        }
+    }
+
     applyAllSettings() {
         Object.keys(this.settings).forEach(key => this.applySetting(key));
+        this.updateUI();
     }
 
     applySetting(key) {
@@ -160,6 +117,10 @@ class AccessibilityManager {
                 break;
             case 'readingMode':
                 root.setAttribute('data-reading-mode', this.settings.readingMode);
+                // Forzar tema gris-sepia cuando modo lectura está activo
+                if (this.settings.readingMode) {
+                    this.forceReadingTheme();
+                }
                 break;
             case 'readingIntensity':
                 root.setAttribute('data-reading-intensity', this.settings.readingIntensity);
@@ -171,59 +132,64 @@ class AccessibilityManager {
                 root.setAttribute('data-photophobia-intensity', this.settings.photophobiaIntensity);
                 break;
             case 'fontSize':
-                root.setAttribute('data-font-size', this.settings.fontSize);
+            case 'fontSizeEnabled':
+                if (this.settings.fontSizeEnabled) {
+                    root.setAttribute('data-font-size', this.settings.fontSize);
+                } else {
+                    root.removeAttribute('data-font-size');
+                }
                 break;
         }
     }
 
     applyMotionSettings() {
         const root = document.documentElement;
-        const motionLevel = this.motionLevels[this.settings.motionIntensity];
 
-        if (!this.settings.reducedMotion || this.settings.motionIntensity === 0) {
-            // Movimiento normal
-            root.style.setProperty('--animation-duration', '1s');
-            root.style.setProperty('--transition-duration', '0.3s');
-            root.style.setProperty('--particle-speed', '1');
-            root.removeAttribute('data-reduced-motion');
-        } else {
-            // Aplicar niveles de reducción
+        if (this.settings.reducedMotion && this.settings.motionIntensity > 0) {
             root.setAttribute('data-reduced-motion', this.settings.motionIntensity.toString());
-            root.style.setProperty('--animation-duration', this.getAnimationDuration(motionLevel.animations));
-            root.style.setProperty('--transition-duration', motionLevel.transitions);
-            root.style.setProperty('--particle-speed', motionLevel.particleSpeed.toString());
-
-            // Aplicar a elementos específicos
-            this.applyMotionToElements(motionLevel);
+        } else {
+            root.removeAttribute('data-reduced-motion');
         }
     }
 
-    getAnimationDuration(level) {
-        const durations = {
-            'normal': '1s',
-            'reduced': '0.5s',
-            'minimal': '0.2s',
-            'essential': '0.1s',
-            'none': '0s'
-        };
-        return durations[level] || '1s';
+    forceReadingTheme() {
+        // Aplicar tema optimizado para lectura
+        document.documentElement.style.setProperty('--bg-primary', '#2d3748');
+        document.documentElement.style.setProperty('--bg-secondary', '#4a5568');
+        document.documentElement.style.setProperty('--text-primary', '#e2e8f0');
+        document.documentElement.style.setProperty('--text-secondary', '#cbd5e0');
+        document.documentElement.style.setProperty('--border-color', '#4a5568');
+
+        // Aplicar filtro sepia suave
+        document.body.style.filter = 'sepia(0.3) brightness(0.9) contrast(1.1)';
     }
 
-    applyMotionToElements(motionLevel) {
-        // Aplicar a partículas si existen
-        if (window.particleSystem) {
-            window.particleSystem.setSpeed(motionLevel.particleSpeed);
-        }
+    updateUI() {
+        // Actualizar controles de intensidad basado en estados de toggle
+        this.toggleIntensityControl(
+            document.getElementById('motion-intensity-control'),
+            this.settings.reducedMotion
+        );
 
-        // Aplicar a efectos hover
-        const hoverElements = document.querySelectorAll('[data-hover-effect]');
-        hoverElements.forEach(el => {
-            if (motionLevel.hoverEffects === 'none') {
-                el.style.transition = 'none';
-            } else if (motionLevel.hoverEffects === 'minimal') {
-                el.style.transitionDuration = '0.1s';
-            }
-        });
+        this.toggleIntensityControl(
+            document.getElementById('dyslexia-intensity').closest('.intensity-control'),
+            this.settings.dyslexiaMode
+        );
+
+        this.toggleIntensityControl(
+            document.getElementById('reading-intensity').closest('.intensity-control'),
+            this.settings.readingMode
+        );
+
+        this.toggleIntensityControl(
+            document.getElementById('photophobia-intensity').closest('.intensity-control'),
+            this.settings.photophobiaMode
+        );
+
+        this.toggleIntensityControl(
+            document.getElementById('font-size').closest('.intensity-control'),
+            this.settings.fontSizeEnabled
+        );
     }
 }
 

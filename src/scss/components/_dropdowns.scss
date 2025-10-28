@@ -81,112 +81,111 @@
     gap: v.$spacing-3;
     padding: v.$spacing-3 v.$spacing-4;
     position: relative;
+    transition: all v.$transition-base;
+
+    // Cada opción mantiene su tema independiente
+    &[data-theme="light"] {
+      background: #ffffff;
+      color: #212529;
+
+      .theme-preview {
+        background: linear-gradient(135deg, #ffffff 0%, #e9ecef 100%);
+        border-color: #dee2e6;
+      }
+
+      &:hover {
+        background: #f8f9fa;
+      }
+
+      &.active {
+        border: 2px solid #3cc88f;
+        margin: -2px;
+      }
+    }
+
+    &[data-theme="dark"] {
+      background: #1a1a1a;
+      color: #ffffff;
+
+      .theme-preview {
+        background: linear-gradient(135deg, #1a1a1a 0%, #343a40 100%);
+        border-color: #495057;
+      }
+
+      &:hover {
+        background: #2d2d2d;
+      }
+
+      &.active {
+        border: 2px solid #4a6572;
+        margin: -2px;
+      }
+    }
+
+    &[data-theme="sepia"] {
+      background: #f4ecd8;
+      color: #5b4636;
+
+      .theme-preview {
+        background: linear-gradient(135deg, #f4ecd8 0%, #e6d7b8 100%);
+        border-color: #d4b996;
+      }
+
+      &:hover {
+        background: #e8ddc8;
+      }
+
+      &.active {
+        border: 2px solid #a86c3d;
+        margin: -2px;
+      }
+    }
+
+    &[data-theme="gray-scale"] {
+      background: #2d3748;
+      color: #e2e8f0;
+
+      .theme-preview {
+        background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+        border-color: #718096;
+      }
+
+      &:hover {
+        background: #4a5568;
+      }
+
+      &.active {
+        border: 2px solid #e2e8f0;
+        margin: -2px;
+      }
+    }
+
+    &[data-theme="high-contrast"] {
+      background: #000000;
+      color: #ffffff;
+
+      .theme-preview {
+        background: linear-gradient(135deg, #000000 0%, #ffffff 100%);
+        border-color: #ffffff;
+      }
+
+      &:hover {
+        background: #1a1a1a;
+      }
+
+      &.active {
+        border: 2px solid #ffff00;
+        margin: -2px;
+      }
+    }
 
     .theme-preview {
       width: 24px;
       height: 24px;
       border-radius: v.$border-radius;
-      border: 2px solid var(--border-color);
-      transition: all var(--transition-base);
-      position: relative;
-      overflow: hidden;
-
-      // Estados de los temas usando variables CSS
-      &.light-theme {
-        background: var(--theme-light-bg, linear-gradient(135deg, #ffffff 0%, #e9ecef 100%));
-        &::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: var(--theme-light-accent, v.$color-primary);
-          opacity: 0;
-          transition: opacity v.$transition-base;
-        }
-      }
-
-      &.dark-theme {
-        background: var(--theme-dark-bg, linear-gradient(135deg, #1a1a1a 0%, #343a40 100%));
-        &::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: var(--theme-dark-accent, #4a6572);
-          opacity: 0;
-          transition: opacity v.$transition-base;
-        }
-      }
-
-      &.sepia-theme {
-        background: var(--theme-sepia-bg, linear-gradient(135deg, #f4ecd8 0%, #e6d7b8 100%));
-        &::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: var(--theme-sepia-accent, #a86c3d);
-          opacity: 0;
-          transition: opacity v.$transition-base;
-        }
-      }
-
-      &.gray-theme {
-        background: var(--theme-gray-bg, linear-gradient(135deg, #8a8d91 0%, #495057 100%));
-        &::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: var(--theme-gray-accent, #6c757d);
-          opacity: 0;
-          transition: opacity v.$transition-base;
-        }
-      }
-
-      &.contrast-theme {
-        background: var(--theme-contrast-bg, linear-gradient(135deg, #000000 0%, #ffffff 100%));
-        &::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: var(--theme-contrast-accent, #ffff00);
-          opacity: 0;
-          transition: opacity v.$transition-base;
-        }
-      }
-    }
-
-    // Estado activo
-    &.active .theme-preview {
-      border-color: var(--accent-color, v.$color-primary);
-      box-shadow: 0 0 0 2px var(--accent-color, v.$color-primary);
-
-      &::before {
-        opacity: 0.3;
-      }
-    }
-
-    // Hover state - muestra versión accent
-    &:hover .theme-preview::before {
-      opacity: 0.6;
-    }
-
-    // Focus state
-    &:focus .theme-preview {
-      outline: 2px solid var(--text-on-accent), var(--accent-secondary);
-      outline-offset: 2px;
+      border: 2px solid;
+      transition: all v.$transition-base;
+      flex-shrink: 0;
     }
   }
 }
