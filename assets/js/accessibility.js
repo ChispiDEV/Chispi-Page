@@ -213,58 +213,50 @@ class AccessibilityManager {
             // Aplicar filtros basados en los sliders
             const filters = [];
 
-            // Temperatura de color (0=frio, 10=calido)
-            const tempValue = (this.settings.colorTemperature - 5) / 5; // -1 a 1
-            filters.push(`hue-rotate(${tempValue * 60}deg)`);
+            // Temperatura de color (0=frio, 10=calido) - CORREGIDO
+            const tempValue = (this.settings.colorTemperature - 5) * 12; // -60 a 60 grados
+            filters.push(`hue-rotate(${tempValue}deg)`);
 
-            // Brillo (0=oscuro, 10=brillante)
-            const brightnessValue = 0.7 + (this.settings.brightness * 0.06); // 0.7 a 1.3
+            // Brillo (0=oscuro, 10=brillante) - CORREGIDO
+            const brightnessValue = 0.7 + (this.settings.brightness * 0.03); // 0.7 a 1.0
             filters.push(`brightness(${brightnessValue})`);
 
             // Contraste mejorado para fotofobia
-            filters.push('contrast(1.1)');
+            filters.push('contrast(1.05)');
 
-            // Aplicar filtros
+            // Aplicar filtros al body
             document.body.style.filter = filters.join(' ');
 
-            // Controlar frecuencia de refresco (afecta a animaciones)
+            // Controlar frecuencia de refresco
             if (this.settings.refreshRate <= 3) {
                 root.setAttribute('data-low-refresh', 'true');
+                // Reducir FPS de animaciones
+                if (window.particleSystem) {
+                    window.particleSystem.setLowRefreshRate(true);
+                }
             } else {
                 root.removeAttribute('data-low-refresh');
+                if (window.particleSystem) {
+                    window.particleSystem.setLowRefreshRate(false);
+                }
             }
+
+            console.log('🕶️ Modo fotofobia activado:', {
+                temperatura: this.settings.colorTemperature,
+                brillo: this.settings.brightness,
+                refresco: this.settings.refreshRate
+            });
 
         } else {
             root.removeAttribute('data-photophobia-mode');
             root.removeAttribute('data-low-refresh');
             document.body.style.filter = '';
-        }
-    }
 
-    updateColorTemperature() {
-        if (this.settings.photophobiaMode) {
-            this.applyPhotophobiaSettings();
-        }
-    }
-
-    updateBrightness() {
-        if (this.settings.photophobiaMode) {
-            this.applyPhotophobiaSettings();
-        }
-    }
-
-    updateRefreshRate() {
-        if (this.settings.photophobiaMode) {
-            this.applyPhotophobiaSettings();
-
-            // Afectar animaciones de partículas
             if (window.particleSystem) {
-                if (this.settings.refreshRate <= 3) {
-                    window.particleSystem.setLowRefreshRate(true);
-                } else {
-                    window.particleSystem.setLowRefreshRate(false);
-                }
+                window.particleSystem.setLowRefreshRate(false);
             }
+
+            console.log('👁️ Modo fotofobia desactivado');
         }
     }
 
