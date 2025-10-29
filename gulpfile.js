@@ -1,11 +1,19 @@
 const gulp = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
-const postcss = require('gulp-postcss');
-const autoprefixer = require('autoprefixer');
-const cssnano = require('cssnano');
-const sourcemaps = require('gulp-sourcemaps');
-const rename = require('gulp-rename');
-const gulpif = require('gulp-if');
+
+// Importaciones condicionales para evitar errores
+let postcss, autoprefixer, cssnano, sourcemaps, rename, gulpif;
+
+try {
+    postcss = require('gulp-postcss');
+    autoprefixer = require('autoprefixer');
+    cssnano = require('cssnano');
+    sourcemaps = require('gulp-sourcemaps');
+    rename = require('gulp-rename');
+    gulpif = require('gulp-if');
+} catch (error) {
+    console.log('⚠️  Algunas dependencias opcionales no están instaladas');
+}
 
 // Configuración
 const config = {
@@ -17,64 +25,83 @@ const config = {
     }
 };
 
-// Configuración de autoprefixer
-const autoprefixerOptions = {
-    overrideBrowserslist: [
-        'last 2 versions',
-        '> 1%',
-        'IE 11',
-        'not dead'
-    ]
+// Verificar si PostCSS está disponible
+const hasPostCSS = () => {
+    return typeof postcss !== 'undefined';
 };
-
-// Configuración de cssnano
-const cssnanoOptions = {
-    preset: ['default', {
-        discardComments: {
-            removeAll: true
-        }
-    }]
-};
-
-// Procesadores de PostCSS
-const postcssProcessors = [
-    autoprefixer(autoprefixerOptions),
-    ...(config.production ? [cssnano(cssnanoOptions)] : [])
-];
 
 function compileSCSS() {
-    return gulp.src(config.styles.src)
-        .pipe(gulpif(!config.production, sourcemaps.init()))
-        .pipe(sass({
-            sassOptions: {
-                quietDeps: true,
-                style: 'expanded',
-                includePaths: ['node_modules'],
-                outputStyle: config.production ? 'compressed' : 'expanded'
-            }
-        }).on('error', function(error) {
-            console.error('❌ Error en Sass:', error.message);
-            console.error('🔍 Archivo:', error.file);
-            console.error('📄 Línea:', error.line);
-            this.emit('end');
-        }))
-        .pipe(postcss(postcssProcessors))
-        .pipe(gulpif(!config.production, sourcemaps.write('.')))
-        .pipe(gulp.dest(config.styles.dest))
-        .pipe(gulpif(config.production, rename({ suffix: '.min' })))
-        .pipe(gulpif(config.production, gulp.dest(config.styles.dest)))
-        .on('end', () => {
-            console.log(`✅ SCSS compilado ${config.production ? 'en modo producción' : 'en modo desarrollo'}`);
-            console.log(`📁 Output: ${config.styles.dest}/`);
-        });
+    console.log('🎨 Compilando SCSS...');
+
+    let stream = gulp.src(config.styles.src);
+
+    // Sourcemaps solo en desarrollo y si está disponible
+    if (!config.production && hasPostCSS()) {
+        stream = stream.pipe(sourcemaps.init());
+        console.log('📝 Sourcemaps habilitados');
+    }
+
+    stream = stream.pipe(sass({
+        sassOptions: {
+            quietDeps: true,
+            style: 'expanded',
+            outputStyle: config.production ? 'compressed' : 'expanded'
+        }
+    }).on('error', function(error) {
+        console.error('❌ Error en Sass:', error.message);
+        console.error('🔍 Archivo:', error.file);
+        console.error('📄 Línea:', error.line);
+        this.emit('end');
+    }));
+
+    // PostCSS solo si está disponible
+    if (hasPostCSS()) {
+        const processors = [autoprefixer()];
+        if (config.production) {
+            processors.push(cssnano());
+            console.log('⚡ CSS minificado habilitado');
+        }
+        stream = stream.pipe(postcss(processors));
+        console.log('🎯 Autoprefixer habilitado');
+    }
+
+    // Sourcemaps solo en desarrollo y si está disponible
+    if (!config.production && hasPostCSS()) {
+        stream = stream.pipe(sourcemaps.write('.'));
+    }
+
+    stream = stream.pipe(gulp.dest(config.styles.dest));
+
+    // Minificar solo en producción y si está disponible
+    if (config.production && hasPostCSS()) {
+        stream = stream.pipe(rename({ suffix: '.min' }))
+            .pipe(gulp.dest(config.styles.dest));
+    }
+
+    return stream.on('end', () => {
+        console.log(`✅ SCSS compilado ${config.production ? 'en modo producción' : 'en modo desarrollo'}`);
+        console.log(`📁 Output: ${config.styles.dest}/`);
+        if (!hasPostCSS()) {
+            console.log('ℹ️  PostCSS no disponible - CSS sin autoprefixer ni minificación');
+        }
+    });
 }
 
 function watch() {
+    console.log('🔍 Buscando archivos SCSS...');
+
+    // Compilar primero antes de empezar a observar
+    compileSCSS();
+
     console.log('👀 Observando cambios en SCSS...');
-    gulp.watch(config.styles.watch, compileSCSS)
-        .on('change', (path) => {
-            console.log(`📝 Archivo modificado: ${path}`);
-        });
+    console.log('📁 Ruta observada:', config.styles.watch);
+
+    return gulp.watch(config.styles.watch, {
+        ignoreInitial: false
+    }, function(done) {
+        console.log('🔄 Cambio detectado, recompilando...');
+        compileSCSS().on('end', done);
+    });
 }
 
 // Tarea para limpiar CSS
@@ -82,15 +109,28 @@ function cleanCSS(done) {
     const fs = require('fs');
     const path = require('path');
 
+    console.log('🧹 Limpiando archivos CSS...');
     const cssDir = config.styles.dest;
+
     if (fs.existsSync(cssDir)) {
-        fs.readdirSync(cssDir).forEach(file => {
+        const files = fs.readdirSync(cssDir);
+        let deletedCount = 0;
+
+        files.forEach(file => {
             if (file.endsWith('.css') || file.endsWith('.css.map')) {
                 fs.unlinkSync(path.join(cssDir, file));
-                console.log(`🧹 Eliminado: ${file}`);
+                console.log(`🗑️  Eliminado: ${file}`);
+                deletedCount++;
             }
         });
+
+        if (deletedCount === 0) {
+            console.log('📭 No se encontraron archivos CSS para limpiar');
+        }
+    } else {
+        console.log('📁 Directorio CSS no existe:', cssDir);
     }
+
     done();
 }
 
@@ -100,5 +140,5 @@ exports.watch = watch;
 exports.clean = cleanCSS;
 exports.build = gulp.series(cleanCSS, compileSCSS);
 
-// Tarea por defecto
+// Tarea por defecto - compila y luego observa
 exports.default = gulp.series(compileSCSS, watch);
