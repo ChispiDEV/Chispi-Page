@@ -1,4 +1,3 @@
-// assets/js/accessibility-manager.js
 class AccessibilityManager {
     constructor() {
         this.settings = this.loadSettings();
@@ -14,9 +13,9 @@ class AccessibilityManager {
             readingMode: false,
             readingIntensity: 3,
             photophobiaMode: false,
-            colorTemperature: 5,    // Nuevo: temperatura de color (0=frio, 10=calido)
-            brightness: 5,          // Nuevo: brillo (0=oscuro, 10=brillante)
-            refreshRate: 5,         // Nuevo: frecuencia refresco (0=baja, 10=alta)
+            colorTemperature: 5,
+            brightness: 5,
+            refreshRate: 5,
             fontSize: 3,
             fontSizeEnabled: false
         };
@@ -45,7 +44,7 @@ class AccessibilityManager {
         this.setupToggleWithIntensity('reading-mode-toggle', 'reading-intensity', 'readingMode', 'readingIntensity');
         this.setupToggleWithIntensity('font-size-toggle', 'font-size', 'fontSizeEnabled', 'fontSize');
 
-        // Nuevos controles para fotofobia
+        // Nuevos controles para fotofobia - CORREGIDO
         this.setupPhotophobiaControls();
     }
 
@@ -64,16 +63,25 @@ class AccessibilityManager {
                 this.saveSettings();
             });
 
-            // Configurar sliders de fotofobia
-            this.setupSlider('color-temperature', 'colorTemperature', this.updateColorTemperature.bind(this));
-            this.setupSlider('brightness', 'brightness', this.updateBrightness.bind(this));
-            this.setupSlider('refresh-rate', 'refreshRate', this.updateRefreshRate.bind(this));
+            // Configurar sliders de fotofobia - CORREGIDO: usar arrow functions
+            this.setupSlider('color-temperature', 'colorTemperature', () => {
+                this.updateColorTemperature();
+            });
+            this.setupSlider('brightness', 'brightness', () => {
+                this.updateBrightness();
+            });
+            this.setupSlider('refresh-rate', 'refreshRate', () => {
+                this.updateRefreshRate();
+            });
+        } else {
+            console.warn('❌ Controles de fotofobia no encontrados en el DOM');
         }
     }
 
     setupSlider(sliderId, settingKey, onChange) {
         const slider = document.getElementById(sliderId);
-        const valueDisplay = slider?.closest('.slider-container')?.querySelector('.slider-value');
+        const sliderContainer = slider?.closest('.slider-container');
+        const valueDisplay = sliderContainer?.querySelector('.slider-value');
 
         if (slider && valueDisplay) {
             slider.value = this.settings[settingKey];
@@ -85,6 +93,8 @@ class AccessibilityManager {
                 if (onChange) onChange();
                 this.saveSettings();
             });
+        } else {
+            console.warn(`❌ Slider no encontrado: ${sliderId}`);
         }
     }
 
@@ -98,17 +108,19 @@ class AccessibilityManager {
                 this.saveSettings();
                 this.updateUI();
             });
+        } else {
+            console.warn(`❌ Toggle no encontrado: ${toggleId}`);
         }
     }
 
     setupToggleWithIntensity(toggleId, sliderId, toggleKey, sliderKey) {
         const toggle = document.getElementById(toggleId);
         const slider = document.getElementById(sliderId);
-        const valueDisplay = slider?.nextElementSibling;
-        const intensityControl = slider?.closest('.intensity-control');
+        const sliderContainer = slider?.closest('.intensity-control');
+        const valueDisplay = sliderContainer?.querySelector('.slider-value');
 
-        if (toggle && slider && valueDisplay && intensityControl) {
-            intensityControl.style.display = 'none';
+        if (toggle && slider && valueDisplay && sliderContainer) {
+            sliderContainer.style.display = 'none';
 
             toggle.checked = this.settings[toggleKey];
             slider.value = this.settings[sliderKey];
@@ -116,7 +128,7 @@ class AccessibilityManager {
 
             toggle.addEventListener('change', (e) => {
                 this.settings[toggleKey] = e.target.checked;
-                this.toggleIntensityControl(intensityControl, e.target.checked);
+                this.toggleIntensityControl(sliderContainer, e.target.checked);
                 this.applySetting(toggleKey);
                 this.saveSettings();
             });
@@ -127,6 +139,8 @@ class AccessibilityManager {
                 this.applySetting(sliderKey);
                 this.saveSettings();
             });
+        } else {
+            console.warn(`❌ Toggle con intensidad no encontrado: ${toggleId}`);
         }
     }
 
@@ -195,12 +209,15 @@ class AccessibilityManager {
             } else if (window.particleSystem && this.settings.motionIntensity > 2) {
                 window.particleSystem.startAnimation();
             }
+
+            console.log('🚫 Movimiento reducido activado:', this.settings.motionIntensity);
         } else {
             root.removeAttribute('data-reduced-motion');
             // Reanudar partículas si están habilitadas
             if (window.particleSystem && window.themeManager?.particlesEnabled) {
                 window.particleSystem.startAnimation();
             }
+            console.log('🎬 Movimiento normal');
         }
     }
 
@@ -213,11 +230,11 @@ class AccessibilityManager {
             // Aplicar filtros basados en los sliders
             const filters = [];
 
-            // Temperatura de color (0=frio, 10=calido) - CORREGIDO
+            // Temperatura de color (0=frio, 10=calido)
             const tempValue = (this.settings.colorTemperature - 5) * 12; // -60 a 60 grados
             filters.push(`hue-rotate(${tempValue}deg)`);
 
-            // Brillo (0=oscuro, 10=brillante) - CORREGIDO
+            // Brillo (0=oscuro, 10=brillante)
             const brightnessValue = 0.7 + (this.settings.brightness * 0.03); // 0.7 a 1.0
             filters.push(`brightness(${brightnessValue})`);
 
@@ -231,12 +248,12 @@ class AccessibilityManager {
             if (this.settings.refreshRate <= 3) {
                 root.setAttribute('data-low-refresh', 'true');
                 // Reducir FPS de animaciones
-                if (window.particleSystem) {
+                if (window.particleSystem && window.particleSystem.setLowRefreshRate) {
                     window.particleSystem.setLowRefreshRate(true);
                 }
             } else {
                 root.removeAttribute('data-low-refresh');
-                if (window.particleSystem) {
+                if (window.particleSystem && window.particleSystem.setLowRefreshRate) {
                     window.particleSystem.setLowRefreshRate(false);
                 }
             }
@@ -252,11 +269,43 @@ class AccessibilityManager {
             root.removeAttribute('data-low-refresh');
             document.body.style.filter = '';
 
-            if (window.particleSystem) {
+            if (window.particleSystem && window.particleSystem.setLowRefreshRate) {
                 window.particleSystem.setLowRefreshRate(false);
             }
 
             console.log('👁️ Modo fotofobia desactivado');
+        }
+    }
+
+    // Métodos para fotofobia - CORREGIDOS: usar arrow functions o bind
+    updateColorTemperature = () => {
+        if (this.settings.photophobiaMode) {
+            this.applyPhotophobiaSettings();
+        }
+    }
+
+    updateBrightness = () => {
+        if (this.settings.photophobiaMode) {
+            this.applyPhotophobiaSettings();
+        }
+    }
+
+    updateRefreshRate = () => {
+        if (this.settings.photophobiaMode) {
+            this.applyPhotophobiaSettings();
+
+            // Afectar animaciones de partículas
+            if (window.particleSystem) {
+                if (this.settings.refreshRate <= 3) {
+                    if (window.particleSystem.setLowRefreshRate) {
+                        window.particleSystem.setLowRefreshRate(true);
+                    }
+                } else {
+                    if (window.particleSystem.setLowRefreshRate) {
+                        window.particleSystem.setLowRefreshRate(false);
+                    }
+                }
+            }
         }
     }
 
@@ -271,6 +320,8 @@ class AccessibilityManager {
         // Aplicar filtro sepia suave basado en intensidad
         const intensity = this.settings.readingIntensity / 10;
         document.body.style.filter = `sepia(${intensity * 0.5}) brightness(${0.9 + intensity * 0.1}) contrast(1.1)`;
+
+        console.log('📖 Modo lectura activado');
     }
 
     restoreOriginalTheme() {
@@ -279,6 +330,7 @@ class AccessibilityManager {
         if (window.themeManager) {
             window.themeManager.applyTheme(window.themeManager.currentTheme);
         }
+        console.log('📖 Modo lectura desactivado');
     }
 
     updateUI() {
@@ -288,20 +340,20 @@ class AccessibilityManager {
             this.settings.reducedMotion
         );
 
-        this.toggleIntensityControl(
-            document.getElementById('dyslexia-intensity')?.closest('.intensity-control'),
-            this.settings.dyslexiaMode
-        );
+        const dyslexiaControl = document.getElementById('dyslexia-intensity')?.closest('.intensity-control');
+        if (dyslexiaControl) {
+            this.toggleIntensityControl(dyslexiaControl, this.settings.dyslexiaMode);
+        }
 
-        this.toggleIntensityControl(
-            document.getElementById('reading-intensity')?.closest('.intensity-control'),
-            this.settings.readingMode
-        );
+        const readingControl = document.getElementById('reading-intensity')?.closest('.intensity-control');
+        if (readingControl) {
+            this.toggleIntensityControl(readingControl, this.settings.readingMode);
+        }
 
-        this.toggleIntensityControl(
-            document.getElementById('font-size')?.closest('.intensity-control'),
-            this.settings.fontSizeEnabled
-        );
+        const fontSizeControl = document.getElementById('font-size')?.closest('.intensity-control');
+        if (fontSizeControl) {
+            this.toggleIntensityControl(fontSizeControl, this.settings.fontSizeEnabled);
+        }
 
         // Actualizar controles de fotofobia
         const photophobiaContainer = document.getElementById('photophobia-controls');
@@ -310,7 +362,13 @@ class AccessibilityManager {
         }
     }
 }
-// Inicializar
+
+// Inicializar con manejo de errores
 document.addEventListener('DOMContentLoaded', () => {
-    new AccessibilityManager();
+    try {
+        new AccessibilityManager();
+        console.log('✅ AccessibilityManager inicializado correctamente');
+    } catch (error) {
+        console.error('❌ Error inicializando AccessibilityManager:', error);
+    }
 });

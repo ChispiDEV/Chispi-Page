@@ -197,12 +197,29 @@ class EnhancedParticleSystem {
     }
 
     setLowRefreshRate(enabled) {
-        if (enabled) {
-            // Reducir FPS para bajo refresco
-            this.frameInterval = 1000 / 30; // 30 FPS
-        } else {
-            this.frameInterval = 1000 / 60; // 60 FPS
+        if (this.animationId) {
+            cancelAnimationFrame(this.animationId);
         }
+
+        if (enabled) {
+            // Animación a 30 FPS para bajo refresco
+            this.animate = () => {
+                this.updateParticles();
+                this.drawParticles();
+                setTimeout(() => {
+                    this.animationId = requestAnimationFrame(() => this.animate());
+                }, 33); // ~30 FPS
+            };
+        } else {
+            // Animación normal a 60 FPS
+            this.animate = () => {
+                this.updateParticles();
+                this.drawParticles();
+                this.animationId = requestAnimationFrame(() => this.animate());
+            };
+        }
+
+        this.startAnimation();
     }
 
     setupThemeListener() {
