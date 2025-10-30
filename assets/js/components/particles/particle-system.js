@@ -67,7 +67,25 @@ export class ParticleSystem {
             'rgba(180, 240, 255, 0.1)'
         ];
     }
+    
+    setReducedOpacity(opacity) {
+        this.particles.forEach(particle => {
+            // Convertir rgba string a nuevo valor de opacidad
+            const newColor = particle.color.replace(/rgba\(([^,]+,[^,]+,[^,]+),([^)]+)\)/,
+                `rgba($1,${opacity})`);
+            particle.color = newColor;
+        });
+        this.logger.debug(`Opacidad de partículas reducida a ${opacity}`);
+    }
 
+    setNormalOpacity() {
+        // Restaurar colores originales
+        this.particles.forEach((particle, index) => {
+            particle.color = particle.originalColor;
+        });
+        this.logger.debug('Opacidad de partículas restaurada');
+    }
+    
     setupCanvas() {
         const width = window.innerWidth;
         const height = window.innerHeight;
@@ -186,6 +204,29 @@ export class ParticleSystem {
         }
     }
 
+    setReducedSpeed(factor) {
+        this.particles.forEach(particle => {
+            particle.speedX *= factor;
+            particle.speedY *= factor;
+        });
+        this.logger.debug(`Velocidad de partículas reducida a ${factor * 100}%`);
+    }
+
+    setNormalSpeed() {
+        // Restaurar velocidades originales basadas en configuración
+        this.particles.forEach(particle => {
+            const originalSpeed = this.config.speed * this.config.moveSpeed;
+            const currentSpeed = Math.sqrt(particle.speedX * particle.speedX + particle.speedY * particle.speedY);
+
+            if (currentSpeed > 0) {
+                const factor = originalSpeed / currentSpeed;
+                particle.speedX *= factor;
+                particle.speedY *= factor;
+            }
+        });
+        this.logger.debug('Velocidad de partículas restaurada');
+    }
+    
     setLowRefreshRate(enabled) {
         if (this.animationId) {
             cancelAnimationFrame(this.animationId);

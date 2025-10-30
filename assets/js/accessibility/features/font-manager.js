@@ -18,86 +18,45 @@ export class FontManager extends BaseFeatureManager {
 
     async setupEventListeners() {
         this.setupToggle('font-size-toggle', (e) => {
-            const control = document.getElementById('font-size')?.closest('.intensity-control');
-            this.toggleElementVisibility(control?.id, e.target.checked);
+            this.toggleIntensityControl(e.target.checked);
         });
 
-        this.setupSlider('font-size', 'fontSize');
+        this.setupSlider('font-size', 'fontSize', (e) => {
+            if (this.settings.enabled) {
+                this.applySettings();
+            }
+        });
 
-        this.logger.debug('Event listeners de font configurados');
+        this.logger.debug('Event listeners de tamaño de fuente configurados');
     }
 
+    toggleIntensityControl(show) {
+        const control = document.getElementById('motion-intensity-control');
+        if (control) {
+            if (show) {
+                control.classList.add('visible');
+                control.style.display = 'flex';
+            } else {
+                control.classList.remove('visible');
+                control.style.display = 'none';
+            }
+            this.logger.debug(`Control de intensidad ${show ? 'mostrado' : 'ocultado'}`);
+        }
+    }
     applySettings() {
         const root = document.documentElement;
 
         if (this.settings.enabled) {
             root.setAttribute('data-font-size', this.settings.fontSize.toString());
-            this.applyFontScaling();
+            // EL SCSS SE ENCARGA DE TODO
             this.logger.info('Escalado de fuente activado', {
-                fontSize: this.settings.fontSize,
-                scale: this.getCurrentScale()
+                fontSize: this.settings.fontSize
             });
         } else {
             root.removeAttribute('data-font-size');
-            this.removeFontScaling();
+            // EL SCSS SE ENCARGA DE TODO
             this.logger.info('Escalado de fuente desactivado');
         }
-    }
-
-    applyFontScaling() {
-        const scale = this.getCurrentScale();
-        const styleId = 'font-scaling-styles';
-
-        if (!document.getElementById(styleId)) {
-            const style = document.createElement('style');
-            style.id = styleId;
-            document.head.appendChild(style);
-        }
-
-        const style = document.getElementById(styleId);
-        style.textContent = `
-            [data-font-size] body {
-                font-size: ${scale * 100}% !important;
-            }
-
-            [data-font-size] h1 {
-                font-size: ${scale * 2.5}rem !important;
-            }
-
-            [data-font-size] h2 {
-                font-size: ${scale * 2}rem !important;
-            }
-
-            [data-font-size] h3 {
-                font-size: ${scale * 1.75}rem !important;
-            }
-
-            [data-font-size] p, 
-            [data-font-size] li, 
-            [data-font-size] span {
-                font-size: ${scale * 1}rem !important;
-            }
-
-            /* Ajustar contenedores para texto más grande */
-            [data-font-size] .container {
-                max-width: ${scale * 100}% !important;
-            }
-        `;
-
-        this.logger.debug('Escalado de fuente aplicado', { scale });
-    }
-
-    removeFontScaling() {
-        const style = document.getElementById('font-scaling-styles');
-        if (style) {
-            style.remove();
-            this.logger.debug('Escalado de fuente removido');
-        }
-    }
-
-    getCurrentScale() {
-        const index = Math.min(Math.max(0, this.settings.fontSize), this.availableFontSizes.length - 1);
-        return this.availableFontSizes[index];
     }
 
     setFontSize(sizeIndex) {

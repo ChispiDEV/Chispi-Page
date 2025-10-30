@@ -64,23 +64,39 @@ export class PhotophobiaManager extends BaseFeatureManager {
             root.setAttribute('data-photophobia-mode', 'true');
 
             const filters = [];
-            const tempValue = (this.settings.colorTemperature - 5) * 12;
-            const brightnessValue = 0.7 + (this.settings.brightness * 0.03);
+            root.setAttribute('data-photophobia-intensity', this.settings.intensity.toString());
 
-            filters.push(`hue-rotate(${tempValue}deg)`);
-            filters.push(`brightness(${brightnessValue})`);
-            filters.push('contrast(1.05)');
+            this.applyCustomFilters();
 
-            document.body.style.filter = filters.join(' ');
-
-            this.logger.info('Configuración de fotofobia aplicada', this.settings);
+            this.logger.info('Modo fotofobia activado', this.settings);
         } else {
             root.removeAttribute('data-photophobia-mode');
-            document.body.style.filter = '';
-            this.logger.info('Fotofobia desactivada');
+            root.removeAttribute('data-photophobia-intensity');
+            this.removeCustomFilters();
+            this.logger.info('Modo fotofobia desactivado');
         }
     }
 
+    applyCustomFilters() {
+        // Los filtros de temperatura y brillo necesitan JS porque son dinámicos
+        const filters = [];
+
+        // Temperatura de color (0=frio, 10=calido)
+        const tempValue = (this.settings.colorTemperature - 5) * 12; // -60 a 60 grados
+        filters.push(`hue-rotate(${tempValue}deg)`);
+
+        // Brillo (0=oscuro, 10=brillante)
+        const brightnessValue = 0.7 + (this.settings.brightness * 0.03); // 0.7 a 1.0
+        filters.push(`brightness(${brightnessValue})`);
+
+        // Aplicar filtros al body
+        document.body.style.filter = filters.join(' ');
+    }
+
+    removeCustomFilters() {
+        document.body.style.filter = '';
+    }
+    
     enable(intensity = 5) {
         this.settings.enabled = true;
         this.settings.colorTemperature = intensity;

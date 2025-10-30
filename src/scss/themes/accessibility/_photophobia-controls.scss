@@ -1,10 +1,20 @@
 // src/scss/accessibility/_photophobia-controls.scss
+
+// ===== CONTROLES DE FOTOFOBIA =====
 .photophobia-controls {
   padding: 1rem;
   background: var(--bg-secondary);
   border-radius: 8px;
   margin-top: 1rem;
   border: 1px solid var(--border-color);
+  // CORREGIDO: No forzar display block aquí, se controla via JS
+  display: none; // Oculto por defecto
+
+  // Mostrar cuando el contenedor tenga la clase visible
+  &.visible {
+    display: block !important;
+    animation: slideDown 0.3s ease;
+  }
 
   .slider-container {
     margin-bottom: 1rem;
@@ -20,6 +30,7 @@
       margin-bottom: 0.5rem;
       color: var(--text-primary);
       font-size: 0.9rem;
+      font-weight: 500;
 
       .slider-value {
         background: var(--bg-primary);
@@ -28,6 +39,7 @@
         font-weight: bold;
         min-width: 2rem;
         text-align: center;
+        border: 1px solid var(--border-color);
       }
     }
 
@@ -38,12 +50,19 @@
       background: var(--border-color);
       outline: none;
       opacity: 0.7;
-      transition: opacity 0.2s;
+      transition: all 0.2s ease;
+      cursor: pointer;
 
       &:hover {
         opacity: 1;
       }
 
+      &:focus {
+        opacity: 1;
+        box-shadow: 0 0 0 2px var(--accent-primary);
+      }
+
+      // Webkit (Chrome, Safari, Edge)
       &::-webkit-slider-thumb {
         appearance: none;
         width: 18px;
@@ -51,13 +70,46 @@
         border-radius: 50%;
         background: var(--accent-primary);
         cursor: pointer;
+        border: 2px solid var(--bg-primary);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: all 0.2s ease;
+
+        &:hover {
+          transform: scale(1.1);
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+        }
       }
 
+      // Firefox
       &::-moz-range-thumb {
         width: 18px;
         height: 18px;
         border-radius: 50%;
         background: var(--accent-primary);
+        cursor: pointer;
+        border: 2px solid var(--bg-primary);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: all 0.2s ease;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+
+      // Track styles
+      &::-webkit-slider-track {
+        width: 100%;
+        height: 6px;
+        border-radius: 3px;
+        background: var(--border-color);
+        cursor: pointer;
+      }
+
+      &::-moz-range-track {
+        width: 100%;
+        height: 6px;
+        border-radius: 3px;
+        background: var(--border-color);
         cursor: pointer;
         border: none;
       }
@@ -65,8 +117,137 @@
   }
 }
 
-// Estados de accesibilidad
-[data-reduced-motion] {
+// ===== CONTROLES DE INTENSIDAD GENERALES =====
+.intensity-control {
+  // CORREGIDO: Oculto por defecto, no forzar flex
+  display: none;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background: var(--bg-secondary);
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+
+  // Mostrar cuando tenga la clase visible
+  &.visible {
+    display: flex !important;
+    animation: slideDown 0.3s ease;
+  }
+
+  .intensity-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    font-weight: 500;
+    min-width: 80px;
+  }
+
+  .intensity-slider {
+    flex: 1;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--border-color);
+    outline: none;
+    opacity: 0.7;
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &:focus {
+      opacity: 1;
+      box-shadow: 0 0 0 2px var(--accent-primary);
+    }
+
+    // Webkit
+    &::-webkit-slider-thumb {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent-primary);
+      cursor: pointer;
+      border: 2px solid var(--bg-primary);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transition: all 0.2s ease;
+
+      &:hover {
+        transform: scale(1.1);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    // Firefox
+    &::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent-primary);
+      cursor: pointer;
+      border: 2px solid var(--bg-primary);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transition: all 0.2s ease;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+
+    // Track
+    &::-webkit-slider-track {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--border-color);
+      cursor: pointer;
+    }
+
+    &::-moz-range-track {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--border-color);
+      cursor: pointer;
+      border: none;
+    }
+  }
+
+  .intensity-value {
+    min-width: 2rem;
+    text-align: center;
+    font-weight: bold;
+    color: var(--accent-primary);
+    background: var(--bg-primary);
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// ===== ANIMACIONES =====
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ===== ESTADOS DE ACCESIBILIDAD =====
+
+// MOVIMIENTO REDUCIDO - CORREGIDO: No aplicar a todos los niveles
+// Esto debería estar en tu archivo _accessibility-modes.scss
+[data-reduced-motion="4"] {
+  // Solo nivel 4 (sin movimiento) debería tener estas reglas extremas
   * {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
@@ -74,16 +255,153 @@
   }
 }
 
+// BAJO REFRESCO
 [data-low-refresh="true"] {
   .particles-container {
     animation: none !important;
   }
+
+  // También reducir otras animaciones
+  * {
+    animation-duration: 0.1s !important;
+    transition-duration: 0.1s !important;
+  }
 }
 
+// MODO FOTOFOBIA - CORREGIDO: Mejorar especificidad
 [data-photophobia-mode="true"] {
   // Estilos específicos para modo fotofobia
-  img, video {
+  img, video, iframe {
     opacity: 0.8;
     filter: brightness(0.9) contrast(1.1);
+    transition: all 0.3s ease;
+  }
+
+  // Reducir brillo de elementos luminosos
+  .btn-primary,
+  .accent-element {
+    opacity: 0.9;
+    filter: brightness(0.95);
+  }
+
+  // Asegurar buen contraste en texto
+  .text-primary,
+  .text-secondary {
+    filter: contrast(1.1);
+  }
+}
+
+// ===== ESTILOS PARA DARK MODE =====
+[data-theme="dark"] {
+  .photophobia-controls,
+  .intensity-control {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+
+    .slider,
+    .intensity-slider {
+      background: var(--border-color);
+
+      &::-webkit-slider-thumb,
+      &::-moz-range-thumb {
+        border-color: var(--bg-primary);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+      }
+    }
+
+    .slider-value,
+    .intensity-value {
+      background: var(--bg-primary);
+      border-color: var(--border-color);
+    }
+  }
+}
+
+// ===== RESPONSIVE =====
+@media (max-width: 768px) {
+  .photophobia-controls {
+    padding: 0.75rem;
+    margin-top: 0.75rem;
+
+    .slider-container {
+      margin-bottom: 0.875rem;
+
+      label {
+        font-size: 0.85rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+
+        .slider-value {
+          align-self: flex-end;
+        }
+      }
+    }
+  }
+
+  .intensity-control {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    padding: 0.625rem;
+
+    .intensity-label {
+      min-width: auto;
+      text-align: left;
+    }
+
+    .intensity-value {
+      align-self: flex-end;
+      margin-top: 0.25rem;
+    }
+  }
+}
+
+// ===== HIGH CONTRAST MODE SUPPORT =====
+@media (prefers-contrast: high) {
+  .photophobia-controls,
+  .intensity-control {
+    border-width: 2px;
+    border-color: var(--text-primary);
+
+    .slider,
+    .intensity-slider {
+      border: 1px solid var(--text-primary);
+
+      &::-webkit-slider-thumb,
+      &::-moz-range-thumb {
+        border-width: 3px;
+        border-color: var(--text-primary);
+      }
+    }
+
+    .slider-value,
+    .intensity-value {
+      border: 1px solid var(--text-primary);
+      font-weight: 800;
+    }
+  }
+}
+
+// ===== REDUCED MOTION SUPPORT =====
+@media (prefers-reduced-motion: reduce) {
+  .photophobia-controls,
+  .intensity-control {
+    transition: none;
+
+    &.visible {
+      animation: none;
+    }
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }

@@ -103,10 +103,23 @@ export class BaseFeatureManager {
             toggle.checked = this.settings.enabled;
             toggle.addEventListener('change', (e) => {
                 this.settings.enabled = e.target.checked;
+                // Ejecutar callbacks de habilitación/deshabilitación
+                if (e.target.checked) {
+                    this.onEnable?.();
+                } else {
+                    this.onDisable?.();
+                }
+
                 if (onChange) onChange(e);
                 this.applySettings();
                 this.saveSettings();
             });
+
+            // Aplicar estado inicial
+            if (this.settings.enabled) {
+                this.onEnable?.();
+            }
+
             return true;
         }
         this.logger.warn(`Toggle no encontrado: ${toggleId}`);

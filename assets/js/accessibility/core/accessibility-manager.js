@@ -9,21 +9,42 @@ import { AccessibilityLogger } from './accessibility-logger.js';
 
 export class AccessibilityManager {
     constructor() {
-        this.logger = new AccessibilityLogger();
+        // SINGLETON PATTERN - prevenir duplicación
+        if (window.__accessibilityManagerInstance) {
+            return window.__accessibilityManagerInstance;
+        }
+        window.__accessibilityManagerInstance = this;
+
+        this.logger = new AccessibilityLogger('AccessibilityManager');
         this.managers = new Map();
         this.isInitialized = false;
-
-        this.initialize();
+        this.initializationPromise = null; // Para prevenir inicialización concurrente
     }
 
     async initialize() {
+        // Prevenir múltiples inicializaciones
+        if (this.isInitialized) {
+            this.logger.debug('Ya inicializado, omitiendo...');
+            return;
+        }
+
+        if (this.initializationPromise) {
+            this.logger.debug('Inicialización en progreso, esperando...');
+            return this.initializationPromise;
+        }
+
+        this.initializationPromise = this._initialize();
+        return this.initializationPromise;
+    }
+
+    async _initialize() {
         try {
             this.logger.info('Inicializando AccessibilityManager...');
 
-            // Inicializar todos los managers
-            await this.initializeManagers();
+            // DEBUG: Ver qué elementos existen
+            this.debugAccessibilityElements();
 
-            // Configurar comunicación entre managers
+            await this.initializeManagers();
             this.setupInterManagerCommunication();
 
             this.isInitialized = true;
@@ -34,6 +55,8 @@ export class AccessibilityManager {
 
         } catch (error) {
             this.logger.error('Error inicializando AccessibilityManager', error);
+            this.initializationPromise = null;
+            throw error;
         }
     }
 
@@ -46,12 +69,17 @@ export class AccessibilityManager {
             { key: 'font', Class: FontManager }
         ];
 
-        // VERIFICAR ELEMENTOS ANTES DE INICIALIZAR
-        this.debugAccessibilityElements();
+        const initialized = [];
 
         for (const config of managerConfigs) {
             try {
-                // Verificar si los elementos necesarios existen
+                // Verificar duplicación
+                if (this.managers.has(config.key)) {
+                    this.logger.warn(`Manager ${config.key} ya existe, omitiendo...`);
+                    continue;
+                }
+
+                // Verificar elementos requeridos
                 if (!this.shouldInitializeManager(config.key)) {
                     this.logger.warn(`Manager ${config.key} omitido - elementos no encontrados`);
                     continue;
@@ -60,12 +88,16 @@ export class AccessibilityManager {
                 const manager = new config.Class(this.logger);
                 await manager.initialize();
                 this.managers.set(config.key, manager);
+                initialized.push(config.key);
+
                 this.logger.success(`${config.key}Manager inicializado`);
 
             } catch (error) {
                 this.logger.error(`Error inicializando ${config.key}Manager`, error);
             }
         }
+
+        this.logger.info(`Managers inicializados: ${initialized.join(', ')}`);
     }
 
     shouldInitializeManager(managerKey) {
