@@ -1,5 +1,4 @@
 // assets/js/core/logger.js
-
 export class Logger {
     constructor(moduleName) {
         this.moduleName = moduleName;

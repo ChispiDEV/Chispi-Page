@@ -1,4 +1,5 @@
 // assets/js/core/event-bus.js
+import { Logger } from './logger.js';
 
 export class EventBus {
     constructor() {
