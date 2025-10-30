@@ -1,13 +1,12 @@
-// assets/js/theme-manager.js - Sistema completo de temas
-class ThemeManager {
+// assets/js/components/themes/theme-manager.js
+
+import { Logger } from '../../core/logger.js';
+import { eventBus } from '../../core/event-bus.js';
+
+export class ThemeManager {
     constructor() {
-        this.availableThemes = [
-            'light',
-            'dark',
-            'sepia',
-            'gray-scale',
-            'high-contrast',
-        ];
+        this.logger = new Logger('ThemeManager');
+        this.availableThemes = ['light', 'dark', 'sepia', 'gray-scale', 'high-contrast'];
         this.currentTheme = this.getSavedTheme() || this.getSystemTheme();
         this.particlesEnabled = true;
 
@@ -18,8 +17,7 @@ class ThemeManager {
         this.applyTheme(this.currentTheme);
         this.setupThemeEventListeners();
         this.setupParticleThemes();
-
-        console.log('🎨 Gestor de temas inicializado - Tema actual:', this.currentTheme);
+        this.logger.success('Inicializado', { theme: this.currentTheme });
     }
 
     getSavedTheme() {
@@ -33,24 +31,21 @@ class ThemeManager {
     applyTheme(theme) {
         if (!this.availableThemes.includes(theme)) {
             theme = 'light';
+            this.logger.warn('Tema no válido, usando light por defecto');
         }
 
         document.documentElement.setAttribute('data-theme', theme);
         this.currentTheme = theme;
         localStorage.setItem('preferred-theme', theme);
 
-        // Aplicar configuraciones específicas del tema
         this.applyThemeSpecifics(theme);
-
-        // Actualizar UI
         this.updateThemeUI(theme);
-        
-        // Notificar a otros componentes
         this.notifyThemeChange(theme);
+
+        this.logger.info('Tema aplicado', { theme });
     }
 
     applyThemeSpecifics(theme) {
-        // Configuraciones específicas para cada tema
         const specifics = {
             'high-contrast': {
                 particles: false,
@@ -72,11 +67,9 @@ class ThemeManager {
 
         const config = specifics[theme] || specifics.light;
 
-        // Aplicar configuración de partículas
         this.particlesEnabled = config.particles;
         this.toggleParticles(config.particles);
 
-        // Aplicar preferencias de animación
         if (config.animations === 'reduce') {
             document.documentElement.style.setProperty('--reduce-motion', 'reduce');
         } else {
@@ -85,7 +78,7 @@ class ThemeManager {
     }
 
     updateThemeUI(theme) {
-        // Actualizar opciones activas en el dropdown
+        // Actualizar opciones activas en dropdown
         document.querySelectorAll('.theme-option').forEach(option => {
             option.classList.remove('active');
             if (option.getAttribute('data-theme') === theme) {
@@ -93,7 +86,7 @@ class ThemeManager {
             }
         });
 
-        // Actualizar selector móvil si existe
+        // Actualizar selector móvil
         const mobileSelector = document.getElementById('mobile-theme-selector');
         if (mobileSelector) {
             mobileSelector.value = theme;
@@ -114,7 +107,6 @@ class ThemeManager {
     }
 
     setupParticleThemes() {
-        // Configuraciones de partículas por tema
         const particleThemes = {
             'light': {
                 colors: [
@@ -168,40 +160,34 @@ class ThemeManager {
                 e.preventDefault();
                 const theme = option.getAttribute('data-theme');
                 this.applyTheme(theme);
-
-                // Cerrar dropdown después de seleccionar
-                if (window.dropdownManager) {
-                    window.dropdownManager.closeAllDropdowns();
-                }
+                eventBus.emit('dropdown:close-all');
             });
         });
-        
+
         // Escuchar cambios del sistema
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-            if (!this.getSavedTheme()) { // Solo si el usuario no ha elegido manualmente
+            if (!this.getSavedTheme()) {
                 this.applyTheme(e.matches ? 'dark' : 'light');
             }
         });
 
-        // Escuchar cambios de contraste
         window.matchMedia('(prefers-contrast: high)').addEventListener('change', (e) => {
             if (e.matches && !this.getSavedTheme()) {
                 this.applyTheme('high-contrast');
             }
         });
+
+        // Escuchar eventos del bus
+        eventBus.on('theme:change', (data) => {
+            this.applyTheme(data.theme);
+        });
     }
 
     notifyThemeChange(theme) {
-        // Disparar evento personalizado
-        const event = new CustomEvent('themechange', {
-            detail: { theme, particlesEnabled: this.particlesEnabled }
+        eventBus.emit('theme:changed', {
+            theme,
+            particlesEnabled: this.particlesEnabled
         });
-        document.dispatchEvent(event);
-
-        // Notificar a las partículas
-        if (window.particleSystem && typeof window.particleSystem.onThemeChange === 'function') {
-            window.particleSystem.onThemeChange(theme);
-        }
     }
 
     // API pública
@@ -219,14 +205,3 @@ class ThemeManager {
         this.applyTheme(this.availableThemes[nextIndex]);
     }
 }
-
-// Inicializar gestor de temas
-document.addEventListener('DOMContentLoaded', () => {
-    window.themeManager = new ThemeManager();
-
-    // Comandos de consola para desarrollo
-    console.log('🎨 Comandos de tema:');
-    console.log('- themeManager.setTheme("dark")');
-    console.log('- themeManager.cycleThemes()');
-    console.log('- themeManager.getTheme()');
-});

@@ -1,6 +1,12 @@
+// assets/js/components/navigation/dropdown-manager.js
 // Gestión mejorada de dropdowns
-class DropdownManager {
+
+import { Logger } from '../../core/logger.js';
+import { eventBus } from '../../core/event-bus.js';
+
+export class DropdownManager {
     constructor() {
+        this.logger = new Logger('DropdownManager');
         this.dropdowns = new Map();
         this.init();
     }
@@ -8,7 +14,7 @@ class DropdownManager {
     init() {
         this.setupDropdowns();
         this.setupEventListeners();
-        console.log('✅ DropdownManager inicializado');
+        this.logger.success('Inicializado');
     }
 
     setupDropdowns() {
@@ -19,10 +25,11 @@ class DropdownManager {
             if (toggle && menu) {
                 const dropdownId = `dropdown-${index}`;
                 this.dropdowns.set(dropdownId, { dropdown, toggle, menu });
-
                 this.setupDropdown(dropdown, toggle, menu);
             }
         });
+
+        this.logger.info(`${this.dropdowns.size} dropdowns configurados`);
     }
 
     setupDropdown(dropdown, toggle, menu) {
@@ -43,12 +50,10 @@ class DropdownManager {
             item.addEventListener('click', (e) => {
                 e.stopPropagation();
 
-                // No cerrar si es un input o slider
                 if (item.type === 'checkbox' || item.type === 'range') {
                     return;
                 }
 
-                // Cerrar después de un breve delay para permitir la acción
                 setTimeout(() => {
                     this.closeDropdown(dropdown);
                 }, 100);
@@ -58,11 +63,8 @@ class DropdownManager {
 
     toggleDropdown(targetDropdown) {
         const isOpen = targetDropdown.classList.contains('open');
-
-        // Cerrar todos los dropdowns primero
         this.closeAllDropdowns();
 
-        // Abrir el dropdown objetivo si no estaba abierto
         if (!isOpen) {
             this.openDropdown(targetDropdown);
         }
@@ -81,6 +83,9 @@ class DropdownManager {
             const firstItem = menu.querySelector('a, button, input');
             if (firstItem) firstItem.focus();
         }, 100);
+
+        eventBus.emit('dropdown:opened', { dropdown });
+        this.logger.debug('Dropdown abierto', { id: dropdown.id });
     }
 
     closeDropdown(dropdown) {
@@ -90,12 +95,16 @@ class DropdownManager {
 
         if (menu) menu.classList.remove('show');
         if (toggle) toggle.setAttribute('aria-expanded', 'false');
+
+        eventBus.emit('dropdown:closed', { dropdown });
+        this.logger.debug('Dropdown cerrado', { id: dropdown.id });
     }
 
     closeAllDropdowns() {
         this.dropdowns.forEach(({ dropdown }) => {
             this.closeDropdown(dropdown);
         });
+        this.logger.debug('Todos los dropdowns cerrados');
     }
 
     setupEventListeners() {
@@ -150,8 +159,3 @@ class DropdownManager {
         });
     }
 }
-
-// Inicialización
-document.addEventListener('DOMContentLoaded', () => {
-    window.dropdownManager = new DropdownManager();
-});

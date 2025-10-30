@@ -1,11 +1,15 @@
-// assets/js/particles.js
-class EnhancedParticleSystem {
-    constructor(canvasId) {
-        console.log('🚀 Iniciando sistema de partículas mejorado...');
+// assets/js/components/particles/particle-system.js
 
+import { Logger } from '../../core/logger.js';
+import { eventBus } from '../../core/event-bus.js';
+
+export class ParticleSystem {
+    constructor(canvasId) {
+        this.logger = new Logger('ParticleSystem');
         this.canvas = document.getElementById(canvasId);
+
         if (!this.canvas) {
-            console.error('❌ Canvas no encontrado:', canvasId);
+            this.logger.error('Canvas no encontrado', { canvasId });
             return;
         }
 
@@ -15,7 +19,6 @@ class EnhancedParticleSystem {
         this.isInitialized = false;
         this.currentTheme = 'light';
 
-        // Configuración inicial
         this.config = {
             count: 60,
             colors: this.getParticleColors(),
@@ -26,7 +29,7 @@ class EnhancedParticleSystem {
             moveSpeed: 1
         };
 
-        console.log('✅ Sistema de partículas creado');
+        this.logger.success('Sistema creado');
         this.init();
     }
 
@@ -36,10 +39,8 @@ class EnhancedParticleSystem {
         this.startAnimation();
         this.isInitialized = true;
 
-        // Escuchar cambios de tema
-        this.setupThemeListener();
-
-        console.log('🎉 Partículas inicializadas con tema:', this.currentTheme);
+        this.setupEventListeners();
+        this.logger.success('Inicializado', { theme: this.currentTheme });
     }
 
     getCSSVariable(name, defaultValue) {
@@ -48,19 +49,16 @@ class EnhancedParticleSystem {
     }
 
     getParticleColors() {
-        // Obtener colores del CSS variable
         const colorsArray = getComputedStyle(document.documentElement).getPropertyValue('--particles-colors-array');
         if (colorsArray) {
             try {
-                // Limpiar y parsear el array
                 const cleanArray = colorsArray.trim().replace(/^\[|\]$/g, '');
                 return JSON.parse(`[${cleanArray}]`);
             } catch (e) {
-                console.warn('❌ No se pudieron parsear los colores CSS, usando defaults');
+                this.logger.warn('No se pudieron parsear colores CSS, usando defaults');
             }
         }
 
-        // Colores por defecto más suaves
         return [
             'rgba(100, 200, 255, 0.2)',
             'rgba(120, 180, 240, 0.15)',
@@ -87,13 +85,11 @@ class EnhancedParticleSystem {
             opacity: ${this.config.opacity};
         `;
 
-        console.log('📐 Canvas configurado:', width, 'x', height);
+        this.logger.debug('Canvas configurado', { width, height });
     }
 
     createParticles() {
         this.particles = [];
-
-        // Obtener configuración actualizada del CSS
         this.updateConfigFromCSS();
 
         for (let i = 0; i < this.config.count; i++) {
@@ -108,7 +104,7 @@ class EnhancedParticleSystem {
             });
         }
 
-        console.log(`✨ ${this.particles.length} partículas creadas`);
+        this.logger.debug(`${this.particles.length} partículas creadas`);
     }
 
     updateConfigFromCSS() {
@@ -118,11 +114,8 @@ class EnhancedParticleSystem {
         this.config.moveSpeed = this.getCSSVariable('--particles-move-speed', 1);
         this.config.sizeMin = this.getCSSVariable('--particles-size-min', 1);
         this.config.sizeMax = this.getCSSVariable('--particles-size-max', 2.5);
-
-        // Actualizar colores
         this.config.colors = this.getParticleColors();
 
-        // Aplicar opacidad al canvas
         if (this.canvas) {
             this.canvas.style.opacity = this.config.opacity;
         }
@@ -147,7 +140,7 @@ class EnhancedParticleSystem {
                     particle.y = Math.max(1, Math.min(this.canvas.height - 1, particle.y));
                 }
 
-                // Movimiento orgánico reducido
+                // Movimiento orgánico
                 particle.speedX += (Math.random() - 0.5) * 0.01;
                 particle.speedY += (Math.random() - 0.5) * 0.01;
 
@@ -159,15 +152,12 @@ class EnhancedParticleSystem {
                     particle.speedY = (particle.speedY / speed) * maxSpeed;
                 }
             }
-            // En reduced motion, las partículas no se mueven
         });
     }
 
     drawParticles() {
-        // Limpiar canvas
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        // Dibujar partículas
         this.particles.forEach(particle => {
             this.ctx.beginPath();
             this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
@@ -202,16 +192,14 @@ class EnhancedParticleSystem {
         }
 
         if (enabled) {
-            // Animación a 30 FPS para bajo refresco
             this.animate = () => {
                 this.updateParticles();
                 this.drawParticles();
                 setTimeout(() => {
                     this.animationId = requestAnimationFrame(() => this.animate());
-                }, 33); // ~30 FPS
+                }, 33);
             };
         } else {
-            // Animación normal a 60 FPS
             this.animate = () => {
                 this.updateParticles();
                 this.drawParticles();
@@ -220,40 +208,30 @@ class EnhancedParticleSystem {
         }
 
         this.startAnimation();
+        this.logger.debug('Refresh rate actualizado', { lowRefresh: enabled });
     }
 
-    setupThemeListener() {
-        // Observar cambios en data-theme
-        const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
-                    const newTheme = document.documentElement.getAttribute('data-theme') || 'light';
-                    this.onThemeChange(newTheme);
-                }
-            });
+    setupEventListeners() {
+        // Escuchar cambios de tema
+        eventBus.on('theme:changed', (data) => {
+            this.onThemeChange(data.theme);
         });
 
-        observer.observe(document.documentElement, {
-            attributes: true,
-            attributeFilter: ['data-theme']
-        });
-
-        // También observar cambios en atributos de accesibilidad
-        const accessibilityObserver = new MutationObserver(() => {
+        // Observar cambios en atributos de accesibilidad
+        const observer = new MutationObserver(() => {
             this.updateConfigFromCSS();
         });
 
-        accessibilityObserver.observe(document.documentElement, {
+        observer.observe(document.documentElement, {
             attributes: true,
             attributeFilter: ['data-reduced-motion', 'data-photophobia-mode']
         });
     }
 
     onThemeChange(newTheme) {
-        console.log('🎨 Cambio de tema detectado:', newTheme);
+        this.logger.info('Cambio de tema detectado', { newTheme });
         this.currentTheme = newTheme;
 
-        // Pequeño delay para asegurar que CSS está aplicado
         setTimeout(() => {
             this.updateConfigFromCSS();
             this.createParticles();
@@ -263,6 +241,7 @@ class EnhancedParticleSystem {
     restart() {
         this.createParticles();
         this.startAnimation();
+        this.logger.debug('Sistema reiniciado');
     }
 
     // Métodos públicos para debugging
@@ -271,43 +250,13 @@ class EnhancedParticleSystem {
             const newColor = particle.color.replace(/[\d\.]+\)$/g, '0.6)');
             particle.color = newColor;
         });
-        console.log('💡 Partículas hechas más brillantes');
+        this.logger.debug('Partículas hechas más brillantes');
     }
 
     makeLarger() {
         this.particles.forEach(particle => {
             particle.size *= 1.5;
         });
-        console.log('🔍 Partículas agrandadas');
+        this.logger.debug('Partículas agrandadas');
     }
 }
-
-// Inicialización global
-function initializeParticles() {
-    console.log('🌊 Inicializando partículas...');
-
-    // Esperar a que el DOM esté listo
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            window.particleSystem = new EnhancedParticleSystem('particles-canvas');
-        });
-    } else {
-        window.particleSystem = new EnhancedParticleSystem('particles-canvas');
-    }
-}
-
-// Comandos de debug
-window.makeParticlesBrighter = () => {
-    if (window.particleSystem) window.particleSystem.makeBrighter();
-};
-
-window.makeParticlesLarger = () => {
-    if (window.particleSystem) window.particleSystem.makeLarger();
-};
-
-window.restartParticles = () => {
-    if (window.particleSystem) window.particleSystem.restart();
-};
-
-// Iniciar
-initializeParticles();
