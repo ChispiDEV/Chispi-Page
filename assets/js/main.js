@@ -4,7 +4,7 @@
 import './core/app.js';
 
 // Inicializar accesibilidad si existe
-import './accessibility/main.js';
+import './accessibility/accessibility-main.js';
 
 console.log('🎯 Aplicación cargada correctamente');
 
