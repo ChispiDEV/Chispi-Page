@@ -115,8 +115,25 @@ export class BaseFeatureManager {
 
     setupSlider(sliderId, settingKey, onChange = null) {
         const slider = document.getElementById(sliderId);
-        const container = slider?.closest('.slider-container, .intensity-control');
-        const valueDisplay = container?.querySelector('.slider-value');
+
+        // INTENTAR DIFERENTES ESTRUCTURAS
+        let container = slider?.closest('.intensity-control');
+        let valueDisplay = container?.querySelector('.intensity-value');
+
+        // Si no se encuentra en intensity-control, buscar en slider-container
+        if (!valueDisplay) {
+            container = slider?.closest('.slider-container');
+            valueDisplay = container?.querySelector('.slider-value');
+        }
+
+        // Si aún no se encuentra, buscar cualquier elemento hermano con la clase
+        if (!valueDisplay && slider) {
+            valueDisplay = slider.nextElementSibling?.classList?.contains('intensity-value')
+                ? slider.nextElementSibling
+                : slider.nextElementSibling?.classList?.contains('slider-value')
+                    ? slider.nextElementSibling
+                    : null;
+        }
 
         if (slider && valueDisplay) {
             slider.value = this.settings[settingKey] || this.settings.intensity;
@@ -129,9 +146,20 @@ export class BaseFeatureManager {
                 this.applySettings();
                 this.saveSettings();
             });
+
+            this.logger.debug(`Slider configurado: ${sliderId}`);
             return true;
         }
-        this.logger.warn(`Slider no encontrado: ${sliderId}`);
+
+        this.logger.warn(`Slider no encontrado: ${sliderId}`, {
+            slider: !!slider,
+            container: !!container,
+            valueDisplay: !!valueDisplay,
+            availableContainers: {
+                intensityControl: !!document.querySelector('.intensity-control'),
+                sliderContainer: !!document.querySelector('.slider-container')
+            }
+        });
         return false;
     }
 

@@ -46,16 +46,65 @@ export class AccessibilityManager {
             { key: 'font', Class: FontManager }
         ];
 
+        // VERIFICAR ELEMENTOS ANTES DE INICIALIZAR
+        this.debugAccessibilityElements();
+
         for (const config of managerConfigs) {
             try {
+                // Verificar si los elementos necesarios existen
+                if (!this.shouldInitializeManager(config.key)) {
+                    this.logger.warn(`Manager ${config.key} omitido - elementos no encontrados`);
+                    continue;
+                }
+
                 const manager = new config.Class(this.logger);
                 await manager.initialize();
                 this.managers.set(config.key, manager);
                 this.logger.success(`${config.key}Manager inicializado`);
+
             } catch (error) {
                 this.logger.error(`Error inicializando ${config.key}Manager`, error);
             }
         }
+    }
+
+    shouldInitializeManager(managerKey) {
+        const requiredElements = {
+            motion: ['reduced-motion-toggle', 'motion-intensity'],
+            dyslexia: ['dyslexia-mode-toggle', 'dyslexia-intensity'],
+            reading: ['reading-mode-toggle', 'reading-intensity'],
+            font: ['font-size-toggle', 'font-size'],
+            photophobia: ['photophobia-mode-toggle', 'color-temperature', 'brightness', 'refresh-rate']
+        };
+
+        const elements = requiredElements[managerKey] || [];
+        const allExist = elements.every(id => document.getElementById(id));
+
+        if (!allExist) {
+            this.logger.debug(`Elementos faltantes para ${managerKey}:`,
+                elements.filter(id => !document.getElementById(id)));
+        }
+
+        return allExist;
+    }
+
+    debugAccessibilityElements() {
+        const allElements = [
+            'reduced-motion-toggle', 'motion-intensity',
+            'dyslexia-mode-toggle', 'dyslexia-intensity',
+            'reading-mode-toggle', 'reading-intensity',
+            'font-size-toggle', 'font-size',
+            'photophobia-mode-toggle', 'color-temperature', 'brightness', 'refresh-rate'
+        ];
+
+        this.logger.info('=== DEBUG: Elementos de Accesibilidad ===');
+
+        allElements.forEach(id => {
+            const element = document.getElementById(id);
+            this.logger.debug(`- ${id}:`, element ? '✅' : '❌');
+        });
+
+        this.logger.info('=== FIN DEBUG ===');
     }
 
     setupInterManagerCommunication() {
