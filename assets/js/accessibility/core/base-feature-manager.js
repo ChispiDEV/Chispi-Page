@@ -91,10 +91,9 @@ export class BaseFeatureManager {
             this.applySettings();
             this.saveSettings();
         }
-        this.logger.debug(`Intensidad de ${this.name} actualizada`, { intensity });
+        this.logger.debug(`Intensidad de ${this.name} actualizada`, { intensity: this.settings.intensity });
     }
 
-    // Método de validación común
     validateIntensity(intensity, min = 1, max = 5) {
         const parsed = parseInt(intensity);
         return Math.min(max, Math.max(min, isNaN(parsed) ? min : parsed));
@@ -112,85 +111,80 @@ export class BaseFeatureManager {
     // Métodos utilitarios comunes
     setupToggle(toggleId, onChange = null) {
         const toggle = document.getElementById(toggleId);
-        if (toggle) {
-            toggle.checked = this.settings.enabled;
-            toggle.addEventListener('change', (e) => {
-                this.settings.enabled = e.target.checked;
+        if (!toggle) {
+            this.logger.warn(`Toggle no encontrado: ${toggleId}`);
+            return false;
+        }
 
-                // Ejecutar callbacks de habilitación/deshabilitación
-                if (e.target.checked) {
-                    this.onEnable?.();
-                } else {
-                    this.onDisable?.();
-                }
+        toggle.checked = this.settings.enabled;
+        toggle.addEventListener('change', (e) => {
+            this.settings.enabled = e.target.checked;
 
-                if (onChange) onChange(e);
-                this.applySettings();
-                this.saveSettings();
-            });
-
-            // Aplicar estado inicial
-            if (this.settings.enabled) {
+            // Ejecutar callbacks de habilitación/deshabilitación
+            if (e.target.checked) {
                 this.onEnable?.();
+            } else {
+                this.onDisable?.();
             }
 
-            return true;
+            onChange?.(e);
+            this.applySettings();
+            this.saveSettings();
+        });
+
+        // Aplicar estado inicial
+        if (this.settings.enabled) {
+            this.onEnable?.();
         }
-        this.logger.warn(`Toggle no encontrado: ${toggleId}`);
-        return false;
+
+        return true;
     }
 
-    setupSlider(sliderId, settingKey, onChange = null) {
+    setupSlider(sliderId, settingKey = 'intensity', onChange = null) {
         const slider = document.getElementById(sliderId);
+        if (!slider) {
+            this.logger.warn(`Slider no encontrado: ${sliderId}`);
+            return false;
+        }
 
-        // INTENTAR DIFERENTES ESTRUCTURAS
-        let container = slider?.closest('.intensity-control');
-        let valueDisplay = container?.querySelector('.intensity-value');
-
-        // Si no se encuentra en intensity-control, buscar en slider-container
+        const valueDisplay = this.findValueDisplay(slider);
         if (!valueDisplay) {
-            container = slider?.closest('.slider-container');
-            valueDisplay = container?.querySelector('.slider-value');
+            this.logger.warn(`Display de valor no encontrado para slider: ${sliderId}`);
+            return false;
         }
 
-        // Si aún no se encuentra, buscar cualquier elemento hermano con la clase
-        if (!valueDisplay && slider) {
-            valueDisplay = slider.nextElementSibling?.classList?.contains('intensity-value')
-                ? slider.nextElementSibling
-                : slider.nextElementSibling?.classList?.contains('slider-value')
-                    ? slider.nextElementSibling
-                    : null;
-        }
+        const currentValue = this.settings[settingKey] ?? this.settings.intensity;
+        slider.value = currentValue;
+        valueDisplay.textContent = currentValue;
 
-        if (slider && valueDisplay) {
-            // Usar el valor del setting específico o el intensity general
-            const currentValue = this.settings[settingKey] !== undefined
-                ? this.settings[settingKey]
-                : this.settings.intensity;
+        slider.addEventListener('input', (e) => {
+            const newValue = parseInt(e.target.value);
+            this.settings[settingKey] = newValue;
+            valueDisplay.textContent = newValue;
 
-            slider.value = currentValue;
-            valueDisplay.textContent = currentValue;
-
-            slider.addEventListener('input', (e) => {
-                const newValue = parseInt(e.target.value);
-                this.settings[settingKey] = newValue;
-                valueDisplay.textContent = newValue;
-
-                if (onChange) onChange(e);
-                this.applySettings();
-                this.saveSettings();
-            });
-
-            this.logger.debug(`Slider configurado: ${sliderId}`);
-            return true;
-        }
-
-        this.logger.warn(`Slider no encontrado: ${sliderId}`, {
-            slider: !!slider,
-            container: !!container,
-            valueDisplay: !!valueDisplay
+            onChange?.(e);
+            this.applySettings();
+            this.saveSettings();
         });
-        return false;
+
+        this.logger.debug(`Slider configurado: ${sliderId}`);
+        return true;
+    }
+
+    findValueDisplay(slider) {
+        // Buscar en diferentes estructuras de contenedores
+        const containers = ['.intensity-control', '.slider-container'];
+        for (const containerClass of containers) {
+            const container = slider.closest(containerClass);
+            const valueDisplay = container?.querySelector('.intensity-value, .slider-value');
+            if (valueDisplay) return valueDisplay;
+        }
+
+        // Buscar en elementos hermanos
+        return slider.nextElementSibling?.classList?.contains('intensity-value') ||
+        slider.nextElementSibling?.classList?.contains('slider-value')
+            ? slider.nextElementSibling
+            : null;
     }
 
     toggleElementVisibility(elementId, show) {
@@ -202,19 +196,17 @@ export class BaseFeatureManager {
         return false;
     }
 
-    // Método helper para mostrar/ocultar controles de intensidad
     toggleIntensityControl(controlId, show) {
         const control = document.getElementById(controlId);
-        if (control) {
-            if (show) {
-                control.classList.add('visible');
-                control.style.display = control.classList.contains('intensity-control') ? 'flex' : 'block';
-            } else {
-                control.classList.remove('visible');
-                control.style.display = 'none';
-            }
-            return true;
+        if (!control) return false;
+
+        if (show) {
+            control.classList.add('visible');
+            control.style.display = control.classList.contains('intensity-control') ? 'flex' : 'block';
+        } else {
+            control.classList.remove('visible');
+            control.style.display = 'none';
         }
-        return false;
+        return true;
     }
 }

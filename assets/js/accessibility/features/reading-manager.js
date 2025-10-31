@@ -20,7 +20,7 @@ export class ReadingManager extends BaseFeatureManager {
 
     async setupEventListeners() {
         this.setupToggle('reading-mode-toggle', (e) => {
-            this.toggleIntensityControl(e.target.checked);
+            this.toggleIntensityControl('reading-intensity-control', e.target.checked);
         });
 
         this.setupSlider('reading-intensity', 'intensity', (e) => {
@@ -32,47 +32,52 @@ export class ReadingManager extends BaseFeatureManager {
         this.logger.debug('Event listeners de Reading-Mode configurados');
     }
 
-    toggleIntensityControl(show) {
-        const control = document.getElementById('motion-intensity-control');
-        if (control) {
-            if (show) {
-                control.classList.add('visible');
-                control.style.display = 'flex';
-            } else {
-                control.classList.remove('visible');
-                control.style.display = 'none';
-            }
-            this.logger.debug(`Control de intensidad ${show ? 'mostrado' : 'ocultado'}`);
-        }
-    }
-    
     applySettings() {
         const root = document.documentElement;
 
         if (this.settings.enabled) {
-            // SOLO establecer atributos - el SCSS hace el resto
             root.setAttribute('data-reading-mode', 'true');
             root.setAttribute('data-reading-intensity', this.settings.intensity.toString());
-
+            this.applyReadingTheme();
             this.logger.info('Modo lectura activado', {
-                intensity: this.settings.intensity
+                intensity: this.settings.intensity,
+                theme: this.settings.theme
             });
         } else {
-            // SOLO remover atributos - el SCSS hace el resto
             root.removeAttribute('data-reading-mode');
             root.removeAttribute('data-reading-intensity');
-
+            this.removeReadingTheme();
             this.logger.info('Modo lectura desactivado');
         }
     }
 
-    // Método para cambiar el tema de lectura
-    setReadingTheme(theme) {
-        this.settings.theme = theme;
-        if (this.settings.enabled) {
-            this.applyReadingTheme();
-            this.saveSettings();
+    applyReadingTheme() {
+        const root = document.documentElement;
+        // Remover temas previos
+        root.classList.remove('reading-theme-sepia', 'reading-theme-dark', 'reading-theme-light');
+
+        // Aplicar tema actual
+        if (this.settings.theme) {
+            root.classList.add(`reading-theme-${this.settings.theme}`);
         }
-        this.logger.info('Tema de lectura actualizado', { theme });
+    }
+
+    removeReadingTheme() {
+        const root = document.documentElement;
+        root.classList.remove('reading-theme-sepia', 'reading-theme-dark', 'reading-theme-light');
+    }
+
+    setReadingTheme(theme) {
+        const validThemes = ['sepia', 'dark', 'light'];
+        if (validThemes.includes(theme)) {
+            this.settings.theme = theme;
+            if (this.settings.enabled) {
+                this.applyReadingTheme();
+                this.saveSettings();
+            }
+            this.logger.info('Tema de lectura actualizado', { theme });
+        } else {
+            this.logger.warn('Tema de lectura no válido', { theme, validThemes });
+        }
     }
 }

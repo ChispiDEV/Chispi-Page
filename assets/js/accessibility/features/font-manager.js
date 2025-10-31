@@ -18,7 +18,7 @@ export class FontManager extends BaseFeatureManager {
 
     async setupEventListeners() {
         this.setupToggle('font-size-toggle', (e) => {
-            this.toggleIntensityControl(e.target.checked);
+            this.toggleIntensityControl('font-size-control', e.target.checked);
         });
 
         this.setupSlider('font-size', 'fontSize', (e) => {
@@ -30,40 +30,34 @@ export class FontManager extends BaseFeatureManager {
         this.logger.debug('Event listeners de tamaño de fuente configurados');
     }
 
-    toggleIntensityControl(show) {
-        const control = document.getElementById('motion-intensity-control');
-        if (control) {
-            if (show) {
-                control.classList.add('visible');
-                control.style.display = 'flex';
-            } else {
-                control.classList.remove('visible');
-                control.style.display = 'none';
-            }
-            this.logger.debug(`Control de intensidad ${show ? 'mostrado' : 'ocultado'}`);
-        }
-    }
     applySettings() {
         const root = document.documentElement;
 
         if (this.settings.enabled) {
+            const scale = this.getCurrentScale();
             root.setAttribute('data-font-size', this.settings.fontSize.toString());
-            // EL SCSS SE ENCARGA DE TODO
+            root.style.setProperty('--font-scale', scale.toString());
             this.logger.info('Escalado de fuente activado', {
-                fontSize: this.settings.fontSize
+                fontSize: this.settings.fontSize,
+                scale: scale
             });
         } else {
             root.removeAttribute('data-font-size');
-            // EL SCSS SE ENCARGA DE TODO
+            root.style.removeProperty('--font-scale');
             this.logger.info('Escalado de fuente desactivado');
         }
+    }
+
+    getCurrentScale() {
+        const index = Math.min(Math.max(0, this.settings.fontSize), this.availableFontSizes.length - 1);
+        return this.availableFontSizes[index];
     }
 
     setFontSize(sizeIndex) {
         const index = Math.min(Math.max(0, sizeIndex), this.availableFontSizes.length - 1);
         this.settings.fontSize = index;
         if (this.settings.enabled) {
-            this.applyFontScaling();
+            this.applySettings();
             this.saveSettings();
         }
         this.logger.info('Tamaño de fuente actualizado', {
