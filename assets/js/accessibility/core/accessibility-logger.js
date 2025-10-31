@@ -1,9 +1,10 @@
 // assets/js/accessibility/core/accessibility-logger.js
 
 export class AccessibilityLogger {
-    constructor() {
+    constructor(name = 'Anonymous') {
+        this.name = name;
         this.logs = [];
-        this.maxLogs = 1000; // Máximo de logs en memoria
+        this.maxLogs = 1000;
         this.enableRemoteLogging = false;
         this.remoteEndpoint = '/api/logs/accessibility';
     }
@@ -21,7 +22,7 @@ export class AccessibilityLogger {
         const logEntry = {
             timestamp,
             level,
-            message,
+            message: `[${this.name}] ${message}`,
             data,
             userAgent: navigator.userAgent,
             url: window.location.href,
@@ -35,7 +36,7 @@ export class AccessibilityLogger {
         // Guardar en memoria
         this.logs.push(logEntry);
         if (this.logs.length > this.maxLogs) {
-            this.logs.shift(); // Remover el más antiguo
+            this.logs.shift();
         }
 
         // Guardar en localStorage para persistencia
@@ -46,7 +47,7 @@ export class AccessibilityLogger {
             this.sendToServer(logEntry);
         }
 
-        // Console output con colores
+        // Console output
         this.consoleOutput(level, message, data, timestamp);
 
         return logEntry;
@@ -69,22 +70,24 @@ export class AccessibilityLogger {
     }
 
     success(message, data = null) {
-        const entry = this.log(this.levels.INFO, message, data);
-        console.log(`✅ ${message}`, data || '');
+        const entry = this.log(this.levels.INFO, `✅ ${message}`, data);
+        console.log(`%c[${this.name}] ✅ ${message}`, 'color: green; font-weight: bold;', data || '');
         return entry;
     }
 
     consoleOutput(level, message, data, timestamp) {
         const time = timestamp.split('T')[1].split('.')[0];
+        const levelNames = ['ERROR', 'WARN', 'INFO', 'DEBUG'];
+        const levelName = levelNames[level];
+
         const styles = {
-            [this.levels.ERROR]: 'color: red; font-weight: bold;',
-            [this.levels.WARN]: 'color: orange; font-weight: bold;',
-            [this.levels.INFO]: 'color: blue;',
-            [this.levels.DEBUG]: 'color: gray;'
+            ERROR: 'color: red; font-weight: bold;',
+            WARN: 'color: orange; font-weight: bold;',
+            INFO: 'color: blue;',
+            DEBUG: 'color: gray;'
         };
 
-        const levelNames = ['ERROR', 'WARN', 'INFO', 'DEBUG'];
-        console.log(`%c[${time}] ${levelNames[level]}: ${message}`, styles[level], data || '');
+        console.log(`%c[${time}] [${this.name}] ${levelName}: ${message}`, styles[levelName], data || '');
     }
 
     saveToStorage(logEntry) {
@@ -92,7 +95,6 @@ export class AccessibilityLogger {
             const storedLogs = JSON.parse(localStorage.getItem('accessibility_logs') || '[]');
             storedLogs.push(logEntry);
 
-            // Mantener solo los últimos 500 logs en localStorage
             if (storedLogs.length > 500) {
                 storedLogs.splice(0, storedLogs.length - 500);
             }
@@ -104,6 +106,8 @@ export class AccessibilityLogger {
     }
 
     async sendToServer(logEntry) {
+        if (!this.enableRemoteLogging) return;
+
         try {
             await fetch(this.remoteEndpoint, {
                 method: 'POST',
@@ -128,6 +132,10 @@ export class AccessibilityLogger {
 
     getRecentLogs(count = 50) {
         return this.logs.slice(-count);
+    }
+
+    getLogsByLevel(level) {
+        return this.logs.filter(log => log.level === level);
     }
 
     analyzeCommonErrors() {
@@ -166,36 +174,43 @@ export class AccessibilityLogger {
 
     generateSuggestions() {
         const errors = this.getErrors();
-        const suggestions = [];
+        const suggestions = new Map(); // Usar Map para evitar duplicados
 
-        // Análisis de errores comunes y sugerencias
         errors.forEach(error => {
-            if (error.message.includes('Cannot read properties')) {
-                suggestions.push({
+            if (error.message.includes('Cannot read properties') || error.message.includes('undefined')) {
+                suggestions.set('undefined-property', {
                     issue: 'Error de propiedades undefined',
                     solution: 'Verificar que los elementos DOM existen antes de acceder a sus propiedades',
                     codeExample: 'if (element) { element.property }'
                 });
             }
 
-            if (error.message.includes('Theme')) {
-                suggestions.push({
+            if (error.message.includes('Theme') || error.message.includes('theme')) {
+                suggestions.set('theme-error', {
                     issue: 'Problema con temas',
                     solution: 'Verificar que themeManager esté inicializado antes de usar temas',
                     codeExample: 'if (window.themeManager) { themeManager.setTheme() }'
                 });
             }
 
-            if (error.message.includes('Particles')) {
-                suggestions.push({
+            if (error.message.includes('Particles') || error.message.includes('particle')) {
+                suggestions.set('particle-error', {
                     issue: 'Problema con partículas',
                     solution: 'Verificar que el canvas existe y el sistema de partículas esté inicializado',
                     codeExample: 'if (window.particleSystem) { particleSystem.restart() }'
                 });
             }
+
+            if (error.message.includes('localStorage') || error.message.includes('storage')) {
+                suggestions.set('storage-error', {
+                    issue: 'Problema con almacenamiento',
+                    solution: 'Verificar que localStorage esté disponible y no esté lleno',
+                    codeExample: 'if (StorageUtils.isAvailable()) { /* usar storage */ }'
+                });
+            }
         });
 
-        return suggestions;
+        return Array.from(suggestions.values());
     }
 
     // Exportar logs
@@ -206,7 +221,7 @@ export class AccessibilityLogger {
             case 'json':
                 return JSON.stringify(report, null, 2);
             case 'csv':
-                return this.convertToCSV(report);
+                return this.convertToCSV();
             case 'html':
                 return this.convertToHTML(report);
             default:
@@ -214,54 +229,97 @@ export class AccessibilityLogger {
         }
     }
 
-    convertToCSV(report) {
+    convertToCSV() {
         let csv = 'Timestamp,Level,Message,Data\n';
         this.logs.forEach(log => {
-            csv += `"${log.timestamp}","${log.level}","${log.message}","${JSON.stringify(log.data)}"\n`;
+            const dataStr = log.data ? JSON.stringify(log.data).replace(/"/g, '""') : '';
+            csv += `"${log.timestamp}","${log.level}","${log.message.replace(/"/g, '""')}","${dataStr}"\n`;
         });
         return csv;
     }
 
     convertToHTML(report) {
+        const levelToClass = {
+            0: 'error',
+            1: 'warn',
+            2: 'info',
+            3: 'debug'
+        };
+
+        const recentLogsHTML = this.getRecentLogs(20).map(log => `
+            <tr class="${levelToClass[log.level]}">
+                <td>${log.timestamp}</td>
+                <td>${log.level}</td>
+                <td>${log.message}</td>
+                <td>${log.data ? JSON.stringify(log.data) : ''}</td>
+            </tr>
+        `).join('');
+
         return `
         <!DOCTYPE html>
         <html>
         <head>
-            <title>Accessibility Log Report</title>
+            <title>Accessibility Log Report - ${this.name}</title>
             <style>
-                body { font-family: Arial, sans-serif; margin: 20px; }
-                .error { color: red; }
-                .warn { color: orange; }
-                .info { color: blue; }
-                .debug { color: gray; }
-                table { border-collapse: collapse; width: 100%; }
-                th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-                th { background-color: #f2f2f2; }
+                body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+                .error { color: red; background-color: #ffeeee; }
+                .warn { color: orange; background-color: #fff4e6; }
+                .info { color: blue; background-color: #e6f3ff; }
+                .debug { color: gray; background-color: #f5f5f5; }
+                table { border-collapse: collapse; width: 100%; margin: 20px 0; }
+                th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+                th { background-color: #f2f2f2; font-weight: bold; }
+                .summary { background: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0; }
+                .suggestion { background: #e8f5e8; padding: 10px; margin: 10px 0; border-left: 4px solid #4CAF50; }
             </style>
         </head>
         <body>
-            <h1>Accessibility System Report</h1>
-            <div>
+            <h1>Accessibility System Report - ${this.name}</h1>
+            
+            <div class="summary">
                 <h2>Summary</h2>
-                <p>Total Logs: ${report.summary.totalLogs}</p>
-                <p>Errors: ${report.summary.errors}</p>
-                <p>Warnings: ${report.summary.warnings}</p>
+                <p><strong>Total Logs:</strong> ${report.summary.totalLogs}</p>
+                <p><strong>Errors:</strong> ${report.summary.errors}</p>
+                <p><strong>Warnings:</strong> ${report.summary.warnings}</p>
+                <p><strong>Session Start:</strong> ${report.summary.sessionStart || 'N/A'}</p>
+                <p><strong>Session End:</strong> ${report.summary.sessionEnd || 'N/A'}</p>
             </div>
+
             <div>
-                <h2>Common Errors</h2>
+                <h2>Common Errors (Top 10)</h2>
                 <ul>
                     ${report.commonErrors.map(error =>
-            `<li>${error.message} (${error.count} veces)</li>`
+            `<li><strong>${error.count}x:</strong> ${error.message}</li>`
         ).join('')}
                 </ul>
             </div>
+
             <div>
                 <h2>Suggestions</h2>
-                <ul>
-                    ${report.suggestions.map(suggestion =>
-            `<li><strong>${suggestion.issue}:</strong> ${suggestion.solution}</li>`
-        ).join('')}
-                </ul>
+                ${report.suggestions.map(suggestion => `
+                    <div class="suggestion">
+                        <h3>${suggestion.issue}</h3>
+                        <p><strong>Solution:</strong> ${suggestion.solution}</p>
+                        <p><strong>Code Example:</strong> <code>${suggestion.codeExample}</code></p>
+                    </div>
+                `).join('')}
+            </div>
+
+            <div>
+                <h2>Recent Logs (Last 20)</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Level</th>
+                            <th>Message</th>
+                            <th>Data</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${recentLogsHTML}
+                    </tbody>
+                </table>
             </div>
         </body>
         </html>`;
@@ -270,5 +328,17 @@ export class AccessibilityLogger {
     clearLogs() {
         this.logs = [];
         localStorage.removeItem('accessibility_logs');
+    }
+
+    // Método para configurar logging remoto
+    enableRemoteLogging(endpoint = null) {
+        this.enableRemoteLogging = true;
+        if (endpoint) {
+            this.remoteEndpoint = endpoint;
+        }
+    }
+
+    disableRemoteLogging() {
+        this.enableRemoteLogging = false;
     }
 }
