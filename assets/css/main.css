@@ -238,54 +238,103 @@
   --particles-opacity: 0.3;
 }
 
-[data-reduced-motion="1"] * {
-  animation-duration: 0.5s !important;
-  animation-iteration-count: 1 !important;
-  transition-duration: 0.3s !important;
-}
-[data-reduced-motion="1"] .btn:hover {
-  transform: translateY(-1px) scale(1.02);
-  transition-duration: 0.2s;
-}
+[data-reduced-motion="1"] .btn,
+[data-reduced-motion="1"] .skill-card,
 [data-reduced-motion="1"] .nav-menu a,
 [data-reduced-motion="1"] .dropdown-toggle,
-[data-reduced-motion="1"] .social-link {
-  transition-duration: 0.2s !important;
+[data-reduced-motion="1"] .social-link,
+[data-reduced-motion="1"] .fade-in,
+[data-reduced-motion="1"] .slide-in,
+[data-reduced-motion="1"] [class*=animate-],
+[data-reduced-motion="1"] [class*=transition-] {
+  animation-duration: 0.8s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.4s !important;
+  transition-timing-function: ease-out !important;
+}
+[data-reduced-motion="1"] .btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  transition-duration: 0.3s;
+}
+[data-reduced-motion="1"] .skill-card:hover {
+  transform: translateY(-3px);
+  transition-duration: 0.3s;
+}
+[data-reduced-motion="1"] .particles-container {
+  animation-duration: 5s !important;
 }
 
-[data-reduced-motion="2"] * {
-  animation-duration: 0.2s !important;
+[data-reduced-motion="2"] .btn,
+[data-reduced-motion="2"] .skill-card,
+[data-reduced-motion="2"] .nav-menu a,
+[data-reduced-motion="2"] .dropdown-toggle,
+[data-reduced-motion="2"] .social-link,
+[data-reduced-motion="2"] .fade-in,
+[data-reduced-motion="2"] .slide-in,
+[data-reduced-motion="2"] [class*=animate-],
+[data-reduced-motion="2"] [class*=transition-] {
+  animation-duration: 0.3s !important;
   animation-iteration-count: 1 !important;
-  transition-duration: 0.15s !important;
+  transition-duration: 0.2s !important;
+  transition-timing-function: ease-out !important;
 }
 [data-reduced-motion="2"] .btn:hover {
   transform: translateY(-1px);
-  transition-duration: 0.1s;
+  transition-duration: 0.15s;
 }
 [data-reduced-motion="2"] .skill-card:hover {
   transform: translateY(-2px);
-  transition-duration: 0.1s;
+  transition-duration: 0.15s;
+}
+[data-reduced-motion="2"] .particles-container {
+  animation-duration: 8s !important;
+  opacity: 0.7;
+}
+[data-reduced-motion="2"] html {
+  scroll-behavior: auto !important;
 }
 
-[data-reduced-motion="3"] * {
+[data-reduced-motion="3"] .btn,
+[data-reduced-motion="3"] .skill-card,
+[data-reduced-motion="3"] .nav-menu a,
+[data-reduced-motion="3"] .dropdown-toggle,
+[data-reduced-motion="3"] .social-link,
+[data-reduced-motion="3"] .fade-in,
+[data-reduced-motion="3"] .slide-in,
+[data-reduced-motion="3"] [class*=animate-],
+[data-reduced-motion="3"] [class*=transition-] {
   animation-duration: 0.1s !important;
   animation-iteration-count: 1 !important;
   transition-duration: 0.05s !important;
+  transition-timing-function: linear !important;
+}
+[data-reduced-motion="3"] .btn:hover,
+[data-reduced-motion="3"] .skill-card:hover {
+  transform: none !important;
 }
 [data-reduced-motion="3"] [data-hover-effect] {
   transition: none !important;
 }
-[data-reduced-motion="3"] .btn:hover,
-[data-reduced-motion="3"] .skill-card:hover {
-  transform: none;
-}
 [data-reduced-motion="3"] .particles-container {
-  opacity: 0.5;
+  animation-duration: 12s !important;
+  opacity: 0.3;
+}
+[data-reduced-motion="3"] html {
+  scroll-behavior: auto !important;
+}
+[data-reduced-motion="3"] .fade-in,
+[data-reduced-motion="3"] .slide-in {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 [data-reduced-motion="4"] * {
   animation: none !important;
   transition: none !important;
+  transform: none !important;
+}
+[data-reduced-motion="4"] html {
   scroll-behavior: auto !important;
 }
 [data-reduced-motion="4"] .particles-container {
@@ -299,15 +348,28 @@
   transform: none !important;
   transition: none !important;
 }
+[data-reduced-motion="4"] .fade-in,
+[data-reduced-motion="4"] .slide-in,
+[data-reduced-motion="4"] [class*=animate-] {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
 
 @media (prefers-reduced-motion: reduce) {
-  :root:not([data-reduced-motion]) *,
-  :root:not([data-reduced-motion]) *::before,
-  :root:not([data-reduced-motion]) *::after {
+  :root:not([data-reduced-motion]) .btn,
+  :root:not([data-reduced-motion]) .skill-card,
+  :root:not([data-reduced-motion]) .nav-menu a,
+  :root:not([data-reduced-motion]) .dropdown-toggle,
+  :root:not([data-reduced-motion]) .social-link {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  }
+  :root:not([data-reduced-motion]) .btn:hover,
+  :root:not([data-reduced-motion]) .skill-card:hover {
+    transform: none !important;
   }
 }
 [data-dyslexia-mode=true] {

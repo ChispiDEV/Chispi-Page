@@ -6,78 +6,151 @@
 
 // Niveles de movimiento reducido
 [data-reduced-motion="1"] {
-  // Reducción leve
-  * {
-    animation-duration: 0.5s !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.3s !important;
-  }
+  // Reducción leve - Animaciones más lentas pero suaves
 
-  .btn:hover {
-    transform: translateY(-1px) scale(1.02);
-    transition-duration: 0.2s;
-  }
-
+  // Aplicar a elementos que comúnmente tienen animaciones
+  .btn,
+  .skill-card,
   .nav-menu a,
   .dropdown-toggle,
-  .social-link {
-    transition-duration: 0.2s !important;
+  .social-link,
+  .fade-in,
+  .slide-in,
+  [class*="animate-"],
+  [class*="transition-"] {
+    animation-duration: 0.8s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.4s !important;
+    transition-timing-function: ease-out !important;
+  }
+
+  // Efectos hover más suaves
+  .btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    transition-duration: 0.3s;
+  }
+
+  .skill-card:hover {
+    transform: translateY(-3px);
+    transition-duration: 0.3s;
+  }
+
+  // Partículas más lentas
+  .particles-container {
+    animation-duration: 5s !important;
   }
 }
 
 [data-reduced-motion="2"] {
-  // Reducción media
-  * {
-    animation-duration: 0.2s !important;
+  // Reducción media - Animaciones significativamente reducidas
+
+  .btn,
+  .skill-card,
+  .nav-menu a,
+  .dropdown-toggle,
+  .social-link,
+  .fade-in,
+  .slide-in,
+  [class*="animate-"],
+  [class*="transition-"] {
+    animation-duration: 0.3s !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.15s !important;
+    transition-duration: 0.2s !important;
+    transition-timing-function: ease-out !important;
   }
 
+  // Efectos hover mínimos
   .btn:hover {
     transform: translateY(-1px);
-    transition-duration: 0.1s;
+    transition-duration: 0.15s;
   }
 
   .skill-card:hover {
     transform: translateY(-2px);
-    transition-duration: 0.1s;
+    transition-duration: 0.15s;
+  }
+
+  // Reducir partículas
+  .particles-container {
+    animation-duration: 8s !important;
+    opacity: 0.7;
+  }
+
+  // Scroll más rápido
+  html {
+    scroll-behavior: auto !important;
   }
 }
 
 [data-reduced-motion="3"] {
-  // Reducción alta
-  * {
+  // Reducción alta - Solo animaciones esenciales
+
+  .btn,
+  .skill-card,
+  .nav-menu a,
+  .dropdown-toggle,
+  .social-link,
+  .fade-in,
+  .slide-in,
+  [class*="animate-"],
+  [class*="transition-"] {
     animation-duration: 0.1s !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.05s !important;
+    transition-timing-function: linear !important;
+  }
+
+  // Eliminar efectos hover complejos
+  .btn:hover,
+  .skill-card:hover {
+    transform: none !important;
   }
 
   [data-hover-effect] {
     transition: none !important;
   }
 
-  .btn:hover,
-  .skill-card:hover {
-    transform: none;
+  // Partículas muy reducidas
+  .particles-container {
+    animation-duration: 12s !important;
+    opacity: 0.3;
   }
 
-  .particles-container {
-    opacity: 0.5;
+  // Scroll instantáneo
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  // Eliminar animaciones de entrada
+  .fade-in,
+  .slide-in {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 
 [data-reduced-motion="4"] {
-  // Sin movimiento
+  // Sin movimiento - Eliminar todas las animaciones
+
+  // Desactivar TODAS las animaciones y transiciones
   * {
     animation: none !important;
     transition: none !important;
+    transform: none !important;
+  }
+
+  // Scroll instantáneo
+  html {
     scroll-behavior: auto !important;
   }
 
+  // Ocultar partículas
   .particles-container {
     display: none !important;
   }
 
+  // Eliminar todos los efectos hover
   .btn:hover,
   .skill-card:hover,
   .nav-menu a:hover,
@@ -86,19 +159,34 @@
     transform: none !important;
     transition: none !important;
   }
+
+  // Forzar estados visibles
+  .fade-in,
+  .slide-in,
+  [class*="animate-"] {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+  }
 }
 
-// Compatibilidad con preferencias del sistema para reduced motion
+// Compatibilidad con preferencias del sistema
 @media (prefers-reduced-motion: reduce) {
-  // Solo aplicar si el usuario no ha configurado un nivel específico
   :root:not([data-reduced-motion]) {
-    *,
-    *::before,
-    *::after {
+    .btn,
+    .skill-card,
+    .nav-menu a,
+    .dropdown-toggle,
+    .social-link {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
+    }
+
+    .btn:hover,
+    .skill-card:hover {
+      transform: none !important;
     }
   }
 }
