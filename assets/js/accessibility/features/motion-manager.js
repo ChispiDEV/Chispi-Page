@@ -5,12 +5,16 @@ import { BaseFeatureManager } from '../core/base-feature-manager.js';
 export class MotionManager extends BaseFeatureManager {
     constructor(logger) {
         super('motion', logger);
+        this.settings = {
+            enabled: false,
+            intensity: 3
+        };
     }
 
     getDefaultSettings() {
         return {
             enabled: false,
-            intensity: 1, // Cambiado a 1 para que coincida con el slider (1-4)
+            intensity: 3, // Mantener 3 como valor por defecto para coincidir con el constructor
             reduceParticles: true
         };
     }
@@ -45,15 +49,65 @@ export class MotionManager extends BaseFeatureManager {
         }
     }
 
+    // MÉTODO FALTANTE - AÑADIR ESTO
+    getIntensityLevel() {
+        // Convertir intensidad del slider (1-5) a niveles de reducción (1-4)
+        const intensity = this.settings.intensity || 3;
+
+        const levelMap = {
+            1: 1, // Reducción leve
+            2: 2, // Reducción media  
+            3: 2, // Reducción media (valor por defecto)
+            4: 3, // Reducción alta
+            5: 4  // Sin movimiento
+        };
+
+        return levelMap[intensity] || 2;
+    }
+
+    // MÉTODO FALTANTE - AÑADIR ESTO
+    getIntensityInfo() {
+        const level = this.getIntensityLevel();
+        const levelInfo = {
+            1: {
+                name: 'Leve',
+                description: 'Reducción mínima de animaciones',
+                effects: ['Animaciones más lentas', 'Transiciones suaves']
+            },
+            2: {
+                name: 'Media',
+                description: 'Reducción moderada de movimiento',
+                effects: ['Animaciones significativamente reducidas', 'Efectos hover limitados']
+            },
+            3: {
+                name: 'Alta',
+                description: 'Reducción extensa de movimiento',
+                effects: ['Solo animaciones esenciales', 'Efectos hover eliminados']
+            },
+            4: {
+                name: 'Extrema',
+                description: 'Sin movimiento',
+                effects: ['Todas las animaciones desactivadas', 'Scroll instantáneo']
+            }
+        };
+
+        return {
+            level: level,
+            intensity: this.settings.intensity,
+            info: levelInfo[level] || levelInfo[2]
+        };
+    }
+
     applySettings() {
         const root = document.documentElement;
 
         if (this.settings.enabled) {
-            root.setAttribute('data-reduced-motion', this.settings.intensity.toString());
+            const level = this.getIntensityLevel();
+            root.setAttribute('data-reduced-motion', level.toString());
             this.applyMotionReduction();
             this.logger.info('Movimiento reducido activado', {
                 intensity: this.settings.intensity,
-                level: this.getIntensityLevel()
+                level: level
             });
         } else {
             root.removeAttribute('data-reduced-motion');
@@ -111,7 +165,41 @@ export class MotionManager extends BaseFeatureManager {
             window.particleSystem.setNormalOpacity();
         }
 
-        // ELIMINADO: No necesitamos remover CSS inline porque usamos SCSS
         this.logger.debug('Reducción de movimiento removida');
+    }
+
+    // Métodos adicionales para mejor control
+    enable(intensity = null) {
+        this.settings.enabled = true;
+        if (intensity !== null) {
+            this.settings.intensity = this.validateIntensity(intensity);
+        }
+        this.applySettings();
+        this.saveSettings();
+        this.logger.info('Movimiento reducido activado', {
+            intensity: this.settings.intensity
+        });
+    }
+
+    disable() {
+        this.settings.enabled = false;
+        this.applySettings();
+        this.saveSettings();
+        this.logger.info('Movimiento reducido desactivado');
+    }
+
+    setIntensity(intensity) {
+        this.settings.intensity = this.validateIntensity(intensity);
+        if (this.settings.enabled) {
+            this.applySettings();
+            this.saveSettings();
+        }
+        this.logger.info('Intensidad de movimiento actualizada', {
+            intensity: this.settings.intensity
+        });
+    }
+
+    validateIntensity(intensity) {
+        return Math.min(5, Math.max(1, parseInt(intensity)));
     }
 }

@@ -4,18 +4,24 @@ export class BaseFeatureManager {
     constructor(name, logger) {
         this.name = name;
         this.logger = logger;
-        this.settings = {};
+        this.settings = this.getDefaultSettings();
         this.isInitialized = false;
     }
 
     loadSettings() {
         try {
             const allSettings = JSON.parse(localStorage.getItem('accessibility_settings') || '{}');
-            this.settings = {
-                ...this.getDefaultSettings(),
-                ...allSettings[this.name]
-            };
-            this.logger.debug(`Configuración cargada para ${this.name}`, this.settings);
+            const savedSettings = allSettings[this.name];
+
+            if (savedSettings) {
+                this.settings = {
+                    ...this.getDefaultSettings(),
+                    ...savedSettings
+                };
+                this.logger.debug(`Configuración cargada para ${this.name}`, this.settings);
+            } else {
+                this.logger.debug(`Configuración por defecto para ${this.name}`, this.settings);
+            }
         } catch (error) {
             this.logger.error(`Error cargando configuración para ${this.name}`, error);
             this.settings = this.getDefaultSettings();
@@ -42,6 +48,7 @@ export class BaseFeatureManager {
 
     getStatus() {
         return {
+            name: this.name,
             enabled: this.settings.enabled || false,
             settings: this.settings,
             initialized: this.isInitialized
@@ -64,7 +71,7 @@ export class BaseFeatureManager {
     enable(intensity = null) {
         this.settings.enabled = true;
         if (intensity !== null) {
-            this.settings.intensity = intensity;
+            this.settings.intensity = this.validateIntensity(intensity);
         }
         this.applySettings();
         this.saveSettings();
@@ -79,12 +86,18 @@ export class BaseFeatureManager {
     }
 
     setIntensity(intensity) {
-        this.settings.intensity = intensity;
+        this.settings.intensity = this.validateIntensity(intensity);
         if (this.settings.enabled) {
             this.applySettings();
             this.saveSettings();
         }
         this.logger.debug(`Intensidad de ${this.name} actualizada`, { intensity });
+    }
+
+    // Método de validación común
+    validateIntensity(intensity, min = 1, max = 5) {
+        const parsed = parseInt(intensity);
+        return Math.min(max, Math.max(min, isNaN(parsed) ? min : parsed));
     }
 
     // Métodos que deben ser implementados por las clases hijas
@@ -103,6 +116,7 @@ export class BaseFeatureManager {
             toggle.checked = this.settings.enabled;
             toggle.addEventListener('change', (e) => {
                 this.settings.enabled = e.target.checked;
+
                 // Ejecutar callbacks de habilitación/deshabilitación
                 if (e.target.checked) {
                     this.onEnable?.();
@@ -149,12 +163,19 @@ export class BaseFeatureManager {
         }
 
         if (slider && valueDisplay) {
-            slider.value = this.settings[settingKey] || this.settings.intensity;
-            valueDisplay.textContent = this.settings[settingKey] || this.settings.intensity;
+            // Usar el valor del setting específico o el intensity general
+            const currentValue = this.settings[settingKey] !== undefined
+                ? this.settings[settingKey]
+                : this.settings.intensity;
+
+            slider.value = currentValue;
+            valueDisplay.textContent = currentValue;
 
             slider.addEventListener('input', (e) => {
-                this.settings[settingKey] = parseInt(e.target.value);
-                valueDisplay.textContent = e.target.value;
+                const newValue = parseInt(e.target.value);
+                this.settings[settingKey] = newValue;
+                valueDisplay.textContent = newValue;
+
                 if (onChange) onChange(e);
                 this.applySettings();
                 this.saveSettings();
@@ -167,11 +188,7 @@ export class BaseFeatureManager {
         this.logger.warn(`Slider no encontrado: ${sliderId}`, {
             slider: !!slider,
             container: !!container,
-            valueDisplay: !!valueDisplay,
-            availableContainers: {
-                intensityControl: !!document.querySelector('.intensity-control'),
-                sliderContainer: !!document.querySelector('.slider-container')
-            }
+            valueDisplay: !!valueDisplay
         });
         return false;
     }
@@ -180,6 +197,22 @@ export class BaseFeatureManager {
         const element = document.getElementById(elementId);
         if (element) {
             element.style.display = show ? 'block' : 'none';
+            return true;
+        }
+        return false;
+    }
+
+    // Método helper para mostrar/ocultar controles de intensidad
+    toggleIntensityControl(controlId, show) {
+        const control = document.getElementById(controlId);
+        if (control) {
+            if (show) {
+                control.classList.add('visible');
+                control.style.display = control.classList.contains('intensity-control') ? 'flex' : 'block';
+            } else {
+                control.classList.remove('visible');
+                control.style.display = 'none';
+            }
             return true;
         }
         return false;
