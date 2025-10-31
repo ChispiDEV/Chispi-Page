@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cristina Fuentes - Desarrolladora Frontend & Especialista en Accesibilidad</title>
+    <meta name="description" content="Portfolio de Cristina Fuentes - Desarrolladora Frontend especializada en accesibilidad web y análisis de datos">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!-- FAVICON -->
+    <link rel="icon" href="assets/icons/favicon.ico">
+</head>
+<body>
+<!-- Skip Link corregido -->
+<a href="#main-content" class="skip-link">
+    <span class="skip-icon">⚡</span>
+    <span class="skip-text"></span>
+</a>
+
+<!-- Navegación simplificada para landing -->
+<nav class="navbar" aria-label="Navegación principal">
+    <div class="nav-container">
+        <div class="nav-brand">
+            <a href="index.html" class="brand-link">
+                <h1>Cristina Fuentes</h1>
+                <img src="assets/icons/es-variant.svg" alt="Español" class="language-flag">
+            </a>
+        </div>
+
+        <ul class="nav-menu">
+            <li><a href="src/pages/es/index.html" aria-current="page">Inicio</a></li>
+            <li><a href="src/pages/es/about.html">Sobre mí</a></li>
+            <li><a href="src/pages/es/projects.html">Proyectos</a></li>
+            <li><a href="src/pages/es/devlog.html">Devlog</a></li>
+            <li><a href="src/pages/es/contact.html">Contacto</a></li>
+        </ul>
+
+        <!-- SOLO menú hamburguesa en landing -->
+        <div class="nav-controls">
+            <button class="nav-button menu-toggle"
+                    id="menu-toggle"
+                    aria-label="Abrir menú"
+                    aria-expanded="false"
+                    aria-controls="mobile-menu">
+                <span class="hamburger-icon"></span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Menú Móvil simplificado -->
+<div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-header">
+        <button class="close-button" id="close-menu-toggle" aria-label="Cerrar menú">
+            <span class="close-icon">×</span>
+        </button>
+    </div>
+    <ul class="mobile-nav">
+        <li><a href="src/pages/es/index.html" aria-current="page">Inicio Español</a></li>
+        <li><a href="src/pages/en/index.html">Inicio Inglés</a></li>
+        <li><a href="src/pages/fr/index.html">Inicio Francés</a></li>
+        <li><a href="src/pages/es/about.html">Sobre mí</a></li>
+        <li><a href="src/pages/es/projects.html">Proyectos</a></li>
+        <li><a href="src/pages/es/devlog.html">Devlog</a></li>
+        <li><a href="src/pages/es/contact.html">Contacto</a></li>
+    </ul>
+</div>
+
+<!-- Overlay para menú móvil -->
+<div id="menu-overlay" class="menu-overlay" aria-hidden="true"></div>
+
+<!-- Contenido principal -->
+<main id="main-content">
+    <!-- Hero Section -->
+    <section class="hero" aria-labelledby="hero-title">
+        <div class="container">
+            <h1 id="hero-title" class="hero-title">
+                <span class="title-line">Bienvenido/a a mi Portfolio</span>
+                <span class="title-line">Accesibilidad & Desarrollo Frontend</span>
+            </h1>
+            <p class="hero-subtitle">Selecciona tu idioma para comenzar la experiencia</p>
+
+            <div class="language-selection">
+                <div class="language-cards">
+                    <a href="src/pages/es/index.html" class="language-card" data-lang="es">
+                        <div class="language-flag-container">
+                            <img src="assets/icons/es-variant.svg" alt="Español" class="language-flag-large">
+                        </div>
+                        <h3>Español</h3>
+                        <p>Contenido en español</p>
+                    </a>
+
+                    <a href="src/pages/en/index.html" class="language-card" data-lang="en">
+                        <div class="language-flag-container">
+                            <img src="assets/icons/gb.svg" alt="English" class="language-flag-large">
+                        </div>
+                        <h3>English</h3>
+                        <p>Content in English</p>
+                    </a>
+
+                    <a href="src/pages/fr/index.html" class="language-card" data-lang="fr">
+                        <div class="language-flag-container">
+                            <img src="assets/icons/fr.svg" alt="Français" class="language-flag-large">
+                        </div>
+                        <h3>Français</h3>
+                        <p>Contenu en français</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de características -->
+    <section class="features" aria-labelledby="features-title">
+        <div class="container">
+            <h2 id="features-title" class="section-title">Características del Sitio</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">♿</div>
+                    <h3>Totalmente Accesible</h3>
+                    <p>Diseñado siguiendo las pautas WCAG 2.1 AA</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Multilingüe</h3>
+                    <p>Disponible en español, inglés y francés</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Temas Personalizables</h3>
+                    <p>Adapta la apariencia a tus necesidades</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="footer" role="contentinfo">
+    <div class="container">
+        <p>&copy; <span id="current-year">2025</span> Cristina Fuentes. Todos los derechos reservados.</p>
+    </div>
+</footer>
+
+<!-- JavaScript -->
+<script type="module" src="assets/js/main.js"></script>
+</body>
+</html>

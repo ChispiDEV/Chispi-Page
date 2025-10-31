@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devlogs - Cristina Fuentes</title>
+    <meta name="description" content="Devlogs y publicaciones técnicas de Cristina Fuentes - Desarrolladora Frontend especializada en accesibilidad web">
+    <link rel="stylesheet" href="../../../assets/css/main.css">
+    <style>
+        /* Estilos específicos para la página de posts */
+        .posts-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .posts-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .posts-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Sidebar de etiquetas */
+        .tags-sidebar {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 1.5rem;
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .tags-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.5rem;
+        }
+
+        .tags-cloud {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .tag-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0.75rem;
+            background: var(--surface-secondary);
+            border-radius: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .tag-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .tag-count {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .tags-stats {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Lista de posts */
+        .posts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .post-card {
+            background: var(--surface);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .post-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-card-content {
+            padding: 1.5rem;
+        }
+
+        .post-header {
+            margin-bottom: 1rem;
+        }
+
+        .post-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .post-title a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .post-title a:hover {
+            color: var(--primary);
+        }
+
+        .post-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .post-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-tertiary);
+            margin-bottom: 1rem;
+        }
+
+        .post-body {
+            margin-bottom: 1rem;
+        }
+
+        .post-summary {
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .post-excerpt {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .post-tag {
+            background: var(--surface-secondary);
+            color: var(--text-primary);
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .post-tag:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .post-mood {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .mood-label {
+            color: var(--text-secondary);
+        }
+
+        .mood-tag {
+            background: var(--accent);
+            color: var(--text-on-accent);
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        /* Paginación */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .pagination-link {
+            padding: 0.7rem 1.2rem;
+            background: var(--surface);
+            color: var(--text-primary);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: 1px solid var(--border);
+        }
+
+        .pagination-link:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .pagination-link.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .pagination-info {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Estado vacío */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-secondary);
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+<!-- Skip Link -->
+<a href="#main-content" class="skip-link">
+    <span class="skip-icon">⚡</span>
+    <span class="skip-text">Saltar al contenido principal</span>
+</a>
+
+<!-- Navegación -->
+<nav class="navbar" aria-label="Navegación principal">
+    <div class="nav-container">
+        <div class="nav-brand">
+            <a href="../../../index.html" class="brand-link">
+                <h1>Cristina Fuentes</h1>
+                <img src="../../../assets/icons/es-variant.svg" alt="Español" class="language-flag">
+            </a>
+        </div>
+
+        <ul class="nav-menu">
+            <li><a href="../index.html">Inicio</a></li>
+            <li><a href="about.html">Sobre mí</a></li>
+            <li><a href="projects.html">Proyectos</a></li>
+            <li><a href="devlog.html" aria-current="page">Devlog</a></li>
+            <li><a href="contact.html">Contacto</a></li>
+        </ul>
+
+        <div class="nav-controls">
+            <button class="nav-button menu-toggle"
+                    id="menu-toggle"
+                    aria-label="Abrir menú"
+                    aria-expanded="false"
+                    aria-controls="mobile-menu">
+                <span class="hamburger-icon"></span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Menú Móvil -->
+<div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-header">
+        <button class="close-button" id="close-menu-toggle" aria-label="Cerrar menú">
+            <span class="close-icon">×</span>
+        </button>
+    </div>
+    <ul class="mobile-nav">
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="about.html">Sobre mí</a></li>
+        <li><a href="projects.html">Proyectos</a></li>
+        <li><a href="devlog.html" aria-current="page">Devlog</a></li>
+        <li><a href="contact.html">Contacto</a></li>
+    </ul>
+</div>
+
+<!-- Overlay para menú móvil -->
+<div id="menu-overlay" class="menu-overlay" aria-hidden="true"></div>
+
+<!-- Contenido principal -->
+<main id="main-content">
+    <div class="posts-container">
+        <header class="page-header">
+            <h1 class="page-title">Devlog</h1>
+            <p class="page-subtitle">Reflexiones, aprendizajes y actualizaciones sobre desarrollo frontend, accesibilidad y análisis de datos</p>
+        </header>
+
+        <div class="posts-layout">
+            <!-- Sidebar de etiquetas -->
+            <aside class="tags-sidebar">
+                <h2 class="tags-title">Etiquetas</h2>
+                <div class="tags-cloud">
+                    <!-- Estas etiquetas se generarían dinámicamente en un sistema real -->
+                    <a href="#" class="tag-link">
+                        <span>Accesibilidad</span>
+                        <span class="tag-count">12</span>
+                    </a>
+                    <a href="#" class="tag-link">
+                        <span>JavaScript</span>
+                        <span class="tag-count">8</span>
+                    </a>
+                    <a href="#" class="tag-link">
+                        <span>CSS</span>
+                        <span class="tag-count">6</span>
+                    </a>
+                    <a href="#" class="tag-link">
+                        <span>React</span>
+                        <span class="tag-count">5</span>
+                    </a>
+                    <a href="#" class="tag-link">
+                        <span>Análisis de Datos</span>
+                        <span class="tag-count">4</span>
+                    </a>
+                    <a href="#" class="tag-link">
+                        <span>UX/UI</span>
+                        <span class="tag-count">3</span>
+                    </a>
+                    <a href="#" class="tag-link">
+                        <span>Performance</span>
+                        <span class="tag-count">3</span>
+                    </a>
+                </div>
+
+                <div class="tags-stats">
+                    <p><strong>24</strong> posts en total</p>
+                    <p><strong>7</strong> etiquetas únicas</p>
+                </div>
+            </aside>
+
+            <!-- Lista de posts -->
+            <section class="posts-list">
+                <!-- Ejemplo de post 1 -->
+                <article class="post-card">
+                    <div class="post-card-content">
+                        <div class="post-header">
+                            <h2 class="post-title">
+                                <a href="post-detail.html">Implementando Navegación por Teclado Accesible</a>
+                            </h2>
+                            <p class="post-subtitle">Mejores prácticas para una experiencia de usuario inclusiva</p>
+                            <div class="post-meta">
+                                <time datetime="2024-03-15">15 de Marzo, 2024</time>
+                                <span>•</span>
+                                <span>5 min de lectura</span>
+                            </div>
+                        </div>
+
+                        <div class="post-body">
+                            <p class="post-summary">
+                                Explorando técnicas avanzadas para implementar navegación por teclado que cumpla con las WCAG 2.1, incluyendo gestión de foco, trampas de teclado y orden lógico de tabulación.
+                            </p>
+                        </div>
+
+                        <div class="post-mood">
+                            <span class="mood-label">Estado:</span>
+                            <span class="mood-tag">Enfocada</span>
+                            <span class="mood-tag">Productiva</span>
+                        </div>
+
+                        <div class="post-tags">
+                            <a href="#" class="post-tag">Accesibilidad</a>
+                            <a href="#" class="post-tag">JavaScript</a>
+                            <a href="#" class="post-tag">UX/UI</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Ejemplo de post 2 -->
+                <article class="post-card">
+                    <div class="post-card-content">
+                        <div class="post-header">
+                            <h2 class="post-title">
+                                <a href="post-detail.html">Optimización de Rendimiento en Aplicaciones React</a>
+                            </h2>
+                            <p class="post-subtitle">Técnicas para reducir el tiempo de carga y mejorar la experiencia de usuario</p>
+                            <div class="post-meta">
+                                <time datetime="2024-03-10">10 de Marzo, 2024</time>
+                                <span>•</span>
+                                <span>7 min de lectura</span>
+                            </div>
+                        </div>
+
+                        <div class="post-body">
+                            <p class="post-summary">
+                                Análisis de estrategias como code splitting, lazy loading, memoización y virtualización para mejorar significativamente el rendimiento de aplicaciones React en producción.
+                            </p>
+                        </div>
+
+                        <div class="post-mood">
+                            <span class="mood-label">Estado:</span>
+                            <span class="mood-tag">Técnica</span>
+                            <span class="mood-tag">Analítica</span>
+                        </div>
+
+                        <div class="post-tags">
+                            <a href="#" class="post-tag">React</a>
+                            <a href="#" class="post-tag">Performance</a>
+                            <a href="#" class="post-tag">JavaScript</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Ejemplo de post 3 -->
+                <article class="post-card">
+                    <div class="post-card-content">
+                        <div class="post-header">
+                            <h2 class="post-title">
+                                <a href="post-detail.html">CSS Grid vs Flexbox: Cuándo Usar Cada Uno</a>
+                            </h2>
+                            <div class="post-meta">
+                                <time datetime="2024-03-05">5 de Marzo, 2024</time>
+                                <span>•</span>
+                                <span>4 min de lectura</span>
+                            </div>
+                        </div>
+
+                        <div class="post-body">
+                            <p class="post-excerpt">
+                                Aunque ambos son poderosas herramientas de layout en CSS, Grid y Flexbox tienen casos de uso específicos. En este artículo exploramos cuándo es más apropiado utilizar cada uno...
+                            </p>
+                        </div>
+
+                        <div class="post-tags">
+                            <a href="#" class="post-tag">CSS</a>
+                            <a href="#" class="post-tag">Layout</a>
+                            <a href="#" class="post-tag">Frontend</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Ejemplo de post 4 -->
+                <article class="post-card">
+                    <div class="post-card-content">
+                        <div class="post-header">
+                            <h2 class="post-title">
+                                <a href="post-detail.html">Visualización de Datos con D3.js y Accesibilidad</a>
+                            </h2>
+                            <p class="post-subtitle">Haciendo que los gráficos complejos sean accesibles para todos</p>
+                            <div class="post-meta">
+                                <time datetime="2024-02-28">28 de Febrero, 2024</time>
+                                <span>•</span>
+                                <span>6 min de lectura</span>
+                            </div>
+                        </div>
+
+                        <div class="post-body">
+                            <p class="post-summary">
+                                Cómo implementar visualizaciones de datos interactivas con D3.js mientras se mantienen los estándares de accesibilidad, incluyendo descripciones alternativas, navegación por teclado y compatibilidad con lectores de pantalla.
+                            </p>
+                        </div>
+
+                        <div class="post-mood">
+                            <span class="mood-label">Estado:</span>
+                            <span class="mood-tag">Creativa</span>
+                            <span class="mood-tag">Detallista</span>
+                        </div>
+
+                        <div class="post-tags">
+                            <a href="#" class="post-tag">Análisis de Datos</a>
+                            <a href="#" class="post-tag">JavaScript</a>
+                            <a href="#" class="post-tag">Accesibilidad</a>
+                            <a href="#" class="post-tag">D3.js</a>
+                        </div>
+                    </div>
+                </article>
+            </section>
+        </div>
+
+        <!-- Paginación -->
+        <nav class="pagination" aria-label="Navegación de páginas">
+            <a href="#" class="pagination-link disabled" aria-disabled="true">Anterior</a>
+            <span class="pagination-info">Página 1 de 3</span>
+            <a href="#" class="pagination-link">Siguiente</a>
+        </nav>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer" role="contentinfo">
+    <div class="container">
+        <p>&copy; <span id="current-year">2025</span> Cristina Fuentes. Todos los derechos reservados.</p>
+    </div>
+</footer>
+
+<!-- JavaScript -->
+<script type="module" src="../../../assets/js/main.js"></script>
+<script>
+    // Actualizar año actual en el footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
