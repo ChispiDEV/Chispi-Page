@@ -40,6 +40,7 @@ export class ParticleSystem {
         this.isInitialized = true;
 
         this.setupEventListeners();
+        this.verifyMethods(); 
         this.logger.success('Inicializado', { theme: this.currentTheme });
     }
 
@@ -299,5 +300,25 @@ export class ParticleSystem {
             particle.size *= 1.5;
         });
         this.logger.debug('Partículas agrandadas');
+    }
+
+    // Método para verificar que todos los métodos están disponibles
+    verifyMethods() {
+        const methods = [
+            'setReducedSpeed',
+            'setReducedOpacity',
+            'setNormalSpeed',
+            'setNormalOpacity',
+            'stopAnimation',
+            'startAnimation'
+        ];
+
+        const availableMethods = {};
+        methods.forEach(method => {
+            availableMethods[method] = typeof this[method] === 'function';
+        });
+
+        console.log('🔍 ParticleSystem métodos verificados:', availableMethods);
+        return availableMethods;
     }
 }

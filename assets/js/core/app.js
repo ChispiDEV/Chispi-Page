@@ -38,7 +38,7 @@ class App {
             {
                 name: 'navigation',
                 Class: NavigationManager,
-                condition: () => true // Siempre inicializar
+                condition: () => true
             },
             {
                 name: 'theme',
@@ -65,6 +65,12 @@ class App {
                     const instance = new config.Class(...args);
                     this.modules.set(config.name, instance);
                     this.logger.success(`${config.name} inicializado`);
+
+                    // Exponer particleSystem globalmente inmediatamente después de inicializar
+                    if (config.name === 'particles') {
+                        window.particleSystem = instance;
+                        this.logger.debug('ParticleSystem expuesto globalmente');
+                    }
                 } catch (error) {
                     this.logger.error(`Error inicializando ${config.name}`, error);
                 }
