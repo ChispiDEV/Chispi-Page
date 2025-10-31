@@ -118,6 +118,7 @@
                     <span class="button-text">Accesibilidad</span>
                 </button>
                 <ul class="dropdown-menu accessibility-menu" aria-labelledby="accessibility-toggle">
+
                     <!-- Movimiento Reducido -->
                     <li class="accessibility-option motion-intensity">
                         <div class="option-header">
@@ -143,7 +144,7 @@
                                 <span class="toggle-slider"></span>
                             </label>
                         </div>
-                        <div class="intensity-control" style="display: none;">
+                        <div class="intensity-control" id="dyslexia-intensity-control" style="display: none;">
                             <span class="intensity-label">Intensidad:</span>
                             <input type="range" min="1" max="5" value="3" class="intensity-slider" id="dyslexia-intensity">
                             <span class="intensity-value">3</span>
@@ -159,7 +160,7 @@
                                 <span class="toggle-slider"></span>
                             </label>
                         </div>
-                        <div class="intensity-control" style="display: none;">
+                        <div class="intensity-control" id="reading-intensity-control" style="display: none;">
                             <span class="intensity-label">Intensidad:</span>
                             <input type="range" min="1" max="5" value="3" class="intensity-slider" id="reading-intensity">
                             <span class="intensity-value">3</span>
@@ -175,7 +176,7 @@
                                 <span class="toggle-slider"></span>
                             </label>
                         </div>
-                        
+
                         <div id="photophobia-controls" class="photophobia-controls" style="display: none;">
                             <div class="slider-container">
                                 <label>
@@ -212,7 +213,7 @@
                                 <span class="toggle-slider"></span>
                             </label>
                         </div>
-                        <div class="intensity-control" style="display: none;">
+                        <div class="intensity-control" id="font-size-control" style="display: none;">
                             <span class="intensity-label">Tamaño:</span>
                             <input type="range" min="1" max="5" value="3" class="intensity-slider" id="font-size">
                             <span class="intensity-value">3</span>
